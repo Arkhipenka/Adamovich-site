@@ -1,0 +1,22 @@
+:root {
+  --color-bg: #0f0f0f;
+  --color-bg-elevated: #181716;
+  --color-text: #f5f1e8;
+  --color-muted: #b8b1a3;
+  --color-border: #2a2927;
+  --color-accent: #c2a36b;
+  --color-accent-strong: #d8b572;
+  --font-sans: Inter, "Segoe UI", Arial, Helvetica, sans-serif;
+  --font-serif: "Cormorant Garamond", "Source Serif 4", Georgia, "Times New Roman", serif;
+  --container: 1320px;
+  --page-gutter: clamp(20px, 5vw, 72px);
+  --header-height: 82px;
+  --header-height-scrolled: 62px;
+}
+
+@media (max-width: 640px) {
+  :root {
+    --header-height: 68px;
+    --header-height-scrolled: 58px;
+  }
+}

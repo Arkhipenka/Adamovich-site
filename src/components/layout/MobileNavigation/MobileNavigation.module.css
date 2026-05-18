@@ -1,0 +1,78 @@
+.mobileNavigation {
+  position: fixed;
+  inset: 87px 0 0;
+  z-index: -1;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  min-height: calc(100dvh - 87px);
+  padding: 34px var(--page-gutter);
+  background:
+    radial-gradient(circle at top right, rgba(194, 163, 107, 0.08), transparent 24rem),
+    rgba(15, 15, 15, 0.98);
+  border-top: 1px solid var(--color-border);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(-12px);
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease,
+    visibility 180ms ease;
+}
+
+.mobileNavigationOpen {
+  z-index: 9;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.links {
+  display: grid;
+  align-content: start;
+  gap: 22px;
+}
+
+.links a {
+  width: fit-content;
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 10vw, 3.8rem);
+  line-height: 1;
+  color: var(--color-text);
+  text-transform: uppercase;
+}
+
+.links a[aria-current="page"],
+.meta a[aria-current="page"],
+.links a:hover,
+.meta a:hover {
+  color: var(--color-accent);
+}
+
+.meta {
+  display: grid;
+  gap: 18px;
+  color: var(--color-muted);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+}
+
+.meta div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.meta a:not(:last-child)::after {
+  margin-left: 10px;
+  color: var(--color-border);
+  content: "/";
+}
+
+@media (max-width: 640px) {
+  .mobileNavigation {
+    inset: 85px 0 0;
+    padding-inline: 18px;
+  }
+}

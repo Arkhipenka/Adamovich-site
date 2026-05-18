@@ -1,0 +1,233 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 50;
+  width: 100%;
+  background: rgba(15, 15, 15, 0.78);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  transition:
+    background-color 220ms ease,
+    border-color 220ms ease;
+}
+
+.inner {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: clamp(24px, 3vw, 44px);
+  align-items: center;
+  width: min(100%, var(--container));
+  min-height: var(--header-height);
+  margin-inline: auto;
+  padding-inline: var(--page-gutter);
+  transition: min-height 220ms ease;
+}
+
+.headerScrolled {
+  border-bottom-color: rgba(194, 163, 107, 0.24);
+  background: rgba(8, 8, 8, 0.92);
+}
+
+.headerScrolled .inner {
+  min-height: var(--header-height-scrolled);
+}
+
+.brand {
+  position: relative;
+  display: inline-grid;
+  align-items: center;
+  width: fit-content;
+  min-width: 240px;
+}
+
+.fullLogoWrap {
+  grid-area: 1 / 1;
+  display: inline-flex;
+  align-items: center;
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 220ms ease,
+    transform 220ms ease;
+}
+.compactLogo {
+  grid-area: 1 / 1;
+  color: var(--color-text);
+  font-family: var(--font-serif);
+  font-size: clamp(1.25rem, 1.6vw, 1.6rem);
+  font-weight:200;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(6px);
+  transition:
+    opacity 220ms ease,
+    transform 220ms ease,
+    color 180ms ease;
+}
+
+.headerScrolled .fullLogoWrap {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-6px);
+}
+
+.logo {
+  width: auto;
+  height: clamp(48px, 4.2vw, 62px);
+}
+
+.nav,
+.actions,
+.localeSwitcher {
+  display: flex;
+  align-items: center;
+}
+
+.nav {
+  justify-content: center;
+  gap: clamp(14px, 2vw, 30px);
+  color: var(--color-muted);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.navLink {
+  position: relative;
+  transition: color 180ms ease;
+}
+
+.navLink:hover,
+.navLink[aria-current="page"],
+.localeSwitcher a:hover,
+.localeSwitcher a[aria-current="page"] {
+  color: var(--color-accent);
+}
+
+.navLink[aria-current="page"]::after {
+  position: absolute;
+  right: 0;
+  bottom: -14px;
+  left: 0;
+  height: 1px;
+  content: "";
+  background: var(--color-accent);
+}
+
+.actions {
+  gap: 18px;
+}
+
+.supportLink {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  padding-inline: 18px;
+  border: 1px solid rgba(194, 163, 107, 0.72);
+  color: var(--color-accent);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition:
+    background-color 180ms ease,
+    color 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+.headerScrolled .compactLogo {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.supportLink:hover,
+.supportLink[aria-current="page"] {
+  color: #111;
+  border-color: var(--color-accent);
+  background: var(--color-accent);
+  transform: translateY(-1px);
+}
+
+.localeSwitcher {
+  gap: 10px;
+  color: var(--color-muted);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.localeSwitcher a {
+  transition: color 180ms ease;
+}
+
+.localeSwitcher a:not(:last-child)::after {
+  margin-left: 10px;
+  color: var(--color-border);
+  content: "/";
+}
+
+.menuToggle {
+  display: none;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  border: 1px solid var(--color-border);
+  border-radius: 0;
+  color: var(--color-text);
+  background: transparent;
+  cursor: pointer;
+}
+
+.menuToggle span {
+  display: block;
+  width: 18px;
+  height: 1px;
+  background: currentColor;
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease;
+}
+
+.menuToggle[aria-expanded="true"] span:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+
+.menuToggle[aria-expanded="true"] span:nth-child(2) {
+  opacity: 0;
+}
+
+.menuToggle[aria-expanded="true"] span:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+@media (max-width: 1080px) {
+  .inner {
+    grid-template-columns: 1fr auto;
+  }
+
+  .nav,
+  .actions {
+    display: none;
+  }
+
+  .menuToggle {
+    display: grid;
+  }
+}
+
+@media (max-width: 640px) {
+  .inner {
+    padding-inline: 18px;
+  }
+
+  .logo {
+    height: 56px;
+  }
+}

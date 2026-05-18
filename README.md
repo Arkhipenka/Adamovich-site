@@ -1,4 +1,4 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Ales Adamovich Site
 
 ## Getting Started
 
@@ -16,21 +16,30 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The localized homepage is available at [http://localhost:3000/ru](http://localhost:3000/ru).
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## GitHub Pages
 
-## Learn More
+The project is configured for static export with GitHub Pages:
 
-To learn more about Next.js, take a look at the following resources:
+- `next.config.ts` uses `output: "export"`, `trailingSlash: true`, and unoptimized images.
+- `.github/workflows/deploy-pages.yml` builds the static site and deploys the `out` directory through GitHub Actions.
+- `NEXT_PUBLIC_BASE_PATH` is set automatically in the workflow for project pages, for example `/adamovich`.
+- For a user or organization Pages repository named `<owner>.github.io`, the workflow leaves `NEXT_PUBLIC_BASE_PATH` empty.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+To publish:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Push the repository to GitHub.
+2. Open repository settings: **Settings → Pages**.
+3. Set **Source** to **GitHub Actions**.
+4. Push to `main` or `master`, or run the workflow manually from the **Actions** tab.
 
-## Deploy on Vercel
+Local checks:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+npm run typecheck
+npm run lint
+npm run build
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The static export is generated into `out/`.
