@@ -2,56 +2,17 @@ import Image from "next/image";
 import Link from "next/link";
 
 import styles from "./AboutWriter.module.css";
-import { assetPath, localizedPath, type Locale } from "@/config/site";
+import { homePageContent } from "@/data/home";
+import { assetPath, type Locale } from "@/config/site";
+import { getLocalizedText } from "@/lib/getLocalizedText";
+import { localizedHref } from "@/lib/localizedHref";
 
 type AboutWriterProps = {
   locale?: Locale;
 };
 
-type AboutWriterContent = {
-  eyebrow: string;
-  title: string;
-  text: string;
-  linkLabel: string;
-  quote: string;
-  quoteAuthor: string;
-  imageAlt: string;
-};
-
-const contentByLocale: Record<Locale, AboutWriterContent> = {
-  be: {
-    eyebrow: "Пра пісьменніка",
-    title: "Голас памяці і сумлення",
-    text: "Алесь Адамовіч — пісьменнік, публіцыст і адзін з найважнейшых галасоў беларускай літаратуры XX стагоддзя. Яго кнігі, заснаваныя на сведчаннях і дакументальнай праўдзе, захоўваюць памяць пра вайну, чалавечую годнасць і маральны выбар.",
-    linkLabel: "Даведацца больш",
-    quote: "Чалавечая памяць мацнейшая за страх.",
-    quoteAuthor: "Алесь Адамовіч",
-    imageAlt: "Алесь Адамовіч за працай",
-  },
-  en: {
-    eyebrow: "About the writer",
-    title: "A voice of memory and conscience",
-    text: "Ales Adamovich was a writer, publicist and one of the most important voices of Belarusian literature of the 20th century. His books, based on testimonies and documentary truth, preserve the memory of war, human dignity and moral choice.",
-    linkLabel: "Read more",
-    quote: "Human memory is stronger than fear.",
-    quoteAuthor: "Ales Adamovich",
-    imageAlt: "Ales Adamovich working at a desk",
-  },
-  ru: {
-    eyebrow: "О писателе",
-    title: "Голос памяти и совести",
-    text: "Алесь Адамович — писатель, публицист и один из важнейших голосов белорусской литературы XX века. Его книги, основанные на свидетельствах и документальной правде, сохраняют память о войне, человеческом достоинстве и нравственном выборе.",
-    linkLabel: "Подробнее",
-    quote: "Человеческая память сильнее страха.",
-    quoteAuthor: "Алесь Адамович",
-    imageAlt: "Алесь Адамович за работой",
-  },
-};
-
-const writerImage = assetPath("/assets/images/portraits/adamovich-writing.webp");
-
-export function AboutWriter({ locale = "en" }: AboutWriterProps) {
-  const content = contentByLocale[locale];
+export function AboutWriter({ locale = "ru" }: AboutWriterProps) {
+  const content = homePageContent.aboutWriter;
 
   return (
     <section className={styles.section} aria-labelledby="about-writer-title">
@@ -59,24 +20,29 @@ export function AboutWriter({ locale = "en" }: AboutWriterProps) {
         <div className={styles.imageColumn}>
           <div className={styles.imageFrame}>
             <Image
-              alt={content.imageAlt}
+              alt={getLocalizedText(content.image.alt, locale)}
               className={styles.image}
-              height={578}
+              height={630}
               sizes="(max-width: 700px) calc(100vw - 40px), (max-width: 1024px) 42vw, 420px"
-              src={writerImage}
-              width={840}
+              src={assetPath(content.image.src)}
+              width={1200}
             />
           </div>
         </div>
 
         <div className={styles.content}>
-          <p className={styles.eyebrow}>{content.eyebrow}</p>
+          <p className={styles.eyebrow}>
+            {getLocalizedText(content.eyebrow, locale)}
+          </p>
           <h2 id="about-writer-title" className={styles.title}>
-            {content.title}
+            {getLocalizedText(content.title, locale)}
           </h2>
-          <p className={styles.text}>{content.text}</p>
-          <Link className={styles.link} href={localizedPath(locale, "biography")}>
-            {content.linkLabel}
+          <p className={styles.text}>{getLocalizedText(content.text, locale)}</p>
+          <Link
+            className={styles.link}
+            href={localizedHref(locale, content.linkHref)}
+          >
+            {getLocalizedText(content.linkLabel, locale)}
             <span aria-hidden="true">→</span>
           </Link>
         </div>
@@ -85,8 +51,17 @@ export function AboutWriter({ locale = "en" }: AboutWriterProps) {
           <div className={styles.quoteMark} aria-hidden="true">
             ”
           </div>
-          <blockquote className={styles.quoteText}>{content.quote}</blockquote>
-          <p className={styles.quoteAuthor}>{content.quoteAuthor}</p>
+          <blockquote className={styles.quoteText}>
+            {getLocalizedText(content.quote, locale)}
+          </blockquote>
+          <p className={styles.quoteAuthor}>
+            {getLocalizedText(content.quoteAuthor, locale)}
+            {content.quoteSource ? (
+              <span className={styles.quoteSource}>
+                {getLocalizedText(content.quoteSource, locale)}
+              </span>
+            ) : null}
+          </p>
         </aside>
       </div>
     </section>

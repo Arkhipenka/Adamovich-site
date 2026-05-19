@@ -2,14 +2,22 @@ import Link from "next/link";
 
 import styles from "./MobileNavigation.module.css";
 import {
-  localeLabels,
-  locales,
+  localeOptions,
+  supportNavigationItem,
+} from "@/data/navigation";
+import {
   localizedPath,
   siteConfig,
   type Locale,
   type RouteSegment,
 } from "@/config/site";
 import type { Dictionary } from "@/i18n/dictionaries";
+import { getLocalizedText } from "@/lib/getLocalizedText";
+
+type MobileNavigationLink = {
+  segment: RouteSegment;
+  label: string;
+};
 
 type MobileNavigationProps = {
   id: string;
@@ -18,7 +26,7 @@ type MobileNavigationProps = {
   pathname: string;
   currentSegment: string;
   dictionary: Dictionary;
-  navigationSegments: readonly RouteSegment[];
+  navigationLinks: readonly MobileNavigationLink[];
   onNavigate: () => void;
 };
 
@@ -33,7 +41,7 @@ export function MobileNavigation({
   dictionary,
   id,
   locale,
-  navigationSegments,
+  navigationLinks,
   onNavigate,
   open,
   pathname,
@@ -46,14 +54,14 @@ export function MobileNavigation({
       id={id}
     >
       <nav aria-label={dictionary.common.mobileNavigation} className={styles.links}>
-        {navigationSegments.map((segment) => (
+        {navigationLinks.map((item) => (
           <Link
-            aria-current={currentSegment === segment ? "page" : undefined}
-            href={localizedPath(locale, segment)}
-            key={segment}
+            aria-current={currentSegment === item.segment ? "page" : undefined}
+            href={localizedPath(locale, item.segment)}
+            key={item.segment}
             onClick={onNavigate}
           >
-            {dictionary.navigation[segment]}
+            {item.label}
           </Link>
         ))}
         <Link
@@ -61,20 +69,20 @@ export function MobileNavigation({
           href={localizedPath(locale, "support")}
           onClick={onNavigate}
         >
-          {dictionary.common.supportProject}
+          {getLocalizedText(supportNavigationItem.label, locale)}
         </Link>
       </nav>
 
       <div className={styles.meta}>
         <div aria-label={dictionary.common.languageSwitcher}>
-          {locales.map((item) => (
+          {localeOptions.map((item) => (
             <Link
-              aria-current={item === locale ? "page" : undefined}
-              href={getLocaleHref(pathname, locale, item)}
-              key={item}
+              aria-current={item.locale === locale ? "page" : undefined}
+              href={getLocaleHref(pathname, locale, item.locale)}
+              key={item.locale}
               onClick={onNavigate}
             >
-              {localeLabels[item]}
+              {item.label}
             </Link>
           ))}
         </div>

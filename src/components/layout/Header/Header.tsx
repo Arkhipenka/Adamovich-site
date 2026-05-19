@@ -8,27 +8,62 @@ import { useEffect, useMemo, useState } from "react";
 import styles from "./Header.module.css";
 import { MobileNavigation } from "@/components/layout/MobileNavigation";
 import {
-  localeLabels,
-  locales,
+  localeOptions,
+  navigationItems,
+  supportNavigationItem,
+} from "@/data/navigation";
+import {
   localizedPath,
   assetPath,
   type Locale,
   type RouteSegment,
 } from "@/config/site";
 import type { Dictionary } from "@/i18n/dictionaries";
+import { getLocalizedText } from "@/lib/getLocalizedText";
 
 type HeaderProps = {
   locale: Locale;
   dictionary: Dictionary;
 };
 
-const navigationSegments = [
+type HeaderNavigationLink = {
+  segment: HeaderRouteSegment;
+  label: string;
+};
+
+const headerRouteSegments = [
   "biography",
   "bibliography",
   "audio-guide",
   "initiative",
   "contacts",
 ] as const satisfies readonly RouteSegment[];
+
+type HeaderRouteSegment = (typeof headerRouteSegments)[number];
+
+function getRouteSegmentFromHref(href: string) {
+  const segment = href.replace(/^\//, "").split("/")[0] ?? "";
+
+  return headerRouteSegments.includes(segment as HeaderRouteSegment)
+    ? (segment as HeaderRouteSegment)
+    : null;
+}
+
+function getHeaderNavigationLinks(locale: Locale): HeaderNavigationLink[] {
+  return navigationItems
+    .flatMap((item) => item.children ?? [item])
+    .map((item) => {
+      const segment = getRouteSegmentFromHref(item.href);
+
+      if (!segment) return null;
+
+      return {
+        segment,
+        label: getLocalizedText(item.label, locale),
+      };
+    })
+    .filter((item): item is HeaderNavigationLink => Boolean(item));
+}
 
 const headerLogoByLocale: Record<Locale, string> = {
   be: assetPath("/assets/brand/adamovich-logo-be-dark.png"),
@@ -66,6 +101,10 @@ export function Header({ locale, dictionary }: HeaderProps) {
   const currentSegment = useMemo(
     () => getCurrentSegment(pathname, locale),
     [locale, pathname],
+  );
+  const navigationLinks = useMemo(
+    () => getHeaderNavigationLinks(locale),
+    [locale],
   );
 
   const [isScrolled, setIsScrolled] = useState(false);
@@ -119,14 +158,14 @@ export function Header({ locale, dictionary }: HeaderProps) {
         </Link>
 
         <nav className={styles.nav} aria-label={dictionary.common.primaryNavigation}>
-          {navigationSegments.map((segment) => (
+          {navigationLinks.map((item) => (
             <Link
-              aria-current={currentSegment === segment ? "page" : undefined}
+              aria-current={currentSegment === item.segment ? "page" : undefined}
               className={styles.navLink}
-              href={localizedPath(locale, segment)}
-              key={segment}
+              href={localizedPath(locale, item.segment)}
+              key={item.segment}
             >
-              {dictionary.navigation[segment]}
+              {item.label}
             </Link>
           ))}
         </nav>
@@ -137,16 +176,16 @@ export function Header({ locale, dictionary }: HeaderProps) {
             className={styles.supportLink}
             href={localizedPath(locale, "support")}
           >
-            {dictionary.common.supportProject}
+            {getLocalizedText(supportNavigationItem.label, locale)}
           </Link>
           <div className={styles.localeSwitcher} aria-label={dictionary.common.languageSwitcher}>
-            {locales.map((item) => (
+            {localeOptions.map((item) => (
               <Link
-                aria-current={item === locale ? "page" : undefined}
-                href={getLocaleHref(pathname, locale, item)}
-                key={item}
+                aria-current={item.locale === locale ? "page" : undefined}
+                href={getLocaleHref(pathname, locale, item.locale)}
+                key={item.locale}
               >
-                {localeLabels[item]}
+                {item.label}
               </Link>
             ))}
           </div>
@@ -175,7 +214,7 @@ export function Header({ locale, dictionary }: HeaderProps) {
         dictionary={dictionary}
         id="mobile-navigation"
         locale={locale}
-        navigationSegments={navigationSegments}
+        navigationLinks={navigationLinks}
         onNavigate={closeMenu}
         open={menuOpen}
         pathname={pathname}

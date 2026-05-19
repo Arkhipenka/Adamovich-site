@@ -2,136 +2,27 @@ import Image from "next/image";
 import Link from "next/link";
 
 import styles from "./AudioGuidePreview.module.css";
-import { assetPath, localizedPath, siteConfig, type Locale } from "@/config/site";
+import { homePageContent } from "@/data/home";
+import { assetPath, siteConfig, type Locale } from "@/config/site";
+import { getLocalizedText } from "@/lib/getLocalizedText";
+import { localizedHref } from "@/lib/localizedHref";
 
 type AudioGuidePreviewProps = {
   locale?: Locale;
 };
 
-type AudioCard = {
-  title: string;
-  text: string;
-  image: string;
-  imageAlt: string;
-  icon: IconName;
-};
-
-type AudioGuidePreviewContent = {
-  eyebrow: string;
-  title: string;
-  description: string;
-  telegramLabel: string;
-  appLabel: string;
-  detailsLabel: string;
-  cards: AudioCard[];
-};
-
 type IconName = "book" | "map" | "mic" | "phone" | "send";
 
-const cardImages = {
-  life: assetPath("/assets/images/audioguide/life-and-path.webp"),
-  books: assetPath("/assets/images/audioguide/books-and-ideas.webp"),
-  voices: assetPath("/assets/images/audioguide/voices-of-time.webp"),
-};
-
-const contentByLocale: Record<Locale, AudioGuidePreviewContent> = {
-  be: {
-    eyebrow: "Аўдыягід",
-    title: "Пачуць яго словы. Адчуць яго час.",
-    description:
-      "Аўдыягід па жыцці, кнігах і думках Алеся Адамовіча. Гісторыі, сведчанні і разважанні ў новым фармаце.",
-    telegramLabel: "Telegram-бот",
-    appLabel: "Адкрыць праграму",
-    detailsLabel: "Даведацца больш",
-    cards: [
-      {
-        title: "Жыццё і шлях",
-        text: "Аўдыягісторыі пра ключавыя падзеі і людзей.",
-        image: cardImages.life,
-        imageAlt: "Пейзаж з маршруту аўдыягіда",
-        icon: "map",
-      },
-      {
-        title: "Кнігі і ідэі",
-        text: "Галоўныя творы пісьменніка ў яго ўласных словах.",
-        image: cardImages.books,
-        imageAlt: "Аркуш рукапісу і друкарская машынка",
-        icon: "book",
-      },
-      {
-        title: "Галасы часу",
-        text: "Сведчанні сучаснікаў і рэдкія архіўныя запісы.",
-        image: cardImages.voices,
-        imageAlt: "Навушнікі і архіўныя аўдыяматэрыялы",
-        icon: "mic",
-      },
-    ],
-  },
-  en: {
-    eyebrow: "Audio guide",
-    title: "Hear his words. Feel his time.",
-    description:
-      "An audio guide through the life, books and thoughts of Ales Adamovich. Stories, testimonies and reflections in a new format.",
-    telegramLabel: "Telegram bot",
-    appLabel: "Open application",
-    detailsLabel: "Learn more",
-    cards: [
-      {
-        title: "Life and path",
-        text: "Audio stories about key events and people.",
-        image: cardImages.life,
-        imageAlt: "Landscape from the audio guide route",
-        icon: "map",
-      },
-      {
-        title: "Books and ideas",
-        text: "The main works of the writer in his own words.",
-        image: cardImages.books,
-        imageAlt: "Manuscript page and typewriter",
-        icon: "book",
-      },
-      {
-        title: "Voices of the time",
-        text: "Testimonies of contemporaries and rare archival recordings.",
-        image: cardImages.voices,
-        imageAlt: "Headphones and archival audio materials",
-        icon: "mic",
-      },
-    ],
-  },
-  ru: {
-    eyebrow: "Аудиогид",
-    title: "Услышать его слова. Почувствовать его время.",
-    description:
-      "Аудиогид по жизни, книгам и мыслям Алеся Адамовича. Истории, свидетельства и размышления в новом формате.",
-    telegramLabel: "Telegram-бот",
-    appLabel: "Открыть приложение",
-    detailsLabel: "Подробнее",
-    cards: [
-      {
-        title: "Жизнь и путь",
-        text: "Аудиоистории о ключевых событиях и людях.",
-        image: cardImages.life,
-        imageAlt: "Пейзаж из маршрута аудиогида",
-        icon: "map",
-      },
-      {
-        title: "Книги и идеи",
-        text: "Главные произведения писателя в его собственных словах.",
-        image: cardImages.books,
-        imageAlt: "Лист рукописи и печатная машинка",
-        icon: "book",
-      },
-      {
-        title: "Голоса времени",
-        text: "Свидетельства современников и редкие архивные записи.",
-        image: cardImages.voices,
-        imageAlt: "Наушники и архивные аудиоматериалы",
-        icon: "mic",
-      },
-    ],
-  },
-};
+function getCardIcon(cardId: string): IconName {
+  switch (cardId) {
+    case "books-and-ideas":
+      return "book";
+    case "voices-of-time":
+      return "mic";
+    default:
+      return "map";
+  }
+}
 
 function Icon({ name }: { name: IconName }) {
   const commonProps = {
@@ -189,55 +80,63 @@ function Icon({ name }: { name: IconName }) {
   }
 }
 
-export function AudioGuidePreview({ locale = "en" }: AudioGuidePreviewProps) {
-  const content = contentByLocale[locale];
-  const detailsHref = localizedPath(locale, "audio-guide");
-  const telegramHref = siteConfig.telegramBotUrl || "#";
-  const appHref = siteConfig.audioAppUrl || "#";
+export function AudioGuidePreview({ locale = "ru" }: AudioGuidePreviewProps) {
+  const content = homePageContent.audioGuidePreview;
+  const detailsHref = localizedHref(locale, content.detailsHref);
+  const telegramHref = siteConfig.telegramBotUrl || content.telegramHref;
+  const appHref = siteConfig.audioAppUrl || content.appHref;
 
   return (
     <section className={styles.section} aria-labelledby="audio-guide-preview-title">
       <div className={styles.inner}>
         <div className={styles.content}>
-          <p className={styles.eyebrow}>{content.eyebrow}</p>
+          <p className={styles.eyebrow}>
+            {getLocalizedText(content.eyebrow, locale)}
+          </p>
           <h2 id="audio-guide-preview-title" className={styles.title}>
-            {content.title}
+            {getLocalizedText(content.title, locale)}
           </h2>
-          <p className={styles.description}>{content.description}</p>
+          <p className={styles.description}>
+            {getLocalizedText(content.description, locale)}
+          </p>
 
           <div className={styles.actions}>
             <Link className={styles.buttonPrimary} href={telegramHref}>
               <Icon name="send" />
-              {content.telegramLabel}
+              {getLocalizedText(content.telegramLabel, locale)}
             </Link>
             <Link className={styles.buttonSecondary} href={appHref}>
               <Icon name="phone" />
-              {content.appLabel}
+              {getLocalizedText(content.appLabel, locale)}
             </Link>
           </div>
         </div>
 
         <div className={styles.cards}>
           {content.cards.map((card) => (
-            <Link className={styles.card} href={detailsHref} key={card.title}>
+            <Link className={styles.card} href={detailsHref} key={card.id}>
               <span className={styles.cardImageWrap}>
                 <Image
-                  alt={card.imageAlt}
+                  alt={getLocalizedText(card.image.alt, locale)}
                   className={styles.cardImage}
                   fill
                   sizes="(max-width: 800px) calc(100vw - 40px), (max-width: 1100px) 33vw, 300px"
-                  src={card.image}
+                  src={assetPath(card.image.src)}
                 />
                 <span className={styles.cardOverlay} />
               </span>
               <span className={styles.cardContent}>
                 <span className={styles.cardIcon}>
-                  <Icon name={card.icon} />
+                  <Icon name={getCardIcon(card.id)} />
                 </span>
-                <span className={styles.cardTitle}>{card.title}</span>
-                <span className={styles.cardText}>{card.text}</span>
+                <span className={styles.cardTitle}>
+                  {getLocalizedText(card.title, locale)}
+                </span>
+                <span className={styles.cardText}>
+                  {getLocalizedText(card.text, locale)}
+                </span>
                 <span className={styles.detailsLink}>
-                  {content.detailsLabel}
+                  {getLocalizedText(content.detailsLabel, locale)}
                   <span aria-hidden="true">→</span>
                 </span>
               </span>

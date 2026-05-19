@@ -2,7 +2,10 @@ import Image from "next/image";
 import Link from "next/link";
 
 import styles from "./InitiativePreview.module.css";
-import { assetPath, localizedPath, type Locale } from "@/config/site";
+import { homePageContent } from "@/data/home";
+import { assetPath, type Locale } from "@/config/site";
+import { getLocalizedText } from "@/lib/getLocalizedText";
+import { localizedHref } from "@/lib/localizedHref";
 
 type InitiativePreviewProps = {
   locale?: Locale;
@@ -10,115 +13,18 @@ type InitiativePreviewProps = {
 
 type FeatureIcon = "archive" | "book" | "map" | "voice";
 
-type InitiativeFeature = {
-  title: string;
-  text: string;
-  icon: FeatureIcon;
-};
-
-type InitiativeContent = {
-  eyebrow: string;
-  title: string;
-  description: string;
-  linkLabel: string;
-  imageAlt: string;
-  features: InitiativeFeature[];
-};
-
-const contentByLocale: Record<Locale, InitiativeContent> = {
-  be: {
-    eyebrow: "Ініцыятыва",
-    title: "Захоўваць. Даследаваць. Натхняць.",
-    description:
-      "Наша місія — захоўваць літаратурную і культурную спадчыну Алеся Адамовіча, рабіць яе даступнай новым пакаленням і развіваць лічбавыя інструменты для адукацыі, даследаванняў і памяці.",
-    linkLabel: "Даведацца больш",
-    imageAlt: "Месца, звязанае з ініцыятывай пра Алеся Адамовіча",
-    features: [
-      {
-        title: "Лічбавы архіў",
-        text: "Творы, дакументы і архіўныя матэрыялы.",
-        icon: "archive",
-      },
-      {
-        title: "Інтэрактыўная мапа",
-        text: "Месцы, маршруты і падзеі, звязаныя з Адамовічам.",
-        icon: "map",
-      },
-      {
-        title: "Вусная гісторыя",
-        text: "Галасы, сведчанні і ўспаміны.",
-        icon: "voice",
-      },
-      {
-        title: "Адукацыйныя матэрыялы",
-        text: "Матэрыялы для студэнтаў, выкладчыкаў і даследчыкаў.",
-        icon: "book",
-      },
-    ],
-  },
-  en: {
-    eyebrow: "The initiative",
-    title: "Preserve. Research. Inspire.",
-    description:
-      "Our mission is to preserve the literary and cultural heritage of Ales Adamovich, make it accessible to new generations and develop digital tools for education, research and remembrance.",
-    linkLabel: "Learn more",
-    imageAlt: "Landscape connected with Ales Adamovich initiative",
-    features: [
-      {
-        title: "Digital archive",
-        text: "Works, documents and archival materials.",
-        icon: "archive",
-      },
-      {
-        title: "Interactive map",
-        text: "Places, routes and events connected with Adamovich.",
-        icon: "map",
-      },
-      {
-        title: "Oral histories",
-        text: "Voices, testimonies and memories.",
-        icon: "voice",
-      },
-      {
-        title: "Educational resources",
-        text: "Materials for students, teachers and researchers.",
-        icon: "book",
-      },
-    ],
-  },
-  ru: {
-    eyebrow: "Инициатива",
-    title: "Сохранять. Исследовать. Вдохновлять.",
-    description:
-      "Наша миссия — сохранять литературное и культурное наследие Алеся Адамовича, делать его доступным новым поколениям и развивать цифровые инструменты для образования, исследований и памяти.",
-    linkLabel: "Подробнее",
-    imageAlt: "Место, связанное с инициативой об Алесе Адамовиче",
-    features: [
-      {
-        title: "Цифровой архив",
-        text: "Произведения, документы и архивные материалы.",
-        icon: "archive",
-      },
-      {
-        title: "Интерактивная карта",
-        text: "Места, маршруты и события, связанные с Адамовичем.",
-        icon: "map",
-      },
-      {
-        title: "Устная история",
-        text: "Голоса, свидетельства и воспоминания.",
-        icon: "voice",
-      },
-      {
-        title: "Образовательные материалы",
-        text: "Материалы для студентов, преподавателей и исследователей.",
-        icon: "book",
-      },
-    ],
-  },
-};
-
-const initiativeImage = assetPath("/assets/images/initiative/initiative-preview.webp");
+function getFeatureIcon(featureId: string): FeatureIcon {
+  switch (featureId) {
+    case "interactive-map":
+      return "map";
+    case "oral-history":
+      return "voice";
+    case "educational-resources":
+      return "book";
+    default:
+      return "archive";
+  }
+}
 
 function Icon({ name }: { name: FeatureIcon }) {
   const commonProps = {
@@ -173,8 +79,8 @@ function Icon({ name }: { name: FeatureIcon }) {
   }
 }
 
-export function InitiativePreview({ locale = "en" }: InitiativePreviewProps) {
-  const content = contentByLocale[locale];
+export function InitiativePreview({ locale = "ru" }: InitiativePreviewProps) {
+  const content = homePageContent.initiativePreview;
 
   return (
     <section className={styles.section} aria-labelledby="initiative-preview-title">
@@ -182,35 +88,46 @@ export function InitiativePreview({ locale = "en" }: InitiativePreviewProps) {
         <div className={styles.imageColumn}>
           <div className={styles.imageFrame}>
             <Image
-              alt={content.imageAlt}
+              alt={getLocalizedText(content.image.alt, locale)}
               className={styles.image}
               fill
               sizes="(max-width: 900px) calc(100vw - 40px), (max-width: 1180px) 42vw, 420px"
-              src={initiativeImage}
+              src={assetPath(content.image.src)}
             />
           </div>
         </div>
 
         <div className={styles.content}>
-          <p className={styles.eyebrow}>{content.eyebrow}</p>
+          <p className={styles.eyebrow}>
+            {getLocalizedText(content.eyebrow, locale)}
+          </p>
           <h2 id="initiative-preview-title" className={styles.title}>
-            {content.title}
+            {getLocalizedText(content.title, locale)}
           </h2>
-          <p className={styles.description}>{content.description}</p>
-          <Link className={styles.link} href={localizedPath(locale, "initiative")}>
-            {content.linkLabel}
+          <p className={styles.description}>
+            {getLocalizedText(content.description, locale)}
+          </p>
+          <Link
+            className={styles.link}
+            href={localizedHref(locale, content.linkHref)}
+          >
+            {getLocalizedText(content.linkLabel, locale)}
             <span aria-hidden="true">→</span>
           </Link>
         </div>
 
         <ul className={styles.features}>
           {content.features.map((feature) => (
-            <li className={styles.feature} key={feature.title}>
+            <li className={styles.feature} key={feature.id}>
               <span className={styles.featureIcon}>
-                <Icon name={feature.icon} />
+                <Icon name={getFeatureIcon(feature.id)} />
               </span>
-              <h3 className={styles.featureTitle}>{feature.title}</h3>
-              <p className={styles.featureText}>{feature.text}</p>
+              <h3 className={styles.featureTitle}>
+                {getLocalizedText(feature.title, locale)}
+              </h3>
+              <p className={styles.featureText}>
+                {getLocalizedText(feature.text, locale)}
+              </p>
             </li>
           ))}
         </ul>
