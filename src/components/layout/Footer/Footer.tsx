@@ -192,8 +192,6 @@ export function Footer({ locale = defaultLocale }: FooterProps) {
               </li>
               <li>{content.location}</li>
             </ul>
-          </div>
-
           <div className={styles.column}>
             <h2 className={styles.columnTitle}>{content.followTitle}</h2>
             <ul className={styles.socialList}>
@@ -210,6 +208,9 @@ export function Footer({ locale = defaultLocale }: FooterProps) {
               ))}
             </ul>
           </div>
+          </div>
+
+          
 
           <div className={styles.column}>
             <h2 className={styles.columnTitle}>{content.supportedTitle}</h2>

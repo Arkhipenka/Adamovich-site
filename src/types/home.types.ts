@@ -5,6 +5,7 @@ export type HomeHeroSlide = {
   eyebrow: RequiredLocalizedText;
   title: RequiredLocalizedText;
   subtitle?: RequiredLocalizedText;
+  text?: RequiredLocalizedText;
   quote?: RequiredLocalizedText;
   quoteAuthor?: RequiredLocalizedText;
   image: ImageAsset;

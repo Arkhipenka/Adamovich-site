@@ -26,6 +26,7 @@ type MobileNavigationProps = {
   pathname: string;
   currentSegment: string;
   dictionary: Dictionary;
+  isScrolled?: boolean;
   navigationLinks: readonly MobileNavigationLink[];
   onNavigate: () => void;
 };
@@ -43,51 +44,68 @@ export function MobileNavigation({
   locale,
   navigationLinks,
   onNavigate,
+  isScrolled,
   open,
   pathname,
 }: MobileNavigationProps) {
   return (
-    <div
-      className={`${styles.mobileNavigation} ${
-        open ? styles.mobileNavigationOpen : ""
-      }`}
-      id={id}
-    >
-      <nav aria-label={dictionary.common.mobileNavigation} className={styles.links}>
-        {navigationLinks.map((item) => (
-          <Link
-            aria-current={currentSegment === item.segment ? "page" : undefined}
-            href={localizedPath(locale, item.segment)}
-            key={item.segment}
-            onClick={onNavigate}
-          >
-            {item.label}
-          </Link>
-        ))}
-        <Link
-          aria-current={currentSegment === "support" ? "page" : undefined}
-          href={localizedPath(locale, "support")}
-          onClick={onNavigate}
-        >
-          {getLocalizedText(supportNavigationItem.label, locale)}
-        </Link>
-      </nav>
+    <>
+      <button
+        aria-label={dictionary.common.closeNavigation}
+        className={[
+          styles.mobileNavigationBackdrop,
+          open ? styles.mobileNavigationBackdropOpen : "",
+          isScrolled ? styles.mobileNavigationBackdropScrolled : "",
+        ].join(" ")}
+        onClick={onNavigate}
+        tabIndex={open ? 0 : -1}
+        type="button"
+      />
 
-      <div className={styles.meta}>
-        <div aria-label={dictionary.common.languageSwitcher}>
-          {localeOptions.map((item) => (
+      <div
+        className={[
+          styles.mobileNavigation,
+          open ? styles.mobileNavigationOpen : "",
+          isScrolled ? styles.mobileNavigationScrolled : "",
+        ].join(" ")}
+        id={id}
+      >
+        <nav aria-label={dictionary.common.mobileNavigation} className={styles.links}>
+          {navigationLinks.map((item) => (
             <Link
-              aria-current={item.locale === locale ? "page" : undefined}
-              href={getLocaleHref(pathname, locale, item.locale)}
-              key={item.locale}
+              aria-current={currentSegment === item.segment ? "page" : undefined}
+              href={localizedPath(locale, item.segment)}
+              key={item.segment}
               onClick={onNavigate}
             >
               {item.label}
             </Link>
           ))}
+          <Link
+            aria-current={currentSegment === "support" ? "page" : undefined}
+            href={localizedPath(locale, "support")}
+            onClick={onNavigate}
+          >
+            {getLocalizedText(supportNavigationItem.label, locale)}
+          </Link>
+        </nav>
+
+        <div className={styles.meta}>
+          <div aria-label={dictionary.common.languageSwitcher}>
+            {localeOptions.map((item) => (
+              <Link
+                aria-current={item.locale === locale ? "page" : undefined}
+                href={getLocaleHref(pathname, locale, item.locale)}
+                key={item.locale}
+                onClick={onNavigate}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </div>
+          <p>{siteConfig.contactEmail}</p>
         </div>
-        <p>{siteConfig.contactEmail}</p>
       </div>
-    </div>
+    </>
   );
 }

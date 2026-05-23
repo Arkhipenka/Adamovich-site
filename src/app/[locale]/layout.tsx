@@ -23,21 +23,28 @@ export async function generateMetadata({
   const { locale } = await params;
   const activeLocale = isLocale(locale) ? locale : defaultLocale;
   const dictionary = await getDictionary(activeLocale);
+  const metadataTitle = dictionary?.metadata.title ?? siteConfig.name;
+  const metadataDescription = dictionary?.metadata.description;
 
   return {
     metadataBase: new URL(siteConfig.url),
     title: {
-      default: dictionary?.metadata.title ?? siteConfig.name,
+      default: metadataTitle,
       template: `%s | ${siteConfig.name}`,
     },
-    description: dictionary?.metadata.description,
+    description: metadataDescription,
     openGraph: {
-      title: dictionary?.metadata.title ?? siteConfig.name,
-      description: dictionary?.metadata.description,
+      title: metadataTitle,
+      description: metadataDescription,
       siteName: siteConfig.name,
       locale: activeLocale,
       type: "website",
       url: `/${activeLocale}`,
+    },
+    twitter: {
+      card: "summary",
+      title: metadataTitle,
+      description: metadataDescription,
     },
   };
 }

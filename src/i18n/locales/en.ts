@@ -2,9 +2,9 @@ import type { Dictionary } from "../dictionaries";
 
 export const dictionary: Dictionary = {
   metadata: {
-    title: "Ales Adamovich | Cultural Digital Platform",
+    title: "Ales Adamovich — the voice of Belarusian conscience",
     description:
-      "A multilingual cultural platform about Ales Adamovich, his biography, books, audio guide, and legacy initiative.",
+      "A digital platform about Ales Adamovich: biography, works, audio guide, and the legacy of the writer and public figure.",
   },
   navigation: {
     "": "Home",

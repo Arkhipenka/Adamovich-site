@@ -6,7 +6,7 @@ import "../globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: siteConfig.name,
-  description: "Ales Adamovich cultural digital platform",
+  description: "Ales Adamovich - belarusian writer",
 };
 
 export default function DefaultRootLayout({

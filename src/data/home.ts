@@ -1,233 +1,9 @@
-import type { HomePageContent } from "@/types/home.types";
+import type { HomeHeroSlide, HomePageContent } from "@/types/home.types";
 
 export const homePageContent: HomePageContent = {
-  heroSlides: [
-    {
-      id: "memory",
-      eyebrow: {
-        be: "Пісьменнік. Сведка. Маральны голас.",
-        ru: "Писатель. Свидетель. Нравственный голос.",
-        en: "Writer. Witness. Moral Voice.",
-      },
-      title: {
-        be: "Алесь Адамовіч",
-        ru: "Алесь Адамович",
-        en: "Ales Adamovich",
-      },
-      quote: {
-        be: "Памяць — гэта супраціў забыццю.",
-        ru: "Память — это сопротивление забвению.",
-        en: "To remember means to resist oblivion.",
-      },
-      quoteAuthor: {
-        be: "Алесь Адамовіч",
-        ru: "Алесь Адамович",
-        en: "Ales Adamovich",
-      },
-      image: {
-        src: "/assets/images/hero/home-hero-1.webp",
-        alt: {
-          be: "Партрэт Алеся Адамовіча ў цёмнай архіўнай кампазіцыі",
-          ru: "Портрет Алеся Адамовича в тёмной архивной композиции",
-          en: "Ales Adamovich portrait in a dark archival composition",
-        },
-      },
-      imageCredit: {
-        be: "Архіўная візуальная канцэпцыя",
-        ru: "Архивная визуальная концепция",
-        en: "Archival visual concept",
-      },
-      primaryLink: {
-        label: {
-          be: "Біяграфія",
-          ru: "Биография",
-          en: "Biography",
-        },
-        href: "/biography",
-      },
-      secondaryLink: {
-        label: {
-          be: "Аўдыягід",
-          ru: "Аудиогид",
-          en: "Audio Guide",
-        },
-        href: "/audio-guide",
-      },
-      tertiaryLink: {
-        label: {
-          be: "Падтрымаць праект",
-          ru: "Поддержать проект",
-          en: "Support Project",
-        },
-        href: "/support",
-      },
-    },
-    {
-      id: "biography",
-      eyebrow: {
-        be: "Біяграфія",
-        ru: "Биография",
-        en: "Biography",
-      },
-      title: {
-        be: "Жыццё, прысвечанае праўдзе",
-        ru: "Жизнь, посвящённая правде",
-        en: "A life dedicated to truth",
-      },
-      subtitle: {
-        be: "Гісторыя пісьменніка, сведкі і гуманіста, які захаваў галасы вайны, памяці і сумлення.",
-        ru: "История писателя, свидетеля и гуманиста, сохранившего голоса войны, памяти и совести.",
-        en: "The story of a writer, witness and humanist whose work preserved the voices of war and conscience.",
-      },
-      image: {
-        src: "/assets/images/hero/home-hero-2.webp",
-        alt: {
-          be: "Архіўны вобраз пісьменніка і дакументальных матэрыялаў",
-          ru: "Архивный образ писателя и документальных материалов",
-          en: "Archival image of the writer and documentary materials",
-        },
-      },
-      imageCredit: {
-        be: "Біяграфічны архіў",
-        ru: "Биографический архив",
-        en: "Biographical archive",
-      },
-      primaryLink: {
-        label: {
-          be: "Біяграфія",
-          ru: "Биография",
-          en: "Biography",
-        },
-        href: "/biography",
-      },
-      secondaryLink: {
-        label: {
-          be: "Аўдыягід",
-          ru: "Аудиогид",
-          en: "Audio Guide",
-        },
-        href: "/audio-guide",
-      },
-      tertiaryLink: {
-        label: {
-          be: "Падтрымаць праект",
-          ru: "Поддержать проект",
-          en: "Support Project",
-        },
-        href: "/support",
-      },
-    },
-    {
-      id: "audio-guide",
-      eyebrow: {
-        be: "Аўдыягід",
-        ru: "Аудиогид",
-        en: "Audio Guide",
-      },
-      title: {
-        be: "Пачуць яго словы. Адчуць яго час.",
-        ru: "Услышать его слова. Почувствовать его время.",
-        en: "Hear his words. Feel his time.",
-      },
-      subtitle: {
-        be: "Дакументальнае аўдыяпадарожжа па мясцінах, звязаных з жыццём, кнігамі і памяццю пра Адамовіча.",
-        ru: "Документальное аудиопутешествие по местам, связанным с жизнью, книгами и памятью об Адамовиче.",
-        en: "A documentary audio journey through places connected with Adamovich’s life, books and memory.",
-      },
-      image: {
-        src: "/assets/images/hero/home-hero-3.webp",
-        alt: {
-          be: "Цёмная аўдыявізуальная сцэна з архіўнымі матэрыяламі",
-          ru: "Тёмная аудиовизуальная сцена с архивными материалами",
-          en: "Dark audio guide scene with archival materials",
-        },
-      },
-      imageCredit: {
-        be: "Голас і памяць",
-        ru: "Голос и память",
-        en: "Voice and memory",
-      },
-      primaryLink: {
-        label: {
-          be: "Біяграфія",
-          ru: "Биография",
-          en: "Biography",
-        },
-        href: "/biography",
-      },
-      secondaryLink: {
-        label: {
-          be: "Аўдыягід",
-          ru: "Аудиогид",
-          en: "Audio Guide",
-        },
-        href: "/audio-guide",
-      },
-      tertiaryLink: {
-        label: {
-          be: "Падтрымаць праект",
-          ru: "Поддержать проект",
-          en: "Support Project",
-        },
-        href: "/support",
-      },
-    },
-    {
-      id: "bibliography",
-      eyebrow: {
-        be: "Бібліяграфія",
-        ru: "Библиография",
-        en: "Bibliography",
-      },
-      title: {
-        be: "Кнігі, што захоўваюць праўду",
-        ru: "Книги, сохраняющие правду",
-        en: "Books that preserve truth",
-      },
-      subtitle: {
-        be: "Дакументальная проза, сведчанні і творы, якія сталі часткай маральнай памяці XX стагоддзя.",
-        ru: "Документальная проза, свидетельства и произведения, ставшие частью моральной памяти XX века.",
-        en: "Documentary prose, testimonies and works that became part of the moral memory of the 20th century.",
-      },
-      image: {
-        src: "/assets/images/hero/home-hero-4.webp",
-        alt: {
-          be: "Кнігі і дакументальная проза Алеся Адамовіча",
-          ru: "Книги и документальная проза Алеся Адамовича",
-          en: "Books and documentary prose by Ales Adamovich",
-        },
-      },
-      imageCredit: {
-        be: "Кнігі і сведчанні",
-        ru: "Книги и свидетельства",
-        en: "Books and testimony",
-      },
-      primaryLink: {
-        label: {
-          be: "Біяграфія",
-          ru: "Биография",
-          en: "Biography",
-        },
-        href: "/biography",
-      },
-      secondaryLink: {
-        label: {
-          be: "Аўдыягід",
-          ru: "Аудиогид",
-          en: "Audio Guide",
-        },
-        href: "/audio-guide",
-      },
-      tertiaryLink: {
-        label: {
-          be: "Падтрымаць праект",
-          ru: "Поддержать проект",
-          en: "Support Project",
-        },
-        href: "/support",
-      },
-    },
-  ],
+  // HomeHero uses activeHomeHeroSlides below; keep this empty to avoid a second editable source.
+  heroSlides: [],
+
   aboutWriter: {
     eyebrow: {
       be: "Пра пісьменніка",
@@ -483,6 +259,242 @@ export const homePageContent: HomePageContent = {
     ],
   },
 };
+
+export const homeHeroSlides: HomeHeroSlide[] = [
+  {
+    id: "writer",
+    eyebrow: {
+      be: "",
+      ru: "",
+      en: "",
+    },
+    title: {
+      be: "АЛЕСЬ АДАМОВІЧ",
+      ru: "АЛЕСЬ АДАМОВИЧ",
+      en: "ALES ADAMOVICH",
+    },
+    subtitle: {
+      be: "ПІСЬМЕННІК. СВЕДКА. МАРАЛЬНЫ ГОЛАС.",
+      ru: "ПИСАТЕЛЬ. СВИДЕТЕЛЬ. НРАВСТВЕННЫЙ ГОЛОС.",
+      en: "WRITER. WITNESS. MORAL VOICE.",
+    },
+    quote: {
+      be: "Памяць — гэта супраціў забыццю.",
+      ru: "Память — это сопротивление забвению.",
+      en: "To remember means to resist oblivion.",
+    },
+    quoteAuthor: {
+      be: "АЛЕСЬ АДАМОВІЧ",
+      ru: "АЛЕСЬ АДАМОВИЧ",
+      en: "ALES ADAMOVICH",
+    },
+    image: {
+      src: "/assets/images/hero/adamovich-writer-desk.jpg",
+      alt: {
+        be: "Алесь Адамовіч піша за сваім сталом",
+        ru: "Алесь Адамович пишет за своим столом",
+        en: "Ales Adamovich writing at his desk",
+      },
+    },
+    primaryLink: {
+      label: {
+        be: "БІЯГРАФІЯ",
+        ru: "БИОГРАФИЯ",
+        en: "BIOGRAPHY",
+      },
+      href: "/biography",
+    },
+    secondaryLink: {
+      label: {
+        be: "АЎДЫЯГІД",
+        ru: "АУДИОГИД",
+        en: "AUDIO GUIDE",
+      },
+      href: "/audio-guide",
+    },
+    tertiaryLink: {
+      label: {
+        be: "ПАДТРЫМАЦЬ ПРАЕКТ",
+        ru: "ПОДДЕРЖАТЬ ПРОЕКТ",
+        en: "SUPPORT PROJECT",
+      },
+      href: "/support",
+    },
+  },
+  {
+    id: "audio-guide",
+    eyebrow: {
+      be: "",
+      ru: "",
+      en: "",
+    },
+    title: {
+      be: "АЎДЫЯГІД",
+      ru: "АУДИОГИД",
+      en: "AUDIO GUIDE",
+    },
+    subtitle: {
+      be: "МЕСЦЫ ПАМЯЦІ Ў ГЛУШЫ.",
+      ru: "МЕСТА ПАМЯТИ В ГЛУШЕ.",
+      en: "PLACES OF MEMORY IN GLUSHA.",
+    },
+    text: {
+      be: "Прайдзіце маршрутам па мясцінах, звязаных з Алесем Адамовічам: вёска, аптэка, прыпынак памяці, помнік, скансэн і могілкі.",
+      ru: "Пройдите маршрут по местам, связанным с Алесем Адамовичем: деревня, аптека, памятная остановка, памятник, скансен и кладбище.",
+      en: "Walk through the places connected with Ales Adamovich: the village, the pharmacy, the memorial stop, the monument, the skansen, and the cemetery.",
+    },
+    image: {
+      src: "/assets/images/hero/hero-audio-guide-glusha.png",
+      alt: {
+        be: "Блакітны драўляны будынак аптэкі ў Глушы, звязаны з аўдыягідам пра Адамовіча",
+        ru: "Голубое деревянное здание аптеки в Глуше, связанное с аудиогидом об Адамовиче",
+        en: "Blue wooden pharmacy building in Glusha connected with the Adamovich audio guide",
+      },
+    },
+    primaryLink: {
+      label: {
+        be: "АДКРЫЦЬ АЎДЫЯГІД",
+        ru: "ОТКРЫТЬ АУДИОГИД",
+        en: "OPEN AUDIO GUIDE",
+      },
+      href: "/audio-guide",
+    },
+    secondaryLink: {
+      label: {
+        be: "ПАГЛЯДЗЕЦЬ МАРШРУТ",
+        ru: "ПОСМОТРЕТЬ МАРШРУТ",
+        en: "VIEW ROUTE",
+      },
+      href: "/audio-guide",
+    },
+    tertiaryLink: {
+      label: {
+        be: "TELEGRAM-БОТ",
+        ru: "TELEGRAM-БОТ",
+        en: "TELEGRAM BOT",
+      },
+      href: "/audio-guide",
+    },
+  },
+  {
+    id: "books",
+    eyebrow: {
+      be: "",
+      ru: "",
+      en: "",
+    },
+    title: {
+      be: "КНІГІ, ШТО ЗАХОЎВАЮЦЬ ПРАЎДУ",
+      ru: "КНИГИ, СОХРАНЯЮЩИЕ ПРАВДУ",
+      en: "BOOKS THAT PRESERVE TRUTH",
+    },
+    subtitle: {
+      be: "РУКАПІСЫ. СВЕДЧАННЕ. ПАМЯЦЬ.",
+      ru: "РУКОПИСИ. СВИДЕТЕЛЬСТВО. ПАМЯТЬ.",
+      en: "MANUSCRIPTS. TESTIMONY. MEMORY.",
+    },
+    text: {
+      be: "Кнігі Адамовіча захоўваюць галасы сведкаў, памяць вайны і маральную адказнасць літаратуры.",
+      ru: "Книги Адамовича сохраняют голоса свидетелей, память войны и нравственную ответственность литературы.",
+      en: "Adamovich's books preserve the voices of witnesses, the memory of war, and the moral responsibility of literature.",
+    },
+    image: {
+      src: "/assets/images/hero/hero-books-manuscripts.png",
+      alt: {
+        be: "Рукапіс і кнігі, якія прадстаўляюць літаратурную спадчыну Алеся Адамовіча",
+        ru: "Рукопись и книги, представляющие литературное наследие Алеся Адамовича",
+        en: "Handwritten manuscript and books representing Ales Adamovich's literary legacy",
+      },
+    },
+    primaryLink: {
+      label: {
+        be: "БІБЛІЯГРАФІЯ",
+        ru: "БИБЛИОГРАФИЯ",
+        en: "BIBLIOGRAPHY",
+      },
+      href: "/bibliography",
+    },
+    secondaryLink: {
+      label: {
+        be: "ЧЫТАЦЬ БОЛЬШ",
+        ru: "ЧИТАТЬ ДАЛЬШЕ",
+        en: "READ MORE",
+      },
+      href: "/bibliography",
+    },
+    tertiaryLink: {
+      label: {
+        be: "АРХІЎ",
+        ru: "АРХИВ",
+        en: "ARCHIVE",
+      },
+      href: "/archive",
+    },
+  },
+];
+
+export const optionalHomeHeroSlides: HomeHeroSlide[] = [
+  {
+    id: "initiative",
+    eyebrow: {
+      be: "",
+      ru: "",
+      en: "",
+    },
+    title: {
+      be: "ІНІЦЫЯТЫВА",
+      ru: "ИНИЦИАТИВА",
+      en: "THE INITIATIVE",
+    },
+    subtitle: {
+      be: "ЗАХОЎВАЦЬ. ДАСЛЕДАВАЦЬ. НАТХНЯЦЬ.",
+      ru: "СОХРАНЯТЬ. ИССЛЕДОВАТЬ. ВДОХНОВЛЯТЬ.",
+      en: "PRESERVE. RESEARCH. INSPIRE.",
+    },
+    text: {
+      be: "Культурная лічбавая платформа, прысвечаная захаванню спадчыны Алеся Адамовіча і сувязі яго памяці з новымі пакаленнямі.",
+      ru: "Культурная цифровая платформа, посвящённая сохранению наследия Алеся Адамовича и связи его памяти с новыми поколениями.",
+      en: "A cultural digital platform dedicated to preserving the legacy of Ales Adamovich and connecting his memory with new generations.",
+    },
+    image: {
+      src: "/assets/images/hero/hero-initiative-glusha.png",
+      alt: {
+        be: "Прыпынак памяці і помнік Алесю Адамовічу ў Глушы",
+        ru: "Памятная остановка и памятник Алесю Адамовичу в Глуше",
+        en: "Memorial stop and monument to Ales Adamovich in Glusha",
+      },
+    },
+    primaryLink: {
+      label: {
+        be: "ПРА ІНІЦЫЯТЫВУ",
+        ru: "ОБ ИНИЦИАТИВЕ",
+        en: "ABOUT INITIATIVE",
+      },
+      href: "/initiative",
+    },
+    secondaryLink: {
+      label: {
+        be: "ПАДТРЫМАЦЬ ПРАЕКТ",
+        ru: "ПОДДЕРЖАТЬ ПРОЕКТ",
+        en: "SUPPORT PROJECT",
+      },
+      href: "/support",
+    },
+    tertiaryLink: {
+      label: {
+        be: "ЗВЯЗАЦЦА",
+        ru: "СВЯЗАТЬСЯ",
+        en: "CONTACT US",
+      },
+      href: "/contacts",
+    },
+  },
+];
+
+export const activeHomeHeroSlides: HomeHeroSlide[] = [
+  ...homeHeroSlides,
+  ...optionalHomeHeroSlides,
+];
 
 export const homeHeroControlLabels = {
   be: {

@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 import styles from "./Header.module.css";
 import { MobileNavigation } from "@/components/layout/MobileNavigation";
@@ -72,9 +72,9 @@ const headerLogoByLocale: Record<Locale, string> = {
 };
 
 const headerLogoAltByLocale: Record<Locale, string> = {
-  be: "\u0410\u043b\u0435\u0441\u044c \u0410\u0434\u0430\u043c\u043e\u0432\u0456\u0447",
+  be: "Алесь Адамовіч",
   en: "Ales Adamovich",
-  ru: "\u0410\u043b\u0435\u0441\u044c \u0410\u0434\u0430\u043c\u043e\u0432\u0438\u0447",
+  ru: "Алесь Адамович",
 };
 
 const compactLogoTextByLocale: Record<Locale, string> = {
@@ -98,6 +98,8 @@ function getLocaleHref(pathname: string, currentLocale: Locale, nextLocale: Loca
 export function Header({ locale, dictionary }: HeaderProps) {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const menuOpenRef = useRef(menuOpen);
   const currentSegment = useMemo(
     () => getCurrentSegment(pathname, locale),
     [locale, pathname],
@@ -107,27 +109,94 @@ export function Header({ locale, dictionary }: HeaderProps) {
     [locale],
   );
 
-  const [isScrolled, setIsScrolled] = useState(false);
+  useEffect(() => {
+    menuOpenRef.current = menuOpen;
+  }, [menuOpen]);
 
   useEffect(() => {
-  const handleScroll = () => {
-    setIsScrolled(window.scrollY > 80);
-  };
+    const handleScroll = () => {
+      if (menuOpenRef.current) return;
 
-  handleScroll();
+      setIsScrolled(window.scrollY > 80);
+    };
 
-  window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
 
-  return () => {
-    window.removeEventListener("scroll", handleScroll);
-  };
-}, []);
-
-  useEffect(() => {
-    document.body.dataset.menuOpen = menuOpen ? "true" : "false";
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => {
-      delete document.body.dataset.menuOpen;
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!menuOpen) {
+      document.body.removeAttribute("data-menu-open");
+      document.body.style.overflow = "";
+
+      return;
+    }
+
+    const scrollY = window.scrollY;
+    const previousHtmlOverflow = document.documentElement.style.overflow;
+    const previousBodyOverflow = document.body.style.overflow;
+    const previousBodyPosition = document.body.style.position;
+    const previousBodyTop = document.body.style.top;
+    const previousBodyLeft = document.body.style.left;
+    const previousBodyRight = document.body.style.right;
+    const previousBodyWidth = document.body.style.width;
+
+    document.body.setAttribute("data-menu-open", "true");
+    document.documentElement.style.overflow = "hidden";
+    document.body.style.overflow = "hidden";
+    document.body.style.position = "fixed";
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.left = "0";
+    document.body.style.right = "0";
+    document.body.style.width = "100%";
+
+    return () => {
+      document.body.removeAttribute("data-menu-open");
+      document.documentElement.style.overflow = previousHtmlOverflow;
+      document.body.style.overflow = previousBodyOverflow;
+      document.body.style.position = previousBodyPosition;
+      document.body.style.top = previousBodyTop;
+      document.body.style.left = previousBodyLeft;
+      document.body.style.right = previousBodyRight;
+      document.body.style.width = previousBodyWidth;
+      window.scrollTo(0, scrollY);
+    };
+  }, [menuOpen]);
+
+  useEffect(() => {
+    const desktopQuery = window.matchMedia("(min-width: 1181px)");
+    const handleDesktopChange = () => {
+      if (desktopQuery.matches) {
+        setMenuOpen(false);
+      }
+    };
+
+    handleDesktopChange();
+    desktopQuery.addEventListener("change", handleDesktopChange);
+
+    return () => {
+      desktopQuery.removeEventListener("change", handleDesktopChange);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!menuOpen) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setMenuOpen(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
     };
   }, [menuOpen]);
 
@@ -213,6 +282,7 @@ export function Header({ locale, dictionary }: HeaderProps) {
         currentSegment={currentSegment}
         dictionary={dictionary}
         id="mobile-navigation"
+        isScrolled={isScrolled}
         locale={locale}
         navigationLinks={navigationLinks}
         onNavigate={closeMenu}
