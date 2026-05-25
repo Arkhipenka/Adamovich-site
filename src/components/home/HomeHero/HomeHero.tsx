@@ -5,10 +5,7 @@ import Link from "next/link";
 import { useEffect, useState, type CSSProperties } from "react";
 
 import styles from "./HomeHero.module.css";
-import {
-  activeHomeHeroSlides,
-  homeHeroControlLabels,
-} from "@/data/home";
+import { homeHeroControlLabels, homePageContent } from "@/data/home";
 import { assetPath, type Locale } from "@/config/site";
 import { getLocalizedText } from "@/lib/getLocalizedText";
 import { localizedHref } from "@/lib/localizedHref";
@@ -29,7 +26,7 @@ const slideImageClassById: Record<string, string> = {
 };
 
 export function HomeHero({ locale = "ru" }: HomeHeroProps) {
-  const slides = activeHomeHeroSlides;
+  const slides = homePageContent.heroSlides;
   const labels = homeHeroControlLabels[locale];
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);

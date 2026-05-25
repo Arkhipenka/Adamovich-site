@@ -11,7 +11,7 @@ type AudioGuidePreviewProps = {
   locale?: Locale;
 };
 
-type IconName = "book" | "map" | "mic" | "phone" | "send";
+type IconName = "book" | "googlePlay" | "map" | "mic" | "phone" | "send";
 
 function getCardIcon(cardId: string): IconName {
   switch (cardId) {
@@ -45,6 +45,15 @@ function Icon({ name }: { name: IconName }) {
           <path d="M4 19V5.5" />
           <path d="M8 7h8" />
           <path d="M8 11h7" />
+        </svg>
+      );
+    case "googlePlay":
+      return (
+        <svg {...commonProps}>
+          <path d="M5.2 3.6v16.8c0 .65.74 1.03 1.28.66l13.1-8.37a.82.82 0 0 0 0-1.38L6.48 2.94a.8.8 0 0 0-1.28.66Z" />
+          <path d="m5.8 3.25 8.48 8.75-8.48 8.75" />
+          <path d="M14.28 12 19.9 6.5" />
+          <path d="M14.28 12 19.9 17.5" />
         </svg>
       );
     case "map":
@@ -106,7 +115,7 @@ export function AudioGuidePreview({ locale = "ru" }: AudioGuidePreviewProps) {
               {getLocalizedText(content.telegramLabel, locale)}
             </Link>
             <Link className={styles.buttonSecondary} href={appHref}>
-              <Icon name="phone" />
+              <Icon name="googlePlay" />
               {getLocalizedText(content.appLabel, locale)}
             </Link>
           </div>

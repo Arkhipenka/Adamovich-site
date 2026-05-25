@@ -134,13 +134,27 @@
 
 @media (max-width: 1024px) {
   .inner {
-    grid-template-columns: 0.9fr 1.1fr;
+    grid-template-columns: minmax(240px, 0.85fr) minmax(0, 1.15fr);
+    gap: 36px;
+    align-items: center;
   }
 
   .quoteColumn {
     grid-column: 1 / -1;
-    max-width: 720px;
-    margin-left: calc(42% + clamp(16px, 3vw, 32px));
+    max-width: 760px;
+    margin-top: 8px;
+    padding-top: 28px;
+    padding-left: 0;
+    border-left: 0;
+    justify-self: center;
+    border-top: 1px solid rgba(194, 163, 107, 0.32);
+  }
+  .quoteText {
+    max-width: 480px;
+    font-size: clamp(1.25rem, 2.6vw, 1.8rem);
+  }
+  .quoteAuthor{
+    justify-self: self-end;
   }
 }
 

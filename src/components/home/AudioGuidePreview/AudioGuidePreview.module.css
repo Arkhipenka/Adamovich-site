@@ -8,9 +8,9 @@
 
 .inner {
   display: grid;
-  grid-template-columns: minmax(260px, 360px) minmax(0, 1fr);
-  gap: clamp(28px, 4.4vw, 56px);
-  align-items: center;
+  grid-template-columns: minmax(280px, 360px) minmax(0, 1fr);
+  gap: clamp(40px, 5vw, 72px);
+  align-items: stretch;
   width: min(100% - var(--page-gutter) * 2, var(--container));
   margin-inline: auto;
 }
@@ -64,6 +64,10 @@
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+  color: var(--color-text);
+  background: transparent;
+  border-color: var(--color-text);
+  transform: translateY(-1px);
   transition:
     border-color 180ms ease,
     background-color 180ms ease,
@@ -71,24 +75,11 @@
     transform 180ms ease;
 }
 
-.buttonPrimary {
-  color: #111;
-  background: var(--color-accent);
-}
 
-.buttonSecondary {
-  color: var(--color-text);
-  background: transparent;
-}
-
-.buttonPrimary:hover,
-.buttonSecondary:hover {
-  border-color: var(--color-accent-strong);
-  transform: translateY(-1px);
-}
-
-.buttonSecondary:hover {
+.buttonSecondary:hover,
+.buttonPrimary:hover {
   color: var(--color-accent);
+  border-color: var(--color-accent);
   background: rgba(194, 163, 107, 0.08);
 }
 
@@ -96,12 +87,14 @@
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 18px;
+  align-items: stretch;
 }
 
 .card {
   position: relative;
-  min-height: 258px;
+  min-height: 300px;
   overflow: hidden;
+  align-items: end;
   border: 1px solid rgba(255, 255, 255, 0.08);
   color: var(--color-text);
   background: var(--color-bg-elevated);
@@ -142,11 +135,13 @@
 
 .cardContent {
   position: relative;
-  z-index: 1;
-  display: grid;
-  min-height: 258px;
-  align-content: end;
-  padding: 22px;
+  z-index: 2;
+  display: flex;
+  min-height: 100%;
+  width: 100%;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 28px;
 }
 
 .cardIcon {

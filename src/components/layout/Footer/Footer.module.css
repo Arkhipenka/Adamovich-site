@@ -8,7 +8,7 @@
 }
 
 .inner {
-    width: min(100% - var(--page-gutter) * 2, var(--container-wide, var(--container)));
+  width: min(100% - var(--page-gutter) * 2, var(--container-wide, var(--container)));
 
   margin-inline: auto;
   padding: 48px 0 28px;
