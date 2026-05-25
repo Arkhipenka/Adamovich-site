@@ -1,8 +1,8 @@
 import { AboutWriter } from "@/components/home/AboutWriter";
 import { AudioGuidePreview } from "@/components/home/AudioGuidePreview";
-import { BibliographyPreview } from "@/components/home/BibliographyPreview";
 import { HomeHero } from "@/components/home/HomeHero";
 import { InitiativePreview } from "@/components/home/InitiativePreview";
+import { FeaturedWorks } from "@/components/FeaturedWorks";
 import { resolveLocalePage, type LocalePageProps } from "@/lib/page";
 
 export default async function HomePage({ params }: LocalePageProps) {
@@ -13,7 +13,7 @@ export default async function HomePage({ params }: LocalePageProps) {
       <HomeHero locale={locale} />
       <AboutWriter locale={locale} />
       <AudioGuidePreview locale={locale} />
-      <BibliographyPreview locale={locale} />
+      <FeaturedWorks locale={locale} />
       <InitiativePreview locale={locale} />
     </>
   );

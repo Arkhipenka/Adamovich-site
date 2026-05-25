@@ -404,14 +404,14 @@ export const homePageContent: HomePageContent = {
       en: "The initiative",
     },
     title: {
-      be: "Захоўваць. Даследаваць. Натхняць.",
-      ru: "Сохранять. Исследовать. Вдохновлять.",
-      en: "Preserve. Research. Inspire.",
+      be: "Прыпынак Адамовіча",
+      ru: "Припынак Адамовича",
+      en: "Prypynak Adamovich",
     },
     description: {
-      be: "Наша місія — захоўваць літаратурную і культурную спадчыну Алеся Адамовіча, рабіць яе даступнай новым пакаленням і развіваць лічбавыя інструменты для адукацыі, даследаванняў і памяці.",
-      ru: "Наша миссия — сохранять литературное и культурное наследие Алеся Адамовича, делать его доступным новым поколениям и развивать цифровые инструменты для образования, исследований и памяти.",
-      en: "Our mission is to preserve the literary and cultural heritage of Ales Adamovich, make it accessible to new generations and develop digital tools for education, research and remembrance.",
+      be: "«Прыпынак Адамовіча» — культурная ініцыятыва, якая вырасла з працы па ўвекавечванню памяці Алеся Адамовіча ў Глушы. Мы вяртаем імя пісьменніка ў публічную прастору праз памятныя месцы, лічбавыя праекты, даследаванні, аўдыягід і адукацыйныя матэрыялы.",
+      ru: "«Прыпынак Адамовіча» — культурная инициатива, выросшая из работы по увековечиванию памяти Алеся Адамовича в Глуше. Мы возвращаем имя писателя в публичное пространство через памятные места, цифровые проекты, исследования, аудиогид и образовательные материалы.",
+      en: "Prypynak Adamovich is a cultural initiative that grew out of work to commemorate Ales Adamovich in Glusha. We bring the writer’s name back into the public space through memorial sites, digital projects, research, an audio guide and educational materials.",
     },
     linkLabel: {
       be: "Даведацца больш",
