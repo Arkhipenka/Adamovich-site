@@ -84,6 +84,12 @@
   color: rgba(184, 177, 163, 0.72);
 }
 
+.searchInput::-webkit-search-cancel-button,
+.searchInput::-webkit-search-decoration {
+  display: none;
+  appearance: none;
+}
+
 .clearSearch {
   position: absolute;
   top: 50%;
