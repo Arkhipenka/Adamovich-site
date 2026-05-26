@@ -1,0 +1,1 @@
+export { InitiativePartners } from "./InitiativePartners";

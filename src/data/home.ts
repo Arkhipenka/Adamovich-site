@@ -436,9 +436,9 @@ export const homePageContent: HomePageContent = {
           en: "Digital archive",
         },
         text: {
-          be: "Творы, дакументы і архіўныя матэрыялы.",
-          ru: "Произведения, документы и архивные материалы.",
-          en: "Works, documents and archival materials.",
+          be: "Працуем над лічбавым архівам",
+          ru: "Работаем над цифровым архивом",
+          en: "We are working on the digital archive",
         },
       },
       {

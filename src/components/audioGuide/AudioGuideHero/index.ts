@@ -1,0 +1,1 @@
+export { AudioGuideHero } from "./AudioGuideHero";

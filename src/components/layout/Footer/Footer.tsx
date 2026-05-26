@@ -38,7 +38,6 @@ const footerContentByLocale: Record<
     rights: string;
     privacy: string;
     terms: string;
-    location: string;
     navigation: FooterNavItem[];
   }
 > = {
@@ -52,7 +51,6 @@ const footerContentByLocale: Record<
     rights: "Усе правы абаронены",
     privacy: "Палітыка прыватнасці",
     terms: "Умовы выкарыстання",
-    location: "Польшча",
     navigation: [
       { label: "Біяграфія", segment: "biography" },
       { label: "Бібліяграфія", segment: "bibliography" },
@@ -72,7 +70,6 @@ const footerContentByLocale: Record<
     rights: "All rights reserved",
     privacy: "Privacy Policy",
     terms: "Terms of Use",
-    location: "Poland",
     navigation: [
       { label: "Biography", segment: "biography" },
       { label: "Bibliography", segment: "bibliography" },
@@ -92,7 +89,6 @@ const footerContentByLocale: Record<
     rights: "Все права защищены",
     privacy: "Политика конфиденциальности",
     terms: "Условия использования",
-    location: "Польша",
     navigation: [
       { label: "Биография", segment: "biography" },
       { label: "Библиография", segment: "bibliography" },
@@ -155,16 +151,16 @@ export function Footer({ locale = defaultLocale }: FooterProps) {
           <h2 className={styles.columnTitle}>{content.contactsTitle}</h2>
           <ul className={styles.contactsList}>
             <li>
-              <a className={styles.footerLink} href={`mailto:${siteConfig.contactEmail}`}>
-                {siteConfig.contactEmail}
+              <a className={styles.footerLink} href={`mailto:${siteConfig.contacts.email}`}>
+                {siteConfig.contacts.email}
               </a>
             </li>
             <li>
-              <a className={styles.footerLink} href="tel:+48733259097">
-                +48 733 259 097
+              <a className={styles.footerLink} href={`tel:${siteConfig.contacts.phoneHref}`}>
+                {siteConfig.contacts.phone}
               </a>
             </li>
-            <li>{content.location}</li>
+            <li>{siteConfig.contacts.location[locale]}</li>
           </ul>
 
           <h2 className={styles.socialTitle}>{content.followTitle}</h2>

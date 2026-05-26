@@ -1,0 +1,1 @@
+export { BiographyRelatedWorks } from "./BiographyRelatedWorks";

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-import { WorkDetail } from "@/components/WorkDetail";
+import { WorkDetail } from "@/components/bibliography/WorkDetail";
 import { locales } from "@/config/site";
 import { getLocalizedText } from "@/lib/getLocalizedText";
 import {

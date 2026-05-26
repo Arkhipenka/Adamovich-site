@@ -1,0 +1,1 @@
+export { ContactsHero } from "./ContactsHero";

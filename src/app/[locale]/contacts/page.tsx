@@ -1,10 +1,27 @@
-import { PageScaffold } from "@/components/sections/PageScaffold";
+import type { Metadata } from "next";
+
+import {
+  ContactsPage,
+  getContactsPageMetadata,
+} from "@/components/contacts/ContactsPage";
 import { resolveLocalePage, type LocalePageProps } from "@/lib/page";
 
-export default async function ContactsPage({ params }: LocalePageProps) {
-  const { locale, dictionary } = await resolveLocalePage(params);
+type ContactsMetadataProps = {
+  params: Promise<{
+    locale: string;
+  }>;
+};
 
-  return (
-    <PageScaffold locale={locale} dictionary={dictionary} segment="contacts" />
-  );
+export async function generateMetadata({
+  params,
+}: ContactsMetadataProps): Promise<Metadata> {
+  const { locale } = await resolveLocalePage(params);
+
+  return getContactsPageMetadata(locale);
+}
+
+export default async function ContactsRoute({ params }: LocalePageProps) {
+  const { locale } = await resolveLocalePage(params);
+
+  return <ContactsPage locale={locale} />;
 }

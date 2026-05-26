@@ -1,0 +1,1 @@
+export { BiographyTimeline } from "./BiographyTimeline";

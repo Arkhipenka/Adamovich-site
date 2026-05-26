@@ -15,6 +15,6 @@ export const siteConfig = {
   defaultLocale: "ru" as Locale,
   supportedLocales: ["be", "ru", "en"] as Locale[],
   contacts: {
-    email: "info@adamovich.org",
+    email: "info@adamovich.eu",
   },
 };

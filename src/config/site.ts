@@ -25,14 +25,35 @@ export const routeSegments = [
 
 export type RouteSegment = (typeof routeSegments)[number];
 
+const contactEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "info@adamovich.eu";
+const contactPhone = process.env.NEXT_PUBLIC_CONTACT_PHONE ?? "+48 733-25-90-97";
+const contactPhoneHref = process.env.NEXT_PUBLIC_CONTACT_PHONE_HREF ?? "+48733259097";
+const contactTelegram = process.env.NEXT_PUBLIC_CONTACT_TELEGRAM ?? "@adamovich_bot";
+const telegramBotUrl = process.env.NEXT_PUBLIC_TELEGRAM_BOT_URL ?? "";
+
 export const siteConfig = {
   name: "Ales Adamovich",
   domain: "adamovich.eu",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://adamovich.eu",
-  contactEmail: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "info@adamovich.eu",
-  telegramBotUrl: process.env.NEXT_PUBLIC_TELEGRAM_BOT_URL ?? "",
+  contactEmail,
+  contactPhone,
+  contactPhoneHref,
+  contactTelegram,
+  telegramBotUrl,
   audioAppUrl: process.env.NEXT_PUBLIC_AUDIO_APP_URL ?? "",
   supportUrl: process.env.NEXT_PUBLIC_SUPPORT_URL ?? "",
+  contacts: {
+    email: contactEmail,
+    phone: contactPhone,
+    phoneHref: contactPhoneHref,
+    telegram: contactTelegram,
+    telegramUrl: telegramBotUrl,
+    location: {
+      be: "Адрас будзе дададзена пазней",
+      en: "Address will be added later",
+      ru: "Адрес будет добавлен позже",
+    } satisfies Record<Locale, string>,
+  },
 };
 
 export function isLocale(value: string): value is Locale {
