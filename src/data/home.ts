@@ -420,7 +420,7 @@ export const homePageContent: HomePageContent = {
     },
     linkHref: "/initiative",
     image: {
-      src: "/assets/images/initiative/initiative-preview.webp",
+      src: "/assets/images/initiative/adamovich-stop-dark-portrait-900x1200.webp",
       alt: {
         be: "Месца, звязанае з ініцыятывай пра Алеся Адамовіча",
         ru: "Место, связанное с инициативой об Алесе Адамовиче",

@@ -7,7 +7,7 @@
 }
 
 .inner {
-  width: min(100% - var(--page-gutter) * 2, var(--container));
+  width: min(100% - var(--page-gutter) * 2, var(--container-wide));
   margin-inline: auto;
 }
 

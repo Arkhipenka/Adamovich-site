@@ -91,7 +91,7 @@ export function InitiativePreview({ locale = "ru" }: InitiativePreviewProps) {
               alt={getLocalizedText(content.image.alt, locale)}
               className={styles.image}
               fill
-              sizes="(max-width: 900px) calc(100vw - 40px), (max-width: 1180px) 42vw, 420px"
+              sizes="(max-width: 900px) calc(100vw - 40px), (max-width: 1180px) 42vw, 500px"
               src={assetPath(content.image.src)}
             />
           </div>

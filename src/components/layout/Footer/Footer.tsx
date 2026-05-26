@@ -3,9 +3,9 @@ import Link from "next/link";
 
 import styles from "./Footer.module.css";
 import {
+  assetPath,
   defaultLocale,
   localizedPath,
-  assetPath,
   siteConfig,
   type Locale,
   type RouteSegment,
@@ -21,18 +21,10 @@ type FooterNavItem = {
 };
 
 const footerLogoByLocale: Record<Locale, string> = {
-  be: assetPath("/assets/brand/logo-footer-by.svg"),
-  en: assetPath("/assets/brand/logo-footer-en.svg"),
-  ru: assetPath("/assets/brand/logo-footer-ru.svg"),
-};
-
-const footerLogoFallbackByLocale: Record<Locale, string> = {
   be: assetPath("/assets/brand/adamovich-logo-be-dark.png"),
   en: assetPath("/assets/brand/adamovich-logo-en-dark.png"),
   ru: assetPath("/assets/brand/adamovich-logo-ru-dark.png"),
 };
-
-const availableFooterLogos = new Set<string>();
 
 const footerContentByLocale: Record<
   Locale,
@@ -52,7 +44,7 @@ const footerContentByLocale: Record<
 > = {
   be: {
     brandTitle: "Алесь Адамовіч",
-    copyright: "© 2026 Ініцыатыўная группа Прыпынак Адамовіча",
+    copyright: "© 2026 Ініцыятыўная група «Прыпынак Адамовіча»",
     navigationTitle: "Навігацыя",
     contactsTitle: "Кантакты",
     followTitle: "Сацыяльныя сеткі",
@@ -72,7 +64,7 @@ const footerContentByLocale: Record<
   },
   en: {
     brandTitle: "Ales Adamovich",
-    copyright: "© 2026 Ales Adamovich Initiative Group",
+    copyright: "© 2026 Prypynak Adamovich Initiative Group",
     navigationTitle: "Navigation",
     contactsTitle: "Contacts",
     followTitle: "Follow us",
@@ -92,7 +84,7 @@ const footerContentByLocale: Record<
   },
   ru: {
     brandTitle: "Алесь Адамович",
-    copyright: "© 2026 Инициативная группа Прыпынак Адамовіча",
+    copyright: "© 2026 Инициативная группа «Прыпынак Адамовіча»",
     navigationTitle: "Навигация",
     contactsTitle: "Контакты",
     followTitle: "Социальные сети",
@@ -100,7 +92,7 @@ const footerContentByLocale: Record<
     rights: "Все права защищены",
     privacy: "Политика конфиденциальности",
     terms: "Условия использования",
-    location: "Польшча",
+    location: "Польша",
     navigation: [
       { label: "Биография", segment: "biography" },
       { label: "Библиография", segment: "bibliography" },
@@ -119,127 +111,110 @@ const socialLinks = [
   { label: "YouTube", shortLabel: "YT", href: "#" },
 ];
 
-const supportLogos = [
-  {
-    alt: "Funded by the European Union",
-    height: 919,
-    src: assetPath("/assets/brand/eu-logo.png"),
-    width: 4125,
-  },
-  {
-    alt: "ArtPower Belarus",
-    height: 731,
-    src: assetPath("/assets/brand/artpower-logo.svg"),
-    width: 731,
-  },
-];
-
-function getFooterLogoSrc(locale: Locale) {
-  const candidate = footerLogoByLocale[locale];
-
-  return availableFooterLogos.has(candidate)
-    ? candidate
-    : footerLogoFallbackByLocale[locale];
-}
-
 export function Footer({ locale = defaultLocale }: FooterProps) {
   const content = footerContentByLocale[locale];
 
   return (
     <footer className={styles.footer}>
       <div className={styles.inner}>
-        <div className={styles.columns}>
-          <div className={styles.brand}>
-            <Link href={localizedPath(locale)} aria-label={content.brandTitle}>
-              <Image
-                alt={content.brandTitle}
-                className={styles.logo}
-                height={256}
-                src={getFooterLogoSrc(locale)}
-                width={767}
-              />
-            </Link>
-            <div className={styles.brandText}>
-              <p>{content.copyright}</p>
-            </div>
-          </div>
-
-          <nav className={styles.column} aria-label={content.navigationTitle}>
-            <h2 className={styles.columnTitle}>{content.navigationTitle}</h2>
-            <ul className={styles.navList}>
-              {content.navigation.map((item) => (
-                <li key={item.segment}>
-                  <Link className={styles.navLink} href={localizedPath(locale, item.segment)}>
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
-
-          <div className={styles.column}>
-            <h2 className={styles.columnTitle}>{content.contactsTitle}</h2>
-            <ul className={styles.contactList}>
-              <li>
-                <a className={styles.contactLink} href={`mailto:${siteConfig.contactEmail}`}>
-                  {siteConfig.contactEmail}
-                </a>
-              </li>
-              <li>
-                <a className={styles.contactLink} href="tel:+48733259097">
-                  +48 733 259 097
-                </a>
-              </li>
-              <li>{content.location}</li>
-            </ul>
-          <div className={styles.column}>
-            <h2 className={styles.columnTitle}>{content.followTitle}</h2>
-            <ul className={styles.socialList}>
-              {socialLinks.map((item) => (
-                <li key={item.label}>
-                  <a
-                    aria-label={item.label}
-                    className={styles.socialLink}
-                    href={item.href}
-                  >
-                    {item.shortLabel}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-          </div>
-
-          
-
-          <div className={styles.column}>
-            <h2 className={styles.columnTitle}>{content.supportedTitle}</h2>
-            <div className={styles.supportLogos}>
-              {supportLogos.map((item) => (
-                <div className={styles.supportLogo} key={item.alt}>
-                  <Image
-                    alt={item.alt}
-                    height={item.height}
-                    src={item.src}
-                    unoptimized
-                    width={item.width}
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
+        <div className={styles.brandBlock}>
+          <Link
+            aria-label={content.brandTitle}
+            className={styles.brand}
+            href={localizedPath(locale)}
+          >
+            <Image
+              alt={content.brandTitle}
+              className={styles.logo}
+              height={256}
+              priority={false}
+              src={footerLogoByLocale[locale]}
+              width={767}
+            />
+          </Link>
+          <p className={styles.brandText}>{content.copyright}</p>
         </div>
 
-        <div className={styles.bottom}>
-          <p>{content.rights}</p>
-          <div className={styles.legalLinks}>
-            <a className={styles.legalLink} href="#">
-              {content.privacy}
-            </a>
-            <a className={styles.legalLink} href="#">
-              {content.terms}
-            </a>
+        <nav className={styles.column} aria-label={content.navigationTitle}>
+          <h2 className={styles.columnTitle}>{content.navigationTitle}</h2>
+          <ul className={styles.links}>
+            {content.navigation.map((item) => (
+              <li key={item.segment}>
+                <Link
+                  className={styles.footerLink}
+                  href={localizedPath(locale, item.segment)}
+                >
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <div className={styles.column}>
+          <h2 className={styles.columnTitle}>{content.contactsTitle}</h2>
+          <ul className={styles.contactsList}>
+            <li>
+              <a className={styles.footerLink} href={`mailto:${siteConfig.contactEmail}`}>
+                {siteConfig.contactEmail}
+              </a>
+            </li>
+            <li>
+              <a className={styles.footerLink} href="tel:+48733259097">
+                +48 733 259 097
+              </a>
+            </li>
+            <li>{content.location}</li>
+          </ul>
+
+          <h2 className={styles.socialTitle}>{content.followTitle}</h2>
+          <ul className={styles.socials}>
+            {socialLinks.map((item) => (
+              <li key={item.label}>
+                <a
+                  aria-label={item.label}
+                  className={styles.socialLink}
+                  href={item.href}
+                >
+                  {item.shortLabel}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className={styles.column}>
+          <h2 className={styles.columnTitle}>{content.supportedTitle}</h2>
+          <div className={styles.supportLogos}>
+            <Image
+              alt="Funded by the European Union"
+              className={styles.supportLogoEu}
+              height={919}
+              src={assetPath("/assets/brand/eu-logo.png")}
+              unoptimized
+              width={4125}
+            />
+            <Image
+              alt="ArtPower Belarus"
+              className={styles.supportLogoArtpower}
+              height={731}
+              src={assetPath("/assets/brand/artpower-logo.svg")}
+              unoptimized
+              width={731}
+            />
           </div>
+        </div>
+      </div>
+
+      <div className={styles.bottom}>
+        <p>{content.rights}</p>
+        <div className={styles.legalLinks}>
+          <a className={styles.legalLink} href="#">
+            {content.privacy}
+          </a>
+          <a className={styles.legalLink} href="#">
+            {content.terms}
+          </a>
         </div>
       </div>
     </footer>

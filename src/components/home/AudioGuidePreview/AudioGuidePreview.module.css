@@ -11,7 +11,7 @@
   grid-template-columns: minmax(280px, 360px) minmax(0, 1fr);
   gap: clamp(40px, 5vw, 72px);
   align-items: stretch;
-  width: min(100% - var(--page-gutter) * 2, var(--container));
+  width: min(100% - var(--page-gutter) * 2, var(--container-wide));
   margin-inline: auto;
 }
 

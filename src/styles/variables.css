@@ -9,6 +9,7 @@
   --font-sans: Inter, "Segoe UI", Arial, Helvetica, sans-serif;
   --font-serif: "Cormorant Garamond", "Source Serif 4", Georgia, "Times New Roman", serif;
   --container: 1320px;
+  --container-wide: 1600px;
   --page-gutter: clamp(20px, 5vw, 72px);
   --header-height: 82px;
   --header-height-scrolled: 62px;
