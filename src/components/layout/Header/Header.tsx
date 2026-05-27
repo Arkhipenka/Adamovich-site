@@ -7,8 +7,10 @@ import { useEffect, useMemo, useRef, useState } from "react";
 
 import styles from "./Header.module.css";
 import { MobileNavigation } from "@/components/layout/MobileNavigation";
+import { ThemeToggle } from "@/components/theme/ThemeToggle";
 import {
   localeOptions,
+  navigationChromeLabels,
   navigationItems,
   supportNavigationItem,
 } from "@/data/navigation";
@@ -18,12 +20,10 @@ import {
   type Locale,
   type RouteSegment,
 } from "@/config/site";
-import type { Dictionary } from "@/i18n/dictionaries";
 import { getLocalizedText } from "@/lib/getLocalizedText";
 
 type HeaderProps = {
   locale: Locale;
-  dictionary: Dictionary;
 };
 
 type HeaderNavigationLink = {
@@ -71,6 +71,12 @@ const headerLogoByLocale: Record<Locale, string> = {
   ru: assetPath("/assets/brand/adamovich-logo-ru-dark.png"),
 };
 
+const headerLightLogoByLocale: Record<Locale, string> = {
+  be: assetPath("/assets/brand/adamovich-logo-be-light.svg"),
+  en: assetPath("/assets/brand/adamovich-logo-en-light.svg"),
+  ru: assetPath("/assets/brand/adamovich-logo-ru-light.svg"),
+};
+
 const headerLogoAltByLocale: Record<Locale, string> = {
   be: "Алесь Адамовіч",
   en: "Ales Adamovich",
@@ -95,11 +101,12 @@ function getLocaleHref(pathname: string, currentLocale: Locale, nextLocale: Loca
   return `/${nextLocale}${pathWithoutLocale || ""}`;
 }
 
-export function Header({ locale, dictionary }: HeaderProps) {
+export function Header({ locale }: HeaderProps) {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const menuOpenRef = useRef(menuOpen);
+  const labels = navigationChromeLabels[locale];
   const currentSegment = useMemo(
     () => getCurrentSegment(pathname, locale),
     [locale, pathname],
@@ -214,11 +221,20 @@ export function Header({ locale, dictionary }: HeaderProps) {
           <span className={styles.fullLogoWrap} aria-hidden={isScrolled}>
             <Image
               alt={headerLogoAltByLocale[locale]}
-              className={styles.logo}
+              className={`${styles.logo} ${styles.logoForDark}`}
               height={256}
               priority
               src={headerLogoByLocale[locale]}
               width={767}
+            />
+            <Image
+              alt=""
+              aria-hidden="true"
+              className={`${styles.logo} ${styles.logoForLight}`}
+              height={360}
+              priority
+              src={headerLightLogoByLocale[locale]}
+              width={1200}
             />
           </span>
           <span className={styles.compactLogo} aria-hidden={!isScrolled}>
@@ -226,7 +242,7 @@ export function Header({ locale, dictionary }: HeaderProps) {
           </span>
         </Link>
 
-        <nav className={styles.nav} aria-label={dictionary.common.primaryNavigation}>
+        <nav className={styles.nav} aria-label={labels.primaryNavigation}>
           {navigationLinks.map((item) => (
             <Link
               aria-current={currentSegment === item.segment ? "page" : undefined}
@@ -247,7 +263,7 @@ export function Header({ locale, dictionary }: HeaderProps) {
           >
             {getLocalizedText(supportNavigationItem.label, locale)}
           </Link>
-          <div className={styles.localeSwitcher} aria-label={dictionary.common.languageSwitcher}>
+          <div className={styles.localeSwitcher} aria-label={labels.languageSwitcher}>
             {localeOptions.map((item) => (
               <Link
                 aria-current={item.locale === locale ? "page" : undefined}
@@ -258,6 +274,11 @@ export function Header({ locale, dictionary }: HeaderProps) {
               </Link>
             ))}
           </div>
+          <ThemeToggle />
+        </div>
+
+        <div className={styles.mobileThemeToggle}>
+          <ThemeToggle />
         </div>
 
         <button
@@ -265,8 +286,8 @@ export function Header({ locale, dictionary }: HeaderProps) {
           aria-expanded={menuOpen}
           aria-label={
             menuOpen
-              ? dictionary.common.closeNavigation
-              : dictionary.common.openNavigation
+              ? labels.closeNavigation
+              : labels.openNavigation
           }
           className={styles.menuToggle}
           onClick={() => setMenuOpen((value) => !value)}
@@ -280,7 +301,7 @@ export function Header({ locale, dictionary }: HeaderProps) {
 
       <MobileNavigation
         currentSegment={currentSegment}
-        dictionary={dictionary}
+        labels={labels}
         id="mobile-navigation"
         isScrolled={isScrolled}
         locale={locale}

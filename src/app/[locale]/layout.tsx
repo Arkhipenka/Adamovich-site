@@ -2,8 +2,14 @@ import type { Metadata } from "next";
 
 import { Footer } from "@/components/layout/Footer/Footer";
 import { Header } from "@/components/layout/Header/Header";
-import { defaultLocale, isLocale, locales, siteConfig } from "@/config/site";
-import { getDictionary } from "@/i18n/dictionaries";
+import { ThemeScript } from "@/components/theme/ThemeScript";
+import {
+  defaultLocale,
+  isLocale,
+  locales,
+  siteConfig,
+  siteMetadataByLocale,
+} from "@/config/site";
 import "../globals.css";
 
 type RootLayoutProps = {
@@ -22,20 +28,18 @@ export async function generateMetadata({
 }: RootLayoutProps): Promise<Metadata> {
   const { locale } = await params;
   const activeLocale = isLocale(locale) ? locale : defaultLocale;
-  const dictionary = await getDictionary(activeLocale);
-  const metadataTitle = dictionary?.metadata.title ?? siteConfig.name;
-  const metadataDescription = dictionary?.metadata.description;
+  const metadata = siteMetadataByLocale[activeLocale];
 
   return {
     metadataBase: new URL(siteConfig.url),
     title: {
-      default: metadataTitle,
+      default: metadata.title,
       template: `%s | ${siteConfig.name}`,
     },
-    description: metadataDescription,
+    description: metadata.description,
     openGraph: {
-      title: metadataTitle,
-      description: metadataDescription,
+      title: metadata.title,
+      description: metadata.description,
       siteName: siteConfig.name,
       locale: activeLocale,
       type: "website",
@@ -43,8 +47,8 @@ export async function generateMetadata({
     },
     twitter: {
       card: "summary",
-      title: metadataTitle,
-      description: metadataDescription,
+      title: metadata.title,
+      description: metadata.description,
     },
   };
 }
@@ -52,20 +56,14 @@ export async function generateMetadata({
 export default async function RootLayout({ children, params }: RootLayoutProps) {
   const { locale } = await params;
   const activeLocale = isLocale(locale) ? locale : defaultLocale;
-  const dictionary = await getDictionary(activeLocale);
 
   return (
-    <html lang={activeLocale}>
+    <html data-theme="dark" lang={activeLocale} suppressHydrationWarning>
       <body>
-        {dictionary ? (
-          <>
-            <Header locale={activeLocale} dictionary={dictionary} />
-            {children}
-            <Footer locale={activeLocale} />
-          </>
-        ) : (
-          children
-        )}
+        <ThemeScript />
+        <Header locale={activeLocale} />
+        {children}
+        <Footer locale={activeLocale} />
       </body>
     </html>
   );

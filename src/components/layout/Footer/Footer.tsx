@@ -26,6 +26,12 @@ const footerLogoByLocale: Record<Locale, string> = {
   ru: assetPath("/assets/brand/adamovich-logo-ru-dark.png"),
 };
 
+const footerLightLogoByLocale: Record<Locale, string> = {
+  be: assetPath("/assets/brand/adamovich-logo-be-light.svg"),
+  en: assetPath("/assets/brand/adamovich-logo-en-light.svg"),
+  ru: assetPath("/assets/brand/adamovich-logo-ru-light.svg"),
+};
+
 const footerContentByLocale: Record<
   Locale,
   {
@@ -121,11 +127,20 @@ export function Footer({ locale = defaultLocale }: FooterProps) {
           >
             <Image
               alt={content.brandTitle}
-              className={styles.logo}
+              className={`${styles.logo} ${styles.logoForDark}`}
               height={256}
               priority={false}
               src={footerLogoByLocale[locale]}
               width={767}
+            />
+            <Image
+              alt=""
+              aria-hidden="true"
+              className={`${styles.logo} ${styles.logoForLight}`}
+              height={360}
+              priority={false}
+              src={footerLightLogoByLocale[locale]}
+              width={1200}
             />
           </Link>
           <p className={styles.brandText}>{content.copyright}</p>

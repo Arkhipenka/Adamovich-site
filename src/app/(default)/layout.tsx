@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import { ThemeScript } from "@/components/theme/ThemeScript";
 import { defaultLocale, siteConfig } from "@/config/site";
 import "../globals.css";
 
@@ -15,8 +16,11 @@ export default function DefaultRootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang={defaultLocale}>
-      <body>{children}</body>
+    <html data-theme="dark" lang={defaultLocale} suppressHydrationWarning>
+      <body>
+        <ThemeScript />
+        {children}
+      </body>
     </html>
   );
 }

@@ -1,0 +1,90 @@
+.state {
+  display: grid;
+  gap: 16px;
+  padding: clamp(28px, 4vw, 44px);
+  border: 1px solid rgba(245, 241, 232, 0.1);
+  background:
+    radial-gradient(circle at top right, rgba(194, 163, 107, 0.08), transparent 18rem),
+    rgba(255, 255, 255, 0.014);
+}
+
+.eyebrow {
+  color: var(--color-accent);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.title {
+  color: var(--color-text);
+  font-family: var(--font-serif);
+  font-size: clamp(1.8rem, 3vw, 3rem);
+  font-weight: 500;
+  line-height: 1.05;
+}
+
+.text {
+  max-width: 620px;
+  color: var(--color-muted);
+  line-height: 1.7;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+.button {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(194, 163, 107, 0.48);
+  color: var(--color-accent);
+  background: transparent;
+  padding: 0 18px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition:
+    border-color 180ms ease,
+    color 180ms ease,
+    background-color 180ms ease;
+}
+
+.button:hover,
+.button:focus-visible {
+  border-color: var(--color-accent);
+  color: var(--color-text);
+  background: rgba(194, 163, 107, 0.08);
+}
+
+.button:focus-visible {
+  outline: 1px solid rgba(194, 163, 107, 0.75);
+  outline-offset: 4px;
+}
+
+.buttonPrimary {
+  color: #0f0f0f;
+  background: var(--color-accent);
+}
+
+.buttonPrimary:hover,
+.buttonPrimary:focus-visible {
+  color: #0f0f0f;
+  background: var(--color-accent-strong);
+}
+
+@media (max-width: 560px) {
+  .actions,
+  .button {
+    width: 100%;
+  }
+}

@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Caveat } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -7,12 +6,6 @@ import styles from "./ContactsPage.module.css";
 import { assetPath, siteConfig } from "@/config/site";
 import { localizedHref } from "@/lib/localizedHref";
 import type { Locale } from "@/types/common.types";
-
-const caveat = Caveat({
-  subsets: ["latin", "cyrillic"],
-  weight: ["400", "500", "600"],
-  variable: "--font-caveat",
-});
 
 type IconName =
   | "book"
@@ -523,7 +516,7 @@ function HeroHandwrittenQuote({
   source: string;
 }) {
   return (
-    <blockquote className={`${styles.quoteWrap} ${caveat.className}`}>
+    <blockquote className={styles.quoteWrap}>
       <p className={styles.quoteText}>{quote}</p>
       <cite className={styles.quoteAuthor}>
         — {author}

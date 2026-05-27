@@ -23,8 +23,8 @@
 }
 
 .headerScrolled {
-  border-bottom-color: rgba(194, 163, 107, 0.24);
-  background: rgba(8, 8, 8, 0.92);
+  border-bottom-color: rgba(var(--color-accent-rgb), 0.24);
+  background: var(--color-header-bg);
 }
 
 .headerScrolled .inner {
@@ -41,7 +41,7 @@
 
 .fullLogoWrap {
   grid-area: 1 / 1;
-  display: inline-flex;
+  display: inline-grid;
   align-items: center;
   opacity: 1;
   transform: translateY(0);
@@ -73,15 +73,34 @@
 }
 
 .logo {
+  grid-area: 1 / 1;
   width: auto;
   height: clamp(48px, 4.2vw, 62px);
+  transition: opacity 220ms ease;
+}
+
+.logoForLight {
+  opacity: 0;
+}
+
+:global([data-theme="light"]) .logoForDark {
+  opacity: 0;
+}
+
+:global([data-theme="light"]) .logoForLight {
+  opacity: 1;
 }
 
 .nav,
 .actions,
-.localeSwitcher {
+.localeSwitcher,
+.mobileThemeToggle {
   display: flex;
   align-items: center;
+}
+
+.mobileThemeToggle {
+  display: none;
 }
 
 .nav {
@@ -117,7 +136,7 @@
 }
 
 .actions {
-  gap: 18px;
+  gap: 14px;
 }
 
 .supportLink {
@@ -126,7 +145,7 @@
   align-items: center;
   justify-content: center;
   padding-inline: 18px;
-  border: 1px solid rgba(194, 163, 107, 0.72);
+  border: 1px solid rgba(var(--color-accent-rgb), 0.72);
   color: var(--color-accent);
   font-size: 0.74rem;
   font-weight: 700;
@@ -146,7 +165,7 @@
 
 .supportLink:hover,
 .supportLink[aria-current="page"] {
-  color: #111;
+  color: var(--color-bg);
   border-color: var(--color-accent);
   background: var(--color-accent);
   transform: translateY(-1px);
@@ -224,8 +243,8 @@
 .menuToggle:hover,
 .menuToggle[aria-expanded="true"] {
   color: var(--color-accent);
-  border-color: rgba(194, 163, 107, 0.72);
-  background: rgba(194, 163, 107, 0.06);
+  border-color: rgba(var(--color-accent-rgb), 0.72);
+  background: rgba(var(--color-accent-rgb), 0.06);
 }
 
 .menuToggle[aria-expanded="true"] span:nth-child(2) {
@@ -239,12 +258,17 @@
 
 @media (max-width: 1180px) {
   .inner {
-    grid-template-columns: 1fr auto;
+    grid-template-columns: 1fr auto auto;
+    gap: 12px;
   }
 
   .nav,
   .actions {
     display: none;
+  }
+
+  .mobileThemeToggle {
+    display: flex;
   }
 
   .menuToggle {

@@ -3,7 +3,6 @@ import Link from "next/link";
 
 import styles from "./SupportPage.module.css";
 import { assetPath } from "@/config/site";
-import type { Dictionary } from "@/i18n/dictionaries";
 import { localizedHref } from "@/lib/localizedHref";
 import type { Locale } from "@/types/common.types";
 
@@ -597,13 +596,10 @@ function Icon({ name }: { name: IconName }) {
 }
 
 type SupportPageProps = {
-  dictionary: Dictionary;
   locale: Locale;
 };
 
-export function SupportPage({ dictionary, locale }: SupportPageProps) {
-  void dictionary;
-
+export function SupportPage({ locale }: SupportPageProps) {
   const copy = supportContent[locale];
 
   return (

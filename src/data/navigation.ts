@@ -2,6 +2,15 @@ import type {
   LocaleOption,
   NavigationItem,
 } from "@/types/navigation.types";
+import type { Locale } from "@/types/common.types";
+
+export type NavigationChromeLabels = {
+  closeNavigation: string;
+  languageSwitcher: string;
+  mobileNavigation: string;
+  openNavigation: string;
+  primaryNavigation: string;
+};
 
 export const navigationItems: NavigationItem[] = [
   {
@@ -95,3 +104,27 @@ export const localeOptions: LocaleOption[] = [
     label: "EN",
   },
 ];
+
+export const navigationChromeLabels: Record<Locale, NavigationChromeLabels> = {
+  be: {
+    closeNavigation: "Закрыць навігацыю",
+    languageSwitcher: "Пераключэнне мовы",
+    mobileNavigation: "Мабільная навігацыя",
+    openNavigation: "Адкрыць навігацыю",
+    primaryNavigation: "Асноўная навігацыя",
+  },
+  ru: {
+    closeNavigation: "Закрыть навигацию",
+    languageSwitcher: "Переключение языка",
+    mobileNavigation: "Мобильная навигация",
+    openNavigation: "Открыть навигацию",
+    primaryNavigation: "Основная навигация",
+  },
+  en: {
+    closeNavigation: "Close navigation",
+    languageSwitcher: "Language switcher",
+    mobileNavigation: "Mobile navigation",
+    openNavigation: "Open navigation",
+    primaryNavigation: "Primary navigation",
+  },
+};

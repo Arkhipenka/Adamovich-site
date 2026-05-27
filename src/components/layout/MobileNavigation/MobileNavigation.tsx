@@ -3,6 +3,7 @@ import Link from "next/link";
 import styles from "./MobileNavigation.module.css";
 import {
   localeOptions,
+  type NavigationChromeLabels,
   supportNavigationItem,
 } from "@/data/navigation";
 import {
@@ -11,7 +12,6 @@ import {
   type Locale,
   type RouteSegment,
 } from "@/config/site";
-import type { Dictionary } from "@/i18n/dictionaries";
 import { getLocalizedText } from "@/lib/getLocalizedText";
 
 type MobileNavigationLink = {
@@ -25,8 +25,8 @@ type MobileNavigationProps = {
   locale: Locale;
   pathname: string;
   currentSegment: string;
-  dictionary: Dictionary;
   isScrolled?: boolean;
+  labels: NavigationChromeLabels;
   navigationLinks: readonly MobileNavigationLink[];
   onNavigate: () => void;
 };
@@ -39,9 +39,9 @@ function getLocaleHref(pathname: string, currentLocale: Locale, nextLocale: Loca
 
 export function MobileNavigation({
   currentSegment,
-  dictionary,
   id,
   locale,
+  labels,
   navigationLinks,
   onNavigate,
   isScrolled,
@@ -50,14 +50,14 @@ export function MobileNavigation({
 }: MobileNavigationProps) {
   return (
     <div
-className={[
-  styles.mobileNavigation,
-  open ? styles.mobileNavigationOpen : "",
-  isScrolled ? styles.mobileNavigationScrolled : "",
-].join(" ")} 
-     id={id}
+      className={[
+        styles.mobileNavigation,
+        open ? styles.mobileNavigationOpen : "",
+        isScrolled ? styles.mobileNavigationScrolled : "",
+      ].join(" ")}
+      id={id}
     >
-      <nav aria-label={dictionary.common.mobileNavigation} className={styles.links}>
+      <nav aria-label={labels.mobileNavigation} className={styles.links}>
         {navigationLinks.map((item) => (
           <Link
             aria-current={currentSegment === item.segment ? "page" : undefined}
@@ -78,7 +78,7 @@ className={[
       </nav>
 
       <div className={styles.meta}>
-        <div aria-label={dictionary.common.languageSwitcher}>
+        <div aria-label={labels.languageSwitcher}>
           {localeOptions.map((item) => (
             <Link
               aria-current={item.locale === locale ? "page" : undefined}

@@ -1,10 +1,10 @@
 .footer {
   width: 100%;
   padding-block: clamp(48px, 5vw, 72px) 28px;
-  border-top: 1px solid rgba(245, 245, 243, 0.1);
+  border-top: 1px solid rgba(var(--color-text-rgb), 0.1);
   color: var(--color-muted);
   background:
-    radial-gradient(circle at top right, rgba(194, 163, 107, 0.05), transparent 32rem),
+    radial-gradient(circle at top right, rgba(var(--color-accent-rgb), 0.05), transparent 32rem),
     var(--color-bg);
 }
 
@@ -24,14 +24,28 @@
 }
 
 .brand {
-  display: inline-flex;
+  display: inline-grid;
   width: fit-content;
 }
 
 .logo {
+  grid-area: 1 / 1;
   width: auto;
   height: clamp(56px, 5vw, 72px);
   object-fit: contain;
+  transition: opacity 220ms ease;
+}
+
+.logoForLight {
+  opacity: 0;
+}
+
+:global([data-theme="light"]) .logoForDark {
+  opacity: 0;
+}
+
+:global([data-theme="light"]) .logoForLight {
+  opacity: 1;
 }
 
 .brandText {
@@ -99,7 +113,7 @@
   width: 36px;
   height: 36px;
   place-items: center;
-  border: 1px solid rgba(245, 245, 243, 0.12);
+  border: 1px solid rgba(var(--color-text-rgb), 0.12);
   border-radius: 50%;
   color: var(--color-muted);
   font-size: 0.72rem;
@@ -112,8 +126,8 @@
 
 .socialLink:hover {
   color: var(--color-accent);
-  border-color: rgba(194, 163, 107, 0.55);
-  background: rgba(194, 163, 107, 0.08);
+  border-color: rgba(var(--color-accent-rgb), 0.55);
+  background: rgba(var(--color-accent-rgb), 0.08);
 }
 
 .supportLogos {
@@ -148,7 +162,7 @@
   width: min(100% - var(--page-gutter) * 2, var(--container-wide, var(--container)));
   margin: clamp(32px, 4vw, 48px) auto 0;
   padding-top: 20px;
-  border-top: 1px solid rgba(245, 245, 243, 0.08);
+  border-top: 1px solid rgba(var(--color-text-rgb), 0.08);
   color: var(--color-muted);
   font-size: 0.82rem;
 }

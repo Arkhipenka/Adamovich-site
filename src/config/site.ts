@@ -56,6 +56,30 @@ export const siteConfig = {
   },
 };
 
+export const siteMetadataByLocale: Record<
+  Locale,
+  {
+    description: string;
+    title: string;
+  }
+> = {
+  be: {
+    title: "Алесь Адамовіч — голас сумлення Беларусі",
+    description:
+      "Цыфравая платформа пра Алеся Адамовіча: біяграфія, творы, аўдыягід і спадчына пісьменніка і грамадскага дзеяча.",
+  },
+  ru: {
+    title: "Алесь Адамович — голос совести Беларуси",
+    description:
+      "Цифровая платформа об Алесе Адамовиче: биография, произведения, аудиогид и наследие писателя и общественного деятеля.",
+  },
+  en: {
+    title: "Ales Adamovich — the voice of Belarusian conscience",
+    description:
+      "A digital platform about Ales Adamovich: biography, works, audio guide, and the legacy of the writer and public figure.",
+  },
+};
+
 export function isLocale(value: string): value is Locale {
   return locales.includes(value as Locale);
 }

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { type FocusEvent, useEffect, useMemo, useState } from "react";
 
 import styles from "./WorksCatalog.module.css";
+import { EmptyState } from "@/components/ui/EmptyState";
 import { WorksGrid } from "./WorksGrid";
 import { assetPath, type Locale } from "@/config/site";
 import type { Work } from "@/data/works";
@@ -614,9 +615,10 @@ export function WorksCatalog({ locale, works }: WorksCatalogProps) {
           ) : null}
         </>
       ) : (
-        <p className={styles.empty}>
-          {normalizedSearchQuery ? content.emptySearch : content.empty}
-        </p>
+        <EmptyState
+          locale={locale}
+          text={normalizedSearchQuery ? content.emptySearch : content.empty}
+        />
       )}
     </div>
   );
