@@ -1,4 +1,10 @@
 .hero {
+  --color-text: var(--color-dark-text);
+  --color-muted: var(--color-dark-muted);
+  --color-accent: var(--color-dark-accent);
+  --color-accent-strong: var(--color-dark-accent-strong);
+  --color-bg: var(--color-dark-bg);
+
   display: flex;
   align-items: stretch;
   position: relative;
@@ -121,7 +127,7 @@
   color: var(--color-text);
   font-family: var(--font-serif);
   font-size: clamp(4.25rem, 5.8vw, 8.25rem);
-  font-weight: 500;
+  font-weight: 600;
   line-height: 0.94;
   letter-spacing: 0;
   text-wrap: balance;
@@ -146,7 +152,7 @@
   padding-top: 26px;
   border-top: 1px solid rgba(194, 163, 107, 0.52);
   color: var(--color-text);
-  font-family: var(--font-serif);
+  font-family: var(--font-quote);
   font-size: clamp(1.25rem, 2vw, 1.75rem);
   font-style: italic;
   line-height: 1.2;

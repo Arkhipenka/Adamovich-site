@@ -1,4 +1,9 @@
 .mobileNavigationBackdrop {
+  --color-text: var(--color-dark-text);
+  --color-muted: var(--color-dark-muted);
+  --color-border: var(--color-dark-border);
+  --color-accent: var(--color-dark-accent);
+
   position: fixed;
   inset: var(--header-height) 0 0;
   z-index: 80;
@@ -30,6 +35,11 @@
 }
 
 .mobileNavigation {
+  --color-text: var(--color-dark-text);
+  --color-muted: var(--color-dark-muted);
+  --color-border: var(--color-dark-border);
+  --color-accent: var(--color-dark-accent);
+
   position: fixed;
   top: var(--header-height);
   right: 0;

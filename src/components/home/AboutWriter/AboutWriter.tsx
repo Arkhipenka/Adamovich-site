@@ -11,6 +11,12 @@ type AboutWriterProps = {
   locale?: Locale;
 };
 
+const imageCaptionByLocale: Record<Locale, string> = {
+  be: "Алесь Адамовіч за працай. Архіўны фотаздымак.",
+  en: "Ales Adamovich at work. Archival photograph.",
+  ru: "Алесь Адамович за работой. Архивная фотография.",
+};
+
 export function AboutWriter({ locale = "ru" }: AboutWriterProps) {
   const content = homePageContent.aboutWriter;
 
@@ -27,6 +33,7 @@ export function AboutWriter({ locale = "ru" }: AboutWriterProps) {
               src={assetPath(content.image.src)}
               width={1200}
             />
+            <p className={styles.imageCaption}>{imageCaptionByLocale[locale]}</p>
           </div>
         </div>
 

@@ -20,9 +20,9 @@ export const homePageContent: HomePageContent = {
         en: "A figure of European stature",
       },
       quoteAuthor: {
-        be: "Васіль Быкаў аб Алесю Адамовічу",
-        ru: "Василий Быков об Алесю Адамовиче",
-        en: "Vasily Bystrov on Ales Adamovich",
+        be: "Васіль Быкаў пра Алеся Адамовіча",
+        ru: "Василий Быков про Алеся Адамовича",
+        en: "Vasil Bykov on Ales Adamovich",
       },
       image: {
         src: "/assets/images/hero/adamovich-speech-microphone.png",
@@ -256,9 +256,9 @@ export const homePageContent: HomePageContent = {
       en: "It is a great thing to make yourself understand another human being.",
     },
     quoteAuthor: {
-      be: "Данііл Гранін, Алесь Адамовіч",
-      ru: "Даниил Гранин, Алесь Адамович",
-      en: "Daniil Granin, Ales Adamovich",
+      be: "Алесь Адамовіч, Данііл Гранін",
+      ru: "Алесь Адамович, Даниил Гранин",
+      en: "Ales Adamovich, Daniil Granin",
     },
     quoteSource: {
       be: "«Блакадная кніга», 1977–1982",
@@ -405,7 +405,7 @@ export const homePageContent: HomePageContent = {
     },
     title: {
       be: "Прыпынак Адамовіча",
-      ru: "Припынак Адамовича",
+      ru: "Прыпынак Адамовича",
       en: "Prypynak Adamovich",
     },
     description: {
@@ -420,7 +420,7 @@ export const homePageContent: HomePageContent = {
     },
     linkHref: "/initiative",
     image: {
-      src: "/assets/images/initiative/adamovich-stop-dark-portrait-900x1200.webp",
+      src: "/assets/images/initiative/adamovich-stop-illustration.png",
       alt: {
         be: "Месца, звязанае з ініцыятывай пра Алеся Адамовіча",
         ru: "Место, связанное с инициативой об Алесе Адамовиче",
@@ -429,55 +429,55 @@ export const homePageContent: HomePageContent = {
     },
     features: [
       {
-        id: "digital-archive",
+        id: "memorial",
         title: {
-          be: "Лічбавы архіў",
-          ru: "Цифровой архив",
-          en: "Digital archive",
+          be: "Помнік Адамовічу",
+          ru: "Памятник Адамовичу",
+          en: "Memorial to Adamovich",
         },
         text: {
-          be: "Працуем над лічбавым архівам",
-          ru: "Работаем над цифровым архивом",
-          en: "We are working on the digital archive",
+          be: "Помнік у Глушы, на малой радзіме пісьменніка.",
+          ru: "Памятник в Глуше, на малой радзіме пісьменніка.",
+          en: "Memorial in Glusha, on the small square of the writer.",
         },
       },
       {
-        id: "interactive-map",
+        id: "art-project",
         title: {
-          be: "Інтэрактыўная мапа",
-          ru: "Интерактивная карта",
-          en: "Interactive map",
+          be: "Aрт-аб'ект",
+          ru: "Арт-объект",
+          en: "Art object",
         },
         text: {
-          be: "Месцы, маршруты і падзеі, звязаныя з Адамовічам.",
-          ru: "Места, маршруты и события, связанные с Адамовичем.",
-          en: "Places, routes and events connected with Adamovich.",
+          be: "Арт-аб'ект Прыпынак Адамовіча ў Глушы.",
+          ru: "Арт-объект Прыпынак Адамовича в Глуше.",
+          en: "The art object Prypynak Adamovich in Glusha.",
         },
       },
       {
-        id: "oral-history",
+        id: "audio-guide",
         title: {
-          be: "Вусная гісторыя",
-          ru: "Устная история",
-          en: "Oral histories",
+          be: "Aўдыягід",
+          ru: "Аудиогид",
+          en: "Audio guide",
         },
         text: {
-          be: "Галасы, сведчанні і ўспаміны.",
-          ru: "Голоса, свидетельства и воспоминания.",
-          en: "Voices, testimonies and memories.",
+          be: "Аўдыягід па Глушы, малой радзіме пісьменніка.",
+          ru: "Аудиогид по Глуше, малой родине писателя.",
+          en: "Audio guide to Glusha, the small homeland of the writer.",
         },
       },
       {
-        id: "educational-resources",
+        id: "archive",
         title: {
-          be: "Адукацыйныя матэрыялы",
-          ru: "Образовательные материалы",
-          en: "Educational resources",
+          be: "Архіў",
+          ru: "Архив",
+          en: "Archive",
         },
         text: {
-          be: "Матэрыялы для студэнтаў, выкладчыкаў і даследчыкаў.",
-          ru: "Материалы для студентов, преподавателей и исследователей.",
-          en: "Materials for students, teachers and researchers.",
+          be: "Віртуальны архіў Адамовіча (у распрацоўцы).",
+          ru: "Виртуальный архив Адамовича (в разработке).",
+          en: "Virtual Adamovich archive (in development).",
         },
       },
     ],

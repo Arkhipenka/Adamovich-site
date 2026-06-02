@@ -1,8 +1,18 @@
 .section {
+  --color-bg: var(--color-paper);
+  --color-bg-elevated: var(--color-paper-surface);
+  --color-text: var(--color-paper-text);
+  --color-muted: var(--color-paper-muted);
+  --color-border: var(--color-paper-border);
+  --color-accent: var(--color-paper-accent);
+  --color-accent-strong: var(--color-paper-accent-strong);
+
   padding-block: clamp(42px, 6vw, 72px);
-  border-bottom: 1px solid rgba(245, 241, 232, 0.055);
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-text);
   background:
-    linear-gradient(180deg, rgba(15, 15, 15, 0) 0%, rgba(24, 23, 22, 0.16) 52%, rgba(15, 15, 15, 0) 100%),
+    radial-gradient(circle at 16% 14%, rgba(154, 104, 38, 0.045), transparent 24rem),
+    linear-gradient(180deg, rgba(80, 54, 28, 0.035), rgba(255, 255, 255, 0) 48%, rgba(80, 54, 28, 0.035)),
     var(--color-bg);
 }
 
@@ -21,15 +31,12 @@
 
 .imageFrame {
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: block;
   overflow: hidden;
   padding: clamp(8px, 1vw, 12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.025), rgba(255, 255, 255, 0)),
-    #0c0c0c;
+  border: 1px solid rgba(122, 84, 51, 0.22);
+  background: rgba(246, 236, 220, 0.56);
+  box-shadow: none;
 }
 
 .image {
@@ -37,6 +44,14 @@
   width: 100%;
   height: auto;
   object-fit: contain;
+  filter: grayscale(1) contrast(1.04);
+}
+
+.imageCaption {
+  margin-top: 8px;
+  color: var(--paper-muted-text, #5b5146);
+  font-size: 11px;
+  line-height: 1.4;
 }
 
 .content {
@@ -57,7 +72,7 @@
   color: var(--color-text);
   font-family: var(--font-serif);
   font-size: clamp(2rem, 2.55vw, 3.05rem);
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.04;
   letter-spacing: 0;
 }
@@ -92,12 +107,12 @@
 
 .quoteColumn {
   padding-left: clamp(22px, 2.8vw, 36px);
-  border-left: 1px solid rgba(194, 163, 107, 0.38);
+  border-left: 1px solid rgba(154, 104, 38, 0.34);
 }
 
 .quoteMark {
   color: var(--color-accent);
-  font-family: var(--font-serif);
+  font-family: var(--font-quote);
   font-size: clamp(3.6rem, 5.6vw, 5.4rem);
   line-height: 0.72;
   opacity: 0.85;
@@ -106,7 +121,7 @@
 .quoteText {
   margin-top: 12px;
   color: var(--color-text);
-  font-family: var(--font-serif);
+  font-family: var(--font-quote);
   font-size: clamp(1.32rem, 1.75vw, 1.95rem);
   font-style: italic;
   line-height: 1.25;

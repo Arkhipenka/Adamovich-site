@@ -14,7 +14,7 @@ type WorkDetailProps = {
   work: Work;
 };
 
-const typeLabels: Record<Locale, Record<WorkType, string>> = {
+const typeLabels: Record<Locale, Partial<Record<WorkType, string>>> = {
   ru: {
     book: "Книга",
     film: "Фильм",
@@ -44,6 +44,24 @@ const typeLabels: Record<Locale, Record<WorkType, string>> = {
     interview: "Interview",
     archive: "Archive",
     research: "Research",
+  },
+};
+
+const expandedTypeLabels: Record<Locale, Partial<Record<WorkType, string>>> = {
+  ru: {
+    story: "Рассказ",
+    novella: "Повесть",
+    documentary_prose: "Документальная проза",
+  },
+  be: {
+    story: "Апавяданне",
+    novella: "Аповесць",
+    documentary_prose: "Дакументальная проза",
+  },
+  en: {
+    story: "Story",
+    novella: "Novella",
+    documentary_prose: "Documentary prose",
   },
 };
 
@@ -153,6 +171,10 @@ function availabilityGroups(work: Work, locale: Locale) {
 export function WorkDetail({ locale, relatedWorks, work }: WorkDetailProps) {
   const copy = labels[locale];
   const title = getLocalizedText(work.title, locale);
+  const typeLabel =
+    expandedTypeLabels[locale][work.type] ??
+    typeLabels[locale][work.type] ??
+    work.type;
   const description = work.descriptionFull
     ? getLocalizedText(work.descriptionFull, locale)
     : getLocalizedText(work.descriptionShort, locale);
@@ -180,7 +202,7 @@ export function WorkDetail({ locale, relatedWorks, work }: WorkDetailProps) {
               />
             ) : (
               <span className={styles.placeholder}>
-                <span className={styles.placeholderLabel}>{typeLabels[locale][work.type]}</span>
+                <span className={styles.placeholderLabel}>{typeLabel}</span>
                 <span className={styles.placeholderTitle}>{title}</span>
                 {work.year ? (
                   <span className={styles.placeholderYear}>{work.year}</span>
@@ -191,7 +213,7 @@ export function WorkDetail({ locale, relatedWorks, work }: WorkDetailProps) {
 
           <div className={styles.content}>
             <div className={styles.meta}>
-              <span>{typeLabels[locale][work.type]}</span>
+              <span>{typeLabel}</span>
               {work.year ? <span>{work.year}</span> : null}
             </div>
             <h1 className={styles.title} id="work-title">

@@ -9,7 +9,12 @@ import { WorksGrid } from "./WorksGrid";
 import { assetPath, type Locale } from "@/config/site";
 import type { Work } from "@/data/works";
 import { localizedHref } from "@/lib/localizedHref";
-import { sortWorks, type WorkSortType } from "@/lib/works";
+import {
+  getWorkCover,
+  getWorkYear,
+  sortWorks,
+  type WorkSortType,
+} from "@/lib/works";
 
 type WorkFilter =
   | "all"
@@ -164,6 +169,14 @@ const viewLabels = {
 
 function matchesFilter(work: Work, filter: WorkFilter) {
   if (filter === "all") return true;
+  if (filter === "book") {
+    return (
+      work.type === "book" ||
+      work.type === "story" ||
+      work.type === "novella" ||
+      work.type === "documentary_prose"
+    );
+  }
   if (filter === "publicism") return work.type === "article" || work.type === "essay";
 
   return work.type === filter;
@@ -195,12 +208,13 @@ function matchesSearch(work: Work, query: string, locale: Locale) {
     work.id,
     work.slug,
     work.type,
-    work.year?.toString(),
+    getWorkYear(work)?.toString(),
     work.date,
     getLocalizedField(work.title, locale),
     getLocalizedField(work.subtitle, locale),
     work.originalTitle,
     getLocalizedField(work.role, locale),
+    work.shortDescription ? getLocalizedField(work.shortDescription, locale) : "",
     getLocalizedField(work.descriptionShort, locale),
     getLocalizedField(work.descriptionFull, locale),
     ...work.authors,
@@ -208,6 +222,8 @@ function matchesSearch(work: Work, query: string, locale: Locale) {
     ...(work.editors ?? []),
     ...(work.translators ?? []),
     ...(work.languages ?? []),
+    ...(work.originalLanguages ?? []),
+    ...(work.translatedLanguages ?? []),
     ...(work.tags ?? []),
     ...(work.themes ?? []),
   ]
@@ -226,9 +242,22 @@ function getItemsPerPage() {
 }
 
 function getWorkFilter(work: Work): WorkFilter {
+  if (
+    work.type === "book" ||
+    work.type === "story" ||
+    work.type === "novella" ||
+    work.type === "documentary_prose"
+  ) {
+    return "book";
+  }
   if (work.type === "article" || work.type === "essay") return "publicism";
+  if (work.type === "film") return "film";
+  if (work.type === "script") return "script";
+  if (work.type === "interview") return "interview";
+  if (work.type === "archive") return "archive";
+  if (work.type === "research") return "research";
 
-  return work.type;
+  return "all";
 }
 
 function getWorkTypeLabel(work: Work, locale: Locale) {
@@ -519,9 +548,13 @@ export function WorksCatalog({ locale, works }: WorksCatalogProps) {
             <div className={styles.listView}>
               {paginatedWorks.map((work) => {
                 const title = getLocalizedField(work.title, locale);
-                const description = getLocalizedField(work.descriptionShort, locale);
+                const description = work.shortDescription
+                  ? getLocalizedField(work.shortDescription, locale)
+                  : getLocalizedField(work.descriptionShort, locale);
                 const authors = getAuthors(work);
                 const typeLabel = getWorkTypeLabel(work, locale);
+                const cover = getWorkCover(work);
+                const year = getWorkYear(work);
 
                 return (
                   <Link
@@ -530,13 +563,13 @@ export function WorksCatalog({ locale, works }: WorksCatalogProps) {
                     key={work.id}
                   >
                     <span className={styles.listCoverWrap}>
-                      {work.cover ? (
+                      {cover ? (
                         <Image
                           alt={title}
                           className={styles.listCover}
                           fill
                           sizes="112px"
-                          src={assetPath(work.cover)}
+                          src={assetPath(cover)}
                         />
                       ) : (
                         <span className={styles.listPlaceholder}>
@@ -548,7 +581,7 @@ export function WorksCatalog({ locale, works }: WorksCatalogProps) {
                     <span className={styles.listBody}>
                       <span className={styles.listMeta}>
                         <span>{typeLabel}</span>
-                        {work.year ? <span>{work.year}</span> : null}
+                        {year ? <span>{year}</span> : null}
                       </span>
                       <span className={styles.listTitle}>{title}</span>
                       {authors ? (

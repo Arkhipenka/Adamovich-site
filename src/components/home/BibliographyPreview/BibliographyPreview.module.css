@@ -1,8 +1,17 @@
 .section {
+  --color-bg: var(--color-paper);
+  --color-bg-elevated: var(--color-paper-surface);
+  --color-text: var(--color-paper-text);
+  --color-muted: var(--color-paper-muted);
+  --color-border: var(--color-paper-border);
+  --color-accent: var(--color-paper-accent);
+  --color-accent-strong: var(--color-paper-accent-strong);
+
   padding-block: clamp(72px, 9vw, 128px);
-  border-bottom: 1px solid rgba(245, 241, 232, 0.055);
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-text);
   background:
-    linear-gradient(180deg, rgba(15, 15, 15, 0) 0%, rgba(24, 23, 22, 0.16) 52%, rgba(15, 15, 15, 0) 100%),
+    linear-gradient(180deg, rgba(80, 54, 28, 0.024), rgba(255, 255, 255, 0) 48%, rgba(80, 54, 28, 0.032)),
     var(--color-bg);
 }
 
@@ -36,7 +45,7 @@
   color: var(--color-text);
   font-family: var(--font-serif);
   font-size: clamp(2rem, 3.2vw, 3.8rem);
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.05;
   letter-spacing: 0;
 }

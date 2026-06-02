@@ -9,10 +9,10 @@
   gap: clamp(18px, 2.2vw, 34px);
   align-items: end;
   padding: clamp(18px, 2vw, 28px);
-  border: 1px solid rgba(245, 241, 232, 0.1);
+  border: 1px solid var(--color-border);
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.024), rgba(255, 255, 255, 0.008)),
-    rgba(255, 255, 255, 0.012);
+    linear-gradient(180deg, rgba(255, 255, 255, 0.34), rgba(255, 255, 255, 0.08)),
+    rgba(154, 104, 38, 0.035);
 }
 
 .searchGroup {
@@ -65,9 +65,9 @@
   width: 100%;
   min-height: 58px;
   padding: 0 58px 0 52px;
-  border: 1px solid rgba(245, 241, 232, 0.16);
+  border: 1px solid rgba(76, 53, 30, 0.22);
   color: var(--color-text);
-  background: rgba(15, 15, 15, 0.44);
+  background: rgba(255, 255, 255, 0.32);
   font-size: 0.95rem;
   outline: none;
   transition:
@@ -76,12 +76,12 @@
 }
 
 .searchInput:focus {
-  border-color: rgba(194, 163, 107, 0.7);
-  background: rgba(194, 163, 107, 0.04);
+  border-color: rgba(154, 104, 38, 0.58);
+  background: rgba(255, 255, 255, 0.48);
 }
 
 .searchInput::placeholder {
-  color: rgba(184, 177, 163, 0.72);
+  color: rgba(93, 80, 67, 0.72);
 }
 
 .searchInput::-webkit-search-cancel-button,
@@ -98,9 +98,9 @@
   width: 34px;
   height: 34px;
   place-items: center;
-  border: 1px solid rgba(245, 241, 232, 0.12);
+  border: 1px solid rgba(76, 53, 30, 0.18);
   color: var(--color-muted);
-  background: rgba(15, 15, 15, 0.72);
+  background: rgba(255, 255, 255, 0.34);
   cursor: pointer;
   font-size: 1.2rem;
   line-height: 1;
@@ -119,9 +119,9 @@
   min-width: 34px;
   height: 28px;
   place-items: center;
-  border: 1px solid rgba(245, 241, 232, 0.1);
+  border: 1px solid rgba(76, 53, 30, 0.16);
   color: var(--color-muted);
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.36);
   font-size: 0.7rem;
   font-weight: 700;
   transform: translateY(-50%);
@@ -137,7 +137,7 @@
   width: 1px;
   height: 42px;
   margin-bottom: 4px;
-  background: rgba(245, 241, 232, 0.1);
+  background: var(--color-border);
 }
 
 .resultCount {
@@ -176,8 +176,8 @@
   display: inline-flex;
   align-items: center;
   flex: 0 0 auto;
-  border: 1px solid rgba(245, 241, 232, 0.12);
-  background: rgba(255, 255, 255, 0.016);
+  border: 1px solid var(--color-border);
+  background: rgba(255, 255, 255, 0.2);
 }
 
 .viewButton {
@@ -186,7 +186,7 @@
   height: 42px;
   place-items: center;
   border: 0;
-  border-right: 1px solid rgba(245, 241, 232, 0.1);
+  border-right: 1px solid var(--color-border);
   color: var(--color-muted);
   background: transparent;
   cursor: pointer;
@@ -225,9 +225,9 @@
 .filterButton {
   min-height: 42px;
   padding: 0 16px;
-  border: 1px solid rgba(245, 241, 232, 0.12);
+  border: 1px solid var(--color-border);
   color: var(--color-muted);
-  background: rgba(255, 255, 255, 0.018);
+  background: rgba(255, 255, 255, 0.18);
   cursor: pointer;
   font-size: 0.72rem;
   font-weight: 700;
@@ -272,11 +272,11 @@
   align-items: center;
   width: 100%;
   min-height: 50px;
-  border: 1px solid rgba(245, 241, 232, 0.14);
+  border: 1px solid var(--color-border);
   color: var(--color-text);
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.026), rgba(255, 255, 255, 0.006)),
-    rgba(15, 15, 15, 0.58);
+    linear-gradient(180deg, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0.08)),
+    rgba(255, 255, 255, 0.16);
   padding: 0 14px;
   cursor: pointer;
   font: inherit;
@@ -349,15 +349,15 @@
   display: grid;
   max-height: min(320px, 54vh);
   overflow: auto;
-  scrollbar-color: rgba(194, 163, 107, 0.52) rgba(245, 241, 232, 0.06);
+  scrollbar-color: rgba(154, 104, 38, 0.52) rgba(76, 53, 30, 0.08);
   scrollbar-gutter: stable;
   scrollbar-width: thin;
   padding: 8px;
-  border: 1px solid rgba(194, 163, 107, 0.24);
+  border: 1px solid rgba(154, 104, 38, 0.3);
   background:
-    radial-gradient(circle at top right, rgba(194, 163, 107, 0.08), transparent 16rem),
-    rgba(12, 12, 12, 0.98);
-  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.48);
+    radial-gradient(circle at top right, rgba(154, 104, 38, 0.1), transparent 16rem),
+    var(--color-paper-surface);
+  box-shadow: 0 24px 70px rgba(58, 39, 20, 0.2);
   opacity: 0;
   pointer-events: none;
   transform: translateY(-6px);
@@ -373,18 +373,18 @@
 }
 
 .dropdownMenu::-webkit-scrollbar-track {
-  background: rgba(245, 241, 232, 0.04);
+  background: rgba(76, 53, 30, 0.06);
 }
 
 .dropdownMenu::-webkit-scrollbar-thumb {
-  border: 2px solid rgba(12, 12, 12, 0.98);
+  border: 2px solid var(--color-paper-surface);
   background:
-    linear-gradient(180deg, rgba(194, 163, 107, 0.72), rgba(126, 98, 53, 0.72));
+    linear-gradient(180deg, rgba(154, 104, 38, 0.72), rgba(126, 84, 38, 0.72));
 }
 
 .dropdownMenu::-webkit-scrollbar-thumb:hover {
   background:
-    linear-gradient(180deg, rgba(214, 184, 126, 0.86), rgba(194, 163, 107, 0.78));
+    linear-gradient(180deg, rgba(176, 118, 42, 0.86), rgba(154, 104, 38, 0.78));
 }
 
 .dropdownMenuOpen {
@@ -401,7 +401,7 @@
   align-items: center;
   min-height: 42px;
   border: 0;
-  border-bottom: 1px solid rgba(245, 241, 232, 0.07);
+  border-bottom: 1px solid rgba(76, 53, 30, 0.1);
   color: var(--color-muted);
   background: transparent;
   cursor: pointer;
@@ -450,9 +450,9 @@
 .sortSelect {
   width: 100%;
   min-height: 50px;
-  border: 1px solid rgba(245, 241, 232, 0.14);
+  border: 1px solid var(--color-border);
   color: var(--color-text);
-  background: rgba(15, 15, 15, 0.54);
+  background: rgba(255, 255, 255, 0.2);
   padding-inline: 42px 14px;
   outline: none;
 }
@@ -463,7 +463,7 @@
 
 .empty {
   padding: 42px;
-  border: 1px solid rgba(245, 241, 232, 0.08);
+  border: 1px solid var(--color-border);
   color: var(--color-muted);
   text-align: center;
 }
@@ -480,11 +480,11 @@
   align-items: center;
   min-width: 0;
   padding: 14px 18px 14px 14px;
-  border: 1px solid rgba(245, 241, 232, 0.1);
+  border: 1px solid var(--color-border);
   color: var(--color-text);
   background:
-    linear-gradient(90deg, rgba(255, 255, 255, 0.022), rgba(255, 255, 255, 0.006)),
-    rgba(255, 255, 255, 0.012);
+    linear-gradient(90deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.08)),
+    rgba(255, 255, 255, 0.18);
   text-decoration: none;
   transition:
     border-color 220ms ease,
@@ -510,7 +510,7 @@
   width: 112px;
   aspect-ratio: 4 / 5;
   overflow: hidden;
-  border: 1px solid rgba(245, 241, 232, 0.08);
+  border: 1px solid rgba(76, 53, 30, 0.16);
   background:
     linear-gradient(135deg, rgba(194, 163, 107, 0.14), transparent 48%),
     var(--color-bg-elevated);
@@ -574,7 +574,7 @@
 .listAuthors {
   display: -webkit-box;
   overflow: hidden;
-  color: rgba(245, 241, 232, 0.78);
+  color: var(--color-muted);
   font-size: 0.92rem;
   line-height: 1.45;
   -webkit-box-orient: vertical;
@@ -628,9 +628,9 @@
   display: inline-grid;
   min-height: 42px;
   place-items: center;
-  border: 1px solid rgba(245, 241, 232, 0.12);
+  border: 1px solid var(--color-border);
   color: var(--color-muted);
-  background: rgba(255, 255, 255, 0.018);
+  background: rgba(255, 255, 255, 0.18);
   cursor: pointer;
   font-size: 0.72rem;
   font-weight: 700;

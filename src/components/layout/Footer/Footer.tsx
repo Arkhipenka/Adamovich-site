@@ -21,9 +21,21 @@ type FooterNavItem = {
 };
 
 const footerLogoByLocale: Record<Locale, string> = {
-  be: assetPath("/assets/brand/adamovich-logo-be-dark.png"),
-  en: assetPath("/assets/brand/adamovich-logo-en-dark.png"),
-  ru: assetPath("/assets/brand/adamovich-logo-ru-dark.png"),
+  be: assetPath("/assets/brand/adamovich-logo-portrait.png"),
+  en: assetPath("/assets/brand/adamovich-logo-portrait.png"),
+  ru: assetPath("/assets/brand/adamovich-logo-portrait.png"),
+};
+
+const footerBrandLabelByLocale: Record<Locale, string> = {
+  be: "Алесь Адамовіч",
+  en: "Ales Adamovich",
+  ru: "Алесь Адамович",
+};
+
+const footerBrandTextByLocale: Record<Locale, string> = {
+  be: "Алесь\nАдамовіч",
+  en: "Ales\nAdamovich",
+  ru: "Алесь\nАдамович",
 };
 
 const footerContentByLocale: Record<
@@ -115,18 +127,22 @@ export function Footer({ locale = defaultLocale }: FooterProps) {
       <div className={styles.inner}>
         <div className={styles.brandBlock}>
           <Link
-            aria-label={content.brandTitle}
+            aria-label={footerBrandLabelByLocale[locale]}
             className={styles.brand}
             href={localizedPath(locale)}
           >
-            <Image
-              alt={content.brandTitle}
-              className={styles.logo}
-              height={256}
-              priority={false}
-              src={footerLogoByLocale[locale]}
-              width={767}
-            />
+            <span className={styles.logoComposition}>
+              <Image
+                alt={footerBrandLabelByLocale[locale]}
+                className={styles.logoPortrait}
+                height={256}
+                priority={false}
+                src={footerLogoByLocale[locale]}
+                width={256}
+              />
+              <span className={styles.logoDivider} aria-hidden="true" />
+              <span className={styles.logoText}>{footerBrandTextByLocale[locale]}</span>
+            </span>
           </Link>
           <p className={styles.brandText}>{content.copyright}</p>
         </div>

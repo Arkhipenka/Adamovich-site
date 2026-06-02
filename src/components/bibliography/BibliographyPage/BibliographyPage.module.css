@@ -1,9 +1,20 @@
 .page {
+  --color-bg: var(--color-paper);
+  --color-bg-elevated: var(--color-paper-surface);
+  --color-surface: var(--color-paper-surface);
+  --color-text: var(--color-paper-text);
+  --color-muted: var(--color-paper-muted);
+  --color-border: var(--color-paper-border);
+  --color-accent: var(--color-paper-accent);
+  --color-accent-strong: var(--color-paper-accent-strong);
+
   min-height: 100vh;
   padding-top: var(--header-height);
   background:
-    radial-gradient(circle at top right, rgba(194, 163, 107, 0.055), transparent 34rem),
+    radial-gradient(circle at top right, rgba(154, 104, 38, 0.055), transparent 34rem),
+    linear-gradient(180deg, rgba(80, 54, 28, 0.035), rgba(255, 255, 255, 0) 46%, rgba(80, 54, 28, 0.03)),
     var(--color-bg);
+  color: var(--color-text);
 }
 
 .inner {
@@ -31,7 +42,7 @@
   color: var(--color-text);
   font-family: var(--font-serif);
   font-size: clamp(2.8rem, 6vw, 6.8rem);
-  font-weight: 500;
+  font-weight: 600;
   line-height: 0.98;
   letter-spacing: 0;
 }

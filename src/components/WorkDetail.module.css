@@ -1,9 +1,20 @@
 .page {
+  --color-bg: var(--color-paper);
+  --color-bg-elevated: var(--color-paper-surface);
+  --color-surface: var(--color-paper-surface);
+  --color-text: var(--color-paper-text);
+  --color-muted: var(--color-paper-muted);
+  --color-border: var(--color-paper-border);
+  --color-accent: var(--color-paper-accent);
+  --color-accent-strong: var(--color-paper-accent-strong);
+
   min-height: 100vh;
   padding-top: var(--header-height);
   background:
-    radial-gradient(circle at 80% 0%, rgba(194, 163, 107, 0.05), transparent 34rem),
+    radial-gradient(circle at 80% 0%, rgba(154, 104, 38, 0.055), transparent 34rem),
+    linear-gradient(180deg, rgba(80, 54, 28, 0.035), rgba(255, 255, 255, 0) 46%, rgba(80, 54, 28, 0.03)),
     var(--color-bg);
+  color: var(--color-text);
 }
 
 .inner {
@@ -28,14 +39,14 @@
   gap: clamp(34px, 6vw, 88px);
   align-items: start;
   padding-bottom: clamp(48px, 7vw, 86px);
-  border-bottom: 1px solid rgba(245, 241, 232, 0.075);
+  border-bottom: 1px solid var(--color-border);
 }
 
 .coverWrap {
   position: relative;
   overflow: hidden;
   aspect-ratio: 3 / 4;
-  border: 1px solid rgba(245, 241, 232, 0.1);
+  border: 1px solid var(--color-border);
   background: var(--color-bg-elevated);
 }
 
@@ -95,7 +106,7 @@
   color: var(--color-text);
   font-family: var(--font-serif);
   font-size: clamp(3rem, 6vw, 7rem);
-  font-weight: 500;
+  font-weight: 600;
   line-height: 0.96;
 }
 
@@ -118,7 +129,7 @@
   grid-template-columns: 160px minmax(0, 1fr);
   gap: 18px;
   padding-top: 14px;
-  border-top: 1px solid rgba(245, 241, 232, 0.07);
+  border-top: 1px solid var(--color-border);
 }
 
 .facts dt {
@@ -144,7 +155,7 @@
   color: var(--color-text);
   font-family: var(--font-serif);
   font-size: clamp(2rem, 3vw, 3.4rem);
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.08;
 }
 
@@ -158,8 +169,8 @@
 .item,
 .linkItem {
   padding: 20px;
-  border: 1px solid rgba(245, 241, 232, 0.08);
-  background: rgba(255, 255, 255, 0.018);
+  border: 1px solid var(--color-border);
+  background: rgba(255, 255, 255, 0.2);
   color: var(--color-muted);
   line-height: 1.6;
 }

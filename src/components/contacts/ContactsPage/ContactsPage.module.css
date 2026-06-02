@@ -1,11 +1,31 @@
 .page {
+  --color-bg: var(--color-paper);
+  --color-bg-elevated: var(--color-paper-surface);
+  --color-surface: var(--color-paper-surface);
+  --color-text: var(--color-paper-text);
+  --color-muted: var(--color-paper-muted);
+  --color-border: var(--color-paper-border);
+  --color-accent: var(--color-paper-accent);
+  --color-accent-strong: var(--color-paper-accent-strong);
+
   min-height: 100vh;
   background:
-    radial-gradient(circle at top right, rgba(194, 163, 107, 0.045), transparent 34rem),
+    radial-gradient(circle at top right, rgba(154, 104, 38, 0.055), transparent 34rem),
+    linear-gradient(180deg, rgba(80, 54, 28, 0.035), rgba(255, 255, 255, 0) 46%, rgba(80, 54, 28, 0.03)),
     var(--color-bg);
+  color: var(--color-text);
 }
 
 .hero {
+  --color-bg: var(--color-dark-bg);
+  --color-bg-elevated: var(--color-dark-surface);
+  --color-surface: var(--color-dark-surface);
+  --color-text: var(--color-dark-text);
+  --color-muted: var(--color-dark-muted);
+  --color-border: var(--color-dark-border);
+  --color-accent: var(--color-dark-accent);
+  --color-accent-strong: var(--color-dark-accent-strong);
+
   position: relative;
   min-height: clamp(520px, 58vw, 690px);
   overflow: hidden;
@@ -67,7 +87,7 @@
   color: var(--color-text);
   font-family: var(--font-serif);
   font-size: clamp(4rem, 6.8vw, 7.8rem);
-  font-weight: 500;
+  font-weight: 600;
   line-height: 0.95;
   letter-spacing: 0;
 }
@@ -84,6 +104,7 @@
   max-width: 520px;
   margin-top: 42px;
   color: #c2a36b;
+  font-family: Caveat, "Marck Script", "Bad Script", cursive;
   transform: rotate(-1deg);
 }
 
@@ -122,7 +143,7 @@
 .messageSection,
 .cooperation,
 .newsletter {
-  border-bottom: 1px solid rgba(245, 241, 232, 0.08);
+  border-bottom: 1px solid var(--color-border);
 }
 
 .inner {
@@ -161,7 +182,7 @@
   color: var(--color-text);
   font-family: var(--font-serif);
   font-size: clamp(2.1rem, 3.4vw, 4.1rem);
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.05;
   letter-spacing: 0;
 }
@@ -185,11 +206,11 @@
   display: grid;
   align-content: start;
   min-height: 238px;
-  border: 1px solid rgba(245, 241, 232, 0.1);
+  border: 1px solid var(--color-border);
   color: var(--color-text);
   background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.035), transparent 48%),
-    rgba(255, 255, 255, 0.012);
+    linear-gradient(135deg, rgba(255, 255, 255, 0.32), transparent 48%),
+    rgba(255, 255, 255, 0.18);
   padding: clamp(24px, 2.1vw, 32px);
   text-decoration: none;
   transition:
@@ -315,7 +336,7 @@
   width: min(100% - var(--page-gutter) * 2, var(--container));
   margin-inline: auto;
   padding-block: clamp(36px, 5.5vw, 70px);
-  border-top: 1px solid rgba(245, 241, 232, 0.08);
+  border-top: 1px solid var(--color-border);
 }
 
 .messageIntro {
@@ -344,8 +365,8 @@
 
 .mapPanel {
   overflow: hidden;
-  border: 1px solid rgba(245, 241, 232, 0.1);
-  background: rgba(255, 255, 255, 0.012);
+  border: 1px solid var(--color-border);
+  background: rgba(255, 255, 255, 0.18);
 }
 
 .mapCanvas {
@@ -449,9 +470,9 @@
 .form textarea,
 .newsletterForm input {
   width: 100%;
-  border: 1px solid rgba(245, 241, 232, 0.13);
+  border: 1px solid rgba(76, 53, 30, 0.22);
   color: var(--color-text);
-  background: rgba(15, 15, 15, 0.52);
+  background: rgba(255, 255, 255, 0.3);
   font: inherit;
   outline: none;
   transition:
@@ -481,7 +502,7 @@
 .form input::placeholder,
 .form textarea::placeholder,
 .newsletterForm input::placeholder {
-  color: rgba(184, 177, 163, 0.68);
+  color: rgba(93, 80, 67, 0.7);
 }
 
 .consent {
@@ -548,7 +569,7 @@
 }
 
 .cooperationCard:last-child {
-  border-right: 1px solid rgba(245, 241, 232, 0.1);
+  border-right: 1px solid var(--color-border);
 }
 
 .cooperationCard h3 {
@@ -572,8 +593,8 @@
   position: relative;
   overflow: hidden;
   background:
-    linear-gradient(90deg, rgba(255, 255, 255, 0.028), transparent 52%),
-    rgba(255, 255, 255, 0.012);
+    linear-gradient(90deg, rgba(255, 255, 255, 0.34), transparent 52%),
+    rgba(255, 255, 255, 0.16);
 }
 
 .newsletterInner {
@@ -593,7 +614,7 @@
   color: var(--color-text);
   font-family: var(--font-serif);
   font-size: clamp(2rem, 3vw, 3.4rem);
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.05;
 }
 
@@ -709,7 +730,7 @@
   }
 
   .cooperationCard {
-    border-right: 1px solid rgba(245, 241, 232, 0.1);
+    border-right: 1px solid var(--color-border);
   }
 
   .newsletterForm {

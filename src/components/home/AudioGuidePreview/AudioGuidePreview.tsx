@@ -2,8 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 import styles from "./AudioGuidePreview.module.css";
+import { siteConfig, type Locale, assetPath } from "@/config/site";
 import { homePageContent } from "@/data/home";
-import { assetPath, siteConfig, type Locale } from "@/config/site";
 import { getLocalizedText } from "@/lib/getLocalizedText";
 import { localizedHref } from "@/lib/localizedHref";
 
@@ -121,7 +121,7 @@ export function AudioGuidePreview({ locale = "ru" }: AudioGuidePreviewProps) {
           </div>
         </div>
 
-        <div className={styles.cards}>
+        <div className={styles.cardsGrid}>
           {content.cards.map((card) => (
             <Link className={styles.card} href={detailsHref} key={card.id}>
               <span className={styles.cardImageWrap}>
@@ -133,11 +133,12 @@ export function AudioGuidePreview({ locale = "ru" }: AudioGuidePreviewProps) {
                   src={assetPath(card.image.src)}
                 />
                 <span className={styles.cardOverlay} />
-              </span>
-              <span className={styles.cardContent}>
                 <span className={styles.cardIcon}>
                   <Icon name={getCardIcon(card.id)} />
                 </span>
+              </span>
+
+              <span className={styles.cardBody}>
                 <span className={styles.cardTitle}>
                   {getLocalizedText(card.title, locale)}
                 </span>

@@ -14,7 +14,7 @@ body {
   flex-direction: column;
   color: var(--color-text);
   background:
-    radial-gradient(circle at top left, rgba(194, 163, 107, 0.08), transparent 32rem),
+    radial-gradient(circle at top left, rgba(197, 154, 71, 0.08), transparent 32rem),
     var(--color-bg);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;

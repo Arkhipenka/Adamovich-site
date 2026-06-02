@@ -66,9 +66,9 @@ function getHeaderNavigationLinks(locale: Locale): HeaderNavigationLink[] {
 }
 
 const headerLogoByLocale: Record<Locale, string> = {
-  be: assetPath("/assets/brand/adamovich-logo-be-dark.png"),
-  en: assetPath("/assets/brand/adamovich-logo-en-dark.png"),
-  ru: assetPath("/assets/brand/adamovich-logo-ru-dark.png"),
+  be: assetPath("/assets/brand/adamovich-logo-portrait.png"),
+  en: assetPath("/assets/brand/adamovich-logo-portrait.png"),
+  ru: assetPath("/assets/brand/adamovich-logo-portrait.png"),
 };
 
 const headerLogoAltByLocale: Record<Locale, string> = {
@@ -81,6 +81,18 @@ const compactLogoTextByLocale: Record<Locale, string> = {
   be: "Алесь Адамовіч",
   en: "Ales Adamovich",
   ru: "Алесь Адамович",
+};
+
+const headerBrandLabelByLocale: Record<Locale, string> = {
+  be: "Алесь Адамовіч",
+  en: "Ales Adamovich",
+  ru: "Алесь Адамович",
+};
+
+const headerBrandTextByLocale: Record<Locale, string> = {
+  be: "Алесь\nАдамовіч",
+  en: "Ales\nAdamovich",
+  ru: "Алесь\nАдамович",
 };
 
 function getCurrentSegment(pathname: string, locale: Locale) {
@@ -206,23 +218,22 @@ export function Header({ locale, dictionary }: HeaderProps) {
     <header className={`${styles.header} ${isScrolled ? styles.headerScrolled : ""}`}>
       <div className={styles.inner}>
         <Link
-          aria-label={headerLogoAltByLocale[locale]}
+          aria-label={headerBrandLabelByLocale[locale]}
           className={styles.brand}
           href={localizedPath(locale)}
           onClick={closeMenu}
         >
-          <span className={styles.fullLogoWrap} aria-hidden={isScrolled}>
+          <span className={styles.logoComposition}>
             <Image
-              alt={headerLogoAltByLocale[locale]}
-              className={styles.logo}
+              alt={headerBrandLabelByLocale[locale]}
+              className={styles.logoPortrait}
               height={256}
               priority
               src={headerLogoByLocale[locale]}
-              width={767}
+              width={256}
             />
-          </span>
-          <span className={styles.compactLogo} aria-hidden={!isScrolled}>
-            {compactLogoTextByLocale[locale]}
+            <span className={styles.logoDivider} aria-hidden="true" />
+            <span className={styles.logoText}>{headerBrandTextByLocale[locale]}</span>
           </span>
         </Link>
 

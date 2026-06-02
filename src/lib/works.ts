@@ -1,6 +1,75 @@
-import { works, type Work, type WorkType } from "@/data/works";
+import {
+  works,
+  type Locale,
+  type Work,
+  type WorkLanguage,
+  type WorkType,
+} from "@/data/works";
 
 export type WorkSortType = "priority" | "year" | "title";
+
+const languageLabels: Record<Locale, Record<string, string>> = {
+  ru: {
+    be: "бел.",
+    ru: "рус.",
+    en: "англ.",
+    pl: "пол.",
+    de: "нем.",
+    fr: "фр.",
+    uk: "укр.",
+    lt: "лит.",
+    ja: "яп.",
+    zh: "кит.",
+  },
+  be: {
+    be: "бел.",
+    ru: "рус.",
+    en: "англ.",
+    pl: "пол.",
+    de: "ням.",
+    fr: "фр.",
+    uk: "укр.",
+    lt: "літ.",
+    ja: "яп.",
+    zh: "кіт.",
+  },
+  en: {
+    be: "Bel.",
+    ru: "Rus.",
+    en: "Eng.",
+    pl: "Pol.",
+    de: "Ger.",
+    fr: "Fr.",
+    uk: "Ukr.",
+    lt: "Lith.",
+    ja: "Jap.",
+    zh: "Ch.",
+  },
+};
+
+export function formatLanguages(
+  languages: WorkLanguage[] | undefined,
+  locale: Locale,
+) {
+  if (!languages?.length) return "";
+
+  return [...new Set(languages)]
+    .map((language) => languageLabels[locale][language] ?? language)
+    .join(" / ");
+}
+
+export function getWorkYear(work: Work) {
+  return (
+    work.firstPublicationYear ??
+    work.firstReleaseYear ??
+    work.mediaCredits?.releaseYear ??
+    work.year
+  );
+}
+
+export function getWorkCover(work: Work) {
+  return work.coverImage ?? work.cover;
+}
 
 export function getPublishedWorks() {
   return works
@@ -38,14 +107,14 @@ export function sortWorks(list: Work[], sortType: WorkSortType) {
   switch (sortType) {
     case "year":
       return sortedWorks.sort(
-        (a, b) => (b.year ?? 0) - (a.year ?? 0) || a.priority - b.priority,
+        (a, b) => (getWorkYear(b) ?? 0) - (getWorkYear(a) ?? 0) || a.priority - b.priority,
       );
     case "title":
       return sortedWorks.sort((a, b) => a.title.ru.localeCompare(b.title.ru));
     case "priority":
     default:
       return sortedWorks.sort(
-        (a, b) => a.priority - b.priority || (b.year ?? 0) - (a.year ?? 0),
+        (a, b) => a.priority - b.priority || (getWorkYear(b) ?? 0) - (getWorkYear(a) ?? 0),
       );
   }
 }

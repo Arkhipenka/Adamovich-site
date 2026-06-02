@@ -6,9 +6,12 @@ export type {
   Work,
   WorkAward,
   WorkEdition,
+  WorkLanguage,
+  WorkMediaCredits,
   WorkMention,
   WorkRating,
   WorkResearch,
   WorkStatus,
+  WorkTranslation,
   WorkType,
 } from "@/data/works";

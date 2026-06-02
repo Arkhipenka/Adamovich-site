@@ -1,9 +1,18 @@
 .section {
+  --color-bg: var(--color-paper);
+  --color-bg-elevated: var(--color-paper-surface);
+  --color-text: var(--color-paper-text);
+  --color-muted: var(--color-paper-muted);
+  --color-border: var(--color-paper-border);
+  --color-accent: var(--color-paper-accent);
+  --color-accent-strong: var(--color-paper-accent-strong);
+
   padding-block: clamp(56px, 7vw, 92px);
-  border-bottom: 1px solid rgba(245, 241, 232, 0.055);
+  padding-bottom: clamp(98px, 11vw, 158px);
+  color: var(--color-text);
   background:
-    radial-gradient(circle at 12% 24%, rgba(194, 163, 107, 0.045), transparent 28rem),
-    linear-gradient(180deg, rgba(15, 15, 15, 0) 0%, rgba(24, 23, 22, 0.16) 52%, rgba(15, 15, 15, 0) 100%),
+    radial-gradient(circle at 12% 24%, rgba(154, 104, 38, 0.045), transparent 28rem),
+    linear-gradient(180deg, rgba(80, 54, 28, 0.024), rgba(255, 255, 255, 0) 48%, rgba(80, 54, 28, 0.032)),
     var(--color-bg);
 }
 
@@ -18,37 +27,34 @@
 
 .imageColumn {
   display: flex;
+  align-items: center;
   min-width: 0;
 }
 
 .imageFrame {
   position: relative;
+  display: grid;
   flex: 1;
   width: 100%;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: var(--color-bg-elevated);
+  height: 282px;
+  border: 0;
+  background: transparent;
 }
 
 .imageFrame::after {
-  position: absolute;
-  inset: 0;
-  content: "";
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent 28%),
-    linear-gradient(0deg, rgba(15, 15, 15, 0.24), transparent 48%);
-  pointer-events: none;
+  display: none;
 }
 
 .image {
-  object-fit: cover;
-  filter: grayscale(1) contrast(1.05) brightness(0.75);
+  object-fit: contain;
+  object-position: center bottom;
+  filter: drop-shadow(0 22px 30px rgba(57, 42, 24, 0.16));
   transform: scale(1);
   transition: transform 500ms ease;
 }
 
 .imageFrame:hover .image {
-  transform: scale(1.03);
+  transform: translateY(-2px) scale(1.015);
 }
 
 .content {
@@ -73,7 +79,7 @@
   color: var(--color-text);
   font-family: var(--font-serif);
   font-size: clamp(2rem, 3.2vw, 3.8rem);
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.05;
   letter-spacing: 0;
 }
@@ -117,22 +123,106 @@
 .feature {
   display: grid;
   align-content: center;
+  box-sizing: content-box;
   gap: 8px;
   padding: clamp(18px, 1.85vw, 28px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(255, 255, 255, 0.015);
+  border: 1px solid rgba(76, 53, 30, 0.46);
+
   transition:
     background-color 180ms ease,
     border-color 180ms ease,
+    background-position 180ms ease,
     transform 180ms ease;
+    
 }
-
+.feature:nth-child(1) {
+  background: linear-gradient(135deg, #ffffff52, #0000 48%),
+    linear-gradient(
+      rgba(239, 230, 216, 0.88),
+      rgba(239, 230, 216, 0.88)
+    ),
+   url(../../../../public/assets/images/initiative/memorial-illustration.png);
+      background-position: 120% 100%;
+    background-repeat: no-repeat;
+  background-size: 100% auto, cover, contain;
+}
+.feature:nth-child(2) {
+  background: linear-gradient(135deg, #ffffff52, #0000 48%),
+    linear-gradient(
+      rgba(239, 230, 216, 0.88),
+      rgba(239, 230, 216, 0.88)
+    ),
+   url(../../../../public/assets/images/initiative/adamovich-stop-illustration.png);
+      background-position: 150% 100%;
+    background-repeat: no-repeat;
+  background-size: 100% auto, cover, contain;
+}
+.feature:nth-child(3) {
+  background: linear-gradient(135deg, #ffffff52, #0000 48%),
+    linear-gradient(
+      rgba(239, 230, 216, 0.88),
+      rgba(239, 230, 216, 0.88)
+    ),
+   url(../../../../public/assets/images/initiative/audiogide-illustration.png);
+      background-position: 150% 100%;
+    background-repeat: no-repeat;
+  background-size: 100% auto, cover, contain;
+}
+.feature:nth-child(4) {
+  background: linear-gradient(135deg, #ffffff52, #0000 48%),
+    linear-gradient(
+      rgba(239, 230, 216, 0.88),
+      rgba(239, 230, 216, 0.88)
+    ),
+   url(../../../../public/assets/images/initiative/archive-illustration.png);
+      background-position: 150% 100%;
+    background-repeat: no-repeat;
+  background-size: 100% auto, cover, contain;
+}
 .feature:hover {
-  border-color: rgba(194, 163, 107, 0.42);
-  background: rgba(194, 163, 107, 0.035);
+  border-color: rgba(154, 104, 38, 0.82);
   transform: translateY(-3px);
 }
-
+.feature:nth-child(1):hover {
+  background: linear-gradient(135deg, #ffffff66, #0000 48%),
+    linear-gradient(
+      rgba(239, 230, 216, 0.77),
+      rgba(239, 230, 216, 0.77)
+    ), url(../../../../public/assets/images/initiative/memorial-illustration.png);
+    background-position: 95% 100%;
+    background-repeat: no-repeat;
+    background-size: 100% auto, cover, contain;
+}
+.feature:nth-child(2):hover {
+  background: linear-gradient(135deg, #ffffff66, #0000 48%),
+    linear-gradient(
+      rgba(239, 230, 216, 0.77),
+      rgba(239, 230, 216, 0.77)
+    ),  url(../../../../public/assets/images/initiative/adamovich-stop-illustration.png);
+    background-position: 100% 100%;
+    background-repeat: no-repeat;
+    background-size: 100% auto, cover, contain;
+}
+.feature:nth-child(3):hover {
+  background: linear-gradient(135deg, #ffffff66, #0000 48%),
+    linear-gradient(
+      rgba(239, 230, 216, 0.77),
+      rgba(239, 230, 216, 0.77)
+    ),  url(../../../../public/assets/images/initiative/audiogide-illustration.png);
+    background-position: 100% 100%;
+    background-repeat: no-repeat;
+    background-size: 100% auto, cover, contain;
+}
+.feature:nth-child(4):hover {
+  background: linear-gradient(135deg, #ffffff66, #0000 48%),
+    linear-gradient(
+      rgba(239, 230, 216, 0.77),
+      rgba(239, 230, 216, 0.77)
+    ),  url(../../../../public/assets/images/initiative/archive-illustration.png);
+    background-position: 90% 100%;
+    background-repeat: no-repeat;
+    background-size: 100% auto, cover, contain;
+}
 .featureIcon {
   display: grid;
   width: 40px;

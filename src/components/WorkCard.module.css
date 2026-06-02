@@ -1,164 +1,316 @@
 .card {
-  display: grid;
-  grid-template-rows: auto 1fr;
+  position: relative;
   min-width: 0;
+  height: 560px;
   overflow: hidden;
-  border: 1px solid rgba(245, 241, 232, 0.08);
-  color: var(--color-text);
-  background: rgba(255, 255, 255, 0.018);
+  border: 1px solid rgba(78, 60, 38, 0.16);
+  color: #17130f;
+  background: rgba(250, 244, 232, 0.92);
+  box-shadow: 0 18px 45px rgba(54, 42, 28, 0.08);
   transition:
-    border-color 180ms ease,
-    transform 180ms ease,
-    background-color 180ms ease;
+    border-color 280ms ease,
+    box-shadow 280ms ease,
+    transform 280ms ease;
 }
 
-.card:hover {
-  border-color: rgba(194, 163, 107, 0.46);
-  background-color: rgba(194, 163, 107, 0.035);
-  transform: translateY(-3px);
+.card:hover,
+.card:focus-within {
+  border-color: rgba(154, 107, 36, 0.48);
+  box-shadow: 0 26px 68px rgba(54, 42, 28, 0.16);
+  transform: translateY(-4px);
 }
 
-.coverLink {
+.cardLink {
   position: relative;
   display: block;
+  height: 100%;
+  color: inherit;
+  text-decoration: none;
+}
+
+.cardLink:focus-visible {
+  outline: 1px solid rgba(154, 107, 36, 0.72);
+  outline-offset: -5px;
+}
+
+.coverWrap {
+  position: absolute;
+  inset: 0;
   overflow: hidden;
-  aspect-ratio: 3 / 4;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  background: var(--color-bg-elevated);
+  background:
+    linear-gradient(135deg, rgba(154, 107, 36, 0.08), transparent 48%),
+    rgba(255, 250, 240, 0.64);
 }
 
-.cover {
+.coverImage {
   object-fit: cover;
-  filter: grayscale(1) contrast(1.04) brightness(0.82);
-  transition:
-    filter 180ms ease,
-    transform 500ms ease;
+  filter: none;
+  transform: scale(1);
+  transition: transform 360ms ease;
 }
 
-.card:hover .cover {
-  filter: grayscale(1) contrast(1.04) brightness(0.96);
-  transform: scale(1.035);
+.card:hover .coverImage,
+.card:focus-within .coverImage {
+  transform: scale(1.02);
+}
+
+.typeBadge,
+.yearBadge {
+  position: absolute;
+  top: 16px;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  border: 1px solid rgba(197, 154, 74, 0.38);
+  padding: 7px 11px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.typeBadge {
+  left: 16px;
+  max-width: calc(100% - 112px);
+  color: #c59a4a;
+  background: rgba(18, 16, 13, 0.9);
+}
+
+.yearBadge {
+  right: 16px;
+  border-color: rgba(154, 107, 36, 0.42);
+  border-radius: 8px;
+  color: #17130f;
+  background: rgba(250, 244, 232, 0.94);
+  box-shadow: 0 6px 18px rgba(23, 19, 15, 0.12);
+  font-size: 0.86rem;
+  letter-spacing: 0.02em;
 }
 
 .placeholder {
+  position: absolute;
+  inset: 0;
   display: grid;
-  height: 100%;
-  align-content: space-between;
+  align-content: end;
   padding: 22px;
   background:
-    linear-gradient(135deg, rgba(194, 163, 107, 0.12), transparent 34%),
-    var(--color-bg-elevated);
+    linear-gradient(135deg, rgba(154, 107, 36, 0.16), transparent 44%),
+    rgba(246, 236, 220, 0.72);
 }
 
-.placeholderType,
-.placeholderYear {
-  color: var(--color-accent);
-  font-size: 0.68rem;
+.placeholderType {
+  color: #9a6b24;
+  font-size: 0.7rem;
   font-weight: 700;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
 .placeholderTitle {
-  color: var(--color-text);
+  margin-top: 12px;
+  color: #17130f;
   font-family: var(--font-serif);
-  font-size: clamp(1.6rem, 2.2vw, 2.4rem);
+  font-size: clamp(1.7rem, 2.4vw, 2.5rem);
+  font-weight: 600;
   line-height: 1.05;
 }
 
-.body {
-  display: grid;
-  align-content: start;
-  gap: 13px;
-  padding: 20px;
+.infoPanel {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+  min-height: 150px;
+  border-top: 1px solid rgba(78, 60, 38, 0.16);
+  padding: 26px 28px 28px;
+  background: rgba(250, 244, 232, 0.97);
+  box-shadow: 0 -16px 40px rgba(23, 19, 15, 0.08);
+  transform: translateY(calc(100% - 150px));
+  transition: transform 320ms ease;
 }
 
-.meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  color: var(--color-accent);
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+.card:hover .infoPanel,
+.card:focus-within .infoPanel {
+  transform: translateY(0);
+}
+
+.defaultInfo {
+  display: grid;
+  gap: 0;
 }
 
 .title {
-  color: var(--color-text);
+  display: -webkit-box;
+  overflow: hidden;
+  min-height: calc(2em * 1.08);
+  margin: 0;
+  color: #17130f;
   font-family: var(--font-serif);
-  font-size: clamp(1.45rem, 2.1vw, 2rem);
-  font-weight: 500;
+  font-size: clamp(1.5rem, 1.65vw, 2.125rem);
+  font-weight: 600;
+  letter-spacing: 0;
   line-height: 1.08;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
 
-.authors,
-.role {
-  color: var(--color-muted);
-  font-size: 0.86rem;
-  line-height: 1.45;
+.authors {
+  display: -webkit-box;
+  overflow: hidden;
+  min-height: calc(2em * 1.4);
+  margin: 8px 0 0;
+  color: #9a6b24;
+  font-size: 0.94rem;
+  line-height: 1.4;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
 
-.role {
-  color: rgba(245, 241, 232, 0.84);
+.revealInfo {
+  margin-top: 18px;
+  border-top: 1px solid rgba(78, 60, 38, 0.16);
+  padding-top: 18px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 220ms ease,
+    transform 220ms ease;
+}
+
+.card:hover .revealInfo,
+.card:focus-within .revealInfo {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .description {
-  color: var(--color-muted);
-  font-size: 0.9rem;
-  line-height: 1.62;
+  display: -webkit-box;
+  overflow: hidden;
+  margin: 0;
+  color: rgba(23, 19, 15, 0.78);
+  font-size: 0.95rem;
+  line-height: 1.55;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
 }
 
-.actions {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 6px;
-}
-
-.details,
-.externalLink {
+.more {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  color: var(--color-accent);
-  font-size: 0.7rem;
+  gap: 10px;
+  margin-top: 22px;
+  color: #9a6b24;
+  font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.08em;
+  line-height: 1.2;
   text-transform: uppercase;
-  transition: color 180ms ease;
+  transition:
+    color 180ms ease,
+    transform 180ms ease;
 }
 
-.details:hover,
-.externalLink:hover {
-  color: var(--color-accent-strong);
-}
-
-.compact .body {
-  padding: 16px 0 0;
+.card:hover .more,
+.card:focus-within .more {
+  color: #7e551b;
+  transform: translateX(4px);
 }
 
 .compact {
-  border: 0;
-  background: transparent;
+  height: clamp(470px, 34vw, 540px);
 }
 
-.compact:hover {
-  background: transparent;
+.compact .infoPanel {
+  min-height: 142px;
+  padding: 24px 24px 26px;
+  transform: translateY(calc(100% - 142px));
 }
 
-@media (max-width: 560px) {
-  .body {
-    padding: 18px;
+.compact:hover .infoPanel,
+.compact:focus-within .infoPanel {
+  transform: translateY(0);
+}
+
+.compact .title {
+  font-size: clamp(1.35rem, 1.7vw, 1.9rem);
+}
+
+@media (max-width: 760px) {
+  .card,
+  .compact {
+    height: 520px;
+  }
+
+  .infoPanel,
+  .compact .infoPanel {
+    min-height: 0;
+    padding: 22px;
+    transform: translateY(0);
+  }
+
+  .revealInfo {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .title {
+    font-size: clamp(1.55rem, 7vw, 2rem);
+  }
+}
+
+@media (max-width: 420px) {
+  .card,
+  .compact {
+    height: 500px;
+  }
+
+  .typeBadge,
+  .yearBadge {
+    top: 12px;
+    min-height: 26px;
+    padding: 6px 9px;
+  }
+
+  .typeBadge {
+    left: 12px;
+    max-width: calc(100% - 98px);
+  }
+
+  .yearBadge {
+    right: 12px;
+  }
+
+  .infoPanel,
+  .compact .infoPanel {
+    padding: 20px;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .card,
-  .cover,
-  .details,
-  .externalLink {
+  .coverImage,
+  .infoPanel,
+  .revealInfo,
+  .more {
     transition-duration: 0.01ms;
+  }
+
+  .card:hover,
+  .card:focus-within,
+  .card:hover .coverImage,
+  .card:focus-within .coverImage,
+  .card:hover .more,
+  .card:focus-within .more {
+    transform: none;
+  }
+
+  .infoPanel,
+  .compact .infoPanel,
+  .revealInfo {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
