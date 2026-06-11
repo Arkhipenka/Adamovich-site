@@ -33,6 +33,20 @@
   background: rgba(8, 8, 8, 0.92);
 }
 
+.headerOnHero:not(.headerScrolled) {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.headerOnPaper:not(.headerScrolled) {
+  --color-text: var(--color-paper-text);
+  --color-muted: rgba(28, 23, 18, 0.72);
+  --color-border: rgba(76, 53, 30, 0.22);
+  --color-accent: var(--color-paper-accent);
+  --color-accent-strong: var(--color-paper-accent-strong);
+
+}
+
 .headerScrolled .inner {
   min-height: var(--header-height-scrolled);
 }
@@ -176,6 +190,24 @@
     border-color 180ms ease,
     transform 180ms ease;
 }
+
+.headerOnPaper:not(.headerScrolled) .supportLink {
+  border-color: rgba(154, 104, 38, 0.56);
+}
+
+.headerOnHero:not(.headerScrolled) .supportLink {
+  border-color: rgba(194, 163, 107, 0.72);
+  background: rgba(13, 13, 12, 0.28);
+}
+
+.headerOnHero:not(.headerScrolled) .supportLink:hover,
+.headerOnHero:not(.headerScrolled) .supportLink:focus-visible,
+.headerOnHero:not(.headerScrolled) .supportLink[aria-current="page"] {
+  color: #111;
+  border-color: var(--color-accent);
+  background: var(--color-accent);
+}
+
 .headerScrolled .compactLogo {
   opacity: 1;
   pointer-events: auto;

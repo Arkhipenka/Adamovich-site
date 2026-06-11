@@ -99,20 +99,35 @@ const contactContent = {
     heroTitle: "Контакты",
     heroText:
       "Мы открыты к сотрудничеству, новым идеям и совместным проектам, посвящённым сохранению наследия Алеся Адамовича и развитию документальной культуры в Беларуси.",
-    quote: "... Святло Алесевай душы\nНам свеціць з Глушы.",
+    quote: "... Светло Алесевой душы\nНам светит из Глуши.",
     quoteAuthor: "Кастусь Севярынец",
-    quoteSource: "03.09.2011 · Стихотворение про Алеся Адамовича",
+    quoteSource: "2011 · Судьба Алеся",
     heroAlt: "Памятная остановка Адамовича в Глуше",
     contactEyebrow: "Свяжитесь с нами",
     contactTitle: "Мы здесь, чтобы слышать и отвечать",
     contactText:
       "Если у вас есть вопросы, предложения, идеи для сотрудничества или вы хотите поделиться материалами — напишите нам.",
+    topicsTitle: "По каким вопросам можно писать",
+    topicsIntro: "Вы можете связаться с нами, если хотите:",
+    topics: [
+      "поделиться материалами, архивами, фотографиями или воспоминаниями;",
+      "предложить совместный проект, лекцию, выставку, дискуссию или публикацию;",
+      "обратиться с исследовательским или медийным запросом;",
+      "помочь в развитии сайта, аудиогида или будущего архива;",
+      "поддержать подготовку материалов к 100-летию Алеся Адамовича.",
+    ],
+    partnershipTitle: "Сотрудничество",
+    partnershipParagraphs: [
+      "Мы работаем как онлайн-инициатива и сотрудничаем с партнёрами по всему миру.",
+      "Нас интересуют проекты, связанные с литературой, документальной культурой, памятью о войне, Чернобылем, правами человека, локальной историей и наследием Алеся Адамовича.",
+      "Если вы хотите присоединиться, предложить идею или передать материалы — напишите нам.",
+    ],
     cards: [
       {
         icon: "mail",
         title: "Электронная почта",
         value: siteConfig.contacts.email,
-        caption: "Для общих вопросов и предложений",
+        caption: "Для общих вопросов, предложений, партнёрства и передачи материалов.",
         href: `mailto:${siteConfig.contacts.email}`,
       },
       {
@@ -132,7 +147,7 @@ const contactContent = {
         icon: "send",
         title: "Telegram",
         value: siteConfig.contacts.telegram,
-        caption: "Новости, проекты и обратная связь",
+        caption: "Для быстрой связи, новостей о проекте и обратной связи.",
         href: siteConfig.contacts.telegramUrl || "#",
       },
     ],
@@ -189,18 +204,33 @@ const contactContent = {
       "Мы адкрытыя да супрацоўніцтва, новых ідэй і супольных праектаў, прысвечаных захаванню спадчыны Алеся Адамовіча і развіццю дакументальнай культуры ў Беларусі.",
     quote: "... Святло Алесевай душы\nНам свеціць з Глушы.",
     quoteAuthor: "Кастусь Севярынец",
-    quoteSource: "03.09.2011 · Верш пра Алеся Адамовіча",
+    quoteSource: "03.09.2011 · Лёс Алеся",
     heroAlt: "Памятны прыпынак Адамовіча ў Глушы",
     contactEyebrow: "Звяжыцеся з намі",
     contactTitle: "Мы тут, каб слухаць і адказваць",
     contactText:
       "Калі ў вас ёсць пытанні, прапановы, ідэі для супрацоўніцтва або вы хочаце падзяліцца матэрыяламі — напішыце нам.",
+    topicsTitle: "Па якіх пытаннях можна пісаць",
+    topicsIntro: "Вы можаце звязацца з намі, калі хочаце:",
+    topics: [
+      "падзяліцца матэрыяламі, архівамі, фотаздымкамі або ўспамінамі;",
+      "прапанаваць супольны праект, лекцыю, выставу, дыскусію або публікацыю;",
+      "звярнуцца з даследчым або медыйным запытам;",
+      "дапамагчы ў развіцці сайта, аўдыягіда або будучага архіва;",
+      "падтрымаць падрыхтоўку матэрыялаў да 100-годдзя Алеся Адамовіча.",
+    ],
+    partnershipTitle: "Супрацоўніцтва",
+    partnershipParagraphs: [
+      "Мы працуем як анлайн-ініцыятыва і супрацоўнічаем з партнёрамі ва ўсім свеце.",
+      "Нас цікавяць праекты, звязаныя з літаратурай, дакументальнай культурай, памяццю пра вайну, Чарнобылем, правамі чалавека, лакальнай гісторыяй і спадчынай Алеся Адамовіча.",
+      "Калі вы хочаце далучыцца, прапанаваць ідэю або перадаць матэрыялы — напішыце нам.",
+    ],
     cards: [
       {
         icon: "mail",
         title: "Электронная пошта",
         value: siteConfig.contacts.email,
-        caption: "Для агульных пытанняў і прапаноў",
+        caption: "Для агульных пытанняў, прапаноў, партнёрства і перадачы матэрыялаў.",
         href: `mailto:${siteConfig.contacts.email}`,
       },
       {
@@ -220,7 +250,7 @@ const contactContent = {
         icon: "send",
         title: "Telegram",
         value: siteConfig.contacts.telegram,
-        caption: "Навіны, праекты і зваротная сувязь",
+        caption: "Для хуткай сувязі, навін пра праект і зваротнай сувязі.",
         href: siteConfig.contacts.telegramUrl || "#",
       },
     ],
@@ -275,20 +305,35 @@ const contactContent = {
     heroTitle: "Contacts",
     heroText:
       "We are open to cooperation, new ideas and joint projects dedicated to preserving Ales Adamovich’s legacy and developing documentary culture in Belarus.",
-    quote: "... Святло Алесевай душы\nНам свеціць з Глушы.",
+    quote: "… The light of Ales’s soul \nStill shines for us from Hlusha.",
     quoteAuthor: "Kastus Seviarynets",
-    quoteSource: "03.09.2011 · Poem about Ales Adamovich",
+    quoteSource: "2011 · The Fate of Ales",
     heroAlt: "Adamovich memorial stop in Glusha",
     contactEyebrow: "Contact us",
     contactTitle: "We are here to listen and respond",
     contactText:
       "If you have questions, proposals, ideas for cooperation or materials to share, please write to us.",
+    topicsTitle: "What you can write about",
+    topicsIntro: "You can contact us if you would like to:",
+    topics: [
+      "share materials, archives, photographs or memories;",
+      "propose a joint project, lecture, exhibition, discussion or publication;",
+      "send a research or media request;",
+      "help develop the website, audio guide or future archive;",
+      "support the preparation of materials for Ales Adamovich’s 100th anniversary.",
+    ],
+    partnershipTitle: "Cooperation",
+    partnershipParagraphs: [
+      "We work as an online initiative and cooperate with partners in all world.",
+      "We are interested in projects connected with literature, documentary culture, memory of war, Chornobyl, human rights, local history and Ales Adamovich’s legacy.",
+      "If you want to join, propose an idea or share materials, please write to us.",
+    ],
     cards: [
       {
         icon: "mail",
         title: "Email",
         value: siteConfig.contacts.email,
-        caption: "For general questions and proposals",
+        caption: "For questions, proposals, partnerships and sharing materials.",
         href: `mailto:${siteConfig.contacts.email}`,
       },
       {
@@ -308,7 +353,7 @@ const contactContent = {
         icon: "send",
         title: "Telegram",
         value: siteConfig.contacts.telegram,
-        caption: "News, projects and feedback",
+        caption: "For quick contact, project news and feedback.",
         href: siteConfig.contacts.telegramUrl || "#",
       },
     ],
@@ -370,6 +415,11 @@ const contactContent = {
     contactEyebrow: string;
     contactTitle: string;
     contactText: string;
+    topicsTitle: string;
+    topicsIntro: string;
+    topics: string[];
+    partnershipTitle: string;
+    partnershipParagraphs: string[];
     cards: ContactCard[];
     mapEyebrow: string;
     mapTitle: string;
@@ -516,13 +566,13 @@ function HeroHandwrittenQuote({
   source: string;
 }) {
   return (
-    <blockquote className={styles.quoteWrap}>
-      <p className={styles.quoteText}>{quote}</p>
-      <cite className={styles.quoteAuthor}>
-        — {author}
+    <figure className={styles.quoteWrap}>
+      <blockquote className={styles.quoteText}>&ldquo;{quote}&rdquo;</blockquote>
+      <figcaption className={styles.quoteAuthor}>
+        {author}
         <span className={styles.quoteSource}>{source}</span>
-      </cite>
-    </blockquote>
+      </figcaption>
+    </figure>
   );
 }
 
@@ -536,7 +586,6 @@ export function ContactsPage({ locale }: ContactsPageProps) {
   const contactCards = [
     copy.cards[0],
     copy.cards[3],
-    copy.cards[1],
     contactBlock.socialCard,
   ].filter(Boolean) as ContactCard[];
 
@@ -549,7 +598,7 @@ export function ContactsPage({ locale }: ContactsPageProps) {
           fill
           priority
           sizes="100vw"
-          src={assetPath("/assets/images/hero/contacts-hero-glusha-collage.png")}
+          src={assetPath("/assets/images/hero/contacts-hero-paper-background.png")}
         />
         <div className={styles.heroOverlay} />
 
@@ -617,12 +666,6 @@ export function ContactsPage({ locale }: ContactsPageProps) {
             })}
           </div>
 
-          <p className={styles.notice}>
-            <span className={styles.noticeIcon}>
-              <Icon name="info" />
-            </span>
-            {contactBlock.notice}
-          </p>
         </div>
       </section>
 
@@ -680,23 +723,28 @@ export function ContactsPage({ locale }: ContactsPageProps) {
         </div>
       </section>
 
-      <section className={styles.cooperation} aria-labelledby="cooperation-title">
-        <div className={styles.cooperationInner}>
-          <h2 className={styles.blockTitle} id="cooperation-title">
-            {copy.cooperationEyebrow}
-          </h2>
+      <section className={styles.guidanceSection} aria-labelledby="contact-topics-title">
+        <div className={styles.guidanceInner}>
+          <article className={styles.guidanceBlock}>
+            <h2 className={styles.guidanceTitle} id="contact-topics-title">
+              {copy.topicsTitle}
+            </h2>
+            <p className={styles.guidanceLead}>{copy.topicsIntro}</p>
+            <ul className={styles.topicList}>
+              {copy.topics.map((topic) => (
+                <li key={topic}>{topic}</li>
+              ))}
+            </ul>
+          </article>
 
-          <div className={styles.cooperationCards}>
-            {copy.cooperationItems.map((item) => (
-              <article className={styles.cooperationCard} key={item.title}>
-                <span className={styles.cardIcon}>
-                  <Icon name={item.icon} />
-                </span>
-                <h3>{item.title}</h3>
-                <p>{item.text}</p>
-              </article>
-            ))}
-          </div>
+          <article className={styles.guidanceBlock}>
+            <h2 className={styles.guidanceTitle}>{copy.partnershipTitle}</h2>
+            <div className={styles.partnershipText}>
+              {copy.partnershipParagraphs.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+            </div>
+          </article>
         </div>
       </section>
 

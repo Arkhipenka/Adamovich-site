@@ -9,7 +9,6 @@
   --color-accent-strong: var(--color-paper-accent-strong);
 
   min-height: 100vh;
-  padding-top: var(--header-height);
   background:
     radial-gradient(circle at top right, rgba(154, 104, 38, 0.055), transparent 34rem),
     linear-gradient(180deg, rgba(80, 54, 28, 0.035), rgba(255, 255, 255, 0) 46%, rgba(80, 54, 28, 0.03)),
@@ -18,45 +17,180 @@
 }
 
 .inner {
-  width: min(100% - var(--page-gutter) * 2, var(--container));
+  width: min(100% - var(--page-gutter) * 2, var(--container-wide, var(--container)));
   margin-inline: auto;
-  padding-block: clamp(72px, 9vw, 132px);
+  padding-block: 0 clamp(72px, 9vw, 132px);
 }
 
-.hero {
+.bibliographyHero {
+  position: relative;
   display: grid;
-  gap: 18px;
-  max-width: 920px;
+  width: 100vw;
+  min-height: 100svh;
+  align-items: center;
+  overflow: hidden;
+  margin-inline: calc(50% - 50vw);
+  padding:
+    calc(var(--header-height) + clamp(64px, 8vh, 112px))
+    max(var(--page-gutter), calc((100vw - var(--container-wide, var(--container))) / 2))
+    clamp(72px, 9vh, 120px);
   margin-bottom: clamp(42px, 6vw, 82px);
+  isolation: isolate;
 }
 
-.eyebrow {
+.bibliographyHero::before {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  content: "";
+  background:
+    linear-gradient(
+      90deg,
+      rgba(232, 223, 207, 0.98) 0%,
+      rgba(232, 223, 207, 0.94) 31%,
+      rgba(232, 223, 207, 0.58) 49%,
+      rgba(232, 223, 207, 0.12) 70%,
+      rgba(232, 223, 207, 0) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(232, 223, 207, 0.78) 0%,
+      rgba(232, 223, 207, 0.08) 34%,
+      rgba(232, 223, 207, 0.74) 100%
+    );
+  pointer-events: none;
+}
+
+.bibliographyHero::after {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  content: "";
+  background-image:
+    radial-gradient(circle, rgba(83, 61, 36, 0.055) 1px, transparent 1px),
+    radial-gradient(circle, rgba(255, 255, 255, 0.28) 1px, transparent 1px);
+  background-position:
+    0 0,
+    9px 12px;
+  background-size:
+    24px 24px,
+    31px 31px;
+  opacity: 0.28;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+.heroVisual {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.heroImage {
+  object-fit: cover;
+  object-position: center right;
+}
+
+.heroContent {
+  position: relative;
+  z-index: 3;
+  max-width: 760px;
+}
+
+.heroEyebrow {
+  margin-bottom: 24px;
   color: var(--color-accent);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
 }
 
-.title {
+.heroTitle {
+  margin: 0;
   color: var(--color-text);
   font-family: var(--font-serif);
-  font-size: clamp(2.8rem, 6vw, 6.8rem);
+  font-size: clamp(3.8rem, 7vw, 7.8rem);
   font-weight: 600;
-  line-height: 0.98;
-  letter-spacing: 0;
+  line-height: 0.95;
+  letter-spacing: -0.045em;
 }
 
-.description {
-  max-width: 760px;
-  color: var(--color-muted);
-  font-size: clamp(1rem, 1.2vw, 1.14rem);
-  line-height: 1.75;
+.heroLead {
+  max-width: 620px;
+  margin-top: 32px;
+  color: color-mix(in srgb, var(--color-text) 76%, transparent);
+  font-size: clamp(1.05rem, 1.4vw, 1.35rem);
+  line-height: 1.65;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 1100px) {
+  .bibliographyHero {
+    min-height: 100svh;
+    padding:
+      calc(var(--header-height) + clamp(52px, 7vw, 84px))
+      max(var(--page-gutter), calc((100vw - var(--container-wide, var(--container))) / 2))
+      clamp(56px, 8vw, 88px);
+  }
+
+  .heroContent {
+    max-width: 820px;
+  }
+
+  .heroImage {
+    object-position: 58% center;
+  }
+}
+
+@media (max-width: 640px) {
   .inner {
-    width: min(100% - 40px, var(--container));
-    padding-block: 56px 80px;
+    width: min(100% - 40px, var(--container-wide, var(--container)));
+    padding-block: 0 80px;
+  }
+
+  .bibliographyHero {
+    min-height: 100svh;
+    padding:
+      calc(var(--header-height) + 44px)
+      20px
+      56px;
+    margin-bottom: 48px;
+  }
+
+  .heroEyebrow {
+    margin-bottom: 18px;
+    font-size: 0.72rem;
+  }
+
+  .heroTitle {
+    font-size: clamp(3rem, 16vw, 4.8rem);
+    line-height: 0.98;
+  }
+
+  .heroLead {
+    margin-top: 24px;
+    font-size: 1rem;
+  }
+
+  .bibliographyHero::before {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(232, 223, 207, 0.98) 0%,
+        rgba(232, 223, 207, 0.92) 47%,
+        rgba(232, 223, 207, 0.58) 74%,
+        rgba(232, 223, 207, 0.86) 100%
+      ),
+      linear-gradient(
+        90deg,
+        rgba(232, 223, 207, 0.96) 0%,
+        rgba(232, 223, 207, 0.68) 58%,
+        rgba(232, 223, 207, 0.32) 100%
+      );
+  }
+
+  .heroImage {
+    object-position: 64% center;
   }
 }

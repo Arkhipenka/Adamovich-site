@@ -2,70 +2,10 @@
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  background:
-    linear-gradient(180deg, var(--color-paper) 0%, var(--color-paper) 84%, var(--color-dark-bg, #0f0f0f) 100%);
+  background: var(--color-paper);
 }
 
 .contentField > * {
   position: relative;
   z-index: 1;
-}
-
-.contentField::before,
-.contentField::after {
-  position: absolute;
-  right: 0;
-  left: 0;
-  pointer-events: none;
-  content: "";
-}
-
-.contentField::before {
-  bottom: -3px;
-  z-index: 3;
-  height: clamp(220px, 22vw, 360px);
-  background:
-    linear-gradient(
-      180deg,
-      rgba(244, 236, 221, 0) 0%,
-      rgba(244, 236, 221, 0.08) 20%,
-      rgba(44, 42, 39, 0.24) 48%,
-      rgba(15, 15, 15, 0.72) 76%,
-      var(--color-dark-bg, #0f0f0f) 100%
-    ),
-    url("../../../public/assets/images/decor/forest-transition-blackfade-wide-low.png");
-  background-position: bottom center;
-  background-repeat: no-repeat, repeat-x;
-  background-size: 100% 100%, auto 100%;
-  opacity: 1;
-}
-
-.contentField::after {
-  bottom: clamp(78px, 8vw, 128px);
-  z-index: 2;
-  height: clamp(110px, 12vw, 180px);
-  background:
-    radial-gradient(ellipse at 24% 54%, rgba(244, 236, 221, 0.14), transparent 64%),
-    radial-gradient(ellipse at 72% 58%, rgba(244, 236, 221, 0.09), transparent 68%);
-  filter: blur(16px);
-  opacity: 0.52;
-}
-
-@media (max-width: 768px) {
-  .contentField::before {
-    height: 170px;
-    background-size: 100% 100%, auto 100%;
-  }
-
-  .contentField::after {
-    bottom: 58px;
-    height: 90px;
-  }
-}
-
-@media (max-width: 480px) {
-  .contentField::before {
-    height: 140px;
-    background-size: 100% 100%, auto 100%;
-  }
 }

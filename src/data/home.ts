@@ -80,17 +80,17 @@ export const homePageContent: HomePageContent = {
         en: "Take a route through Glusha and hear the stories of places connected with Ales Adamovich’s life and creativity.",
       },
       image: {
-        src: "/assets/images/hero/hero-audio-guide-glusha.png",
+        src: "/assets/images/hero/glusha-pharmacy-1985.jpg",
         alt: {
-          be: "Аптэкарскі дом у Глушы, гдзе працавала маці Алеся Адамовіча",
-          ru: "Аптекарский дом в Глуше, где работала мать Алеся Адамовича",
-          en: "The pharmacy house in Glusha, where Ales Adamovich’s mother worked",
+          be: "Алесь Адамовіч каля глушанскай аптэкі ў 1985 годзе",
+          ru: "Алесь Адамович возле глушанской аптеки в 1985 году",
+          en: "Ales Adamovich near the pharmacy in Glusha in 1985",
         },
       },
       imageCredit: {
-        be: "Аптэкарскі дом у Глушы, гдзе працавала маці Алеся Адамовіча",
-        ru: "Аптекарский дом в Глуше, где работала мать Алеся Адамовича",
-        en: "The pharmacy house in Glusha, where Ales Adamovich’s mother worked",
+        be: "Каля глушанскай аптэкі, 1985",
+        ru: "Возле глушанской аптеки, 1985",
+        en: "Near the pharmacy in Glusha, 1985",
       },
       primaryLink: {
         label: {
@@ -266,11 +266,11 @@ export const homePageContent: HomePageContent = {
       en: "The Blockade Book, 1977–1982",
     },
     image: {
-      src: "/assets/images/portraits/adamovich-writing-desk.jpg",
+      src: "/assets/images/portraits/adamovich-desk-minsk-1989.jpg",
       alt: {
-        be: "Ales Adamovich writing at his desk",
-        ru: "Ales Adamovich writing at his desk",
-        en: "Ales Adamovich writing at his desk",
+        be: "Алесь Адамовіч за рабочым сталом. Мінск, 1989",
+        ru: "Алесь Адамович за рабочим столом. Минск, 1989",
+        en: "Ales Adamovich writing at his desk. Minsk, 1989",
       },
     },
   },

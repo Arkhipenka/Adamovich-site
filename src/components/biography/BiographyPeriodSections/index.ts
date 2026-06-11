@@ -1,0 +1,1 @@
+export { BiographyPeriodSections } from "./BiographyPeriodSections";

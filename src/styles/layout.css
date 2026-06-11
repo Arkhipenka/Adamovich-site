@@ -22,7 +22,7 @@
 }
 
 .hero-section {
-  width: min(100% - var(--page-gutter) * 2, var(--container));
+  width: min(100% - var(--page-gutter) * 2, var(--container-wide, var(--container)));
   min-height: min(760px, calc(100vh - 84px));
   margin-inline: auto;
   display: grid;
@@ -40,7 +40,7 @@
 }
 
 .setup-note {
-  width: min(100% - var(--page-gutter) * 2, var(--container));
+  width: min(100% - var(--page-gutter) * 2, var(--container-wide, var(--container)));
   margin-inline: auto;
   margin-block: clamp(48px, 7vw, 96px);
   padding: clamp(24px, 4vw, 40px);
@@ -52,10 +52,10 @@
 @media (max-width: 640px) {
   .hero-section {
     min-height: auto;
-    width: min(100% - 36px, var(--container));
+    width: min(100% - 40px, var(--container-wide, var(--container)));
   }
 
   .setup-note {
-    width: min(100% - 36px, var(--container));
+    width: min(100% - 40px, var(--container-wide, var(--container)));
   }
 }

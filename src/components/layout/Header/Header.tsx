@@ -116,6 +116,8 @@ export function Header({ locale, dictionary }: HeaderProps) {
     () => getCurrentSegment(pathname, locale),
     [locale, pathname],
   );
+  const isHeroHeader = currentSegment === "audio-guide";
+  const isPaperHeader = currentSegment !== "" && currentSegment !== "audio-guide";
   const navigationLinks = useMemo(
     () => getHeaderNavigationLinks(locale),
     [locale],
@@ -215,7 +217,14 @@ export function Header({ locale, dictionary }: HeaderProps) {
   const closeMenu = () => setMenuOpen(false);
 
   return (
-    <header className={`${styles.header} ${isScrolled ? styles.headerScrolled : ""}`}>
+    <header
+      className={[
+        styles.header,
+        isHeroHeader ? styles.headerOnHero : "",
+        isPaperHeader ? styles.headerOnPaper : "",
+        isScrolled ? styles.headerScrolled : "",
+      ].join(" ")}
+    >
       <div className={styles.inner}>
         <Link
           aria-label={headerBrandLabelByLocale[locale]}

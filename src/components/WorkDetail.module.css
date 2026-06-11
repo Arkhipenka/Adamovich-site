@@ -18,7 +18,7 @@
 }
 
 .inner {
-  width: min(100% - var(--page-gutter) * 2, var(--container));
+  width: min(100% - var(--page-gutter) * 2, var(--container-wide, var(--container)));
   margin-inline: auto;
   padding-block: clamp(64px, 8vw, 118px);
 }
@@ -212,7 +212,7 @@
 
 @media (max-width: 620px) {
   .inner {
-    width: min(100% - 40px, var(--container));
+    width: min(100% - 40px, var(--container-wide, var(--container)));
   }
 
   .facts div {

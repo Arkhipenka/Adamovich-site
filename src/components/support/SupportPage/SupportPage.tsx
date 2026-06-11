@@ -36,7 +36,7 @@ type LinkCard = Card & {
   href: string;
 };
 
-const supportHeroImage = assetPath("/assets/images/hero/hero-initiative-glusha.png");
+const supportHeroImage = assetPath("/assets/images/hero/support-hero-paper-background.png");
 // TODO: replace hero image with final archive photo.
 
 const paymentLinks = {
@@ -51,10 +51,10 @@ const supportContent = {
   ru: {
     hero: {
       eyebrow: "Сохраняем память. Исследуем. Передаём дальше.",
-      title: "Поддержать проект",
+      title: "Поддержать",
       text: "Проект об Алесе Адамовиче существует благодаря помощи единомышленников. Ваша поддержка помогает сохранять наследие писателя, делать его доступным сегодня и для будущих поколений.",
       accent:
-        "Нужна помощь в развитии цифрового архива, поддержке сайта, переводах и подготовке программы к 100-летию со дня рождения.",
+        "Нужна помощь в развитии цифрового архива, поддержке сайта, переводах и подготовке к 100-летию писателя.",
       imageAlt:
         "Архивный визуальный фон для страницы поддержки проекта об Алесе Адамовиче",
       primaryCta: "Поддержать проект",
@@ -153,7 +153,7 @@ const supportContent = {
     },
     openness: {
       title: "Открытость проекта",
-      text: "Мы открыто рассказываем о развитии проекта, реализованных инициативах, партнёрах и новых этапах работы. Поддержка проекта направляется на развитие цифрового архива, сайта, переводов, исследований и подготовку программы к 100-летию Алеся Адамовича.",
+      text: "Мы открыто рассказываем о развитии проекта, реализованных инициативах, партнёрах и новых этапах работы.",
       items: [
         {
           icon: "news",
@@ -182,10 +182,10 @@ const supportContent = {
   be: {
     hero: {
       eyebrow: "Захоўваем памяць. Даследуем. Перадаём далей.",
-      title: "Падтрымаць праект",
+      title: "Падтрымаць",
       text: "Праект пра Алеся Адамовіча існуе дзякуючы дапамозе аднадумцаў. Ваша падтрымка дапамагае захоўваць спадчыну пісьменніка, рабіць яе даступнай сёння і для будучых пакаленняў.",
       accent:
-        "Патрэбная дапамога ў развіцці лічбавага архіва, падтрымцы сайта, перакладах і падрыхтоўцы праграмы да 100-годдзя з дня нараджэння.",
+        "Патрэбная дапамога ў развіцці лічбавага архіва, падтрымцы сайта, перакладах і падрыхтоўцы да 100-годдзя пісьменіка.",
       imageAlt:
         "Архіўны візуальны фон для старонкі падтрымкі праекта пра Алеся Адамовіча",
       primaryCta: "Падтрымаць праект",
@@ -284,7 +284,7 @@ const supportContent = {
     },
     openness: {
       title: "Адкрытасць праекта",
-      text: "Мы адкрыта расказваем пра развіццё праекта, рэалізаваныя ініцыятывы, партнёраў і новыя этапы працы. Падтрымка праекта скіраваная на развіццё лічбавага архіва, сайта, перакладаў, даследаванняў і падрыхтоўку праграмы да 100-годдзя Алеся Адамовіча.",
+      text: "Мы адкрыта расказваем пра развіццё праекта, рэалізаваныя ініцыятывы, партнёраў і новыя этапы працы.",
       items: [
         {
           icon: "news",
@@ -313,7 +313,7 @@ const supportContent = {
   en: {
     hero: {
       eyebrow: "Preserve memory. Research. Pass it on.",
-      title: "Support the project",
+      title: "Support",
       text: "The project about Ales Adamovich exists thanks to the help of like-minded people. Your support helps preserve the writer’s legacy and make it accessible today and for future generations.",
       accent:
         "Help is needed for the digital archive, website support, translations and preparation of the programme for Adamovich’s centenary.",
@@ -415,7 +415,7 @@ const supportContent = {
     },
     openness: {
       title: "Project openness",
-      text: "We openly share news about the project’s development, completed initiatives, partners and new stages of work. Support for the project is directed toward the digital archive, website, translations, research and preparation of the programme for Ales Adamovich’s centenary.",
+      text: "We openly share news about the project’s development, completed initiatives, partners and new stages of work.",
       items: [
         {
           icon: "news",
@@ -655,7 +655,6 @@ export function SupportPage({ dictionary, locale }: SupportPageProps) {
       <section className={styles.bridge} aria-labelledby="support-bridge-title">
         <div className={styles.bridgeInner}>
           <div>
-            <p className={styles.eyebrow}>{copy.bridge.title}</p>
             <h2 className={styles.sectionTitle} id="support-bridge-title">
               {copy.bridge.title}
             </h2>
@@ -725,7 +724,7 @@ export function SupportPage({ dictionary, locale }: SupportPageProps) {
               alt=""
               fill
               sizes="420px"
-              src={assetPath("/assets/images/hero/hero-books-manuscripts.png")}
+              src={assetPath("/assets/images/hero/manuscripts.png")}
             />
           </div>
           <div className={styles.materialsContent}>

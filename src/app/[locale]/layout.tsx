@@ -5,6 +5,7 @@ import { Header } from "@/components/layout/Header/Header";
 import { defaultLocale, isLocale, locales, siteConfig } from "@/config/site";
 import { getDictionary } from "@/i18n/dictionaries";
 import "../globals.css";
+import styles from "./layout.module.css";
 
 type RootLayoutProps = {
   children: React.ReactNode;
@@ -60,7 +61,7 @@ export default async function RootLayout({ children, params }: RootLayoutProps) 
         {dictionary ? (
           <>
             <Header locale={activeLocale} dictionary={dictionary} />
-            {children}
+            <div className={styles.contentField}>{children}</div>
             <Footer locale={activeLocale} />
           </>
         ) : (

@@ -17,25 +17,26 @@
 }
 
 .hero {
-  --color-bg: var(--color-dark-bg);
-  --color-bg-elevated: var(--color-dark-surface);
-  --color-surface: var(--color-dark-surface);
-  --color-text: var(--color-dark-text);
-  --color-muted: var(--color-dark-muted);
-  --color-border: var(--color-dark-border);
-  --color-accent: var(--color-dark-accent);
-  --color-accent-strong: var(--color-dark-accent-strong);
+  --color-bg: var(--color-paper);
+  --color-bg-elevated: var(--color-paper-surface);
+  --color-surface: var(--color-paper-surface);
+  --color-text: var(--color-paper-text);
+  --color-muted: var(--color-paper-muted);
+  --color-border: var(--color-paper-border);
+  --color-accent: var(--color-paper-accent);
+  --color-accent-strong: var(--color-paper-accent-strong);
 
   position: relative;
   min-height: clamp(520px, 58vw, 690px);
   overflow: hidden;
-  border-bottom: 1px solid rgba(245, 241, 232, 0.08);
+  border-bottom: 1px solid rgba(76, 53, 30, 0.12);
+  background: var(--color-bg);
   padding-top: var(--header-height);
 }
 
 .heroImage {
   object-fit: cover;
-  object-position: center center;
+  object-position: right center;
 }
 
 .heroOverlay {
@@ -43,8 +44,28 @@
   inset: 0;
   z-index: 1;
   background:
-    linear-gradient(90deg, rgba(6, 6, 6, 0.94) 0%, rgba(6, 6, 6, 0.78) 34%, rgba(6, 6, 6, 0.34) 68%, rgba(6, 6, 6, 0.62) 100%),
-    linear-gradient(180deg, rgba(8, 8, 8, 0.3) 0%, rgba(8, 8, 8, 0.08) 42%, rgba(8, 8, 8, 0.72) 100%);
+    linear-gradient(
+      180deg,
+      rgba(242, 234, 219, 0.18) 0%,
+      rgba(242, 234, 219, 0) 46%,
+      rgba(242, 234, 219, 0.62) 100%
+    );
+}
+
+.hero::after {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  height: clamp(96px, 12vw, 160px);
+  background: linear-gradient(
+    180deg,
+    rgba(242, 234, 219, 0) 0%,
+    var(--color-bg) 84%
+  );
+  content: "";
+  pointer-events: none;
 }
 
 .heroInner {
@@ -52,7 +73,7 @@
   z-index: 2;
   display: grid;
   align-content: center;
-  width: min(100% - var(--page-gutter) * 2, var(--container));
+  width: min(100% - var(--page-gutter) * 2, var(--container-wide, var(--container)));
   min-height: calc(clamp(520px, 58vw, 690px) - var(--header-height));
   margin-inline: auto;
   padding-block: clamp(42px, 6vw, 82px);
@@ -95,77 +116,88 @@
 .heroText {
   max-width: 540px;
   margin-top: 24px;
-  color: rgba(245, 241, 232, 0.84);
+  color: var(--color-muted);
   font-size: clamp(1rem, 1.15vw, 1.12rem);
   line-height: 1.78;
 }
 
 .quoteWrap {
-  max-width: 520px;
-  margin-top: 42px;
-  color: #c2a36b;
-  font-family: Caveat, "Marck Script", "Bad Script", cursive;
-  transform: rotate(-1deg);
+  display: grid;
+  gap: 14px;
+  max-width: 440px;
+  margin: 34px 0 0;
+  padding-top: 26px;
+  border-top: 1px solid rgba(154, 104, 38, 0.52);
+  color: var(--color-text);
+  font-family: var(--font-quote);
+  font-size: clamp(1.25rem, 2vw, 1.75rem);
+  font-style: italic;
+  line-height: 1.2;
 }
 
 .quoteText {
   margin: 0;
-  color: #c2a36b;
-  font-size: clamp(22px, 2.2vw, 34px);
-  font-weight: 500;
-  letter-spacing: 0.01em;
-  line-height: 1.38;
-  text-shadow: 0 0 18px rgba(194, 163, 107, 0.12);
+  color: inherit;
+  font: inherit;
+  line-height: inherit;
+  text-shadow: none;
   white-space: pre-line;
 }
 
 .quoteAuthor {
   display: block;
-  margin-top: 12px;
-  color: #c2a36b;
-  font-size: clamp(20px, 1.8vw, 28px);
+  margin-top: 0;
+  color: var(--color-accent);
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
   font-style: normal;
-  font-weight: 500;
-  line-height: 1.2;
-  opacity: 0.95;
-  transform: translateX(40px);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1.4;
+  text-transform: uppercase;
 }
 
 .quoteSource {
   display: block;
-  margin-top: 4px;
-  font-size: clamp(18px, 1.45vw, 22px);
-  line-height: 1.25;
-  opacity: 0.78;
+  margin-top: 6px;
+  color: var(--color-muted);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  line-height: 1.45;
+  opacity: 0.85;
 }
 
 .contactSection,
+.guidanceSection {
+  border-bottom: 1px solid rgba(31, 26, 20, 0.12);
+}
+
 .messageSection,
-.cooperation,
 .newsletter {
-  border-bottom: 1px solid var(--color-border);
+  display: none;
 }
 
 .inner {
-  width: min(100% - var(--page-gutter) * 2, var(--container));
+  width: min(100% - var(--page-gutter) * 2, var(--container-wide, var(--container)));
   margin-inline: auto;
-  padding-block: clamp(36px, 5vw, 64px);
+  padding-block: clamp(64px, 7vw, 96px);
 }
 
 .contactSection .inner {
   display: grid;
-  gap: 22px;
+  gap: clamp(28px, 4vw, 44px);
   align-items: start;
 }
 
 .blockTitle {
   margin: 0;
-  color: var(--color-accent);
-  font-size: 0.78rem;
-  font-weight: 800;
-  letter-spacing: 0.1em;
-  line-height: 1.4;
-  text-transform: uppercase;
+  color: var(--color-text);
+  font-family: var(--font-serif);
+  font-size: clamp(2.25rem, 3.5vw, 4rem);
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 1.06;
 }
 
 .eyebrow {
@@ -197,44 +229,96 @@
 
 .contactCards {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 22px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(24px, 2.6vw, 40px);
 }
 
-.contactCard,
+.contactCard {
+  display: grid;
+  align-content: start;
+  box-sizing: content-box;
+  min-height: 238px;
+  border: 1px solid rgba(76, 53, 30, 0.46);
+  color: var(--color-text);
+  background:
+    linear-gradient(135deg, #ffffff52, #0000 48%),
+    linear-gradient(
+      rgba(239, 230, 216, 0.88),
+      rgba(239, 230, 216, 0.88)
+    );
+  padding: clamp(26px, 2.5vw, 36px);
+  text-decoration: none;
+  transition:
+    background-color 180ms ease,
+    background-position 180ms ease,
+    border-color 220ms ease,
+    transform 220ms ease;
+}
+
+.contactCard:hover {
+  border-color: rgba(154, 104, 38, 0.82);
+  background:
+    linear-gradient(135deg, #ffffff66, #0000 48%),
+    linear-gradient(
+      rgba(239, 230, 216, 0.77),
+      rgba(239, 230, 216, 0.77)
+    );
+  transform: translateY(-3px);
+}
+
 .cooperationCard {
   display: grid;
   align-content: start;
-  min-height: 238px;
-  border: 1px solid var(--color-border);
+  min-height: 270px;
+  border: 1px solid rgba(31, 26, 20, 0.12);
+  border-radius: 8px;
   color: var(--color-text);
   background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.32), transparent 48%),
-    rgba(255, 255, 255, 0.18);
-  padding: clamp(24px, 2.1vw, 32px);
+    linear-gradient(135deg, rgba(255, 255, 255, 0.62), transparent 54%),
+    rgba(255, 255, 255, 0.38);
+  box-shadow: 0 18px 45px rgba(54, 42, 28, 0.055);
+  padding: clamp(26px, 2.5vw, 36px);
   text-decoration: none;
   transition:
     border-color 220ms ease,
+    box-shadow 220ms ease,
     background-color 220ms ease,
     transform 220ms ease;
 }
 
-.contactCard:hover,
 .cooperationCard:hover {
-  border-color: rgba(194, 163, 107, 0.5);
-  background-color: rgba(194, 163, 107, 0.035);
+  border-color: rgba(154, 104, 38, 0.28);
+  background-color: rgba(255, 255, 255, 0.52);
+  box-shadow: 0 24px 62px rgba(54, 42, 28, 0.09);
   transform: translateY(-3px);
 }
 
-.cardIcon,
+.contactCard:focus-visible,
+.socialButton:focus-visible {
+  outline: 2px solid rgba(154, 104, 38, 0.54);
+  outline-offset: 4px;
+}
+
 .smallIcon {
   display: grid;
-  width: 52px;
-  height: 52px;
+  width: 58px;
+  height: 58px;
   place-items: center;
-  border: 1px solid rgba(194, 163, 107, 0.44);
+  border: 0;
+  border-radius: 50%;
+  color: var(--color-text);
+  background: rgba(232, 221, 204, 0.78);
+}
+
+.cardIcon {
+  display: grid;
+  width: 40px;
+  height: 40px;
+  place-items: center;
+  border: 1px solid rgba(194, 163, 107, 0.46);
   border-radius: 50%;
   color: var(--color-accent);
+  background: transparent;
 }
 
 .cardIcon svg,
@@ -246,44 +330,47 @@
 }
 
 .cardTitle {
-  margin-top: 30px;
-  color: var(--color-accent);
-  font-size: 0.72rem;
+  margin-top: 22px;
+  color: var(--color-text);
+  font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.08em;
+  line-height: 1.35;
   text-transform: uppercase;
 }
 
 .cardValue {
-  margin-top: 14px;
+  margin-top: 16px;
   color: var(--color-text);
-  font-size: 0.98rem;
+  font-size: clamp(1rem, 1.1vw, 1.08rem);
+  font-weight: 750;
   line-height: 1.55;
 }
 
 .cardCaption {
-  margin-top: 12px;
+  margin-top: 14px;
   color: var(--color-muted);
   font-size: 0.9rem;
-  line-height: 1.65;
+  line-height: 1.48;
 }
 
 .socialList {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 18px;
+  gap: 14px;
+  margin-top: 28px;
 }
 
 .socialButton {
   display: grid;
-  width: 34px;
-  height: 34px;
+  width: 40px;
+  height: 40px;
   place-items: center;
-  border: 1px solid rgba(245, 241, 232, 0.16);
+  border: 1px solid rgba(154, 104, 38, 0.42);
   border-radius: 50%;
-  color: var(--color-muted);
-  font-size: 0.68rem;
+  color: var(--color-accent);
+  background: rgba(239, 230, 216, 0.58);
+  font-size: 0.7rem;
   font-weight: 800;
   letter-spacing: 0.04em;
   text-decoration: none;
@@ -294,13 +381,13 @@
 }
 
 .socialButton:hover {
-  border-color: rgba(194, 163, 107, 0.62);
-  color: var(--color-accent);
-  background: rgba(194, 163, 107, 0.08);
+  border-color: rgba(154, 104, 38, 0.82);
+  color: #fffaf0;
+  background: var(--color-accent);
 }
 
 .notice {
-  display: flex;
+  display: none;
   align-items: center;
   gap: 10px;
   margin: 0;
@@ -333,7 +420,7 @@
   display: grid;
   grid-template-columns: minmax(260px, 0.42fr) minmax(0, 1fr);
   gap: clamp(34px, 5vw, 72px);
-  width: min(100% - var(--page-gutter) * 2, var(--container));
+  width: min(100% - var(--page-gutter) * 2, var(--container-wide, var(--container)));
   margin-inline: auto;
   padding-block: clamp(36px, 5.5vw, 70px);
   border-top: 1px solid var(--color-border);
@@ -552,7 +639,7 @@
 .cooperationInner {
   display: grid;
   gap: 24px;
-  width: min(100% - var(--page-gutter) * 2, var(--container));
+  width: min(100% - var(--page-gutter) * 2, var(--container-wide, var(--container)));
   margin-inline: auto;
   padding-block: clamp(34px, 5.5vw, 72px);
 }
@@ -603,7 +690,7 @@
   grid-template-columns: minmax(260px, 0.7fr) minmax(280px, 0.82fr) minmax(220px, 360px);
   gap: clamp(24px, 5vw, 72px);
   align-items: center;
-  width: min(100% - var(--page-gutter) * 2, var(--container));
+  width: min(100% - var(--page-gutter) * 2, var(--container-wide, var(--container)));
   min-height: 170px;
   margin-inline: auto;
   padding-block: 34px;
@@ -670,6 +757,86 @@
   }
 }
 
+.guidanceSection {
+  background:
+    radial-gradient(circle at 12% 0%, rgba(255, 255, 255, 0.34), transparent 34rem),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(80, 54, 28, 0.025));
+}
+
+.guidanceInner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(42px, 6vw, 92px);
+  width: min(100% - var(--page-gutter) * 2, var(--container-wide, var(--container)));
+  margin-inline: auto;
+  padding-block: clamp(54px, 7vw, 92px);
+}
+
+.guidanceBlock {
+  min-width: 0;
+}
+
+.guidanceBlock + .guidanceBlock {
+  border-left: 1px solid rgba(31, 26, 20, 0.2);
+  padding-left: clamp(42px, 5vw, 72px);
+}
+
+.guidanceTitle {
+  margin: 0;
+  color: var(--color-text);
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 3vw, 3.3rem);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: 0;
+}
+
+.guidanceLead,
+.partnershipText p {
+  margin: 24px 0 0;
+  color: var(--color-text);
+  font-size: clamp(1rem, 1.05vw, 1.08rem);
+  line-height: 1.8;
+}
+
+.topicList {
+  display: grid;
+  gap: 15px;
+  margin: 24px 0 0;
+  padding: 0;
+  color: var(--color-text);
+  font-size: clamp(1rem, 1.05vw, 1.08rem);
+  line-height: 1.7;
+  list-style: none;
+}
+
+.topicList li {
+  position: relative;
+  padding-left: 34px;
+}
+
+.topicList li::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: var(--color-text);
+  content: "—";
+}
+
+@media (max-width: 900px) {
+  .guidanceInner {
+    grid-template-columns: 1fr;
+    gap: 34px;
+  }
+
+  .guidanceBlock + .guidanceBlock {
+    border-top: 1px solid rgba(31, 26, 20, 0.18);
+    border-left: 0;
+    padding-top: 34px;
+    padding-left: 0;
+  }
+}
+
 @media (max-width: 760px) {
   .hero {
     min-height: 620px;
@@ -689,27 +856,30 @@
 
   .quoteWrap {
     margin-top: 28px;
+    padding-top: 22px;
+    font-size: clamp(1.1rem, 5.6vw, 1.35rem);
     transform: none;
   }
 
   .quoteText {
-    font-size: clamp(22px, 6.2vw, 24px);
+    font-size: inherit;
   }
 
   .quoteAuthor {
-    font-size: clamp(20px, 5.6vw, 24px);
+    font-size: 0.72rem;
     transform: none;
   }
 
   .quoteSource {
-    font-size: clamp(17px, 4.8vw, 20px);
+    font-size: 0.68rem;
   }
 
   .inner,
+  .guidanceInner,
   .messageInner,
   .cooperationInner,
   .newsletterInner {
-    width: min(100% - 40px, var(--container));
+    width: min(100% - 40px, var(--container-wide, var(--container)));
   }
 
   .messageInner,

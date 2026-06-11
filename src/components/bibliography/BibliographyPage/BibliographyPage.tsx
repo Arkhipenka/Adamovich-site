@@ -1,29 +1,35 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 
 import { WorksCatalog } from "@/components/WorksCatalog";
+import { assetPath } from "@/config/site";
 import type { Work } from "@/data/works";
 import type { Locale } from "@/types/common.types";
 
 import styles from "./BibliographyPage.module.css";
 
+const heroCollageImage = assetPath(
+  "/assets/images/bibliography/bibliography-hero-collage.png",
+);
+
 const bibliographyPageContent = {
-  ru: {
-    eyebrow: "Библиография",
-    title: "Творческое наследие Алеся Адамовича",
-    description:
-      "Книги, фильмы, сценарии, публицистика, интервью и архивные материалы, связанные с жизнью и работой Алеся Адамовича.",
-  },
   be: {
     eyebrow: "Бібліяграфія",
-    title: "Творчая спадчына Алеся Адамовіча",
+    title: "Спадчына Адамовіча",
     description:
-      "Кнігі, фільмы, сцэнары, публіцыстыка, інтэрв'ю і архіўныя матэрыялы, звязаныя з жыццём і працай Алеся Адамовіча.",
+      "Кнігі, фільмы, сцэнары, публіцыстыка, інтэрв’ю і архіўныя матэрыялы, звязаныя з жыццём і працай Алеся Адамовіча.",
   },
   en: {
     eyebrow: "Bibliography",
-    title: "Creative Legacy of Ales Adamovich",
+    title: "Legacy of Adamovich",
     description:
       "Books, films, screenplays, essays, interviews and archival materials connected with the life and work of Ales Adamovich.",
+  },
+  ru: {
+    eyebrow: "Библиография",
+    title: "Наследие Адамовича",
+    description:
+      "Книги, фильмы, сценарии, публицистика, интервью и архивные материалы, связанные с жизнью и работой Алеся Адамовича.",
   },
 } satisfies Record<
   Locale,
@@ -62,12 +68,28 @@ export function BibliographyPage({ locale, works }: BibliographyPageProps) {
   return (
     <main className={styles.page}>
       <div className={styles.inner}>
-        <section className={styles.hero} aria-labelledby="bibliography-title">
-          <p className={styles.eyebrow}>{copy.eyebrow}</p>
-          <h1 className={styles.title} id="bibliography-title">
-            {copy.title}
-          </h1>
-          <p className={styles.description}>{copy.description}</p>
+        <section
+          className={styles.bibliographyHero}
+          aria-labelledby="bibliography-title"
+        >
+          <div className={styles.heroVisual} aria-hidden="true">
+            <Image
+              alt=""
+              className={styles.heroImage}
+              fill
+              priority
+              sizes="100vw"
+              src={heroCollageImage}
+            />
+          </div>
+
+          <div className={styles.heroContent}>
+            <p className={styles.heroEyebrow}>{copy.eyebrow}</p>
+            <h1 className={styles.heroTitle} id="bibliography-title">
+              {copy.title}
+            </h1>
+            <p className={styles.heroLead}>{copy.description}</p>
+          </div>
         </section>
 
         <WorksCatalog locale={locale} works={works} />

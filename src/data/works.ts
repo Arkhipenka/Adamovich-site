@@ -1,6 +1,7 @@
 export type WorkType =
   | "book"
   | "story"
+  | "novel"
   | "novella"
   | "film"
   | "script"
@@ -9,6 +10,7 @@ export type WorkType =
   | "interview"
   | "archive"
   | "research"
+  | "documentary-prose"
   | "documentary_prose";
 
 export type WorkStatus = "published" | "draft" | "in-progress";
@@ -39,6 +41,61 @@ export type ExternalLink = {
   url: string;
 };
 
+export type MaybeLocalizedText = LocalizedText | string;
+
+export type WorkMaterial = {
+  id: string;
+  type: "photo" | "document" | "video" | "audio" | "article" | "archive";
+  title: MaybeLocalizedText;
+  description?: MaybeLocalizedText;
+  image?: string;
+  href?: string;
+  source?: string;
+  year?: string;
+};
+
+export type WorkReview = {
+  id: string;
+  quote?: MaybeLocalizedText;
+  title?: MaybeLocalizedText;
+  author?: string;
+  source?: string;
+  year?: string;
+  href?: string;
+};
+
+export type WorkQuote = {
+  id: string;
+  text: MaybeLocalizedText;
+  sourceNote?: MaybeLocalizedText;
+};
+
+export type WorkLink = {
+  label: MaybeLocalizedText;
+  href: string;
+};
+
+export type WorkAnnotation = {
+  short: MaybeLocalizedText;
+  full?: MaybeLocalizedText[];
+};
+
+export type WorkCreationHistory = {
+  title: MaybeLocalizedText;
+  text: MaybeLocalizedText[];
+  dates?: string[];
+  places?: string[];
+  people?: string[];
+  image?: string;
+  imageAlt?: MaybeLocalizedText;
+};
+
+export type WorkContext = {
+  title: MaybeLocalizedText;
+  text: MaybeLocalizedText[];
+  relatedThemeIds?: string[];
+};
+
 export type WorkEdition = {
   id?: string;
   year?: number;
@@ -51,6 +108,7 @@ export type WorkEdition = {
   cover?: string;
   coverImage?: string;
   notes?: string;
+  link?: string;
 };
 
 export type WorkTranslation = {
@@ -92,14 +150,21 @@ export type WorkAward = {
 };
 
 export type WorkResearch = {
+  id?: string;
   title: string;
   author?: string;
   year?: number;
   type?: "article" | "book" | "thesis" | "conference" | "review";
   language?: string;
   link?: string;
+  href?: string;
+  publication?: string;
   description?: string;
 };
+
+export type WorkResearchItem = WorkResearch;
+
+export type WorkPageData = Work;
 
 export type WorkMention = {
   title: string;
@@ -147,10 +212,14 @@ export type Work = {
   editors?: string[];
   translators?: string[];
   role?: LocalizedText;
+  genre?: MaybeLocalizedText;
   descriptionShort: LocalizedText;
   shortDescription?: LocalizedText;
   descriptionFull?: LocalizedText;
   longDescription?: Partial<LocalizedText>;
+  annotation?: WorkAnnotation;
+  creationHistory?: WorkCreationHistory;
+  context?: WorkContext;
   cover?: string;
   coverImage?: string;
   coverAlt?: LocalizedText;
@@ -181,6 +250,10 @@ export type Work = {
   ratings?: WorkRating[];
   awards?: WorkAward[];
   research?: WorkResearch[];
+  materials?: WorkMaterial[];
+  reviews?: WorkReview[];
+  quotes?: WorkQuote[];
+  pageLinks?: WorkLink[];
   mentions?: WorkMention[];
   relatedWorks?: string[];
   relatedMaterials?: RelatedMaterial[];

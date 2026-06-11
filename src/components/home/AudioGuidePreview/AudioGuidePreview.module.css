@@ -72,6 +72,8 @@ display: inline-flex;
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
+  background:  linear-gradient(180deg, rgba(255, 255, 255, 0.42), rgba(255, 255, 255, 0.08)),
+    rgba(250, 244, 232, 0.9);
   transition:
     border-color 180ms ease,
     background-color 180ms ease,
@@ -85,16 +87,11 @@ display: inline-flex;
 
 .buttonSecondary:hover,
 .buttonPrimary:hover {
-  color: var(--color-accent);
-  border-color: var(--color-accent);
-  background: rgba(154, 104, 38, 0.08);
-}
-
-.buttonPrimary:hover,
-.buttonSecondary:hover {
   color: var(--color-bg);
+  border-color: var(--color-accent);
   background: var(--color-accent);
 }
+
 .cardsGrid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
