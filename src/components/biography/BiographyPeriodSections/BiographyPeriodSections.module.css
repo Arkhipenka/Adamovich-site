@@ -1,253 +1,266 @@
 .periodSections {
-  display: grid;
-  width: min(100% - var(--page-gutter) * 2, var(--container-wide, var(--container)));
-  margin-inline: auto;
-  color: var(--color-paper-text, #1c1712);
+  background: var(--color-paper-bg, #f3eadc);
+  color: var(--color-paper-text, #1a1512);
 }
 
 .periodSection {
+  scroll-margin-top: 170px;
+  border-top: 1px solid rgba(76, 53, 30, 0.12);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 248, 236, 0.52),
+    rgba(243, 234, 220, 0.94)
+  );
+}
+
+.periodSection:nth-child(even) {
+  background: linear-gradient(
+    180deg,
+    rgba(238, 228, 211, 0.72),
+    rgba(246, 238, 224, 0.9)
+  );
+}
+
+.periodInner {
+  width: min(100% - 48px, 1440px);
+  margin-inline: auto;
+  padding: clamp(56px, 7vw, 96px) 0;
   display: grid;
-  grid-template-columns: minmax(280px, 0.86fr) minmax(360px, 1.12fr) minmax(280px, 0.86fr);
-  gap: clamp(28px, 4vw, 58px);
-  align-items: start;
-  padding-block: clamp(56px, 7vw, 92px);
-  border-top: 1px solid rgba(76, 53, 30, 0.1);
-  scroll-margin-top: calc(var(--header-height-scrolled, 62px) + 118px);
+  grid-template-columns: minmax(260px, 0.72fr) minmax(360px, 1.1fr) minmax(280px, 0.74fr);
+  gap: clamp(28px, 4vw, 62px);
+  align-items: center;
 }
 
-.periodIntro {
-  min-width: 0;
+.periodIntro h2 {
+  margin: 10px 0 0;
+  color: var(--color-paper-text, #1a1512);
+  font-family: var(--font-serif);
+  font-size: clamp(2.25rem, 3.6vw, 5rem);
+  line-height: 0.98;
+  letter-spacing: -0.04em;
 }
 
-.periodYear,
-.periodAside p,
-.anchorLabel,
-.eventYear {
+.periodYear {
+  margin: 0;
+  color: var(--color-paper-accent, #9a6826);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.accentLine {
+  display: block;
+  width: 58px;
+  height: 2px;
+  margin: 22px 0;
+  background: var(--color-paper-accent, #9a6826);
+}
+
+.periodLead {
+  margin: 0;
+  color: rgba(28, 23, 18, 0.74);
+  font-size: clamp(1rem, 1.1vw, 1.15rem);
+  line-height: 1.75;
+}
+
+.periodLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 32px;
   color: var(--color-paper-accent, #9a6826);
   font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.periodLink:hover,
+.periodLink:focus-visible {
+  color: #7e551b;
+  outline: none;
+}
+
+.periodMedia,
+.periodMediaPlaceholder {
+  position: relative;
+  min-height: clamp(300px, 30vw, 430px);
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid rgba(76, 53, 30, 0.16);
+  border-radius: 8px;
+  background: rgba(255, 248, 236, 0.5);
+  box-shadow: 0 18px 42px rgba(54, 39, 18, 0.08);
+}
+
+.periodImage {
+  object-fit: cover;
+  filter: grayscale(1) sepia(0.08);
+}
+
+.periodCaption {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 10px 14px;
+  background: rgba(250, 244, 232, 0.88);
+  color: rgba(28, 23, 18, 0.62);
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.periodMediaPlaceholder {
+  display: grid;
+  place-items: center;
+  color: rgba(28, 23, 18, 0.5);
+  font-size: 0.86rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.periodSide {
+  display: grid;
+  align-self: stretch;
+  align-content: center;
+  gap: 16px;
+}
+
+.periodAside {
+  position: relative;
+  min-height: 220px;
+  padding: clamp(24px, 2.2vw, 34px);
+  border: 1px solid rgba(76, 53, 30, 0.14);
+  border-radius: 8px;
+  background: rgba(255, 248, 236, 0.56);
+}
+
+.quoteMark {
+  display: block;
+  color: rgba(154, 104, 38, 0.55);
+  font-family: var(--font-serif);
+  font-size: 4rem;
+  line-height: 0.7;
+}
+
+.asideLabel,
+.asideMeta {
+  display: block;
+  color: var(--color-paper-accent, #9a6826);
+  font-size: 0.72rem;
   font-weight: 800;
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
-.periodYear {
-  margin: 0 0 14px;
-}
-
-.periodIntro h3 {
-  max-width: 520px;
-  margin: 0;
-  color: var(--color-paper-text, #1c1712);
+.periodAside h3 {
+  margin: 10px 0 0;
+  color: var(--color-paper-text, #1a1512);
   font-family: var(--font-serif);
-  font-size: clamp(2.2rem, 3.8vw, 4.8rem);
-  font-weight: 650;
-  letter-spacing: -0.04em;
-  line-height: 1;
-}
-
-.periodLead {
-  max-width: 520px;
-  margin: 28px 0 0;
-  color: var(--color-paper-text, #1c1712);
-  font-size: clamp(1rem, 1.08vw, 1.18rem);
-  font-weight: 650;
-  line-height: 1.62;
-}
-
-.periodText {
-  display: grid;
-  gap: 16px;
-  max-width: 560px;
-  margin-top: 24px;
-}
-
-.periodText p {
-  margin: 0;
-  color: var(--color-paper-muted, #5d5043);
-  line-height: 1.76;
-}
-
-.periodMedia {
-  position: relative;
-  min-width: 0;
-  aspect-ratio: 16 / 11;
-  margin: 0;
-  overflow: hidden;
-  border: 1px solid rgba(76, 53, 30, 0.18);
-  background: rgba(248, 239, 223, 0.6);
-  box-shadow: 0 22px 48px rgba(54, 39, 18, 0.1);
-}
-
-.periodImage {
-  object-fit: cover;
-  object-position: center;
-  filter: saturate(0.86) contrast(0.98);
-}
-
-.periodMedia figcaption {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  padding: 12px 16px;
-  color: rgba(248, 241, 230, 0.88);
-  font-size: 0.78rem;
-  line-height: 1.4;
-  background: linear-gradient(180deg, transparent, rgba(16, 13, 10, 0.76));
-}
-
-.periodSide {
-  display: grid;
-  gap: 18px;
-  min-width: 0;
-}
-
-.periodAside,
-.thematicAnchor {
-  padding: clamp(24px, 2.6vw, 36px);
-  border: 1px solid rgba(76, 53, 30, 0.12);
-  background:
-    radial-gradient(circle at 18% 0%, rgba(255, 255, 255, 0.38), transparent 14rem),
-    rgba(248, 239, 223, 0.64);
-  box-shadow: 0 14px 34px rgba(54, 39, 18, 0.06);
-}
-
-.periodAside p,
-.anchorLabel {
-  margin: 0 0 14px;
-}
-
-.periodAside h4,
-.thematicAnchor h4 {
-  margin: 0;
-  color: var(--color-paper-text, #1c1712);
-  font-family: var(--font-serif);
-  font-size: clamp(1.5rem, 2vw, 2.25rem);
+  font-size: clamp(1.35rem, 1.8vw, 2rem);
   line-height: 1.08;
 }
 
-.periodAside span,
-.thematicAnchor span {
-  display: block;
-  margin-top: 18px;
-  color: var(--color-paper-muted, #5d5043);
-  line-height: 1.68;
+.periodAside p {
+  margin: 18px 0 0;
+  color: var(--color-paper-text, #1a1512);
+  font-family: var(--font-serif);
+  font-size: clamp(1.1rem, 1.4vw, 1.45rem);
+  line-height: 1.45;
 }
 
-.anchorList {
-  display: grid;
-  gap: 14px;
+.asideMeta {
+  margin-top: 14px;
+  color: rgba(28, 23, 18, 0.58);
 }
 
-.thematicAnchor {
-  scroll-margin-top: calc(var(--header-height-scrolled, 62px) + 118px);
-  border-color: rgba(154, 104, 38, 0.26);
-  background:
-    linear-gradient(180deg, rgba(252, 247, 238, 0.78), rgba(244, 235, 221, 0.66));
-}
-
+.anchorList,
 .eventList {
   display: grid;
   gap: 12px;
 }
 
+.thematicAnchor,
 .eventCard {
+  display: block;
   padding: 18px 20px;
-  border: 1px solid rgba(76, 53, 30, 0.12);
-  background: rgba(248, 239, 223, 0.42);
-  transition:
-    transform 180ms ease,
-    border-color 180ms ease,
-    box-shadow 180ms ease;
+  border: 1px solid rgba(76, 53, 30, 0.14);
+  border-radius: 8px;
+  background: rgba(255, 248, 236, 0.42);
+  color: inherit;
+  text-decoration: none;
 }
 
-.eventCard:hover,
-.eventCard:focus-within {
-  border-color: rgba(154, 104, 38, 0.32);
-  box-shadow: 0 10px 24px rgba(54, 39, 18, 0.08);
-  transform: translateY(-3px);
-}
-
-.eventCardFeatured {
-  border-color: rgba(154, 104, 38, 0.36);
-  background:
-    linear-gradient(180deg, rgba(252, 247, 238, 0.78), rgba(244, 235, 221, 0.68));
-}
-
+.anchorLabel,
 .eventYear {
-  margin: 0 0 10px;
+  display: block;
+  margin: 0;
+  color: var(--color-paper-accent, #9a6826);
   font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
-.eventCard h4 {
-  margin: 0;
-  color: var(--color-paper-text, #1c1712);
+.thematicAnchor strong,
+.eventCard h3 {
+  display: block;
+  margin-top: 8px;
+  color: var(--color-paper-text, #1a1512);
   font-family: var(--font-serif);
-  font-size: 1.35rem;
-  line-height: 1.1;
+  font-size: 1.22rem;
+  line-height: 1.15;
 }
 
 .eventCard p:last-child {
-  margin: 12px 0 0;
-  color: var(--color-paper-muted, #5d5043);
+  margin: 10px 0 0;
+  color: rgba(28, 23, 18, 0.7);
   font-size: 0.94rem;
-  line-height: 1.58;
+  line-height: 1.55;
 }
 
-@media (max-width: 1180px) {
-  .periodSection {
-    grid-template-columns: minmax(260px, 0.92fr) minmax(0, 1.08fr);
+.eventCardFeatured {
+  border-color: rgba(154, 104, 38, 0.42);
+  background: rgba(255, 248, 236, 0.7);
+}
+
+@media (max-width: 1100px) {
+  .periodInner {
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
   }
 
   .periodSide {
     grid-column: 1 / -1;
-    grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .eventList {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .periodAside {
+    min-height: 0;
   }
 }
 
 @media (max-width: 760px) {
-  .periodSections {
-    width: min(100% - 32px, var(--container-wide, var(--container)));
+  .periodSection {
+    scroll-margin-top: 120px;
   }
 
-  .periodSection,
+  .periodInner {
+    width: min(100% - 32px, 1440px);
+    grid-template-columns: 1fr;
+    padding-block: 48px;
+  }
+
+  .periodMedia,
+  .periodMediaPlaceholder {
+    min-height: 260px;
+  }
+
   .periodSide {
     grid-template-columns: 1fr;
   }
 
-  .periodSection {
-    padding-block: 44px 54px;
-    scroll-margin-top: calc(var(--header-height-scrolled, 58px) + 86px);
-  }
-
-  .periodIntro h3 {
-    font-size: clamp(2.3rem, 12vw, 3.7rem);
-  }
-
-  .periodMedia {
-    aspect-ratio: 4 / 3;
-  }
-
-  .thematicAnchor {
-    scroll-margin-top: calc(var(--header-height-scrolled, 58px) + 86px);
-  }
-
-  .eventList {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .eventCard {
-    transition: none;
-  }
-
-  .eventCard:hover,
-  .eventCard:focus-within {
-    transform: none;
+  .periodIntro h2 {
+    font-size: clamp(2.2rem, 12vw, 3.8rem);
   }
 }

@@ -24,6 +24,7 @@ const typeLabels = {
   ru: {
     book: "Книга",
     story: "Рассказ",
+    novel: "Роман",
     novella: "Повесть",
     film: "Фильм",
     script: "Сценарий",
@@ -32,11 +33,13 @@ const typeLabels = {
     interview: "Интервью",
     archive: "Архив",
     research: "Исследование",
+    "documentary-prose": "Документальная проза",
     documentary_prose: "Документальная проза",
   },
   be: {
     book: "Кніга",
     story: "Апавяданне",
+    novel: "Раман",
     novella: "Аповесць",
     film: "Фільм",
     script: "Сцэнар",
@@ -45,11 +48,13 @@ const typeLabels = {
     interview: "Інтэрв'ю",
     archive: "Архіў",
     research: "Даследаванне",
+    "documentary-prose": "Дакументальная проза",
     documentary_prose: "Дакументальная проза",
   },
   en: {
     book: "Book",
     story: "Story",
+    novel: "Novel",
     novella: "Novella",
     film: "Film",
     script: "Script",
@@ -58,6 +63,7 @@ const typeLabels = {
     interview: "Interview",
     archive: "Archive",
     research: "Research",
+    "documentary-prose": "Documentary prose",
     documentary_prose: "Documentary prose",
   },
 } satisfies Record<Locale, Record<WorkType, string>>;
