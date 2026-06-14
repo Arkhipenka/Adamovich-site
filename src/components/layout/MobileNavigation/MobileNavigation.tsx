@@ -13,6 +13,7 @@ import {
 } from "@/config/site";
 import type { Dictionary } from "@/i18n/dictionaries";
 import { getLocalizedText } from "@/lib/getLocalizedText";
+import { rememberLocaleSwitchScrollPosition } from "@/lib/localeSwitchScroll";
 
 type MobileNavigationLink = {
   segment: RouteSegment;
@@ -48,6 +49,14 @@ export function MobileNavigation({
   open,
   pathname,
 }: MobileNavigationProps) {
+  const handleLocaleNavigate = (nextLocale: Locale) => {
+    if (nextLocale !== locale) {
+      rememberLocaleSwitchScrollPosition();
+    }
+
+    onNavigate();
+  };
+
   return (
     <div
 className={[
@@ -84,7 +93,8 @@ className={[
               aria-current={item.locale === locale ? "page" : undefined}
               href={getLocaleHref(pathname, locale, item.locale)}
               key={item.locale}
-              onClick={onNavigate}
+              onClick={() => handleLocaleNavigate(item.locale)}
+              scroll={false}
             >
               {item.label}
             </Link>

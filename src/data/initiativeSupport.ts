@@ -79,11 +79,11 @@ export type InitiativeSupportCopy = {
 export const initiativeSupportCopy = {
   be: {
     peopleEyebrow: "Людзі ініцыятывы",
-    teamTitle: "Каманда сёння",
+    teamTitle: "Людзі ініцыатывы",
     teamText:
-      "Ініцыятыву «Прыпынак Адамовіча» сёння развіваюць людзі, якія працягваюць працу над новымі праектамі і захаваннем спадчыны.",
+      "Ініцыятыву «Прыпынак Адамовіча» сёння развіваюць і падтрымліваюць людзі, якія працягваюць працу над новымі праектамі і захаваннем спадчыны.",
     collectiveNote:
-      "У розныя гады да ініцыятывы далучаліся дзясяткі людзей: ад аўтараў і даследчыкаў да валанцёраў і памочнікаў на месцах. Дзякуем кожнаму, хто быў з намі на гэтым шляху.",
+      "У розныя гады да ініцыятывы далучаліся розныя людзі. Дзякуем кожнаму, хто быў з намі на гэтым шляху.",
     featuredEyebrow: "Асобны ўклад",
     previousContribution: "Папярэдні ўклад",
     nextContribution: "Наступны ўклад",
@@ -277,6 +277,12 @@ export const initiativeTeam: InitiativeTeamMember[] = [
       be: "Каардынуе развіццё ініцыятывы, працу з партнёрамі, лічбавую платформу і падрыхтоўку новых этапаў праекта.",
       ru: "Координирует развитие инициативы, работу с партнёрами, цифровую платформу и подготовку новых этапов проекта.",
       en: "Coordinates the initiative, partner work, the digital platform and preparation of the project's next stages.",
+    },
+    image: "/assets/images/initiative/people/andrus-arkhipenka.jpg",
+    imageAlt: {
+      be: "Андрусь Архіпенка",
+      ru: "Андрусь Архипенко",
+      en: "Andrus Arkhipenka",
     },
     order: 1,
   },

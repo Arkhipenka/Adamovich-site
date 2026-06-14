@@ -16,10 +16,10 @@
   margin: 0 0 clamp(20px, 2.6vw, 34px);
   color: var(--color-paper-text);
   font-family: var(--font-serif);
-  font-size: clamp(2.35rem, 4vw, 4.4rem);
-  font-weight: 500;
-  letter-spacing: -0.035em;
-  line-height: 0.98;
+  font-size: clamp(2rem, 2.55vw, 3.05rem);
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 1.04;
 }
 
 .grid {
@@ -31,10 +31,12 @@
 
 .imageFrame {
   position: relative;
-  min-height: 100%;
+  width: 100%;
+  min-width: 0;
+  height: 100%;
+  min-height: 0;
   margin: 0;
   overflow: hidden;
-  aspect-ratio: 800 / 493;
   border: 1px solid rgba(76, 53, 30, 0.18);
   background: rgba(248, 239, 223, 0.74);
   box-shadow: 0 18px 42px rgba(76, 53, 30, 0.08);
@@ -49,10 +51,9 @@
   display: grid;
   align-content: start;
   gap: clamp(14px, 2vw, 22px);
-  padding-block: clamp(4px, 1vw, 10px);
   color: var(--color-paper-muted);
-  font-size: clamp(0.98rem, 1vw, 1.08rem);
-  line-height: 1.72;
+  font-size: clamp(0.92rem, 1vw, 1rem);
+  line-height: 1.68;
 }
 
 .copyColumn + .copyColumn {
@@ -66,11 +67,16 @@
 
 @media (max-width: 1100px) {
   .grid {
-    grid-template-columns: minmax(280px, 0.9fr) minmax(0, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .imageFrame {
-    grid-row: span 2;
+    grid-column: 1 / -1;
+    justify-self: start;
+    width: min(100%, 880px);
+    height: auto;
+    min-height: auto;
+    aspect-ratio: 16 / 7;
   }
 
   .copyColumn + .copyColumn {
@@ -94,13 +100,16 @@
   }
 
   .imageFrame {
+    grid-column: auto;
     grid-row: auto;
+    width: 100%;
     min-height: auto;
+    aspect-ratio: 16 / 9;
   }
 
   .copyColumn {
     gap: 14px;
     padding-block: 0;
-    font-size: 1rem;
+    font-size: clamp(0.92rem, 1vw, 1rem);
   }
 }

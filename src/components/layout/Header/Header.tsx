@@ -20,6 +20,10 @@ import {
 } from "@/config/site";
 import type { Dictionary } from "@/i18n/dictionaries";
 import { getLocalizedText } from "@/lib/getLocalizedText";
+import {
+  rememberLocaleSwitchScrollPosition,
+  restoreLocaleSwitchScrollPosition,
+} from "@/lib/localeSwitchScroll";
 
 type HeaderProps = {
   locale: Locale;
@@ -122,6 +126,10 @@ export function Header({ locale, dictionary }: HeaderProps) {
     () => getHeaderNavigationLinks(locale),
     [locale],
   );
+
+  useEffect(() => {
+    restoreLocaleSwitchScrollPosition();
+  }, [pathname]);
 
   useEffect(() => {
     menuOpenRef.current = menuOpen;
@@ -273,6 +281,12 @@ export function Header({ locale, dictionary }: HeaderProps) {
                 aria-current={item.locale === locale ? "page" : undefined}
                 href={getLocaleHref(pathname, locale, item.locale)}
                 key={item.locale}
+                onClick={() => {
+                  if (item.locale !== locale) {
+                    rememberLocaleSwitchScrollPosition();
+                  }
+                }}
+                scroll={false}
               >
                 {item.label}
               </Link>

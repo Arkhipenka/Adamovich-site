@@ -16,9 +16,9 @@
 .eyebrow {
   margin: 0 0 12px;
   color: var(--color-paper-accent);
-  font-size: 0.8rem;
-  font-weight: 800;
-  letter-spacing: 0.16em;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
@@ -26,10 +26,10 @@
   margin: 0;
   color: var(--color-paper-text);
   font-family: var(--font-serif);
-  font-size: clamp(3.8rem, 7vw, 8rem);
+  font-size: clamp(2rem, 2.55vw, 3.05rem);
   font-weight: 600;
-  letter-spacing: -0.045em;
-  line-height: 0.92;
+  letter-spacing: 0;
+  line-height: 1.04;
 }
 
 .timelineRows {
@@ -158,8 +158,8 @@
 .year {
   display: inline-block;
   color: var(--color-paper-accent);
-  font-size: 0.84rem;
-  font-weight: 800;
+  font-size: 0.7rem;
+  font-weight: 700;
   letter-spacing: 0.12em;
   line-height: 1.2;
 }
@@ -168,10 +168,11 @@
   margin: 0;
   color: var(--color-paper-text);
   font-family: var(--font-sans);
-  font-size: clamp(1.05rem, 1.05vw, 1.28rem);
-  font-weight: 800;
-  letter-spacing: -0.015em;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
   line-height: 1.18;
+  text-transform: uppercase;
 }
 
 .cardImage {
@@ -208,8 +209,8 @@
   width: fit-content;
   margin-top: 4px;
   color: var(--color-paper-accent);
-  font-size: 0.76rem;
-  font-weight: 800;
+  font-size: 0.7rem;
+  font-weight: 700;
   letter-spacing: 0.1em;
   text-decoration: none;
   text-transform: uppercase;
@@ -300,11 +301,11 @@
   }
 
   .cardTitle {
-    font-size: 1.2rem;
+    font-size: 0.78rem;
   }
 
   .description {
-    font-size: 1rem;
+    font-size: clamp(0.92rem, 1vw, 1rem);
   }
 }
 

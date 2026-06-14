@@ -31,9 +31,9 @@
 .eyebrow {
   margin: 0 0 14px;
   color: var(--color-paper-accent);
-  font-size: 0.84rem;
-  font-weight: 800;
-  letter-spacing: 0.14em;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
@@ -41,17 +41,17 @@
   margin: 0;
   color: var(--color-paper-text);
   font-family: var(--font-serif);
-  font-size: clamp(2.75rem, 5vw, 5.5rem);
+  font-size: clamp(2rem, 2.55vw, 3.05rem);
   font-weight: 600;
-  letter-spacing: -0.045em;
-  line-height: 0.96;
+  letter-spacing: 0;
+  line-height: 1.04;
 }
 
 .lead {
   max-width: 760px;
   margin: clamp(18px, 2.5vw, 28px) 0 0;
   color: var(--color-paper-muted);
-  font-size: clamp(1rem, 1.08vw, 1.16rem);
+  font-size: clamp(0.92rem, 1vw, 1rem);
   line-height: 1.72;
 }
 
@@ -121,7 +121,7 @@
 
 .year {
   color: var(--color-paper-accent);
-  font-size: 0.82rem;
+  font-size: 0.72rem;
   font-weight: 800;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -131,16 +131,16 @@
   margin: 12px 0 0;
   color: var(--color-paper-text);
   font-family: var(--font-serif);
-  font-size: clamp(1.65rem, 2.2vw, 2.55rem);
+  font-size: clamp(1.25rem, 1.6vw, 1.65rem);
   font-weight: 600;
-  letter-spacing: -0.03em;
-  line-height: 1.02;
+  letter-spacing: 0;
+  line-height: 1.08;
 }
 
 .description {
   margin: 18px 0 0;
   color: var(--color-paper-muted);
-  font-size: 0.98rem;
+  font-size: clamp(0.92rem, 1vw, 1rem);
   line-height: 1.65;
 }
 
@@ -152,8 +152,8 @@
   margin-top: auto;
   padding-top: 24px;
   color: var(--color-paper-accent);
-  font-size: 0.82rem;
-  font-weight: 800;
+  font-size: 0.7rem;
+  font-weight: 700;
   letter-spacing: 0.1em;
   text-decoration: none;
   text-transform: uppercase;

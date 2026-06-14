@@ -125,9 +125,9 @@ export const homePageContent: HomePageContent = {
         en: "Bibliography",
       },
       title: {
-        be: "Сведчанні, што сталі літаратурай.",
-        ru: "Свидетельства, ставшие литературой.",
-        en: "Testimonies that became literature.",
+        be: "Спадчына Адамовіча",
+        ru: "Наследие Адамовича",
+        en: "Legacy Adamovich",
       },
       subtitle: {
         be: "Кнігі, дакументальная проза, публіцыстыка, фільмы звязанныя з Алесем Адамовічам.",
@@ -286,9 +286,9 @@ export const homePageContent: HomePageContent = {
       en: " Adamovich’s paths through Glusha",
     },
     description: {
-      be: "Аўдыягід па мясцінах, звязаных з жыццём, творчасцю Алеся Адамовіча y фармаце жывога маршруту.",
-      ru: "Аудиогид по местам, связанным с жизнью, творчеством Алеся Адамовича в формате живого маршрута.",
-      en: "An audio guide to places connected with the life, work Ales Adamovich in the format of a live route.",
+      be: "Аўдыягід вядзе па мясцінах Глушы, звязаных з жыццём, сям’ёй, творчасцю і памяццю Алеся Адамовіча. Маршрут адкрывае прастору, дзе асабістая гісторыя пісьменніка сустракаецца з гісторыяй Беларусі. Гэта жывы спосаб даведацца пра Адамовіча праз месца, якое сфармавала ягоны досвед.",
+      ru: "Аудиогид ведёт по местам Глуши, связанным с жизнью, семьёй, творчеством и памятью Алеся Адамовича. Маршрут открывает пространство, где личная история писателя встречается с историей Беларуси. Это живой способ узнать Адамовича через место, которое сформировало его опыт.",
+      en: "The audio guide leads through the places of Hluša connected with the life, family, work, and memory of Ales Adamovich. The route opens a space where the writer’s personal story meets the history of Belarus. It is a living way to discover Adamovich through the place that shaped his experience.",
     },
     telegramLabel: {
       be: "Telegram",

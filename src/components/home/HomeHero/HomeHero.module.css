@@ -96,9 +96,9 @@
 
   width: min(100% - var(--page-gutter) * 2, var(--container-wide, var(--container)));
   min-height: 100vh;
-  min-height: max(820px, 100svh);
+  min-height: 100vh;
   margin-inline: auto;
-  padding-top: calc(var(--header-height) + clamp(24px, 4vw, 48px));
+  padding-top: calc(var(--header-height));
   padding-bottom: clamp(52px, 6vh, 90px);
 }
 
@@ -140,7 +140,7 @@
   font-size: clamp(0.82rem, 1.1vw, 0.98rem);
   font-weight: 700;
   letter-spacing: 0.14em;
-  line-height: 1.55;
+  line-height: 1.78;
   text-transform: uppercase;
 }
 

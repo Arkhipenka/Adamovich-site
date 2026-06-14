@@ -43,9 +43,9 @@
 .title {
   color: var(--color-text);
   font-family: var(--font-serif);
-  font-size: clamp(2rem, 3.2vw, 3.8rem);
+  font-size: clamp(2rem, 2.55vw, 3.05rem);
   font-weight: 600;
-  line-height: 1.05;
+  line-height: 1.04;
   letter-spacing: 0;
 }
 

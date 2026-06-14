@@ -86,7 +86,7 @@
   gap: 10px;
   width: fit-content;
   color: var(--color-accent);
-  font-size: 0.76rem;
+  font-size: 0.68rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-decoration: none;
@@ -107,9 +107,9 @@
   margin-top: clamp(36px, 5vw, 66px);
   color: var(--color-text);
   font-family: var(--font-serif);
-  font-size: clamp(4rem, 6.8vw, 7.8rem);
+  font-size: clamp(4.25rem, 5.8vw, 8.25rem);
   font-weight: 600;
-  line-height: 0.95;
+  line-height: 0.94;
   letter-spacing: 0;
 }
 
@@ -117,7 +117,7 @@
   max-width: 540px;
   margin-top: 24px;
   color: var(--color-muted);
-  font-size: clamp(1rem, 1.15vw, 1.12rem);
+  font-size: clamp(0.82rem, 1.1vw, 0.98rem);
   line-height: 1.78;
 }
 
@@ -194,16 +194,16 @@
   margin: 0;
   color: var(--color-text);
   font-family: var(--font-serif);
-  font-size: clamp(2.25rem, 3.5vw, 4rem);
+  font-size: clamp(2rem, 2.55vw, 3.05rem);
   font-weight: 600;
   letter-spacing: 0;
-  line-height: 1.06;
+  line-height: 1.04;
 }
 
 .eyebrow {
   margin: 0 0 18px;
   color: var(--color-accent);
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -213,9 +213,9 @@
   margin: 0;
   color: var(--color-text);
   font-family: var(--font-serif);
-  font-size: clamp(2.1rem, 3.4vw, 4.1rem);
+  font-size: clamp(2rem, 2.55vw, 3.05rem);
   font-weight: 600;
-  line-height: 1.05;
+  line-height: 1.04;
   letter-spacing: 0;
 }
 
@@ -223,8 +223,8 @@
   max-width: 620px;
   margin: 22px 0 0;
   color: var(--color-muted);
-  font-size: clamp(0.96rem, 1.05vw, 1.04rem);
-  line-height: 1.75;
+  font-size: clamp(0.92rem, 1vw, 1rem);
+  line-height: 1.68;
 }
 
 .contactCards {
@@ -700,7 +700,7 @@
   margin: 0;
   color: var(--color-text);
   font-family: var(--font-serif);
-  font-size: clamp(2rem, 3vw, 3.4rem);
+  font-size: clamp(2rem, 2.55vw, 3.05rem);
   font-weight: 600;
   line-height: 1.05;
 }
@@ -770,6 +770,7 @@
   width: min(100% - var(--page-gutter) * 2, var(--container-wide, var(--container)));
   margin-inline: auto;
   padding-block: clamp(54px, 7vw, 92px);
+  padding-bottom: clamp(120px, 12vw, 180px);
 }
 
 .guidanceBlock {
@@ -785,7 +786,7 @@
   margin: 0;
   color: var(--color-text);
   font-family: var(--font-serif);
-  font-size: clamp(2rem, 3vw, 3.3rem);
+  font-size: clamp(2rem, 2.55vw, 3.05rem);
   font-weight: 600;
   line-height: 1.08;
   letter-spacing: 0;
@@ -795,8 +796,8 @@
 .partnershipText p {
   margin: 24px 0 0;
   color: var(--color-text);
-  font-size: clamp(1rem, 1.05vw, 1.08rem);
-  line-height: 1.8;
+  font-size: clamp(0.92rem, 1vw, 1rem);
+  line-height: 1.68;
 }
 
 .topicList {
@@ -805,8 +806,8 @@
   margin: 24px 0 0;
   padding: 0;
   color: var(--color-text);
-  font-size: clamp(1rem, 1.05vw, 1.08rem);
-  line-height: 1.7;
+  font-size: clamp(0.92rem, 1vw, 1rem);
+  line-height: 1.68;
   list-style: none;
 }
 
@@ -851,7 +852,8 @@
   }
 
   .heroTitle {
-    font-size: clamp(3.3rem, 15vw, 5rem);
+    font-size: clamp(2.625rem, 12vw, 3.625rem);
+    line-height: 0.96;
   }
 
   .quoteWrap {

@@ -29,6 +29,12 @@ type InitiativeSupportProps = {
   locale: Locale;
 };
 
+const teamSectionLabels = {
+  be: "Асноўная каманда",
+  ru: "Основная команда",
+  en: "Core team",
+} satisfies Record<Locale, string>;
+
 function localize(text: RequiredLocalizedText | undefined, locale: Locale) {
   return text ? getLocalizedText(text, locale) : "";
 }
@@ -192,7 +198,7 @@ function TeamCard({
   const name = localize(member.name, locale);
 
   return (
-    <article className={styles.teamCard}>
+    <article className={styles.teamCard} tabIndex={0}>
       <div className={styles.teamPhoto}>
         {member.image && !failed ? (
           <Image
@@ -209,9 +215,13 @@ function TeamCard({
         )}
       </div>
       <div className={styles.teamBody}>
-        <h4>{name}</h4>
-        <p className={styles.role}>{localize(member.role, locale)}</p>
-        <p>{localize(member.contribution, locale)}</p>
+        <div className={styles.teamDefaultInfo}>
+          <h4>{name}</h4>
+          <p className={styles.role}>{localize(member.role, locale)}</p>
+        </div>
+        <div className={styles.teamRevealInfo}>
+          <p>{localize(member.contribution, locale)}</p>
+        </div>
       </div>
     </article>
   );
@@ -478,89 +488,94 @@ export function InitiativeSupport({ locale }: InitiativeSupportProps) {
     <section className={styles.section} aria-labelledby="initiative-support-title">
       <div className={styles.inner}>
         <div className={styles.peopleLayout}>
-          <div className={styles.teamArea}>
+          <div className={styles.peopleHeader}>
             <p className={styles.eyebrow}>{labels.peopleEyebrow}</p>
             <h2 id="initiative-support-title" className={styles.title}>
               {labels.teamTitle}
             </h2>
             <p className={styles.intro}>{labels.teamText}</p>
+          </div>
 
+          <div className={styles.teamArea}>
+            <p className={styles.sectionLabel}>{teamSectionLabels[locale]}</p>
             <div className={styles.teamGrid}>
               {team.map((member) => (
                 <TeamCard key={member.id} locale={locale} member={member} />
               ))}
             </div>
-
-            <article className={styles.collectiveNote}>
-              <span className={styles.noteIcon} aria-hidden="true">
-                ◎
-              </span>
-              <p>{labels.collectiveNote}</p>
-            </article>
           </div>
 
           {activeContribution ? (
-            <article
-              className={styles.featuredSlider}
-              aria-label={labels.featuredEyebrow}
-            >
-              <div className={styles.featuredSlide}>
-                <div className={styles.featuredContent}>
-                  <p className={styles.cardEyebrow}>{labels.featuredEyebrow}</p>
-                  <h3>{localize(activeContribution.name, locale)}</h3>
-                  <p className={styles.role}>
-                    {localize(activeContribution.role, locale)}
-                  </p>
-                  <span className={styles.goldRule} aria-hidden="true" />
-                  <p>{localize(activeContribution.contribution, locale)}</p>
-                </div>
-                <div className={styles.featuredImageFrame}>
-                  <ImageOrFallback
-                    className={styles.featuredImage}
-                    entry={activeContribution}
-                    locale={locale}
-                  />
-                </div>
-              </div>
-
-              <div className={styles.sliderControls}>
-                <button
-                  aria-label={labels.previousContribution}
-                  className={styles.sliderButton}
-                  onClick={() => showContribution(activeContributionIndex - 1)}
-                  type="button"
-                >
-                  ‹
-                </button>
-                <div className={styles.sliderStatus}>
-                  <span>{padCounter(activeContributionIndex + 1)}</span>
-                  <span aria-hidden="true">/</span>
-                  <span>{padCounter(individualContributions.length)}</span>
-                </div>
-                <div className={styles.sliderDots} aria-hidden="true">
-                  {individualContributions.map((entry, index) => (
-                    <span
-                      className={[
-                        styles.sliderDot,
-                        index === activeContributionIndex
-                          ? styles.sliderDotActive
-                          : "",
-                      ].join(" ")}
-                      key={entry.id}
+            <div className={styles.featuredArea}>
+              <p className={styles.sectionLabel}>{labels.featuredEyebrow}</p>
+              <article
+                className={styles.featuredSlider}
+                aria-label={labels.featuredEyebrow}
+              >
+                <div className={styles.featuredSlide}>
+                  <div className={styles.featuredContent}>
+                    <h3>{localize(activeContribution.name, locale)}</h3>
+                    <p className={styles.role}>
+                      {localize(activeContribution.role, locale)}
+                    </p>
+                    <span className={styles.goldRule} aria-hidden="true" />
+                    <p>{localize(activeContribution.contribution, locale)}</p>
+                  </div>
+                  <div className={styles.featuredImageFrame}>
+                    <ImageOrFallback
+                      className={styles.featuredImage}
+                      entry={activeContribution}
+                      locale={locale}
                     />
-                  ))}
+                  </div>
                 </div>
-                <button
-                  aria-label={labels.nextContribution}
-                  className={styles.sliderButton}
-                  onClick={() => showContribution(activeContributionIndex + 1)}
-                  type="button"
-                >
-                  ›
-                </button>
-              </div>
-            </article>
+
+                <div className={styles.sliderControls}>
+                  <button
+                    aria-label={labels.previousContribution}
+                    className={styles.sliderButton}
+                    onClick={() => showContribution(activeContributionIndex - 1)}
+                    type="button"
+                  >
+                    ‹
+                  </button>
+                  <div className={styles.sliderStatus}>
+                    <span>{padCounter(activeContributionIndex + 1)}</span>
+                    <span aria-hidden="true">/</span>
+                    <span>{padCounter(individualContributions.length)}</span>
+                  </div>
+                  <div className={styles.sliderDots} aria-hidden="true">
+                    {individualContributions.map((entry, index) => (
+                      <span
+                        className={[
+                          styles.sliderDot,
+                          index === activeContributionIndex
+                            ? styles.sliderDotActive
+                            : "",
+                        ].join(" ")}
+                        key={entry.id}
+                      />
+                    ))}
+                  </div>
+                  <button
+                    aria-label={labels.nextContribution}
+                    className={styles.sliderButton}
+                    onClick={() => showContribution(activeContributionIndex + 1)}
+                    type="button"
+                  >
+                    ›
+                  </button>
+                </div>
+              </article>
+            </div>
           ) : null}
+
+          <article className={styles.collectiveNote}>
+            <span className={styles.noteIcon} aria-hidden="true">
+              ◎
+            </span>
+            <p>{labels.collectiveNote}</p>
+          </article>
         </div>
 
         <section className={styles.awards} aria-labelledby="initiative-awards-title">

@@ -122,9 +122,9 @@
 .eyebrow {
   margin: 0 0 18px;
   color: var(--audio-accent);
-  font-size: clamp(0.76rem, 0.82vw, 0.88rem);
-  font-weight: 800;
-  letter-spacing: 0.14em;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
@@ -133,15 +133,15 @@
   margin: 0;
   color: var(--audio-text);
   font-family: var(--font-serif);
-  font-weight: 650;
-  letter-spacing: -0.025em;
+  font-weight: 600;
+  letter-spacing: 0;
 }
 
 .heroTitle {
   max-width: 840px;
-  font-size: clamp(3.25rem, 8.1vw, 6.25rem);
-  line-height: 0.88;
-  letter-spacing: -0.055em;
+  font-size: clamp(4.25rem, 5.8vw, 8.25rem);
+  line-height: 0.94;
+  letter-spacing: 0;
   text-wrap: balance;
 }
 
@@ -149,14 +149,14 @@
   max-width: 720px;
   margin: clamp(28px, 3vw, 44px) 0 0;
   color: var(--audio-muted);
-  font-size: clamp(1.125rem, 1.35vw, 1.5rem);
-  line-height: 1.6;
+  font-size: clamp(1.02rem, 1.4vw, 1.26rem);
+  line-height: 1.65;
 }
 
 .hero .eyebrow {
   color: var(--color-dark-accent, #c2a36b);
-  font-size: clamp(0.82rem, 0.9vw, 0.94rem);
-  letter-spacing: 0.16em;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
   margin-bottom: clamp(22px, 2.6vw, 36px);
 }
 
@@ -272,16 +272,16 @@
 }
 
 .sectionTitle {
-  font-size: clamp(2.1rem, 3.8vw, 4.6rem);
-  line-height: 1.02;
+  font-size: clamp(2rem, 2.55vw, 3.05rem);
+  line-height: 1.04;
 }
 
 .introContent p {
   max-width: 640px;
   margin: 18px 0 0;
   color: var(--audio-muted);
-  font-size: clamp(0.98rem, 1vw, 1.1rem);
-  line-height: 1.72;
+  font-size: clamp(0.92rem, 1vw, 1rem);
+  line-height: 1.68;
 }
 
 .featureGrid {
@@ -378,8 +378,8 @@
   margin: 22px 0 0;
   max-width: 560px;
   color: var(--audio-muted);
-  font-size: clamp(1.05rem, 1.18vw, 1.2rem);
-  line-height: 1.7;
+  font-size: clamp(0.92rem, 1vw, 1rem);
+  line-height: 1.68;
 }
 
 .voiceFeature {
@@ -429,23 +429,23 @@
   margin: 0;
   color: var(--audio-text);
   font-family: var(--font-serif);
-  font-size: clamp(2.35rem, 4vw, 4.4rem);
-  line-height: 0.96;
+  font-size: clamp(1.25rem, 1.6vw, 1.65rem);
+  line-height: 1.08;
 }
 
 .voiceRole {
   margin: 12px 0 0;
   color: var(--audio-accent);
-  font-size: clamp(0.95rem, 1vw, 1.08rem);
-  font-weight: 800;
+  font-size: 0.7rem;
+  font-weight: 700;
   letter-spacing: 0.06em;
 }
 
 .voiceText {
   margin: 28px 0 0;
   color: var(--audio-text);
-  font-size: clamp(1.02rem, 1.16vw, 1.18rem);
-  line-height: 1.7;
+  font-size: clamp(0.92rem, 1vw, 1rem);
+  line-height: 1.68;
 }
 
 .audioGuideNote {
@@ -475,8 +475,8 @@
   margin: 0;
   color: var(--audio-text);
   font-family: var(--font-serif);
-  font-size: clamp(1.2rem, 1.35vw, 1.55rem);
-  line-height: 1.12;
+  font-size: clamp(1.25rem, 1.6vw, 1.65rem);
+  line-height: 1.08;
 }
 
 .usageCard p,
@@ -484,8 +484,8 @@
 .listenCard p {
   margin: 8px 0 0;
   color: var(--audio-muted);
-  font-size: 0.94rem;
-  line-height: 1.58;
+  font-size: clamp(0.92rem, 1vw, 1rem);
+  line-height: 1.68;
 }
 
 .usageGrid {
@@ -794,9 +794,9 @@
   margin: 18px 0 0;
   color: var(--audio-text);
   font-family: var(--font-serif);
-  font-size: clamp(3.8rem, 5.8vw, 6.8rem);
-  line-height: 0.95;
-  letter-spacing: -0.045em;
+  font-size: clamp(2rem, 2.55vw, 3.05rem);
+  line-height: 1.04;
+  letter-spacing: 0;
 }
 
 .partnerSupportGroup {
@@ -807,8 +807,8 @@
 .partnerLabel {
   margin: 0;
   color: var(--audio-accent);
-  font-size: clamp(0.9rem, 1vw, 1.1rem);
-  font-weight: 800;
+  font-size: 0.7rem;
+  font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
@@ -893,9 +893,9 @@
 
 .kvitName {
   color: #11100e;
-  font-size: clamp(2.05rem, 3vw, 3.2rem);
+  font-size: clamp(1.25rem, 1.6vw, 1.65rem);
   font-weight: 800;
-  letter-spacing: -0.03em;
+  letter-spacing: 0;
   line-height: 1;
 }
 
@@ -906,7 +906,7 @@
   }
 
   .heroTitle {
-    font-size: clamp(3.8rem, 8.2vw, 7.2rem);
+    font-size: clamp(4.25rem, 5.8vw, 8.25rem);
   }
 
   .heroVisual {
@@ -1006,13 +1006,13 @@
   }
 
   .heroTitle {
-    font-size: clamp(3.5rem, 18vw, 5.25rem);
-    line-height: 0.92;
+    font-size: clamp(2.625rem, 12vw, 3.625rem);
+    line-height: 0.96;
   }
 
   .heroDescription {
-    font-size: 1.06rem;
-    line-height: 1.58;
+    font-size: clamp(1.02rem, 1.4vw, 1.26rem);
+    line-height: 1.65;
   }
 
   .heroActions {
@@ -1056,7 +1056,7 @@
   }
 
   .partnersTitle {
-    font-size: clamp(2.9rem, 14vw, 4.6rem);
+    font-size: clamp(2rem, 10vw, 3.05rem);
   }
 
   .partnerLogoRow {
@@ -1077,7 +1077,7 @@
   }
 
   .kvitName {
-    font-size: clamp(1.8rem, 10vw, 2.5rem);
+    font-size: clamp(1.25rem, 1.6vw, 1.65rem);
   }
 }
 
@@ -1087,7 +1087,7 @@
   }
 
   .sectionTitle {
-    font-size: clamp(2rem, 12vw, 3.2rem);
+    font-size: clamp(2rem, 10vw, 3.05rem);
   }
 
   .introFigure {

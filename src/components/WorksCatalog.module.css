@@ -565,8 +565,8 @@
   overflow: hidden;
   color: var(--color-text);
   font-family: var(--font-serif);
-  font-size: clamp(1.45rem, 2.2vw, 2rem);
-  line-height: 1.05;
+  font-size: clamp(1.25rem, 1.6vw, 1.65rem);
+  line-height: 1.08;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
 }
@@ -753,7 +753,7 @@
   }
 
   .listTitle {
-    font-size: 1.28rem;
+    font-size: clamp(1.25rem, 1.6vw, 1.65rem);
   }
 
   .listDescription {

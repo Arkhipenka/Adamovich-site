@@ -49,7 +49,7 @@
   color: rgba(28, 23, 18, 0.7);
   cursor: pointer;
   font-family: var(--font-serif);
-  font-size: clamp(1.05rem, 1.5vw, 1.45rem);
+  font-size: clamp(1.05rem, 1.18vw, 1.2rem);
   white-space: nowrap;
   transition:
     border-color 180ms ease,
@@ -73,8 +73,8 @@
   background: rgba(255, 248, 236, 0.4);
   color: rgba(28, 23, 18, 0.72);
   cursor: pointer;
-  font-size: 0.75rem;
-  font-weight: 800;
+  font-size: 0.7rem;
+  font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   white-space: nowrap;
@@ -115,9 +115,9 @@
 .eyebrow {
   margin: 0 0 18px;
   color: var(--color-paper-accent, #9a6826);
-  font-size: 0.78rem;
-  font-weight: 800;
-  letter-spacing: 0.14em;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
@@ -125,17 +125,17 @@
   margin: 0;
   color: var(--color-paper-text, #1a1512);
   font-family: var(--font-serif);
-  font-size: clamp(2.4rem, 5vw, 5rem);
-  line-height: 0.98;
-  letter-spacing: -0.04em;
+  font-size: clamp(2rem, 2.55vw, 3.05rem);
+  line-height: 1.04;
+  letter-spacing: 0;
 }
 
 .placeholderInner p {
   max-width: 760px;
   margin: 22px 0 0;
   color: rgba(28, 23, 18, 0.74);
-  font-size: clamp(1rem, 1.3vw, 1.2rem);
-  line-height: 1.75;
+  font-size: clamp(0.92rem, 1vw, 1rem);
+  line-height: 1.68;
 }
 
 .placeholderMeta {
@@ -144,8 +144,8 @@
   padding: 8px 12px;
   border: 1px solid rgba(154, 104, 38, 0.3);
   color: var(--color-paper-accent, #9a6826);
-  font-size: 0.75rem;
-  font-weight: 800;
+  font-size: 0.7rem;
+  font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }

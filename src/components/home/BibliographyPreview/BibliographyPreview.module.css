@@ -44,9 +44,9 @@
 .title {
   color: var(--color-text);
   font-family: var(--font-serif);
-  font-size: clamp(2rem, 3.2vw, 3.8rem);
+  font-size: clamp(2rem, 2.55vw, 3.05rem);
   font-weight: 600;
-  line-height: 1.05;
+  line-height: 1.04;
   letter-spacing: 0;
 }
 
@@ -55,7 +55,7 @@
   margin-top: 18px;
   color: var(--color-muted);
   font-size: clamp(0.92rem, 1vw, 1rem);
-  line-height: 1.7;
+  line-height: 1.68;
 }
 
 .viewAll {

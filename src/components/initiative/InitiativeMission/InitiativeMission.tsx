@@ -13,30 +13,35 @@ const content = {
     title: "Як усё пачалося",
     imageAlt: "Людзі каля помніка Алесю Адамовічу ў Глушы",
     paragraphs: [
-      "Ідэя ўшанавання Алеся Адамовіча ў Глушы пачалася з размоў пра памяць, месца і адказнасць перад спадчынай пісьменніка.",
-      "Спачатку гэта была лакальная ініцыятыва: знайсці форму, якая будзе гаварыць не толькі пра мінулае, але і пра жывую прысутнасць Адамовіча ў роднай прасторы.",
-      "Паступова вакол ідэі з’явіліся людзі, партнёры і падтрымка. Так пачаўся шлях да помніка, арт-аб’екта, маршруту і далейшай працы з матэрыяламі.",
-      "Сёння гэтая гісторыя працягваецца як адкрытая культурная праца: даследаванні, аўдыягід, лічбавая платформа і будучы архіў спадчыны.",
+      "Ідэя ўшанавання Алеся Адамовіча ў Глушы нарадзілася з размоў пра тое, як адзначыць ягонае 90-годдзе і што можна зрабіць для памяці пісьменніка ў мясцінах, звязаных з ягоным жыццём.",
+      "Спачатку гэта была лакальная ініцыятыва і даволі смелая думка: усталяваць помнік пісьменіку ў родным пасёлку. Тады мала хто верыў, што ідэю помніка сапраўды ўдасца рэалізаваць.",
+      "Паступова вакол гэтай ідэі з’явіліся людзі, партнёры і падтрымка. Так пачаўся шлях да помніка ў Глушы, арт-аб’екта «Прыпынак Адамовіча».",
+      "Пасля першых рэалізаваных праектаў у працы ініцыятывы быў перапынак. Але сама ідэя не знікла.",
+      "Сёння гэтая гісторыя працягваецца ў новым фармаце.",
     ],
   },
   ru: {
     title: "Как всё началось",
     imageAlt: "Люди у памятника Алесю Адамовичу в Глуше",
     paragraphs: [
-      "Идея увековечить Алеся Адамовича в Глуше началась с разговоров о памяти, месте и ответственности перед наследием писателя.",
-      "Сначала это была локальная инициатива: найти форму, которая говорила бы не только о прошлом, но и о живом присутствии Адамовича в родном пространстве.",
-      "Постепенно вокруг идеи появились люди, партнёры и поддержка. Так начался путь к памятнику, арт-объекту, маршруту и дальнейшей работе с материалами.",
-      "Сегодня эта история продолжается как открытая культурная работа: исследования, аудиогид, цифровая платформа и будущий архив наследия.",
+      "Идея увековечивания памяти Алеся Адамовича в Глуше родилась из разговоров о том, как отметить его 90-летие и что можно сделать для памяти писателя в местах, связанных с его жизнью.",
+      "Сначала это была локальная инициатива и довольно смелая мысль: установить памятник писателю в родном посёлке. Тогда мало кто верил, что идею памятника действительно удастся реализовать.",
+      "Постепенно вокруг этой идеи появились люди, партнёры и поддержка. Так начался путь к памятнику в Глуше и арт-объекту «Прыпынак Адамовіча».",
+      "После первых реализованных проектов в работе инициативы был перерыв. Но сама идея не исчезла.",
+      "Сегодня эта история продолжается в новом формате.",
+
     ],
   },
   en: {
     title: "How it began",
     imageAlt: "People near the monument to Ales Adamovich in Glusha",
     paragraphs: [
-      "The idea to commemorate Ales Adamovich in Glusha began with conversations about memory, place and responsibility for the writer’s legacy.",
-      "At first it was a local initiative: to find a form that would speak not only about the past, but also about Adamovich’s living presence in his native landscape.",
-      "Gradually, people, partners and support gathered around the idea. This became the path toward the monument, the art object, the route and further work with materials.",
-      "Today this story continues as open cultural work: research, an audio guide, a digital platform and a future archive of the legacy.",
+      "The idea of commemorating Ales Adamovich in Hluša grew out of conversations about how to mark his 90th anniversary and what could be done to preserve the writer’s memory in the places connected with his life.",
+      "At first, it was a local initiative and a rather bold idea: to install a monument to the writer in his native village. At that time, few believed that the idea of the monument could truly be brought to life.",
+      "Gradually, people, partners, and support gathered around this idea. This is how the path began toward the monument in Hluša and the art object “Prypynak Adamoviča.”",
+      "After the first completed projects, the initiative went through a pause. But the idea itself did not disappear.",
+      "Today, this story continues in a new format.",
+
     ],
   },
 } satisfies Record<
@@ -44,7 +49,7 @@ const content = {
   {
     title: string;
     imageAlt: string;
-    paragraphs: [string, string, string, string];
+    paragraphs: [string, string, string, string, string];
   }
 >;
 
@@ -68,8 +73,8 @@ export function InitiativeMission({ locale }: InitiativeMissionProps) {
               alt={section.imageAlt}
               className={styles.image}
               fill
-              sizes="(max-width: 900px) calc(100vw - 40px), 34vw"
-              src={assetPath("/assets/images/initiative/initiative-beginning.jpg")}
+              sizes="(max-width: 760px) calc(100vw - 40px), (max-width: 1100px) calc(100vw - 80px), 34vw"
+              src={assetPath("/assets/images/initiative/initiative-beginning-optimized.jpg")}
             />
           </figure>
 
@@ -81,6 +86,7 @@ export function InitiativeMission({ locale }: InitiativeMissionProps) {
           <div className={styles.copyColumn}>
             <p>{section.paragraphs[2]}</p>
             <p>{section.paragraphs[3]}</p>
+            <p>{section.paragraphs[4]}</p>
           </div>
         </div>
       </div>

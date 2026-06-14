@@ -2,7 +2,7 @@ export const locales = ["be", "en", "ru"] as const;
 
 export type Locale = (typeof locales)[number];
 
-export const defaultLocale: Locale = "ru";
+export const defaultLocale: Locale = "be";
 
 export const localeLabels: Record<Locale, string> = {
   be: "BY",

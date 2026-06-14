@@ -25,9 +25,9 @@
 .eyebrow,
 .tag {
   color: var(--color-paper-accent, #9a6826);
-  font-size: 0.78rem;
-  font-weight: 800;
-  letter-spacing: 0.14em;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
@@ -35,18 +35,18 @@
   max-width: 720px;
   margin: 0;
   font-family: var(--font-serif);
-  font-size: clamp(2.7rem, 5vw, 6rem);
-  font-weight: 650;
-  letter-spacing: -0.045em;
-  line-height: 0.96;
+  font-size: clamp(2rem, 2.55vw, 3.05rem);
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 1.04;
 }
 
 .heading p:last-child {
   max-width: 680px;
   margin: 0;
   color: var(--color-paper-muted, #5d5043);
-  font-size: clamp(1rem, 1.08vw, 1.2rem);
-  line-height: 1.76;
+  font-size: clamp(0.92rem, 1vw, 1rem);
+  line-height: 1.68;
 }
 
 .grid {
@@ -97,10 +97,10 @@
   max-width: 420px;
   margin: 18px 0 0;
   font-family: var(--font-serif);
-  font-size: clamp(1.65rem, 2.2vw, 2.7rem);
-  font-weight: 650;
-  letter-spacing: -0.03em;
-  line-height: 1.02;
+  font-size: clamp(1.25rem, 1.6vw, 1.65rem);
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 1.08;
 }
 
 .card p {
@@ -114,7 +114,7 @@
   align-self: end;
   margin-top: 26px;
   color: var(--color-paper-accent, #9a6826);
-  font-size: 1.4rem;
+  font-size: 1.05rem;
   line-height: 1;
 }
 
