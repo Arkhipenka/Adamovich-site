@@ -256,9 +256,13 @@ export function AudioGuidePage({ locale }: AudioGuidePageProps) {
             <h2 id="creation-title" className={styles.sectionTitle}>
               {getLocalizedText(content.creation.title, locale)}
             </h2>
-            <p className={styles.creationLead}>
-              {getLocalizedText(content.creation.lead, locale)}
-            </p>
+            <div className={styles.creationLead}>
+              {content.creation.lead.map((paragraph) => (
+                <p key={getLocalizedText(paragraph, locale)}>
+                  {getLocalizedText(paragraph, locale)}
+                </p>
+              ))}
+            </div>
           </div>
 
           <article className={styles.voiceFeature}>

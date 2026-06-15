@@ -135,11 +135,11 @@ export const homePageContent: HomePageContent = {
         en: "A documentary audio journey through places connected with Adamovich’s life, books and memory.",
       },
       image: {
-        src: "/assets/images/hero/hero-books-manuscripts.png",
+        src: "/assets/images/hero/hero-bibliography-collage.webp",
         alt: {
-          be: "Цёмная аўдыявізуальная сцэна з архіўнымі матэрыяламі",
-          ru: "Тёмная аудиовизуальная сцена с архивными материалами",
-          en: "Dark audio guide scene with archival materials",
+          be: "Калаж з кнігамі, перакладамі і архіўнымі матэрыяламі Алеся Адамовіча",
+          ru: "Коллаж с книгами, переводами и архивными материалами Алеся Адамовича",
+          en: "Collage of Ales Adamovich books, translations and archival materials",
         },
       },
       imageCredit: {
@@ -190,11 +190,11 @@ export const homePageContent: HomePageContent = {
         en: "Books, documentary prose, journalism, films related to Ales Adamovich.",
       },
       image: {
-        src: "/assets/images/hero/hero-initiative-glusha.png",
+        src: "/assets/images/hero/hero-initiative-collage.webp",
         alt: {
-          be: "Кнігі і дакументальная проза Алеся Адамовіча",
-          ru: "Книги и документальная проза Алеся Адамовича",
-          en: "Books and documentary prose by Ales Adamovich",
+          be: "Калаж пра ініцыятыву «Прыпынак Адамовіча» ў Глушы",
+          ru: "Коллаж об инициативе «Прыпынак Адамовіча» в Глуше",
+          en: "Collage about the Prypynak Adamovich initiative in Glusha",
         },
       },
       imageCredit: {

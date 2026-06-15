@@ -517,7 +517,8 @@
 }
 
 .listCover {
-  object-fit: cover;
+  object-fit: contain;
+  object-position: center;
   filter: grayscale(1) contrast(1.04) brightness(0.72);
   transition:
     filter 220ms ease,

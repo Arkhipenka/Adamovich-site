@@ -1,0 +1,175 @@
+.switcher {
+  display: grid;
+  gap: 14px;
+  min-width: 0;
+}
+
+.mainCover {
+  position: relative;
+  display: grid;
+  width: 100%;
+  min-height: 320px;
+  margin: 0;
+  place-items: center;
+  overflow: hidden;
+  background:
+    linear-gradient(135deg, rgba(154, 104, 38, 0.07), transparent 42%),
+    #f7efe2;
+}
+
+.mainImage {
+  display: block;
+  width: 100%;
+  max-height: 420px;
+  object-fit: contain;
+  object-position: center;
+}
+
+.mainCaption,
+.coverCaption {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: grid;
+  color: #f9f3e9;
+  background: rgba(18, 14, 10, 0.68);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.mainCaption {
+  gap: 5px;
+  padding: 14px;
+}
+
+.mainCaption strong,
+.mainCaption span,
+.coverCaption strong,
+.coverCaption span {
+  display: block;
+  margin: 0;
+}
+
+.mainCaption strong {
+  font-size: clamp(0.92rem, 1vw, 1rem);
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.mainCaption span {
+  color: rgba(249, 243, 233, 0.78);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
+.coverRail {
+  display: flex;
+  gap: 8px;
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 10px;
+  scrollbar-color: rgba(154, 104, 38, 0.5) rgba(76, 53, 30, 0.08);
+  scrollbar-width: thin;
+}
+
+.coverRail::-webkit-scrollbar {
+  height: 8px;
+}
+
+.coverRail::-webkit-scrollbar-track {
+  background: rgba(76, 53, 30, 0.08);
+}
+
+.coverRail::-webkit-scrollbar-thumb {
+  border: 2px solid rgba(247, 239, 226, 0.85);
+  background: rgba(154, 104, 38, 0.58);
+}
+
+.coverCard {
+  position: relative;
+  display: grid;
+  flex: 0 0 clamp(72px, 28%, 94px);
+  height: clamp(108px, 12vw, 138px);
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid rgba(76, 53, 30, 0.18);
+  background:
+    linear-gradient(135deg, rgba(154, 104, 38, 0.07), transparent 42%),
+    #f7efe2;
+  box-shadow: 0 12px 30px rgba(54, 39, 18, 0.08);
+  cursor: pointer;
+  padding: 0;
+  text-align: left;
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+.coverCard:hover,
+.coverCard:focus-visible,
+.coverCardActive {
+  border-color: rgba(154, 104, 38, 0.68);
+  box-shadow:
+    inset 0 0 0 1px rgba(154, 104, 38, 0.54),
+    0 14px 30px rgba(54, 39, 18, 0.11);
+  outline: none;
+  transform: translateY(-1px);
+}
+
+.coverImage {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+.coverCaption {
+  gap: 4px;
+  padding: 8px;
+}
+
+.coverCaption strong {
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.coverCaption span {
+  color: rgba(249, 243, 233, 0.78);
+  font-size: 0.52rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
+@media (max-width: 640px) {
+  .mainCover {
+    min-height: 300px;
+  }
+
+  .coverCard {
+    flex-basis: min(28vw, 94px);
+    height: clamp(116px, 36vw, 138px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .coverCard {
+    transition-duration: 0.01ms;
+  }
+
+  .coverCard:hover,
+  .coverCard:focus-visible,
+  .coverCardActive {
+    transform: none;
+  }
+}

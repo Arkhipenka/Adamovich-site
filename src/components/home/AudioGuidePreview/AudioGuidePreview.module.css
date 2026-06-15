@@ -180,14 +180,16 @@ display: inline-flex;
   bottom: 18px;
   z-index: 2;
   display: grid;
-  width: 42px;
-  height: 42px;
+  width: 38px;
+  height: 38px;
   place-items: center;
-  border: 1px solid rgba(154, 107, 36, 0.42);
-  border-radius: 50%;
   color: #9a6b24;
-  background: rgba(250, 244, 232, 0.92);
-  box-shadow: 0 10px 24px rgba(23, 19, 15, 0.16);
+}
+
+.cardIcon svg {
+  width: 28px;
+  height: 28px;
+  stroke-width: 1.45;
 }
 
 .cardTitle {
