@@ -4,6 +4,10 @@ import {
   WorkCoverSwitcher,
   type WorkCoverSwitcherItem,
 } from "./WorkCoverSwitcher";
+import {
+  WorkDetailSections,
+  type WorkDetailSection,
+} from "./WorkDetailSections";
 import styles from "./WorkDetail.module.css";
 
 import { assetPath, type Locale } from "@/config/site";
@@ -175,6 +179,7 @@ const sectionLabels = {
   be: {
     annotation: "Анатацыя",
     history: "Гісторыя кнігі",
+    meaning: "Значэнне",
     materials: "Матэрыялы",
     quotes: "Цытаты",
     reviews: "Рэцэнзіі",
@@ -183,6 +188,7 @@ const sectionLabels = {
   en: {
     annotation: "Annotation",
     history: "Book History",
+    meaning: "Meaning",
     materials: "Materials",
     quotes: "Quotes",
     reviews: "Reviews",
@@ -191,12 +197,19 @@ const sectionLabels = {
   ru: {
     annotation: "Аннотация",
     history: "История книги",
+    meaning: "Значение",
     materials: "Материалы",
     quotes: "Цитаты",
     reviews: "Рецензии",
     sources: "Источники",
   },
 } satisfies Record<Locale, Record<string, string>>;
+
+const sectionEmptyLabels = {
+  be: "Раздзел падрыхтаваны для напаўнення.",
+  en: "This section is prepared for future content.",
+  ru: "Раздел подготовлен для наполнения.",
+} satisfies Record<Locale, string>;
 
 const workTypeLabels: Record<string, Record<Locale, string>> = {
   archive: { be: "Архіў", en: "Archive", ru: "Архив" },
@@ -399,6 +412,7 @@ export function WorkDetail({ locale, relatedWorks = [], work }: WorkDetailProps)
     ...(work.materials ?? []).map((material) => ({
       description: getMaybeText(material.description, locale),
       href: material.href,
+      id: material.id,
       title: getMaybeText(material.title, locale),
     })),
     ...(work.relatedMaterials ?? []).map((material) => ({
@@ -406,24 +420,73 @@ export function WorkDetail({ locale, relatedWorks = [], work }: WorkDetailProps)
         ? getLocalizedText(material.description, locale)
         : "",
       href: material.href ?? material.link,
+      id: material.id ?? getLocalizedText(material.title, locale),
       title: getLocalizedText(material.title, locale),
     })),
   ].filter((item) => item.title || item.description);
   const sourceItems = getSourceItems(work, locale);
-  const detailSections = [
-    annotationTexts.length ? { id: "annotation", title: sectionT.annotation } : null,
-    historyTexts.length ? { id: "history", title: sectionT.history } : null,
-    quoteItems.length ? { id: "quotes", title: sectionT.quotes } : null,
-    reviewItems.length ? { id: "reviews", title: sectionT.reviews } : null,
-    materialItems.length ? { id: "materials", title: sectionT.materials } : null,
-    sourceItems.length ? { id: "sources", title: sectionT.sources } : null,
-  ].filter((section): section is { id: string; title: string } => Boolean(section));
-  const heroClassName = [
-    styles.hero,
-    recommendedWorks.length ? "" : styles.heroNoRecommendations,
-  ]
-    .filter(Boolean)
-    .join(" ");
+  const detailSections: WorkDetailSection[] = [
+    {
+      id: "annotation",
+      paragraphs: annotationTexts,
+      title: sectionT.annotation,
+    },
+    {
+      id: "history",
+      paragraphs: historyTexts,
+      title: sectionT.history,
+    },
+    {
+      id: "meaning",
+      paragraphs: work.context?.text
+        ?.map((item) => getMaybeText(item, locale))
+        .filter(Boolean),
+      title: sectionT.meaning,
+    },
+    {
+      id: "quotes",
+      quotes: quoteItems
+        .map((quote) => ({
+          id: quote.id,
+          sourceNote: getMaybeText(quote.sourceNote, locale),
+          text: getMaybeText(quote.text, locale),
+        }))
+        .filter((quote) => quote.text),
+      title: sectionT.quotes,
+    },
+    {
+      entries: reviewItems.map((review) => ({
+        description: getMaybeText(review.quote, locale),
+        href: review.href,
+        id: review.id,
+        meta: [review.author, review.source, review.year]
+          .filter(Boolean)
+          .join(" / "),
+        title: getMaybeText(review.title, locale),
+      })),
+      id: "reviews",
+      title: sectionT.reviews,
+    },
+    {
+      entries: materialItems.map((material) => ({
+        description: material.description,
+        href: material.href,
+        id: material.id,
+        title: material.title,
+      })),
+      id: "materials",
+      title: sectionT.materials,
+    },
+    {
+      id: "sources",
+      sources: sourceItems.map((source, index) => ({
+        href: source.href,
+        id: source.title + "-" + index,
+        title: source.title || source.href || "",
+      })),
+      title: sectionT.sources,
+    },
+  ];
 
   return (
     <main className={styles.page}>
@@ -433,254 +496,95 @@ export function WorkDetail({ locale, relatedWorks = [], work }: WorkDetailProps)
           {t.back}
         </Link>
 
-        <section className={heroClassName} aria-labelledby="work-title">
-          <div className={styles.content}>
-            <p className={styles.eyebrow}>{t.pageLabel}</p>
-            <h1 className={styles.title} id="work-title">
-              {title}
-            </h1>
-
-            {work.originalTitle ? (
-              <p className={styles.originalTitle}>
-                <span>{t.originalTitle}</span>
-                {work.originalTitle}
-              </p>
-            ) : null}
-
-            <dl className={styles.meta}>
-              <div>
-                <dt>{t.type}</dt>
-                <dd>{typeLabel}</dd>
-              </div>
-
-              {year ? (
-                <div>
-                  <dt>{t.year}</dt>
-                  <dd>{year}</dd>
+        <section className={styles.hero} aria-labelledby="work-title">
+          <div className={styles.coverTrack}>
+            <aside className={styles.coverPanel} aria-label={title}>
+              {editionCoverItems.length > 1 ? (
+                <WorkCoverSwitcher items={editionCoverItems} />
+              ) : cover ? (
+                <img className={styles.cover} src={assetPath(cover)} alt={title} />
+              ) : (
+                <div className={styles.coverPlaceholder}>
+                  <span>{typeLabel}</span>
+                  <strong>{title}</strong>
+                  {year ? <small>{year}</small> : null}
+                  <em>{t.noCover}</em>
                 </div>
-              ) : null}
-
-              {authors ? (
-                <div>
-                  <dt>{t.authors}</dt>
-                  <dd>{authors}</dd>
-                </div>
-              ) : null}
-
-              {originalLanguages ? (
-                <div>
-                  <dt>{detailT.originalLanguage}</dt>
-                  <dd>{originalLanguages}</dd>
-                </div>
-              ) : null}
-
-              {genre ? (
-                <div>
-                  <dt>{detailT.genre}</dt>
-                  <dd>{genre}</dd>
-                </div>
-              ) : null}
-
-              {themes ? (
-                <div>
-                  <dt>{detailT.themes}</dt>
-                  <dd>{themes}</dd>
-                </div>
-              ) : null}
-
-              {translatedLanguages ? (
-                <div>
-                  <dt>{detailT.translations}</dt>
-                  <dd>{translatedLanguages}</dd>
-                </div>
-              ) : null}
-            </dl>
-
-            {description ? <p className={styles.description}>{description}</p> : null}
+              )}
+            </aside>
           </div>
 
-          <aside className={styles.coverPanel} aria-label={title}>
-            {editionCoverItems.length > 1 ? (
-              <WorkCoverSwitcher items={editionCoverItems} />
-            ) : cover ? (
-              <img className={styles.cover} src={assetPath(cover)} alt={title} />
-            ) : (
-              <div className={styles.coverPlaceholder}>
-                <span>{typeLabel}</span>
-                <strong>{title}</strong>
-                {year ? <small>{year}</small> : null}
-                <em>{t.noCover}</em>
-              </div>
-            )}
-          </aside>
+          <div className={styles.mainColumn}>
+            <div className={styles.content}>
+              <h1 className={styles.title} id="work-title">
+                {title}
+              </h1>
 
-          {recommendedWorks.length ? (
-            <aside
-              className={styles.recommendations}
-              aria-labelledby="work-recommendations-title"
-            >
-              <p className={styles.recommendationsEyebrow}>
-                {recommendationT.readNext}
-              </p>
-              <h2
-                className={styles.recommendationsTitle}
-                id="work-recommendations-title"
-              >
-                {recommendationT.recommendations}
-              </h2>
+              {work.originalTitle ? (
+                <p className={styles.originalTitle}>
+                  <span>{t.originalTitle}</span>
+                  {work.originalTitle}
+                </p>
+              ) : null}
 
-              <div className={styles.recommendationList}>
-                {recommendedWorks.map((relatedWork) => {
-                  const relatedTitle = getLocalizedText(relatedWork.title, locale);
-                  const relatedCover = getWorkCover(relatedWork);
-                  const relatedYear = getWorkYear(relatedWork);
-                  const relatedMeta = [
-                    relatedYear,
-                    getTypeLabel(relatedWork.type, locale),
-                  ]
-                    .filter(Boolean)
-                    .join(" / ");
+              <dl className={styles.meta}>
+                <div>
+                  <dt>{t.type}</dt>
+                  <dd>{typeLabel}</dd>
+                </div>
 
-                  return (
-                    <Link
-                      className={styles.recommendationCard}
-                      href={localizedHref(locale, `/bibliography/${relatedWork.slug}`)}
-                      key={relatedWork.slug}
-                    >
-                      {relatedCover ? (
-                        <span className={styles.recommendationCover}>
-                          <img src={assetPath(relatedCover)} alt="" loading="lazy" />
-                        </span>
-                      ) : null}
-                      <span className={styles.recommendationBody}>
-                        {relatedMeta ? (
-                          <span className={styles.recommendationMeta}>
-                            {relatedMeta}
-                          </span>
-                        ) : null}
-                        <strong>{relatedTitle}</strong>
-                      </span>
-                    </Link>
-                  );
-                })}
-              </div>
-            </aside>
-          ) : null}
+                {year ? (
+                  <div>
+                    <dt>{t.year}</dt>
+                    <dd>{year}</dd>
+                  </div>
+                ) : null}
+
+                {authors ? (
+                  <div>
+                    <dt>{t.authors}</dt>
+                    <dd>{authors}</dd>
+                  </div>
+                ) : null}
+
+                {originalLanguages ? (
+                  <div>
+                    <dt>{detailT.originalLanguage}</dt>
+                    <dd>{originalLanguages}</dd>
+                  </div>
+                ) : null}
+
+                {genre ? (
+                  <div>
+                    <dt>{detailT.genre}</dt>
+                    <dd>{genre}</dd>
+                  </div>
+                ) : null}
+
+                {themes ? (
+                  <div>
+                    <dt>{detailT.themes}</dt>
+                    <dd>{themes}</dd>
+                  </div>
+                ) : null}
+
+                {translatedLanguages ? (
+                  <div>
+                    <dt>{detailT.translations}</dt>
+                    <dd>{translatedLanguages}</dd>
+                  </div>
+                ) : null}
+              </dl>
+
+            </div>
+
+            <WorkDetailSections
+              ariaLabel={title}
+              emptyLabel={sectionEmptyLabels[locale]}
+              sections={detailSections}
+            />
+          </div>
         </section>
-
-        {detailSections.length ? (
-          <section className={styles.detailSections} aria-label={title}>
-            <nav className={styles.sectionNav} aria-label={title}>
-              {detailSections.map((section) => (
-                <a href={`#${section.id}`} key={section.id}>
-                  {section.title}
-                </a>
-              ))}
-            </nav>
-
-            {annotationTexts.length ? (
-              <article className={styles.detailSection} id="annotation">
-                <h2>{sectionT.annotation}</h2>
-                {annotationTexts.map((text) => (
-                  <p key={text}>{text}</p>
-                ))}
-              </article>
-            ) : null}
-
-            {historyTexts.length ? (
-              <article className={styles.detailSection} id="history">
-                <h2>{sectionT.history}</h2>
-                {historyTexts.map((text) => (
-                  <p key={text}>{text}</p>
-                ))}
-              </article>
-            ) : null}
-
-            {quoteItems.length ? (
-              <article className={styles.detailSection} id="quotes">
-                <h2>{sectionT.quotes}</h2>
-                <div className={styles.entryList}>
-                  {quoteItems.map((quote) => (
-                    <blockquote className={styles.quote} key={quote.id}>
-                      <p>{getMaybeText(quote.text, locale)}</p>
-                      {quote.sourceNote ? (
-                        <cite>{getMaybeText(quote.sourceNote, locale)}</cite>
-                      ) : null}
-                    </blockquote>
-                  ))}
-                </div>
-              </article>
-            ) : null}
-
-            {reviewItems.length ? (
-              <article className={styles.detailSection} id="reviews">
-                <h2>{sectionT.reviews}</h2>
-                <div className={styles.entryList}>
-                  {reviewItems.map((review) => (
-                    <div className={styles.entryCard} key={review.id}>
-                      {review.title ? (
-                        <strong>{getMaybeText(review.title, locale)}</strong>
-                      ) : null}
-                      {review.quote ? <p>{getMaybeText(review.quote, locale)}</p> : null}
-                      <span>
-                        {[review.author, review.source, review.year]
-                          .filter(Boolean)
-                          .join(" / ")}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </article>
-            ) : null}
-
-            {materialItems.length ? (
-              <article className={styles.detailSection} id="materials">
-                <h2>{sectionT.materials}</h2>
-                <div className={styles.entryList}>
-                  {materialItems.map((material) => {
-                    const content = (
-                      <>
-                        <strong>{material.title}</strong>
-                        {material.description ? <p>{material.description}</p> : null}
-                      </>
-                    );
-
-                    return material.href ? (
-                      <a
-                        className={styles.entryCard}
-                        href={material.href}
-                        key={`${material.title}-${material.href}`}
-                      >
-                        {content}
-                      </a>
-                    ) : (
-                      <div className={styles.entryCard} key={material.title}>
-                        {content}
-                      </div>
-                    );
-                  })}
-                </div>
-              </article>
-            ) : null}
-
-            {sourceItems.length ? (
-              <article className={styles.detailSection} id="sources">
-                <h2>{sectionT.sources}</h2>
-                <div className={styles.sourceList}>
-                  {sourceItems.map((source) =>
-                    source.href ? (
-                      <a href={source.href} key={`${source.title}-${source.href}`}>
-                        {source.title || source.href}
-                      </a>
-                    ) : (
-                      <span key={source.title}>{source.title}</span>
-                    ),
-                  )}
-                </div>
-              </article>
-            ) : null}
-          </section>
-        ) : null}
       </div>
     </main>
   );
