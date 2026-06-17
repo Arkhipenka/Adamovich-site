@@ -11,16 +11,17 @@ type InitiativePreviewProps = {
   locale?: Locale;
 };
 
-type FeatureIcon = "archive" | "book" | "map" | "voice";
+type FeatureIcon = "archive" | "audio" | "memorial" | "stop";
 
 function getFeatureIcon(featureId: string): FeatureIcon {
   switch (featureId) {
-    case "interactive-map":
-      return "map";
-    case "oral-history":
-      return "voice";
-    case "educational-resources":
-      return "book";
+    case "memorial":
+      return "memorial";
+    case "art-project":
+      return "stop";
+    case "audio-guide":
+      return "audio";
+    case "archive":
     default:
       return "archive";
   }
@@ -39,41 +40,47 @@ function Icon({ name }: { name: FeatureIcon }) {
     width: 22,
   };
 
-  switch (name) {
+    switch (name) {
     case "archive":
       return (
         <svg {...commonProps}>
-          <path d="M4 6h16" />
-          <path d="M6 6v14h12V6" />
-          <path d="M9 10h6" />
-          <path d="M9 14h6" />
-          <path d="M8 3h8l1 3H7l1-3Z" />
+          <path d="M4 7h16" />
+          <path d="M6 7v13h12V7" />
+          <path d="M8 4h8l2 3H6l2-3Z" />
+          <path d="M9 11h6" />
+          <path d="M9 15h4" />
         </svg>
       );
-    case "book":
+    case "audio":
       return (
         <svg {...commonProps}>
-          <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H7a3 3 0 0 0-3 3V5.5Z" />
-          <path d="M4 19V5.5" />
-          <path d="M8 7h8" />
-          <path d="M8 11h7" />
+          <path d="M5 12v.01" />
+          <path d="M9 9v6" />
+          <path d="M13 6v12" />
+          <path d="M17 9v6" />
+          <path d="M21 12v.01" />
+          <path d="M3 17a9 9 0 0 0 18 0" />
         </svg>
       );
-    case "map":
+    case "memorial":
       return (
         <svg {...commonProps}>
-          <path d="M12 21s6-5.2 6-11a6 6 0 0 0-12 0c0 5.8 6 11 6 11Z" />
-          <circle cx="12" cy="10" r="2.2" />
+          <path d="M12 4v12" />
+          <path d="M8 16h8" />
+          <path d="M6 20h12" />
+          <path d="M9 8h6" />
+          <path d="M10 4h4" />
         </svg>
       );
-    case "voice":
+    case "stop":
       return (
         <svg {...commonProps}>
-          <path d="M4 12v.01" />
-          <path d="M8 9v6" />
-          <path d="M12 6v12" />
-          <path d="M16 9v6" />
-          <path d="M20 12v.01" />
+          <path d="M5 20V8a3 3 0 0 1 3-3h8a3 3 0 0 1 3 3v12" />
+          <path d="M3 20h18" />
+          <path d="M7 10h10" />
+          <path d="M8 14h8" />
+          <path d="M8 5V3" />
+          <path d="M16 5V3" />
         </svg>
       );
   }

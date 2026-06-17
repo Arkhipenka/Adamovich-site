@@ -264,9 +264,9 @@ export const initiativeTeam: InitiativeTeamMember[] = [
   {
     id: "andrus-arkhipenka",
     name: {
-      be: "Андрусь Архіпенка",
-      ru: "Андрусь Архипенко",
-      en: "Andrus Arkhipenka",
+      be: "Андрэй Архіпенка",
+      ru: "Андрей Архипенко",
+      en: "Andrei Arkhipenka",
     },
     role: {
       be: "ініцыятар і кіраўнік праекта",
@@ -274,15 +274,15 @@ export const initiativeTeam: InitiativeTeamMember[] = [
       en: "project initiator and lead",
     },
     contribution: {
-      be: "Каардынуе развіццё ініцыятывы, працу з партнёрамі, лічбавую платформу і падрыхтоўку новых этапаў праекта.",
-      ru: "Координирует развитие инициативы, работу с партнёрами, цифровую платформу и подготовку новых этапов проекта.",
-      en: "Coordinates the initiative, partner work, the digital platform and preparation of the project's next stages.",
+      be: "Рухавік каманды. Каардынуе развіццё ініцыятывы, працу з партнёрамі, лічбавую платформу, пошук фінансавання і падрыхтоўку новых этапаў праекта.",
+      ru: "Движущая сила команды. Координирует развитие инициативы, работу с партнёрами, цифровую платформу, поиск финансирования и подготовку новых этапов проекта.",
+      en: "The driving force of the team. Coordinates the development of the initiative, work with partners, the digital platform, fundraising, and the preparation of the project’s next stages.",
     },
     image: "/assets/images/initiative/people/andrus-arkhipenka.jpg",
     imageAlt: {
-      be: "Андрусь Архіпенка",
-      ru: "Андрусь Архипенко",
-      en: "Andrus Arkhipenka",
+      be: "Андрэй Архіпенка",
+      ru: "Андрей Архипенко",
+      en: "Andrei Arkhipenka",
     },
     order: 1,
   },
@@ -299,9 +299,9 @@ export const initiativeTeam: InitiativeTeamMember[] = [
       en: "coordinator",
     },
     contribution: {
-      be: "Дапамагае з арганізацыяй, камунікацыяй, матэрыяламі і штодзённай працай ініцыятывы.",
-      ru: "Помогает с организацией, коммуникацией, материалами и ежедневной работой инициативы.",
-      en: "Supports organization, communication, materials and the initiative's day-to-day work.",
+      be: "Дапамагае з арганізацыяй, камунікацыяй, падрыхтоўкай матэрыялаў і працай са СМІ.",
+      ru: "Помогает с организацией, коммуникацией, подготовкой материалов и работой со СМИ.",
+      en: "Helps with organization, communication, preparation of materials, and media relations.",
     },
     order: 2,
   },
@@ -333,9 +333,9 @@ export const initiativeSupport: InitiativeSupportEntry[] = [
     },
     type: "cultural-contribution",
     role: {
-      be: "скульптар бюста",
-      ru: "скульптор бюста",
-      en: "bust sculptor",
+      be: "Скульптар",
+      ru: "Скульптор",
+      en: "Sculptor",
     },
     contribution: {
       be: "Стварэнне бюста Алеся Адамовіча ў Глушы — матэрыяльнага знака памяці пра пісьменніка на яго малой радзіме.",
@@ -355,20 +355,20 @@ export const initiativeSupport: InitiativeSupportEntry[] = [
   {
     id: "malyavanych",
     name: {
-      be: "Маляваныч",
-      ru: "Маляваныч",
-      en: "Malyavanych",
+      be: "Аляксандр Ждановіч",
+      ru: "Александр Жданович",
+      en: "Aliaksandr Zhdanovich",
     },
     type: "voice-contribution",
     role: {
-      be: "голас аўдыягіда",
-      ru: "голос аудиогида",
-      en: "audio guide voice",
+      be: "актор",
+      ru: "актёр",
+      en: "actor",
     },
     contribution: {
-      be: "Удзел у агучванні аўдыягіда па мясцінах Алеся Адамовіча ў Глушы. Яго голас дапамагае ажывіць гісторыі маршруту.",
-      ru: "Участие в озвучивании аудиогида по местам Алеся Адамовича в Глуше. Его голос помогает оживить истории маршрута.",
-      en: "Voiced the audio guide through places connected with Ales Adamovich in Glusha, helping bring the route's stories to life.",
+      be: "Прафесійны актор, вядомы таксама як Маляваныч. Удзельнічаў у агучванні аўдыягіда па мясцінах Алеся Адамовіча ў Глушы. Яго голас дапамагае ажывіць гісторыі маршруту.",
+      ru: "Профессиональный актёр, известный также как Маляваныч. Участвовал в озвучивании аудиогида по местам Алеся Адамовича в Глуше. Его голос помогает оживить истории маршрута.",
+      en: "A professional actor, also known as Malyavanych. He contributed to the voice recording of the audio guide through the places connected with Ales Adamovich in Hluša. His voice helps bring the route’s stories to life.",
     },
     image: "/assets/images/initiative/people/malyavanych.jpg",
     imageAlt: {
@@ -388,9 +388,9 @@ export const initiativeSupport: InitiativeSupportEntry[] = [
     },
     type: "public-support",
     role: {
-      be: "публічная падтрымка",
-      ru: "публичная поддержка",
-      en: "public support",
+      be: "пісьменніца, нобелеўская лаўрэатка",
+      ru: "писательница, нобелевская лауреатка",
+      en: "writer, Nobel laureate",
     },
     contribution: {
       be: "Падтрымка збору сродкаў на помнік Алесю Адамовічу і ўвага да справы ўшанавання яго памяці.",
@@ -415,14 +415,14 @@ export const initiativeSupport: InitiativeSupportEntry[] = [
     },
     type: "public-support",
     role: {
-      be: "падтрымка і камунікацыя",
-      ru: "поддержка и коммуникация",
-      en: "support and communication",
+      be: "прадпрымальнік, заснавальнік TUT.BY",
+      ru: "предприниматель, основатель TUT.BY",
+      en: "entrepreneur, founder of TUT.BY",
     },
     contribution: {
-      be: "Падтрымка ініцыятывы і дапамога ў камунікацыі, якая стала важнай для рэалізацыі помніка.",
-      ru: "Поддержка инициативы и помощь в коммуникации, которая стала важной для реализации памятника.",
-      en: "Supported the initiative and helped with communication that became important for making the monument possible.",
+      be: "Падтрымка ініцыятывы і збору сродкаў, якая стала важнай для рэалізацыі помніка. Публічная падтрымка праекта.",
+      ru: "Поддержка инициативы и сбора средств, которая стала важной для реализации памятника. Публичная поддержка проекта.",
+      en: "Supported the initiative and fundraising, which became important for making the monument possible. Publicly supported the project.",
     },
     image: "/assets/images/initiative/people/zisser.jpg",
     imageAlt: {

@@ -22,6 +22,8 @@ const slideImageClassById: Record<string, string> = {
   writer: styles["slide--writer"],
   "audio-guide": styles["slide--audio-guide"],
   books: styles["slide--books"],
+  bibliography: styles["slide--books"],
+  Initiative: styles["slide--initiative"],
   initiative: styles["slide--initiative"],
 };
 

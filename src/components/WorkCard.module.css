@@ -35,7 +35,7 @@
 
 .coverWrap {
   position: absolute;
-  inset: 0;
+  inset: 0 0 150px;
   overflow: hidden;
   background:
     linear-gradient(135deg, rgba(154, 107, 36, 0.08), transparent 48%),
@@ -43,7 +43,8 @@
 }
 
 .coverImage {
-  object-fit: cover;
+  object-fit: contain;
+  object-position: center;
   filter: none;
   transform: scale(1);
   transition: transform 360ms ease;
@@ -229,6 +230,10 @@
   transform: translateY(calc(100% - 142px));
 }
 
+.compact .coverWrap {
+  bottom: 142px;
+}
+
 .compact:hover .infoPanel,
 .compact:focus-within .infoPanel {
   transform: translateY(0);
@@ -249,6 +254,11 @@
     min-height: 0;
     padding: 22px;
     transform: translateY(0);
+  }
+
+  .coverWrap,
+  .compact .coverWrap {
+    bottom: 172px;
   }
 
   .revealInfo {
@@ -286,6 +296,11 @@
   .infoPanel,
   .compact .infoPanel {
     padding: 20px;
+  }
+
+  .coverWrap,
+  .compact .coverWrap {
+    bottom: 166px;
   }
 }
 

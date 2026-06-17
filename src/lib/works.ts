@@ -20,6 +20,8 @@ const languageLabels: Record<Locale, Record<string, string>> = {
     lt: "лит.",
     ja: "яп.",
     zh: "кит.",
+    it: "ит.",
+    sk: "словац.",
   },
   be: {
     be: "бел.",
@@ -32,6 +34,8 @@ const languageLabels: Record<Locale, Record<string, string>> = {
     lt: "літ.",
     ja: "яп.",
     zh: "кіт.",
+    it: "італ.",
+    sk: "славац.",
   },
   en: {
     be: "Bel.",
@@ -44,6 +48,8 @@ const languageLabels: Record<Locale, Record<string, string>> = {
     lt: "Lith.",
     ja: "Jap.",
     zh: "Ch.",
+    it: "It.",
+    sk: "Slovak",
   },
 };
 

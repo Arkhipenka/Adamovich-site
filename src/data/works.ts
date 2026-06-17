@@ -34,6 +34,8 @@ export type WorkLanguage =
   | "lt"
   | "ja"
   | "zh"
+  | "it"
+  | "sk"
   | string;
 
 export type ExternalLink = {
@@ -98,6 +100,7 @@ export type WorkContext = {
 
 export type WorkEdition = {
   id?: string;
+  title?: MaybeLocalizedText;
   year?: number;
   publisher?: string;
   city?: string;
@@ -283,6 +286,11 @@ export const works: Work[] = [
       be: "суаўтар, укладальнік сведчанняў",
       en: "co-author and compiler of testimonies",
     },
+    genre: {
+      ru: "документальная проза / свидетельства",
+      be: "дакументальная проза / сведчанні",
+      en: "documentary prose / testimonies",
+    },
     descriptionShort: {
       ru: "Документальная книга свидетельств о сожжённых белорусских деревнях.",
       be: "Дакументальная кніга сведчанняў пра спаленыя беларускія вёскі.",
@@ -298,27 +306,43 @@ export const works: Work[] = [
       be: "Кніга пабудавана на галасах сведкаў і захоўвае памяць пра трагедыю беларускіх вёсак, знішчаных падчас вайны.",
       en: "The book is built on witnesses' voices and preserves the memory of Belarusian villages destroyed during the war.",
     },
-    cover: "/assets/images/works/i-am-from-fire-village.webp",
-    coverImage: "/assets/images/works/i-am-from-fire-village.webp",
+    cover: "/assets/images/works/i-am-from-fire-village-1975.webp",
+    coverImage: "/assets/images/works/i-am-from-fire-village-1975.webp",
     coverAlt: {
       ru: "Обложка книги «Я из огненной деревни»",
       be: "Вокладка кнігі «Я з вогненнай вёскі»",
       en: "Cover of I Am from the Fiery Village",
     },
     languages: ["be", "ru"],
-    originalLanguages: ["be", "ru"],
-    translatedLanguages: ["en", "de", "pl"],
+    originalLanguages: ["be"],
+    translatedLanguages: ["ru", "en", "de", "pl"],
     editions: [
       {
         id: "first-edition",
+        title: {
+          ru: "Первое издание",
+          be: "Першае выданне",
+          en: "First edition",
+        },
         year: 1975,
         language: "be",
+        coverImage: "/assets/images/works/i-am-from-fire-village-1975.webp",
         notes: "Bibliographic details need further verification.",
+      },
+      {
+        id: "later-russian-edition",
+        title: {
+          ru: "Позднее издание",
+          be: "Пазнейшае выданне",
+          en: "Later edition",
+        },
+        language: "ru",
+        coverImage: "/assets/images/works/i-am-from-fire-village.webp",
       },
     ],
     relatedWorks: ["come-and-see", "khatyn-story", "punishmenters"],
     tags: ["documentary prose", "testimony", "village memory"],
-    themes: ["war", "memory", "testimony"],
+    themes: ["war", "memory", "testimony", "burned-villages"],
   },
   {
     id: "work-khatyn-story",
@@ -409,6 +433,62 @@ export const works: Work[] = [
     },
     languages: ["ru"],
     originalLanguages: ["ru"],
+    editions: [
+      {
+        id: "german-2019",
+        title: {
+          ru: "Немецкое издание",
+          be: "Нямецкае выданне",
+          en: "German edition",
+        },
+        year: 2019,
+        publisher: "Aufbau",
+        language: "de",
+        coverImage: "/assets/images/works/editions/blockade-book-german-2019.webp",
+      },
+      {
+        id: "german-2019-back",
+        title: {
+          ru: "Немецкое издание, задняя обложка",
+          be: "Нямецкае выданне, задняя вокладка",
+          en: "German edition, back cover",
+        },
+        year: 2019,
+        publisher: "Aufbau",
+        language: "de",
+        coverImage: "/assets/images/works/editions/blockade-book-german-back.webp",
+      },
+      {
+        id: "japanese-edition",
+        title: {
+          ru: "Японское издание",
+          be: "Японскае выданне",
+          en: "Japanese edition",
+        },
+        language: "ja",
+        coverImage: "/assets/images/works/editions/blockade-book-japanese.webp",
+      },
+      {
+        id: "slovak-edition",
+        title: {
+          ru: "Словацкое издание",
+          be: "Славацкае выданне",
+          en: "Slovak edition",
+        },
+        language: "sk",
+        coverImage: "/assets/images/works/editions/blockade-book-slovak.webp",
+      },
+      {
+        id: "italian-edition",
+        title: {
+          ru: "Итальянское издание",
+          be: "Італьянскае выданне",
+          en: "Italian edition",
+        },
+        language: "it",
+        coverImage: "/assets/images/works/editions/blockade-book-italian.webp",
+      },
+    ],
     relatedWorks: ["i-am-from-fire-village"],
     tags: ["documentary prose", "siege", "testimony"],
     themes: ["war", "memory", "testimony"],
@@ -603,6 +683,49 @@ export const works: Work[] = [
     originalLanguages: ["be", "ru"],
     tags: ["prose", "partisans"],
     themes: ["war", "choice"],
+  },
+  {
+    id: "work-vixi",
+    slug: "vixi",
+    type: "book",
+    year: 2002,
+    firstPublicationYear: 2002,
+    featured: false,
+    priority: 8,
+    status: "published",
+    title: {
+      ru: "Vixi",
+      be: "Vixi",
+      en: "Vixi",
+    },
+    originalTitle: "Vixi",
+    authors: ["Алесь Адамовіч"],
+    descriptionShort: {
+      ru: "Минское издание книги Алеся Адамовича 2002 года.",
+      be: "Мінскае выданне кнігі Алеся Адамовіча 2002 года.",
+      en: "A 2002 Minsk edition of a book by Ales Adamovich.",
+    },
+    shortDescription: {
+      ru: "Минское издание книги Алеся Адамовича 2002 года.",
+      be: "Мінскае выданне кнігі Алеся Адамовіча 2002 года.",
+      en: "A 2002 Minsk edition of a book by Ales Adamovich.",
+    },
+    descriptionFull: {
+      ru: "Издание подготовлено для библиографического раздела и будет дополнено уточнёнными данными.",
+      be: "Выданне падрыхтавана для бібліяграфічнага раздзела і будзе дапоўнена ўдакладненымі звесткамі.",
+      en: "This edition is prepared for the bibliography section and will be expanded with verified details.",
+    },
+    cover: "/assets/images/works/editions/vixi-minsk-2002.webp",
+    coverImage: "/assets/images/works/editions/vixi-minsk-2002.webp",
+    coverAlt: {
+      ru: "Обложка книги «Vixi»",
+      be: "Вокладка кнігі «Vixi»",
+      en: "Cover of Vixi",
+    },
+    languages: ["be"],
+    originalLanguages: ["be"],
+    tags: ["book"],
+    themes: ["memory"],
   },
   {
     id: "work-chernobyl-materials",

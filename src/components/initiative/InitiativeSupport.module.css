@@ -189,7 +189,7 @@
   z-index: 2;
   min-height: 152px;
   border-top: 1px solid rgba(76, 53, 30, 0.16);
-  padding: clamp(22px, 2.4vw, 30px);
+  padding: clamp(20px, 2.2vw, 25px);
   background: rgba(250, 244, 232, 0.97);
   box-shadow: 0 -16px 40px rgba(23, 19, 15, 0.08);
   transform: translateY(calc(100% - 152px));
@@ -226,7 +226,9 @@
   font-weight: 700;
   letter-spacing: 0.1em;
   line-height: 1.45;
+  overflow-wrap: anywhere;
   text-transform: uppercase;
+  text-wrap: balance;
 }
 
 .teamRevealInfo {

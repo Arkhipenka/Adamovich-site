@@ -340,30 +340,35 @@
 .smallIcon {
   display: grid;
   place-items: center;
-  border: 1px solid rgba(194, 163, 107, 0.48);
-  border-radius: 50%;
   color: var(--color-accent);
 }
 
 .iconCircle,
 .methodIcon {
-  width: 58px;
-  height: 58px;
+  width: 42px;
+  height: 42px;
 }
 
 .smallIcon {
   flex: 0 0 auto;
-  width: 42px;
-  height: 42px;
+  width: 34px;
+  height: 34px;
 }
 
 .iconCircle svg,
 .methodIcon svg,
 .smallIcon svg {
+  width: 28px;
+  height: 28px;
   stroke: currentColor;
-  stroke-width: 1.35;
+  stroke-width: 1.45;
   stroke-linecap: round;
   stroke-linejoin: round;
+}
+
+.smallIcon svg {
+  width: 24px;
+  height: 24px;
 }
 
 .infoCard h3,

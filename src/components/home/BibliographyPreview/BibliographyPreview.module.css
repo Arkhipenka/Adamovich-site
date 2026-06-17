@@ -119,7 +119,8 @@
 }
 
 .cover {
-  object-fit: cover;
+  object-fit: contain;
+  object-position: center;
   filter: grayscale(1) contrast(1.04) brightness(0.82);
   transform: scale(1);
   transition:

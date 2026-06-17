@@ -126,29 +126,28 @@
 .socials {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 16px;
 }
 
 .socialLink {
   display: grid;
-  width: 36px;
-  height: 36px;
+  width: 28px;
+  height: 28px;
   place-items: center;
-  border: 1px solid rgba(245, 245, 243, 0.12);
-  border-radius: 50%;
-  color: var(--color-muted);
-  font-size: 0.72rem;
-  font-weight: 700;
+  color: rgba(245, 245, 243, 0.72);
   transition:
     color 180ms ease,
-    border-color 180ms ease,
-    background-color 180ms ease;
+    transform 180ms ease;
+}
+
+.socialLink svg {
+  width: 22px;
+  height: 22px;
 }
 
 .socialLink:hover {
   color: var(--color-accent);
-  border-color: rgba(194, 163, 107, 0.55);
-  background: rgba(194, 163, 107, 0.08);
+  transform: translateY(-2px);
 }
 
 .supportLogos {

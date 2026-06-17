@@ -113,11 +113,57 @@ const footerContentByLocale: Record<
 };
 
 const socialLinks = [
-  { label: "Telegram", shortLabel: "TG", href: "#" },
-  { label: "Facebook", shortLabel: "FB", href: "#" },
-  { label: "Instagram", shortLabel: "IG", href: "#" },
-  { label: "YouTube", shortLabel: "YT", href: "#" },
+  { label: "Telegram", icon: "telegram", href: "#" },
+  { label: "Facebook", icon: "facebook", href: "#" },
+  { label: "Instagram", icon: "instagram", href: "#" },
+  { label: "YouTube", icon: "youtube", href: "#" },
 ];
+
+type SocialIconName = (typeof socialLinks)[number]["icon"];
+
+function SocialIcon({ name }: { name: SocialIconName }) {
+  const commonProps = {
+    "aria-hidden": true,
+    fill: "none",
+    height: 18,
+    stroke: "currentColor",
+    strokeLinecap: "round" as const,
+    strokeLinejoin: "round" as const,
+    strokeWidth: 1.8,
+    viewBox: "0 0 24 24",
+    width: 18,
+  };
+
+  switch (name) {
+    case "telegram":
+      return (
+        <svg {...commonProps}>
+          <path d="M21 3 3 10.2l7.2 2.4L17 7.4l-5.1 6.4.2 6.2 3.5-4 4.4 3L21 3Z" />
+        </svg>
+      );
+    case "facebook":
+      return (
+        <svg {...commonProps}>
+          <path d="M14 8h2V4h-2.4A4.6 4.6 0 0 0 9 8.6V11H6v4h3v5h4v-5h3l.5-4H13V8.8c0-.5.4-.8 1-.8Z" />
+        </svg>
+      );
+    case "instagram":
+      return (
+        <svg {...commonProps}>
+          <rect height="16" rx="4" width="16" x="4" y="4" />
+          <circle cx="12" cy="12" r="3.2" />
+          <path d="M16.8 7.2h.01" />
+        </svg>
+      );
+    case "youtube":
+      return (
+        <svg {...commonProps}>
+          <path d="M21 12s0-3.1-.4-4.4a2.6 2.6 0 0 0-1.8-1.8C17.4 5.4 12 5.4 12 5.4s-5.4 0-6.8.4a2.6 2.6 0 0 0-1.8 1.8C3 8.9 3 12 3 12s0 3.1.4 4.4a2.6 2.6 0 0 0 1.8 1.8c1.4.4 6.8.4 6.8.4s5.4 0 6.8-.4a2.6 2.6 0 0 0 1.8-1.8C21 15.1 21 12 21 12Z" />
+          <path d="m10.4 9.3 4.2 2.7-4.2 2.7V9.3Z" />
+        </svg>
+      );
+  }
+}
 
 export function Footer({ locale = defaultLocale }: FooterProps) {
   const content = footerContentByLocale[locale];
@@ -188,7 +234,7 @@ export function Footer({ locale = defaultLocale }: FooterProps) {
                   className={styles.socialLink}
                   href={item.href}
                 >
-                  {item.shortLabel}
+                  <SocialIcon name={item.icon} />
                 </a>
               </li>
             ))}
