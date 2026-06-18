@@ -25,7 +25,7 @@ export const homePageContent: HomePageContent = {
         en: "Vasil Bykov on Ales Adamovich",
       },
       image: {
-        src: "/assets/images/hero/adamovich-speech-microphone.png",
+        src: "/assets/images/hero/adamovich-speech-microphone.webp",
         alt: {
           be: "Партрэт Алеся Адамовіча за трыбунай",
           ru: "Портрет Алеся Адамовича за трибуной",
@@ -80,7 +80,7 @@ export const homePageContent: HomePageContent = {
         en: "Take a route through Glusha and hear the stories of places connected with Ales Adamovich’s life and creativity.",
       },
       image: {
-        src: "/assets/images/hero/glusha-pharmacy-1985.jpg",
+        src: "/assets/images/hero/glusha-pharmacy-1985.webp",
         alt: {
           be: "Алесь Адамовіч каля глушанскай аптэкі ў 1985 годзе",
           ru: "Алесь Адамович возле глушанской аптеки в 1985 году",
@@ -266,7 +266,7 @@ export const homePageContent: HomePageContent = {
       en: "The Blockade Book, 1977–1982",
     },
     image: {
-      src: "/assets/images/portraits/adamovich-desk-minsk-1989.jpg",
+      src: "/assets/images/portraits/adamovich-desk-minsk-1989.webp",
       alt: {
         be: "Алесь Адамовіч за рабочым сталом. Мінск, 1989",
         ru: "Алесь Адамович за рабочим столом. Минск, 1989",
@@ -420,7 +420,7 @@ export const homePageContent: HomePageContent = {
     },
     linkHref: "/initiative",
     image: {
-      src: "/assets/images/initiative/adamovich-stop-illustration.png",
+      src: "/assets/images/initiative/adamovich-stop-illustration.webp",
       alt: {
         be: "Месца, звязанае з ініцыятывай пра Алеся Адамовіча",
         ru: "Место, связанное с инициативой об Алесе Адамовиче",

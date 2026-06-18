@@ -178,8 +178,8 @@ const themeLabels: Record<Locale, Record<string, string>> = {
 const sectionLabels = {
   be: {
     annotation: "Анатацыя",
-    history: "Гісторыя кнігі",
-    meaning: "Значэнне",
+    history: "Гісторыя",
+    awards: "Узнагароды",
     materials: "Матэрыялы",
     quotes: "Цытаты",
     reviews: "Рэцэнзіі",
@@ -187,8 +187,8 @@ const sectionLabels = {
   },
   en: {
     annotation: "Annotation",
-    history: "Book History",
-    meaning: "Meaning",
+    history: "History",
+    awards: "Awards",
     materials: "Materials",
     quotes: "Quotes",
     reviews: "Reviews",
@@ -196,12 +196,30 @@ const sectionLabels = {
   },
   ru: {
     annotation: "Аннотация",
-    history: "История книги",
-    meaning: "Значение",
+    history: "История",
+    awards: "Награды",
     materials: "Материалы",
     quotes: "Цитаты",
     reviews: "Рецензии",
     sources: "Источники",
+  },
+} satisfies Record<Locale, Record<string, string>>;
+
+const awardResultLabels = {
+  be: {
+    nominee: "Намінацыя",
+    selected: "Адбор",
+    winner: "Перамога",
+  },
+  en: {
+    nominee: "Nominee",
+    selected: "Selected",
+    winner: "Winner",
+  },
+  ru: {
+    nominee: "Номинация",
+    selected: "Отбор",
+    winner: "Победа",
   },
 } satisfies Record<Locale, Record<string, string>>;
 
@@ -437,11 +455,21 @@ export function WorkDetail({ locale, relatedWorks = [], work }: WorkDetailProps)
       title: sectionT.history,
     },
     {
-      id: "meaning",
-      paragraphs: work.context?.text
-        ?.map((item) => getMaybeText(item, locale))
-        .filter(Boolean),
-      title: sectionT.meaning,
+      entries: (work.awards ?? []).map((award, index) => ({
+        href: award.link,
+        id: `${award.name}-${award.year ?? index}`,
+        meta: [
+          award.year,
+          award.category,
+          award.organization,
+          award.result ? awardResultLabels[locale][award.result] : "",
+        ]
+          .filter(Boolean)
+          .join(" / "),
+        title: award.name,
+      })),
+      id: "awards",
+      title: sectionT.awards,
     },
     {
       id: "quotes",
@@ -528,48 +556,48 @@ export function WorkDetail({ locale, relatedWorks = [], work }: WorkDetailProps)
               ) : null}
 
               <dl className={styles.meta}>
-                <div>
+                <div className={styles.metaItem}>
                   <dt>{t.type}</dt>
                   <dd>{typeLabel}</dd>
                 </div>
 
                 {year ? (
-                  <div>
+                  <div className={styles.metaItem}>
                     <dt>{t.year}</dt>
                     <dd>{year}</dd>
                   </div>
                 ) : null}
 
                 {authors ? (
-                  <div>
+                  <div className={styles.metaItemWide}>
                     <dt>{t.authors}</dt>
                     <dd>{authors}</dd>
                   </div>
                 ) : null}
 
                 {originalLanguages ? (
-                  <div>
+                  <div className={styles.metaItem}>
                     <dt>{detailT.originalLanguage}</dt>
                     <dd>{originalLanguages}</dd>
                   </div>
                 ) : null}
 
                 {genre ? (
-                  <div>
+                  <div className={styles.metaItem}>
                     <dt>{detailT.genre}</dt>
                     <dd>{genre}</dd>
                   </div>
                 ) : null}
 
                 {themes ? (
-                  <div>
+                  <div className={styles.metaItemWide}>
                     <dt>{detailT.themes}</dt>
                     <dd>{themes}</dd>
                   </div>
                 ) : null}
 
                 {translatedLanguages ? (
-                  <div>
+                  <div className={styles.metaItemWide}>
                     <dt>{detailT.translations}</dt>
                     <dd>{translatedLanguages}</dd>
                   </div>
@@ -577,13 +605,13 @@ export function WorkDetail({ locale, relatedWorks = [], work }: WorkDetailProps)
               </dl>
 
             </div>
-
-            <WorkDetailSections
-              ariaLabel={title}
-              emptyLabel={sectionEmptyLabels[locale]}
-              sections={detailSections}
-            />
           </div>
+
+          <WorkDetailSections
+            ariaLabel={title}
+            emptyLabel={sectionEmptyLabels[locale]}
+            sections={detailSections}
+          />
         </section>
       </div>
     </main>

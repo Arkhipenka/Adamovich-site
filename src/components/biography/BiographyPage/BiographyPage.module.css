@@ -1,6 +1,5 @@
 .page {
   min-height: 100vh;
-  overflow-x: clip;
   background: var(--color-paper, #f2eadb);
   color: var(--color-paper-text, #1c1712);
 }

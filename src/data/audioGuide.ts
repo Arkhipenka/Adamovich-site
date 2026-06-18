@@ -119,7 +119,7 @@ export const audioGuideContent: AudioGuidePageContent = {
       en: "An audio guide through Ales Adamovich’s places in Glusha — a route through streets, a monument, an art object and people’s stories.",
     },
     image: {
-      src: "/assets/images/audioguide/adamovich-glusha-forest-mushrooms.jpg",
+      src: "/assets/images/audioguide/adamovich-glusha-forest-mushrooms.webp",
       alt: {
         be: "Аўдыягід па Глушы з прыпынкам Адамовіча, помнікам і маршрутам",
         ru: "Аудиогид по Глуше с остановкой Адамовича, памятником и маршрутом",
@@ -176,7 +176,7 @@ export const audioGuideContent: AudioGuidePageContent = {
       },
     ],
     image: {
-      src: "/assets/images/audioguide/audio-guide-phone-mockup.png",
+      src: "/assets/images/audioguide/audio-guide-phone-mockup.webp",
       alt: {
         be: "Экран мабільнага аўдыягіда па Глушы",
         ru: "Экран мобильного аудиогида по Глуше",
@@ -424,7 +424,7 @@ export const audioGuideContent: AudioGuidePageContent = {
           en: "A place connected with family history and Ales Adamovich’s return to his small homeland.",
         },
         image: {
-          src: "/assets/images/hero/glusha-pharmacy-1985.jpg",
+          src: "/assets/images/hero/glusha-pharmacy-1985.webp",
           alt: {
             be: "Гістарычны будынак у Глушы",
             ru: "Историческое здание в Глуше",
@@ -446,7 +446,7 @@ export const audioGuideContent: AudioGuidePageContent = {
           en: "A stop about Glusha’s living culture, local traditions, and community.",
         },
         image: {
-          src: "/assets/images/initiative/theatrical-excursion.png",
+          src: "/assets/images/initiative/theatrical-excursion.webp",
           alt: {
             be: "Культурная падзея ў Глушы",
             ru: "Культурное событие в Глуше",
@@ -512,7 +512,7 @@ export const audioGuideContent: AudioGuidePageContent = {
           en: "A place of memory for family, teachers, friends and neighbours.",
         },
         image: {
-          src: "/assets/images/initiative/memorial-illustration.png",
+          src: "/assets/images/initiative/memorial-illustration.webp",
           alt: {
             be: "Мемарыяльны вобраз маршруту",
             ru: "Мемориальный образ маршрута",

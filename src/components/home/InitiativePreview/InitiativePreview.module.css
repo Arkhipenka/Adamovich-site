@@ -141,7 +141,7 @@
       rgba(239, 230, 216, 0.88),
       rgba(239, 230, 216, 0.88)
     ),
-   url(../../../../public/assets/images/initiative/memorial-illustration.png);
+   url(../../../../public/assets/images/initiative/memorial-illustration.webp);
       background-position: 120% 100%;
     background-repeat: no-repeat;
   background-size: 100% auto, cover, contain;
@@ -152,7 +152,7 @@
       rgba(239, 230, 216, 0.88),
       rgba(239, 230, 216, 0.88)
     ),
-   url(../../../../public/assets/images/initiative/adamovich-stop-illustration.png);
+   url(../../../../public/assets/images/initiative/adamovich-stop-illustration.webp);
       background-position: 150% 100%;
     background-repeat: no-repeat;
   background-size: 100% auto, cover, contain;
@@ -163,7 +163,7 @@
       rgba(239, 230, 216, 0.88),
       rgba(239, 230, 216, 0.88)
     ),
-   url(../../../../public/assets/images/initiative/audiogide-illustration.png);
+   url(../../../../public/assets/images/initiative/audiogide-illustration.webp);
       background-position: 150% 100%;
     background-repeat: no-repeat;
   background-size: 100% auto, cover, contain;
@@ -174,7 +174,7 @@
       rgba(239, 230, 216, 0.88),
       rgba(239, 230, 216, 0.88)
     ),
-   url(../../../../public/assets/images/initiative/archive-illustration.png);
+   url(../../../../public/assets/images/initiative/archive-illustration.webp);
       background-position: 150% 100%;
     background-repeat: no-repeat;
   background-size: 100% auto, cover, contain;
@@ -188,7 +188,7 @@
     linear-gradient(
       rgba(239, 230, 216, 0.77),
       rgba(239, 230, 216, 0.77)
-    ), url(../../../../public/assets/images/initiative/memorial-illustration.png);
+    ), url(../../../../public/assets/images/initiative/memorial-illustration.webp);
     background-position: 95% 100%;
     background-repeat: no-repeat;
     background-size: 100% auto, cover, contain;
@@ -198,7 +198,7 @@
     linear-gradient(
       rgba(239, 230, 216, 0.77),
       rgba(239, 230, 216, 0.77)
-    ),  url(../../../../public/assets/images/initiative/adamovich-stop-illustration.png);
+    ),  url(../../../../public/assets/images/initiative/adamovich-stop-illustration.webp);
     background-position: 100% 100%;
     background-repeat: no-repeat;
     background-size: 100% auto, cover, contain;
@@ -208,7 +208,7 @@
     linear-gradient(
       rgba(239, 230, 216, 0.77),
       rgba(239, 230, 216, 0.77)
-    ),  url(../../../../public/assets/images/initiative/audiogide-illustration.png);
+    ),  url(../../../../public/assets/images/initiative/audiogide-illustration.webp);
     background-position: 100% 100%;
     background-repeat: no-repeat;
     background-size: 100% auto, cover, contain;
@@ -218,7 +218,7 @@
     linear-gradient(
       rgba(239, 230, 216, 0.77),
       rgba(239, 230, 216, 0.77)
-    ),  url(../../../../public/assets/images/initiative/archive-illustration.png);
+    ),  url(../../../../public/assets/images/initiative/archive-illustration.webp);
     background-position: 90% 100%;
     background-repeat: no-repeat;
     background-size: 100% auto, cover, contain;

@@ -24,11 +24,11 @@
 .periodInner {
   width: min(100% - 48px, 1440px);
   margin-inline: auto;
-  padding: clamp(56px, 7vw, 96px) 0;
+  padding: clamp(44px, 5.5vw, 72px) 0;
   display: grid;
   grid-template-columns: minmax(250px, 0.72fr) minmax(340px, 1.08fr) minmax(280px, 0.78fr);
-  gap: clamp(24px, 3.6vw, 54px);
-  align-items: center;
+  gap: clamp(22px, 3vw, 42px);
+  align-items: start;
 }
 
 .periodIntro h2 {
@@ -84,12 +84,20 @@
 .periodMedia,
 .periodMediaPlaceholder {
   position: relative;
-  min-height: clamp(280px, 28vw, 400px);
   margin: 0;
   overflow: hidden;
   border: 1px solid rgba(76, 53, 30, 0.16);
   background: rgba(255, 248, 236, 0.5);
   box-shadow: 0 14px 34px rgba(54, 39, 18, 0.07);
+}
+
+.periodMedia {
+  aspect-ratio: 4 / 3;
+  min-height: 0;
+}
+
+.periodMediaPlaceholder {
+  min-height: clamp(210px, 20vw, 280px);
 }
 
 .periodImage {
@@ -123,7 +131,7 @@
   display: grid;
   align-self: stretch;
   align-content: start;
-  gap: 12px;
+  gap: 10px;
 }
 
 .periodAside {
@@ -131,7 +139,7 @@
   display: grid;
   gap: 12px;
   min-height: 0;
-  padding: clamp(18px, 1.8vw, 26px);
+  padding: clamp(16px, 1.6vw, 22px);
   border: 1px solid rgba(76, 53, 30, 0.14);
   background:
     linear-gradient(135deg, rgba(255, 255, 255, 0.3), transparent 46%),
@@ -187,7 +195,7 @@
   display: grid;
   gap: 8px;
   min-width: 0;
-  padding: 16px 18px;
+  padding: 14px 16px;
   border: 1px solid rgba(76, 53, 30, 0.14);
   background: rgba(255, 248, 236, 0.42);
   color: inherit;
@@ -243,7 +251,7 @@
 
 @media (max-width: 1100px) {
   .periodInner {
-    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
   }
 
   .periodSide {
@@ -267,16 +275,21 @@
   .periodInner {
     width: min(100% - 32px, 1440px);
     grid-template-columns: 1fr;
-    padding-block: 48px;
+    gap: 20px;
+    padding-block: 36px;
   }
 
-  .periodMedia,
+  .periodMedia {
+    aspect-ratio: 4 / 3;
+  }
+
   .periodMediaPlaceholder {
-    min-height: 240px;
+    min-height: 180px;
   }
 
   .periodSide {
     grid-template-columns: 1fr;
+    gap: 8px;
   }
 
   .periodAside,

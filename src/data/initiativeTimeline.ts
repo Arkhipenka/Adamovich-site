@@ -111,7 +111,7 @@ export const initiativeTimeline: InitiativeTimelineItem[] = [
     title: "Адказ Міністэрства",
     description:
       "Атрыманы пазітыўны адказ ад Міністэрства Культуры",
-    image: "/assets/images/initiative/ministry-response.png",
+    image: "/assets/images/initiative/ministry-response.webp",
     imageAlt: "Адказ Міністэрства Культуры",
     category: "documents",
     featured: true,
@@ -124,7 +124,7 @@ export const initiativeTimeline: InitiativeTimelineItem[] = [
     title: "Пачатак конкурса",
     description:
       "Пачатак конкурсу на стварэнне арт-аб’екта. Прыём заявак і ідэй прадаўжаўся да канца мая 2018 года",
-    image: "/assets/images/initiative/art-object.jpg",
+    image: "/assets/images/initiative/art-object.webp",
     imageAlt: "Афіша конкурса на стварэнне арт-аб’екта",
     category: "art-object",
     

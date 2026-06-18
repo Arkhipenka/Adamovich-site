@@ -36,7 +36,7 @@ type LinkCard = Card & {
   href: string;
 };
 
-const supportHeroImage = assetPath("/assets/images/hero/support-hero-paper-background.png");
+const supportHeroImage = assetPath("/assets/images/hero/support-hero-paper-background.webp");
 // TODO: replace hero image with final archive photo.
 
 const paymentLinks = {
@@ -724,7 +724,7 @@ export function SupportPage({ dictionary, locale }: SupportPageProps) {
               alt=""
               fill
               sizes="420px"
-              src={assetPath("/assets/images/hero/manuscripts.png")}
+              src={assetPath("/assets/images/hero/manuscripts.webp")}
             />
           </div>
           <div className={styles.materialsContent}>

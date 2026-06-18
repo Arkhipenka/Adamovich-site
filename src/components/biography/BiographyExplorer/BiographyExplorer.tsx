@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { BiographyPeriodSections } from "@/components/biography/BiographyPeriodSections";
 import type { BiographyPeriod, BiographyTheme } from "@/data/biography";
@@ -90,6 +90,60 @@ export function BiographyExplorer({
   const [mode, setMode] = useState<BiographyMode>("chronology");
   const [activePeriodId, setActivePeriodId] = useState(periods[0]?.id ?? "");
   const [activeThemeId, setActiveThemeId] = useState(themes[0]?.id ?? "");
+  const navRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if (mode !== "chronology") {
+      return;
+    }
+
+    let frameId = 0;
+
+    const updateActivePeriod = () => {
+      frameId = 0;
+
+      const headerHeight =
+        Number.parseFloat(
+          getComputedStyle(document.documentElement).getPropertyValue(
+            "--header-height-scrolled",
+          ),
+        ) || 62;
+      const navigationHeight = navRef.current?.offsetHeight ?? 0;
+      const activationLine = headerHeight + navigationHeight + 24;
+      let nextPeriodId = periods[0]?.id ?? "";
+
+      for (const period of periods) {
+        const section = document.getElementById(getSectionId(period.id));
+
+        if (section && section.getBoundingClientRect().top <= activationLine) {
+          nextPeriodId = period.id;
+        }
+      }
+
+      setActivePeriodId((currentId) =>
+        currentId === nextPeriodId ? currentId : nextPeriodId,
+      );
+    };
+
+    const handleScroll = () => {
+      if (!frameId) {
+        frameId = window.requestAnimationFrame(updateActivePeriod);
+      }
+    };
+
+    updateActivePeriod();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+
+      if (frameId) {
+        window.cancelAnimationFrame(frameId);
+      }
+    };
+  }, [mode, periods]);
 
   if (!periods.length) {
     return null;
@@ -111,7 +165,11 @@ export function BiographyExplorer({
 
   return (
     <section className={styles.explorer} aria-label={copy.ariaLabel}>
-      <nav className={styles.stickyNav} aria-label={copy.ariaLabel}>
+      <nav
+        className={styles.stickyNav}
+        aria-label={copy.ariaLabel}
+        ref={navRef}
+      >
         <div className={styles.stickyInner}>
           <div className={styles.navRow} aria-label={copy.datesLabel} role="tablist">
             {periods.map((period) => {

@@ -7,7 +7,7 @@ import styles from "./WorkDetail.module.css";
 export type WorkDetailSectionId =
   | "annotation"
   | "history"
-  | "meaning"
+  | "awards"
   | "quotes"
   | "reviews"
   | "materials"

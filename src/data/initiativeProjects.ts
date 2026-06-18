@@ -99,7 +99,7 @@ export const initiativeProjects: InitiativeProject[] = [
       ru: "Театрализованная экскурсия по местам Алеся Адамовича в Глуше, во время которой герои его произведений ожили в исполнении актёров Бобруйского театра имени Винцента Дунина-Марцинкевича.",
       en: "A theatrical tour through the places connected with Ales Adamovich in Hluša, where characters from his works came to life through performances by actors of the Babrujsk Vincent Dunin-Marcinkievič Theatre.",
     },
-    image: "/assets/images/initiative/theatrical-excursion.png",
+    image: "/assets/images/initiative/theatrical-excursion.webp",
     imageAlt: {
       be: "Сустрэча і прэзентацыя ініцыятывы",
       ru: "Встреча и презентация инициативы",

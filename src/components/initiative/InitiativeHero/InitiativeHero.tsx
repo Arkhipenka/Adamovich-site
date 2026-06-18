@@ -49,38 +49,11 @@ export function InitiativeHero({ locale }: InitiativeHeroProps) {
       <div className={styles.visual} aria-hidden="true">
         <Image
           alt=""
-          className={styles.paperImage}
+          className={styles.backgroundImage}
           fill
           priority
           sizes="100vw"
-          src={assetPath("/assets/images/initiative/initiative-paper-background.png")}
-        />
-        <Image
-          alt=""
-          className={styles.blueWashImage}
-          height={700}
-          priority
-          sizes="(max-width: 760px) 120vw, 58vw"
-          src={assetPath("/assets/images/initiative/initiative-blue-wash.png")}
-          width={1000}
-        />
-        <Image
-          alt=""
-          className={styles.stopImage}
-          height={1100}
-          priority
-          sizes="(max-width: 760px) 128vw, 48vw"
-          src={assetPath("/assets/images/initiative/initiative-stop-layer.png")}
-          width={1153}
-        />
-        <Image
-          alt=""
-          className={styles.monumentImage}
-          height={1149}
-          priority
-          sizes="(max-width: 760px) 38vw, 16vw"
-          src={assetPath("/assets/images/initiative/initiative-monument-layer.png")}
-          width={326}
+          src={assetPath("/assets/images/initiative/initiative-hero-complete.webp")}
         />
       </div>
       <div className={styles.heroOverlay} aria-hidden="true" />

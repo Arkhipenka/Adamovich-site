@@ -59,7 +59,7 @@ export const exampleMaterials: MaterialCardData[] = [
     category: "Публицистика",
     description:
       "Материал для будущего расширения раздела статей, публицистики и архивных публикаций Адамовича.",
-    image: "/assets/images/hero/hero-books-manuscripts.png",
+    image: "/assets/images/hero/hero-books-manuscripts.webp",
     href: "/ru/bibliography",
   },
   {

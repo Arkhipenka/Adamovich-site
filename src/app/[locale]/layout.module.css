@@ -1,7 +1,6 @@
 .contentField {
   position: relative;
   isolation: isolate;
-  overflow: hidden;
   background:
     linear-gradient(
       180deg,

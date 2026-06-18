@@ -651,7 +651,7 @@ export function ContactsPage({ locale }: ContactsPageProps) {
           fill
           priority
           sizes="100vw"
-          src={assetPath("/assets/images/hero/contacts-hero-paper-background.png")}
+          src={assetPath("/assets/images/hero/contacts-hero-paper-background.webp")}
         />
         <div className={styles.heroOverlay} />
 
@@ -737,7 +737,7 @@ export function ContactsPage({ locale }: ContactsPageProps) {
                 alt=""
                 fill
                 sizes="280px"
-                src={assetPath("/assets/images/hero/hero-books-manuscripts.png")}
+                src={assetPath("/assets/images/hero/hero-books-manuscripts.webp")}
               />
             </div>
           </div>
@@ -830,7 +830,7 @@ export function ContactsPage({ locale }: ContactsPageProps) {
               alt=""
               fill
               sizes="320px"
-              src={assetPath("/assets/images/hero/hero-books-manuscripts.png")}
+              src={assetPath("/assets/images/hero/hero-books-manuscripts.webp")}
             />
           </div>
         </div>

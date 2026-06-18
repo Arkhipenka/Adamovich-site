@@ -1,13 +1,14 @@
 .hero {
   position: relative;
   display: grid;
+  min-height: 100vh;
   min-height: 100svh;
   align-items: center;
   overflow: hidden;
   padding:
-    calc(var(--header-height) + clamp(56px, 8vh, 112px))
+    calc(var(--header-height) + clamp(48px, 7vh, 88px))
     max(var(--page-gutter), calc((100vw - var(--container-wide, var(--container))) / 2))
-    clamp(72px, 10vh, 128px);
+    clamp(56px, 8vh, 96px);
   color: var(--color-paper-text, #1c1712);
   background:
     radial-gradient(circle at 18% 42%, rgba(255, 252, 244, 0.38), transparent 34rem),
@@ -73,6 +74,7 @@
   position: relative;
   z-index: 3;
   max-width: 700px;
+  padding-block: 24px;
 }
 
 .eyebrow {
@@ -114,7 +116,8 @@
 
 @media (max-width: 1100px) {
   .hero {
-    padding-top: calc(var(--header-height) + 64px);
+    min-height: clamp(620px, 78svh, 760px);
+    padding-top: calc(var(--header-height) + 48px);
   }
 
   .heroImage {
@@ -141,11 +144,15 @@
 
 @media (max-width: 640px) {
   .hero {
-    min-height: 100svh;
+    min-height: clamp(560px, 82svh, 680px);
     padding:
-      calc(var(--header-height) + 44px)
+      calc(var(--header-height) + 32px)
       20px
-      56px;
+      40px;
+  }
+
+  .heroContent {
+    padding-block: 12px;
   }
 
   .heroImage {

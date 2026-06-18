@@ -142,7 +142,7 @@ export const biographyPeriodsBe: BiographyPeriod[] = [
       "Алесь Адамовіч нарадзіўся ў сям’і служачых. У дакументах замацавалася дата 3 верасня 1927 года, але ў біяграфічных матэрыялах згадваецца і сапраўдная дата — 3 жніўня 1926 года.",
       "У 1928 годзе сям’я пераехала ў Глушу. Тут прайшлі школьныя гады, першыя чытанні і першыя назіранні за жыццём людзей, якія пазней стануць галоўнай мерай яго літаратуры.",
     ],
-    image: "/assets/images/hero/glusha-pharmacy-1985.jpg",
+    image: "/assets/images/hero/glusha-pharmacy-1985.webp",
     imageAlt: "Глуша, месца памяці Алеся Адамовіча",
     imageCaption: "Глуша — месца, да якога Адамовіч вяртаўся ў памяці і тэкстах.",
     events: [
@@ -408,7 +408,7 @@ export const biographyPeriodsBe: BiographyPeriod[] = [
       "У студзені 1994 года Алесь Адамовіч памёр пасля інфаркту і быў пахаваны ў Глушы побач з роднымі.",
       "Яго спадчына працягвае адкрывацца ў даследаваннях, выданнях, аўдыягідах, мемарыяльных ініцыятывах і новых размовах пра памяць.",
     ],
-    image: "/assets/images/portraits/adamovich-desk-minsk-1989.jpg",
+    image: "/assets/images/portraits/adamovich-desk-minsk-1989.webp",
     imageAlt: "Алесь Адамовіч у Мінску, 1989 год",
     imageCaption: "Спадчына Адамовіча застаецца жывой часткай культурнай памяці.",
     events: [
@@ -451,7 +451,7 @@ export const biographyPeriodsRu: BiographyPeriod[] = [
       "Алесь Адамович родился в семье служащих. В документах закрепилась дата 3 сентября 1927 года, но в биографических материалах упоминается и настоящая дата — 3 августа 1926 года.",
       "В 1928 году семья переехала в Глушу. Здесь прошли школьные годы, первые чтения и первые наблюдения за жизнью людей, которые позже станут главной мерой его литературы.",
     ],
-    image: "/assets/images/hero/glusha-pharmacy-1985.jpg",
+    image: "/assets/images/hero/glusha-pharmacy-1985.webp",
     imageAlt: "Глуша, место памяти Алеся Адамовича",
     imageCaption: "Глуша — место, к которому Адамович возвращался в памяти и текстах.",
     events: [
@@ -717,7 +717,7 @@ export const biographyPeriodsRu: BiographyPeriod[] = [
       "В январе 1994 года Алесь Адамович умер после инфаркта и был похоронен в Глуше рядом с родными.",
       "Его наследие продолжает открываться в исследованиях, изданиях, аудиогидах, мемориальных инициативах и новых разговорах о памяти.",
     ],
-    image: "/assets/images/portraits/adamovich-desk-minsk-1989.jpg",
+    image: "/assets/images/portraits/adamovich-desk-minsk-1989.webp",
     imageAlt: "Алесь Адамович в Минске, 1989 год",
     imageCaption: "Наследие Адамовича остаётся живой частью культурной памяти.",
     events: [
@@ -760,7 +760,7 @@ export const biographyPeriodsEn: BiographyPeriod[] = [
       "Adamovich was born into a family of employees. Archival and biographical materials preserve the story of two dates: the official date and the date remembered in family history.",
       "In 1928, the family moved to Hlusha. His school years, first readings, and first observations of people’s lives happened there.",
     ],
-    image: "/assets/images/hero/glusha-pharmacy-1985.jpg",
+    image: "/assets/images/hero/glusha-pharmacy-1985.webp",
     imageAlt: "Hlusha, a place of memory for Ales Adamovich",
     imageCaption: "Hlusha remained a point of return in Adamovich’s memory and writing.",
     events: [
@@ -1026,7 +1026,7 @@ export const biographyPeriodsEn: BiographyPeriod[] = [
       "In January 1994, Ales Adamovich died after a heart attack and was buried in Hlusha next to his relatives.",
       "His legacy continues through research, editions, audio guides, memorial initiatives, and new conversations about memory.",
     ],
-    image: "/assets/images/portraits/adamovich-desk-minsk-1989.jpg",
+    image: "/assets/images/portraits/adamovich-desk-minsk-1989.webp",
     imageAlt: "Ales Adamovich in Minsk, 1989",
     imageCaption: "Adamovich’s legacy remains a living part of cultural memory.",
     events: [

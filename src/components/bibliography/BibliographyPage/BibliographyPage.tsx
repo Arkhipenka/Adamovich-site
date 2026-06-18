@@ -9,7 +9,7 @@ import type { Locale } from "@/types/common.types";
 import styles from "./BibliographyPage.module.css";
 
 const heroCollageImage = assetPath(
-  "/assets/images/bibliography/bibliography-hero-collage.png",
+  "/assets/images/bibliography/bibliography-hero-collage.webp",
 );
 
 const bibliographyPageContent = {

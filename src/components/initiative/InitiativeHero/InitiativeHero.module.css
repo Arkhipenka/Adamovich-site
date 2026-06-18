@@ -4,10 +4,6 @@
   --initiative-paper-muted: var(--color-paper-muted, #5d5043);
   --initiative-paper-border: var(--color-paper-border, rgba(76, 53, 30, 0.18));
   --initiative-paper-accent: var(--color-paper-accent, #9a6826);
-  --initiative-edge: max(
-    var(--page-gutter),
-    calc((100vw - var(--container-wide, var(--container))) / 2)
-  );
 
   position: relative;
   min-height: 100vh;
@@ -15,23 +11,6 @@
   overflow: hidden;
   background: var(--initiative-paper-bg);
   color: var(--initiative-paper-text);
-}
-
-.hero::after {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 7;
-  height: clamp(120px, 18vh, 220px);
-  content: "";
-  pointer-events: none;
-  background: linear-gradient(
-    to bottom,
-    rgba(242, 234, 219, 0) 0%,
-    rgba(242, 234, 219, 0.72) 54%,
-    var(--initiative-paper-bg) 88%
-  );
 }
 
 .visual {
@@ -42,82 +21,23 @@
   pointer-events: none;
 }
 
-.paperImage {
-  z-index: 1;
+.backgroundImage {
   object-fit: cover;
   object-position: center center;
-  opacity: 0.98;
-  scale: 1.02;
-  user-select: none;
-}
-
-.stopImage {
-  position: absolute;
-  right: calc(var(--initiative-edge) + clamp(20px, 2vw, 30px));
-  bottom: clamp(28px, 3vh, 42px);
-  z-index: 3;
-  width: min(42vw, 680px);
-  max-width: none;
-  max-height: min(68vh, 680px);
-  height: auto;
-  object-fit: contain;
-  user-select: none;
-}
-
-.monumentImage {
-  position: absolute;
-  right: calc(var(--initiative-edge) + clamp(8px, 1.6vw, 32px));
-  bottom: clamp(16px, 2vh, 38px);
-  z-index: 4;
-  width: clamp(105px, 6vw, 185px);
-  max-width: none;
-  max-height: min(70vh, 720px);
-  height: auto;
-  object-fit: contain;
-  user-select: none;
-}
-
-.blueWashImage {
-  position: absolute;
-  right: calc(var(--initiative-edge) + clamp(130px, 10vw, 230px));
-  bottom: clamp(70px, 8vh, 124px);
-  z-index: 2;
-  width: min(54vw, 820px);
-  max-width: none;
-  height: auto;
-  opacity: 0.16;
-  filter: blur(20px);
-  mix-blend-mode: multiply;
-  clip-path: ellipse(48% 40% at 55% 54%);
-  transform: rotate(-4deg);
   user-select: none;
 }
 
 .heroOverlay {
   position: absolute;
   inset: 0;
-  z-index: 5;
+  z-index: 2;
   pointer-events: none;
-  background:
-    linear-gradient(
-      90deg,
-      rgba(242, 234, 219, 0.99) 0%,
-      rgba(242, 234, 219, 0.96) 28%,
-      rgba(242, 234, 219, 0.78) 43%,
-      rgba(242, 234, 219, 0.24) 64%,
-      rgba(242, 234, 219, 0.02) 100%
-    ),
-    linear-gradient(
-      180deg,
-      rgba(242, 234, 219, 0.12) 0%,
-      rgba(242, 234, 219, 0) 48%,
-      rgba(242, 234, 219, 0.36) 100%
-    );
+  background: transparent;
 }
 
 .inner {
   position: relative;
-  z-index: 6;
+  z-index: 3;
   display: grid;
   grid-template-columns: minmax(440px, 0.44fr) minmax(0, 0.56fr);
   align-items: center;
@@ -128,7 +48,7 @@
 
 .content {
   position: relative;
-  z-index: 6;
+  z-index: 3;
   max-width: 620px;
   padding-top: calc(var(--header-height) + clamp(72px, 9vh, 120px));
   padding-bottom: clamp(88px, 10vh, 132px);
@@ -197,38 +117,9 @@
   .inner {
     width: min(100% - var(--page-gutter) * 2, var(--container-wide, var(--container)));
   }
-
-  .stopImage {
-    right: calc(var(--initiative-edge) + clamp(190px, 12vw, 280px));
-    width: min(41vw, 720px);
-    max-height: min(66vh, 700px);
-  }
-
-  .monumentImage {
-    right: var(--initiative-edge);
-    width: clamp(160px, 10.5vw, 220px);
-    max-height: min(72vh, 740px);
-  }
-
-  .blueWashImage {
-    right: calc(var(--initiative-edge) + clamp(160px, 10vw, 240px));
-    width: min(52vw, 860px);
-  }
 }
 
 @media (max-width: 1440px) {
-  .stopImage {
-    right: calc(var(--initiative-edge) + clamp(118px, 9vw, 180px));
-    width: min(42vw, 620px);
-    max-height: min(64vh, 620px);
-  }
-
-  .monumentImage {
-    right: var(--initiative-edge);
-    width: clamp(126px, 11vw, 168px);
-    max-height: min(68vh, 660px);
-  }
-
   .title {
     font-size: clamp(4.25rem, 5.8vw, 8.25rem);
   }
@@ -243,22 +134,6 @@
     max-width: 520px;
   }
 
-  .heroOverlay {
-    background:
-      linear-gradient(
-        90deg,
-        rgba(242, 234, 219, 0.99) 0%,
-        rgba(242, 234, 219, 0.94) 34%,
-        rgba(242, 234, 219, 0.7) 54%,
-        rgba(242, 234, 219, 0.14) 80%
-      ),
-      linear-gradient(
-        180deg,
-        rgba(242, 234, 219, 0.14) 0%,
-        rgba(242, 234, 219, 0) 48%,
-        rgba(242, 234, 219, 0.42) 100%
-      );
-  }
 }
 
 @media (max-width: 1100px) {
@@ -277,42 +152,17 @@
     padding-bottom: 96px;
   }
 
-  .stopImage {
-    right: -24vw;
-    bottom: 0;
-    width: min(92vw, 720px);
-    max-height: 52svh;
-  }
-
-  .monumentImage {
-    right: var(--page-gutter);
-    bottom: 0;
-    width: clamp(118px, 18vw, 160px);
-    max-height: 52svh;
-    opacity: 0.82;
-  }
-
-  .blueWashImage {
-    right: -12vw;
-    bottom: 10vh;
-    width: min(92vw, 700px);
-    opacity: 0.12;
+  .backgroundImage {
+    object-position: 58% center;
   }
 
   .heroOverlay {
-    background:
-      linear-gradient(
-        90deg,
-        rgba(242, 234, 219, 0.98) 0%,
-        rgba(242, 234, 219, 0.88) 55%,
-        rgba(242, 234, 219, 0.48) 100%
-      ),
-      linear-gradient(
-        180deg,
-        rgba(242, 234, 219, 0.26) 0%,
-        rgba(242, 234, 219, 0.16) 46%,
-        rgba(242, 234, 219, 0.78) 100%
-      );
+    background: linear-gradient(
+      90deg,
+      rgba(242, 234, 219, 0.92) 0%,
+      rgba(242, 234, 219, 0.7) 54%,
+      rgba(242, 234, 219, 0.08) 100%
+    );
   }
 }
 
@@ -341,23 +191,8 @@
     line-height: 1.68;
   }
 
-  .stopImage {
-    right: -58vw;
-    bottom: 0;
-    width: 132vw;
-    max-height: 44svh;
-    opacity: 0.62;
-  }
-
-  .monumentImage {
-    display: none;
-  }
-
-  .blueWashImage {
-    right: -52vw;
-    bottom: 12vh;
-    width: 128vw;
-    opacity: 0.09;
+  .backgroundImage {
+    object-position: 64% center;
   }
 
   .heroOverlay {
@@ -378,19 +213,8 @@
 }
 
 @media (max-width: 430px) {
-  .stopImage {
-    right: -70vw;
-    width: 152vw;
-  }
-
-  .monumentImage {
-    right: -16vw;
-    opacity: 0.42;
-  }
-
-  .blueWashImage {
-    right: -62vw;
-    width: 144vw;
+  .backgroundImage {
+    object-position: 67% center;
   }
 }
 
@@ -399,10 +223,6 @@
     padding-top: calc(var(--header-height) + 36px);
   }
 
-  .stopImage {
-    right: -80vw;
-    width: 166vw;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -418,16 +238,8 @@
 
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
-    .paperImage {
+    .backgroundImage {
       animation: paperPresence linear both;
-      animation-timeline: view();
-      animation-range: entry 0% exit 100%;
-    }
-
-    .blueWashImage,
-    .stopImage,
-    .monumentImage {
-      animation: layerLift linear both;
       animation-timeline: view();
       animation-range: entry 0% exit 100%;
     }
@@ -444,12 +256,3 @@
   }
 }
 
-@keyframes layerLift {
-  from {
-    translate: 0 0;
-  }
-
-  to {
-    translate: 0 -28px;
-  }
-}
