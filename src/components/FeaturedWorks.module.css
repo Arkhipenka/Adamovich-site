@@ -82,10 +82,6 @@
     padding-block: clamp(56px, 14vw, 84px);
   }
 
-  .inner {
-    width: min(100% - 40px, var(--container));
-  }
-
   .header {
     align-items: start;
     flex-direction: column;

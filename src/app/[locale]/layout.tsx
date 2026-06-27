@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { Footer } from "@/components/layout/Footer/Footer";
 import { Header } from "@/components/layout/Header/Header";
 import { defaultLocale, isLocale, locales, siteConfig } from "@/config/site";
@@ -63,9 +64,13 @@ export default async function RootLayout({ children, params }: RootLayoutProps) 
             <Header locale={activeLocale} dictionary={dictionary} />
             <div className={styles.contentField}>{children}</div>
             <Footer locale={activeLocale} />
+            <GoogleAnalytics />
           </>
         ) : (
-          children
+          <>
+            {children}
+            <GoogleAnalytics />
+          </>
         )}
       </body>
     </html>

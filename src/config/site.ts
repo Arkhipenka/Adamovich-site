@@ -25,7 +25,8 @@ export const routeSegments = [
 
 export type RouteSegment = (typeof routeSegments)[number];
 
-const contactEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "info@adamovich.eu";
+const contactEmail =
+  process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "adamovich1926@gmail.com";
 const contactPhone = process.env.NEXT_PUBLIC_CONTACT_PHONE ?? "+48 733-25-90-97";
 const contactPhoneHref = process.env.NEXT_PUBLIC_CONTACT_PHONE_HREF ?? "+48733259097";
 const contactTelegram = process.env.NEXT_PUBLIC_CONTACT_TELEGRAM ?? "@adamovich_bot";

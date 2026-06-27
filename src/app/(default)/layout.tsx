@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { defaultLocale, siteConfig } from "@/config/site";
 import "../globals.css";
 
@@ -16,7 +17,10 @@ export default function DefaultRootLayout({
 }>) {
   return (
     <html lang={defaultLocale}>
-      <body>{children}</body>
+      <body>
+        {children}
+        <GoogleAnalytics />
+      </body>
     </html>
   );
 }

@@ -15,7 +15,7 @@ export const homePageContent: HomePageContent = {
         en: "Ales Adamovich",
       },
       quote: {
-        be: "Чалавек Еўрапескага маштабу",
+        be: "Чалавек Еўрапейскага маштабу",
         ru: "Человек Европейского масштаба",
         en: "A figure of European stature",
       },

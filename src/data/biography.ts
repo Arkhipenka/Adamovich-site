@@ -61,6 +61,7 @@ export type BiographyPeriod = {
   aside?: BiographyAside;
   anchors?: BiographyThematicAnchor[];
   themes?: BiographyThemeId[];
+  tags?: string[];
   media?: BiographyMediaItem[];
   links?: BiographyLink[];
 };
@@ -129,22 +130,37 @@ export const biographyThemesCopy = {
 export const biographyPeriodsBe: BiographyPeriod[] = [
   {
     id: "childhood",
-    year: "1927–1940",
-    title: "Дзяцінства і Глуша",
+    year: "1926–1940",
+    title: "Дзяцінства. Сямья.",
     shortDescription:
-      "Пачатак жыцця, сям’я і месца, якое стала сапраўднай малой радзімай пісьменніка.",
+      "Алесь Адамовіч нарадзіўся ў Канюхах, але сваёй сапраўднай малой радзімай называў Глушу — рабочы пасёлак каля Бабруйска, куды сям’я пераехала ў 1928 годзе.",
     detail:
       "Біяграфія Алеся Адамовіча пачынаецца з сямейнай гісторыі і пераезду ў Глушу. Менавіта гэтае месца пазней стане для яго прасторай памяці, вяртання і маральнага вытоку.",
-    sectionTitle: "Дзяцінства і Глуша",
+    sectionTitle: "Дзяцінства. Сям'я.",
     sectionLead:
       "Глуша была для Адамовіча не проста пасёлкам дзяцінства. Яна стала ўнутранай кропкай вяртання, праз якую ён глядзеў на чалавека, вайну і памяць.",
     sectionText: [
-      "Алесь Адамовіч нарадзіўся ў сям’і служачых. У дакументах замацавалася дата 3 верасня 1927 года, але ў біяграфічных матэрыялах згадваецца і сапраўдная дата — 3 жніўня 1926 года.",
-      "У 1928 годзе сям’я пераехала ў Глушу. Тут прайшлі школьныя гады, першыя чытанні і першыя назіранні за жыццём людзей, якія пазней стануць галоўнай мерай яго літаратуры.",
+      "Нарадзіўся ў сям’і служачых 3 верасня 1927 года — гэта пашпартная дата. Насамрэч Алесь Адамовіч нарадзіўся 3 жніўня 1926 года: падчас вайны маці, ратуючы сына ад згону ў Нямеччыну, выправіла дату яго нараджэння ў школьным пасведчанні.",
+      "Нарадзіўся ў вёсцы Канюхі Капыльскага раёна Мінскай вобласці. «Самае таямнічае, легендарнае месца ў маёй біяграфіі — гэтыя самыя Канюхі, у іх я нарадзіўся... Я нічога з Канюхоўскага жыцця не памятаю...»",
+      "Яго бацька, Міхаіл Іосіфавіч Адамовіч (1902–1948), родам з вёскі Рачэнь Слуцкага раёна, вучыўся на лекара і ў студэнцкія вакацыі падпрацоўваў у Капыльскім доме адпачынку. Пасля заканчэння медыцынскага факультэта Беларускага дзяржаўнага ўніверсітэта, куды паступіў у 1923 годзе, у 1928 годзе быў накіраваны на пастаянную працу ў пасёлак Глуша Бабруйскага раёна Магілёўскай вобласці.",
+      "У Глушу ён пераехаў разам з жонкай Ганнай Мітрафанаўнай (1904–1979), родам з вёскі Забалоцце Любанскага раёна, якая ў 1935–1936 гадах скончыла Магілёўскую фармацэўтычную школу, і сынамі: Яўгенам (1924–1992), будучым доктарам, і Аляксандрам. «А сапраўдная малая радзіма, дзе я ўваходзіў ва ўзрост і ў жыццё, — рабочы пасёлак Глуша. Савецкае ўдакладненне: шклозавод “Камінтэрн”».",
+      "У 1930 годзе дзеда Алеся Адамовіча, Мітрафана Фаміча Тычыну, «раскулачылі» і выслалі разам з жонкай і трыма дзецьмі з сямі ў далёкую і халодную Якуцію. Маці Алеся Адамовіча ўлады пастаянна нагадвалі, што яна «дачка кулака». Дзед Мітрафан застаўся навек у якуцкай зямлі, астатнія члены сям’і вярнуліся ў Беларусь. Гэтыя падзеі адгукнуліся ў шматлікіх творах Адамовіча.",
+      "У Глушы будучы пісьменнік вучыўся з першага па сёмы клас. Любіў кнігі, асабліва Аляксандра Пушкіна, шмат разоў перачытваў «Вайну і мір» Льва Талстога. Найбольшым мужчынскім аўтарытэтам для яго тады былі бацька і дзядзька Антон — брат маці Антон Мітрафанавіч, настаўнік матэматыкі.",
+      "Міхаіл Іосіфавіч Адамовіч дамогся будаўніцтва бальніцы ў пасёлку Глуша і загадваў ёю. «Радыус аўтарытэту сельскага лекара», паводле слоў Алеся Адамовіча, заслужана ахопліваў не толькі пасёлак, але і ўсё наваколле. Са студзеня 1940 года бацька знаходзіўся на ваеннай службе. З першых дзён вайны ён быў на фронце, служыў тэрапеўтам 13-й арміі пад камандаваннем Мікалая Пухава і даслужыўся да падпалкоўніка медыцынскай службы.",
     ],
-    image: "/assets/images/hero/glusha-pharmacy-1985.webp",
-    imageAlt: "Глуша, месца памяці Алеся Адамовіча",
-    imageCaption: "Глуша — месца, да якога Адамовіч вяртаўся ў памяці і тэкстах.",
+    image: "/assets/images/biography/adamovich-family-archive.webp",
+    imageAlt: "Трохгадовы Саша Адамовіч з бацькамі і братам",
+    imageCaption: "Трохгадовы Саша Адамовіч з бацькамі і братам. 1929 год.",
+    tags: ["сям’я", "Глуша", "дзяцінства"],
+    media: [
+      {
+        id: "mother-and-brother",
+        type: "image",
+        src: "/assets/images/biography/adamovich-with-mother-and-brother.webp",
+        alt: "Алесь Адамовіч з маці і братам Яўгенам",
+        caption: "Алесь Адамовіч з маці і братам Яўгенам. 1938 год.",
+      },
+    ],
     events: [
       {
         id: "birth-date",
@@ -153,27 +169,12 @@ export const biographyPeriodsBe: BiographyPeriod[] = [
         description:
           "Пашпартная дата — 3 верасня 1927 года; сапраўдная дата ў біяграфічных матэрыялах — 3 жніўня 1926 года.",
       },
-      {
-        id: "hlusha-move",
-        year: "1928",
-        title: "Пераезд у Глушу",
-        description:
-          "Сям’я пераехала ў пасёлак Глуша, які пазней Адамовіч называў сваёй сапраўднай малой радзімай.",
-        featured: true,
-      },
     ],
     aside: {
       label: "З архіва",
       title: "Малая радзіма",
       text: "Глуша ў біяграфіі Адамовіча — гэта не толькі геаграфія, але і асабістая памяць, з якой вырастала яго разуменне адказнасці перад людзьмі.",
     },
-    anchors: [
-      {
-        id: "anchor-repressions",
-        title: "Рэпрэсіі і сямейная памяць",
-        text: "У 1930 годзе дзеда Алеся Адамовіча, Мітрафана Фаміча Тычыну, раскулачылі і выслалі ў Якуцію. Гэтая сямейная траўма стала часткай памяці, якая пазней адгукнулася ў творах і грамадзянскай пазіцыі Адамовіча.",
-      },
-    ],
   },
   {
     id: "war",
@@ -448,12 +449,27 @@ export const biographyPeriodsRu: BiographyPeriod[] = [
     sectionLead:
       "Глуша была для Адамовича не просто посёлком детства. Она стала внутренней точкой возвращения, через которую он смотрел на человека, войну и память.",
     sectionText: [
-      "Алесь Адамович родился в семье служащих. В документах закрепилась дата 3 сентября 1927 года, но в биографических материалах упоминается и настоящая дата — 3 августа 1926 года.",
-      "В 1928 году семья переехала в Глушу. Здесь прошли школьные годы, первые чтения и первые наблюдения за жизнью людей, которые позже станут главной мерой его литературы.",
+      "Алесь Адамович родился в семье служащих 3 сентября 1927 года — это паспортная дата. В действительности он родился 3 августа 1926 года: во время войны мать, спасая сына от угона в Германию, исправила дату его рождения в школьном свидетельстве.",
+      "Он родился в деревне Конюхи Копыльского района Минской области. «Самое таинственное, легендарное место в моей биографии — эти самые Конюхи, в них я родился... Я ничего из конюховской жизни не помню...»",
+      "Его отец, Михаил Иосифович Адамович (1902–1948), родом из деревни Рачень Слуцкого района, учился на врача и во время студенческих каникул подрабатывал в Копыльском доме отдыха. После окончания медицинского факультета Белорусского государственного университета, куда поступил в 1923 году, в 1928 году был направлен на постоянную работу в посёлок Глуша Бобруйского района Могилёвской области.",
+      "В Глушу он переехал вместе с женой Анной Митрофановной (1904–1979), родом из деревни Заболотье Любанского района, окончившей в 1935–1936 годах Могилёвскую фармацевтическую школу, и сыновьями: Евгением (1924–1992), будущим врачом, и Александром. «А настоящая малая родина, где я входил в возраст и в жизнь, — рабочий посёлок Глуша. Советское уточнение: стеклозавод “Коминтерн”».",
+      "В 1930 году деда Алеся Адамовича, Митрофана Фомича Тычину, «раскулачили» и выслали вместе с женой и тремя детьми из семи в далёкую и холодную Якутию. Матери Алеся Адамовича власти постоянно напоминали, что она «дочь кулака». Дед Митрофан навсегда остался в якутской земле, остальные члены семьи вернулись в Беларусь. Эти события отозвались во многих произведениях Адамовича.",
+      "В Глуше будущий писатель учился с первого по седьмой класс. Любил книги, особенно Александра Пушкина, много раз перечитывал «Войну и мир» Льва Толстого. Главными мужскими авторитетами для него тогда были отец и дядя Антон — брат матери Антон Митрофанович, учитель математики.",
+      "Михаил Иосифович Адамович добился строительства больницы в посёлке Глуша и руководил ею. «Радиус авторитета сельского врача», по словам Алеся Адамовича, заслуженно охватывал не только посёлок, но и всю округу. С января 1940 года отец находился на военной службе. С первых дней войны он был на фронте, служил терапевтом 13-й армии под командованием Николая Пухова и дослужился до подполковника медицинской службы.",
     ],
-    image: "/assets/images/hero/glusha-pharmacy-1985.webp",
-    imageAlt: "Глуша, место памяти Алеся Адамовича",
-    imageCaption: "Глуша — место, к которому Адамович возвращался в памяти и текстах.",
+    image: "/assets/images/biography/adamovich-family-archive.webp",
+    imageAlt: "Трёхлетний Саша Адамович с родителями и братом",
+    imageCaption: "Трёхлетний Саша Адамович с родителями и братом. 1929 год.",
+    tags: ["семья", "Глуша", "детство"],
+    media: [
+      {
+        id: "mother-and-brother",
+        type: "image",
+        src: "/assets/images/biography/adamovich-with-mother-and-brother.webp",
+        alt: "Алесь Адамович с матерью и братом Евгением",
+        caption: "Алесь Адамович с матерью и братом Евгением. 1938 год.",
+      },
+    ],
     events: [
       {
         id: "birth-date",
@@ -462,27 +478,12 @@ export const biographyPeriodsRu: BiographyPeriod[] = [
         description:
           "Паспортная дата — 3 сентября 1927 года; настоящая дата в биографических материалах — 3 августа 1926 года.",
       },
-      {
-        id: "hlusha-move",
-        year: "1928",
-        title: "Переезд в Глушу",
-        description:
-          "Семья переехала в посёлок Глуша, который позже Адамович называл своей настоящей малой родиной.",
-        featured: true,
-      },
     ],
     aside: {
       label: "Из архива",
       title: "Малая родина",
       text: "Глуша в биографии Адамовича — это не только география, но и личная память, из которой вырастало его понимание ответственности перед людьми.",
     },
-    anchors: [
-      {
-        id: "anchor-repressions",
-        title: "Репрессии и семейная память",
-        text: "В 1930 году деда Алеся Адамовича, Митрофана Фомича Тычину, раскулачили и выслали в Якутию. Эта семейная травма стала частью памяти, которая позже отозвалась в произведениях и гражданской позиции Адамовича.",
-      },
-    ],
   },
   {
     id: "war",
@@ -757,12 +758,28 @@ export const biographyPeriodsEn: BiographyPeriod[] = [
     sectionLead:
       "Hlusha was more than a childhood settlement. It became an inner point of return from which Adamovich thought about people, war, and memory.",
     sectionText: [
-      "Adamovich was born into a family of employees. Archival and biographical materials preserve the story of two dates: the official date and the date remembered in family history.",
-      "In 1928, the family moved to Hlusha. His school years, first readings, and first observations of people’s lives happened there.",
+      "Ales Adamovich was born into a family of employees on September 3, 1927, according to his official documents. His actual birth date was August 3, 1926: during the war, his mother altered the date on his school certificate to protect him from being deported to Germany.",
+      "He was born in the village of Kaniukhy, Kapyl District, Minsk Region. “The most mysterious, legendary place in my biography is Kaniukhy itself, where I was born... I remember nothing of life there...”",
+      "His father, Mikhail Iosifovich Adamovich (1902–1948), came from the village of Rachen in Slutsk District. He studied medicine and worked at the Kapyl holiday home during university vacations. After graduating from the medical faculty of Belarusian State University, which he entered in 1923, he was assigned to permanent work in Hlusha, Babruisk District, Mahiliou Region, in 1928.",
+      "He moved to Hlusha with his wife Hanna Mitrafanauna (1904–1979), from the village of Zabalotstse in Liuban District, who graduated from the Mahiliou School of Pharmacy in 1935–1936, and their sons: Yauhen (1924–1992), who would become a doctor, and Aliaksandr. “My true home ground, where I came of age and entered life, was the workers’ settlement of Hlusha. The Soviet clarification: the Comintern glassworks.”",
+      "In 1930, Ales Adamovich’s grandfather, Mitrafan Famich Tychyna, was dispossessed and exiled with his wife and three of their seven children to distant, cold Yakutia. The authorities repeatedly reminded Adamovich’s mother that she was the “daughter of a kulak.” His grandfather remained forever in Yakut soil; the other family members returned to Belarus. These events echoed through many of Adamovich’s works.",
+      "In Hlusha, the future writer attended school from the first through the seventh grade. He loved books, especially Alexander Pushkin, and reread Leo Tolstoy’s War and Peace many times. His strongest male role models were his father and his uncle Anton, his mother’s brother and a mathematics teacher.",
+      "Mikhail Iosifovich Adamovich secured the construction of a hospital in Hlusha and became its director. In Ales Adamovich’s words, the “radius of authority of a rural doctor” deservedly extended beyond the settlement to the entire surrounding area. From January 1940, his father served in the military. He was at the front from the first days of the war, worked as a physician with the 13th Army under Nikolai Pukhov, and rose to the rank of lieutenant colonel in the medical service.",
     ],
-    image: "/assets/images/hero/glusha-pharmacy-1985.webp",
-    imageAlt: "Hlusha, a place of memory for Ales Adamovich",
-    imageCaption: "Hlusha remained a point of return in Adamovich’s memory and writing.",
+    image: "/assets/images/biography/adamovich-family-archive.webp",
+    imageAlt: "Three-year-old Sasha Adamovich with his parents and brother",
+    imageCaption:
+      "Three-year-old Sasha Adamovich with his parents and brother, 1929.",
+    tags: ["family", "Hlusha", "childhood"],
+    media: [
+      {
+        id: "mother-and-brother",
+        type: "image",
+        src: "/assets/images/biography/adamovich-with-mother-and-brother.webp",
+        alt: "Ales Adamovich with his mother and brother Yauhen",
+        caption: "Ales Adamovich with his mother and brother Yauhen, 1938.",
+      },
+    ],
     events: [
       {
         id: "birth-date",
@@ -771,27 +788,12 @@ export const biographyPeriodsEn: BiographyPeriod[] = [
         description:
           "Biographical materials preserve the story of Adamovich’s official and actual birth dates.",
       },
-      {
-        id: "hlusha-move",
-        year: "1928",
-        title: "Move to Hlusha",
-        description:
-          "The family moved to Hlusha, which Adamovich later called his true home ground.",
-        featured: true,
-      },
     ],
     aside: {
       label: "Archive",
       title: "Home Ground",
       text: "In Adamovich’s biography, Hlusha is not only geography but also personal memory.",
     },
-    anchors: [
-      {
-        id: "anchor-repressions",
-        title: "Repression and Family Memory",
-        text: "The family memory of dispossession and exile became part of the moral background that later echoed in Adamovich’s writing and civic position.",
-      },
-    ],
   },
   {
     id: "war",
@@ -1095,7 +1097,7 @@ export const biographyThemesBe: BiographyTheme[] = [
     title: "Палітычныя рэпрэсіі",
     description:
       "Сямейная памяць пра раскулачванне, савецкі ціск і пазнейшая праваабарончая пазіцыя.",
-    targetId: "anchor-repressions",
+    targetId: "bio-period-childhood",
     tag: "памяць",
     periodId: "childhood",
   },
@@ -1152,7 +1154,7 @@ export const biographyThemesRu: BiographyTheme[] = [
     title: "Политические репрессии",
     description:
       "Семейная память о раскулачивании, советское давление и позднейшая правозащитная позиция.",
-    targetId: "anchor-repressions",
+    targetId: "bio-period-childhood",
     tag: "память",
     periodId: "childhood",
   },
@@ -1209,7 +1211,7 @@ export const biographyThemesEn: BiographyTheme[] = [
     title: "Political Repression",
     description:
       "Family memory of dispossession, Soviet pressure, and later human rights work.",
-    targetId: "anchor-repressions",
+    targetId: "bio-period-childhood",
     tag: "memory",
     periodId: "childhood",
   },

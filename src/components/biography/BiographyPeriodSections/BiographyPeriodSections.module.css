@@ -21,14 +21,45 @@
   );
 }
 
+.periodSectionFeatured {
+  background:
+    radial-gradient(circle at 50% 22%, rgba(255, 252, 246, 0.72), transparent 34rem),
+    linear-gradient(180deg, rgba(255, 250, 241, 0.72), rgba(243, 234, 220, 0.94));
+}
+
+.periodSectionPlaceholder {
+  background: linear-gradient(
+    180deg,
+    rgba(246, 238, 224, 0.84),
+    rgba(241, 231, 216, 0.92)
+  );
+}
+
 .periodInner {
-  width: min(100% - 48px, 1440px);
+  width: min(
+    100% - var(--page-gutter) * 2,
+    var(--container-wide, var(--container))
+  );
   margin-inline: auto;
   padding: clamp(44px, 5.5vw, 72px) 0;
   display: grid;
   grid-template-columns: minmax(250px, 0.72fr) minmax(340px, 1.08fr) minmax(280px, 0.78fr);
   gap: clamp(22px, 3vw, 42px);
   align-items: start;
+}
+
+.periodSectionFeatured .periodInner {
+  grid-template-columns:
+    minmax(280px, 0.76fr)
+    minmax(420px, 1fr)
+    minmax(340px, 0.9fr);
+  gap: clamp(30px, 3.6vw, 56px);
+}
+
+.periodSectionPlaceholder .periodInner {
+  grid-template-columns: minmax(250px, 0.72fr) minmax(0, 1.86fr);
+  align-items: center;
+  padding-block: clamp(24px, 3.2vw, 42px);
 }
 
 .periodIntro h2 {
@@ -67,7 +98,11 @@
   align-items: center;
   gap: 12px;
   margin-top: 32px;
+  padding: 0;
+  border: 0;
+  background: transparent;
   color: var(--color-paper-accent, #9a6826);
+  cursor: pointer;
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -75,10 +110,47 @@
   text-transform: uppercase;
 }
 
+.periodLink span {
+  display: inline-block;
+  font-size: 1rem;
+  transition: transform 180ms ease;
+}
+
+.linkArrowExpanded {
+  transform: rotate(180deg);
+}
+
+.periodLinkMobile {
+  display: none;
+}
+
+.periodSectionFeatured .periodLinkDesktop {
+  min-height: 50px;
+  margin-top: 32px;
+  padding: 0 22px;
+  border: 1px solid rgba(154, 104, 38, 0.58);
+}
+
 .periodLink:hover,
 .periodLink:focus-visible {
   color: #7e551b;
   outline: none;
+}
+
+.tagList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px 12px;
+  margin: 24px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tagList li {
+  color: rgba(126, 85, 27, 0.78);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
 }
 
 .periodMedia,
@@ -92,8 +164,49 @@
 }
 
 .periodMedia {
-  aspect-ratio: 4 / 3;
   min-height: 0;
+}
+
+.periodMediaPortrait {
+  justify-self: center;
+  width: 100%;
+  max-height: none;
+  padding: 0;
+}
+
+.periodImageButton {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: zoom-in;
+}
+
+.periodImageFrame {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 320px;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.periodMediaPortrait .periodImageFrame {
+  background: rgba(225, 218, 201, 0.54);
+}
+
+.periodImageButton:focus-visible {
+  outline: 2px solid var(--color-paper-accent, #9a6826);
+  outline-offset: -2px;
+}
+
+.periodImageButton .periodImage {
+  transition: transform 220ms ease;
+}
+
+.periodImageButton:hover .periodImage {
+  transform: scale(1.025);
 }
 
 .periodMediaPlaceholder {
@@ -106,12 +219,7 @@
 }
 
 .periodCaption {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  padding: 10px 14px;
-  background: rgba(250, 244, 232, 0.88);
+  padding: 12px 4px 14px;
   color: rgba(28, 23, 18, 0.62);
   font-size: 0.82rem;
   line-height: 1.45;
@@ -144,6 +252,11 @@
   background:
     linear-gradient(135deg, rgba(255, 255, 255, 0.3), transparent 46%),
     rgba(255, 248, 236, 0.5);
+}
+
+.periodSectionFeatured .periodAside {
+  gap: 16px;
+  padding: clamp(24px, 2.4vw, 34px);
 }
 
 .quoteMark {
@@ -188,6 +301,113 @@
 .eventList {
   display: grid;
   gap: 12px;
+}
+
+.eventGroup {
+  display: grid;
+  gap: 10px;
+}
+
+.periodSectionFeatured .eventGroup {
+  padding: clamp(20px, 2vw, 28px);
+  border: 1px solid rgba(76, 53, 30, 0.14);
+  background: rgba(255, 248, 236, 0.42);
+}
+
+.factHeading {
+  margin: 3px 0 0;
+  color: var(--color-paper-accent, #9a6826);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.periodPlaceholderPanel {
+  display: grid;
+  align-content: center;
+  min-height: 72px;
+  padding: clamp(16px, 2vw, 22px);
+  border: 1px solid rgba(76, 53, 30, 0.14);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.34), transparent 48%),
+    rgba(255, 248, 236, 0.48);
+}
+
+.periodPlaceholderPanel p {
+  margin: 0;
+  color: rgba(28, 23, 18, 0.64);
+  font-size: clamp(0.9rem, 1vw, 1rem);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.5;
+}
+
+.imageModal {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  padding: clamp(16px, 4vw, 48px);
+  background: rgba(10, 9, 8, 0.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.imageModalContent {
+  position: relative;
+  display: grid;
+  width: min(100%, 1200px);
+  max-height: calc(100dvh - clamp(32px, 8vw, 96px));
+  grid-template-rows: minmax(0, 1fr) auto;
+  background: rgba(20, 18, 15, 0.96);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.42);
+}
+
+.imageModalFrame {
+  position: relative;
+  width: 100%;
+  height: min(78dvh, 820px);
+  min-height: 0;
+}
+
+.imageModalImage {
+  object-fit: contain;
+}
+
+.imageModalClose {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+  display: grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  background: rgba(15, 13, 11, 0.72);
+  color: #fff;
+  cursor: pointer;
+  font-size: 2rem;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.imageModalClose:hover,
+.imageModalClose:focus-visible {
+  border-color: var(--color-paper-accent, #c29f63);
+  color: var(--color-paper-accent, #c29f63);
+  outline: none;
+}
+
+.imageModalCaption {
+  margin: 0;
+  padding: 12px 18px 14px;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.82rem;
+  line-height: 1.5;
 }
 
 .thematicAnchor,
@@ -249,6 +469,141 @@
   background: rgba(255, 248, 236, 0.7);
 }
 
+.periodSectionFeatured .eventCard {
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.periodSectionFeatured .eventCard:hover,
+.periodSectionFeatured .eventCard:focus-within {
+  background: transparent;
+  transform: none;
+}
+
+.periodSectionFeatured .eventCard + .eventCard {
+  padding-top: 18px;
+  border-top: 1px solid rgba(76, 53, 30, 0.13);
+}
+
+.periodDetails {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition:
+    grid-template-rows 300ms ease,
+    opacity 220ms ease;
+}
+
+.periodDetailsExpanded {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.periodDetailsInner {
+  display: grid;
+  min-height: 0;
+  overflow: hidden;
+  grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
+  gap: clamp(24px, 4vw, 56px);
+  border-top: 1px solid rgba(76, 53, 30, 0.14);
+}
+
+.periodDetailsExpanded .periodDetailsInner {
+  padding-top: clamp(26px, 3vw, 42px);
+}
+
+.detailText {
+  display: grid;
+  align-content: start;
+  gap: 16px;
+  max-width: 780px;
+}
+
+.detailText p,
+.detailTheme p {
+  margin: 0;
+  color: rgba(28, 23, 18, 0.74);
+  font-size: clamp(0.92rem, 1vw, 1rem);
+  line-height: 1.72;
+}
+
+.detailThemes {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+}
+
+.detailTheme {
+  padding: 18px 20px;
+  border-left: 2px solid rgba(154, 104, 38, 0.46);
+  background: rgba(255, 248, 236, 0.36);
+}
+
+.detailTheme span {
+  color: var(--color-paper-accent, #9a6826);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.detailTheme h3 {
+  margin: 8px 0 10px;
+  font-family: var(--font-serif);
+  font-size: clamp(1.15rem, 1.4vw, 1.4rem);
+  line-height: 1.12;
+}
+
+.detailMediaGrid {
+  grid-column: 1 / -1;
+  display: grid;
+  gap: 18px;
+  padding-top: clamp(4px, 1vw, 12px);
+}
+
+.detailMediaGridAside {
+  grid-column: 2;
+  grid-row: 1;
+  justify-items: end;
+  padding-top: 0;
+}
+
+.detailMedia {
+  width: min(100%, 720px);
+  margin: 0;
+}
+
+.detailMediaPortrait {
+  width: min(100%, 430px);
+}
+
+.detailMediaFrame {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  aspect-ratio: 604 / 432;
+  border: 1px solid rgba(76, 53, 30, 0.2);
+  background: rgba(245, 237, 221, 0.78);
+  box-shadow: 0 14px 34px rgba(57, 42, 25, 0.12);
+}
+
+.detailMediaPortrait .detailMediaFrame {
+  aspect-ratio: 390 / 539;
+}
+
+.detailMediaImage {
+  object-fit: contain;
+}
+
+.detailMedia figcaption {
+  margin-top: 10px;
+  color: rgba(49, 39, 28, 0.62);
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+
 @media (max-width: 1100px) {
   .periodInner {
     grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
@@ -265,6 +620,33 @@
   .eventList {
     align-self: stretch;
   }
+
+  .periodMediaPortrait {
+    justify-self: center;
+    width: 100%;
+  }
+
+  .periodDetailsInner {
+    grid-template-columns: 1fr;
+  }
+
+  .detailMediaGridAside {
+    grid-column: 1;
+    grid-row: auto;
+    justify-items: center;
+  }
+
+  .detailMedia {
+    justify-self: center;
+  }
+
+  .periodSectionFeatured .periodInner {
+    grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+  }
+
+  .periodSectionPlaceholder .periodInner {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 760px) {
@@ -273,14 +655,33 @@
   }
 
   .periodInner {
-    width: min(100% - 32px, 1440px);
     grid-template-columns: 1fr;
     gap: 20px;
     padding-block: 36px;
   }
 
   .periodMedia {
-    aspect-ratio: 4 / 3;
+    width: 100%;
+  }
+
+  .periodMediaPortrait {
+    width: 100%;
+  }
+
+  .periodImageFrame {
+    height: 240px;
+  }
+
+  .imageModal {
+    padding: 12px;
+  }
+
+  .imageModalContent {
+    max-height: calc(100dvh - 24px);
+  }
+
+  .imageModalFrame {
+    height: calc(100dvh - 92px);
   }
 
   .periodMediaPlaceholder {
@@ -301,9 +702,43 @@
   .periodIntro h2 {
     font-size: clamp(2rem, 10vw, 3.05rem);
   }
+
+  .periodLinkDesktop {
+    display: none;
+  }
+
+  .periodLinkMobile {
+    display: inline-flex;
+    grid-column: 1 / -1;
+    justify-self: start;
+    margin-top: 4px;
+  }
+
+  .periodSectionFeatured .periodInner {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .periodSectionPlaceholder .periodInner {
+    grid-template-columns: 1fr;
+    padding-block: 30px;
+  }
+
+  .periodSectionFeatured .periodAside,
+  .periodSectionFeatured .eventGroup {
+    padding: 20px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .periodImageButton .periodImage {
+    transition-duration: 0.01ms;
+  }
+
+  .periodImageButton:hover .periodImage {
+    transform: none;
+  }
+
   .thematicAnchor,
   .eventCard {
     transition-duration: 0.01ms;

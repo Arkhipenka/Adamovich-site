@@ -1111,10 +1111,29 @@
   }
 
   .teamCard {
-    height: 460px;
+    display: grid;
+    height: auto;
+    grid-template-rows: auto auto;
+  }
+
+  .teamPhoto {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    min-height: 0;
+  }
+
+  .teamImage {
+    object-fit: cover;
+    object-position: center 32%;
   }
 
   .teamBody {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    left: auto;
     min-height: 0;
     padding: 22px;
     transform: translateY(0);

@@ -96,7 +96,7 @@ export function WorkCard({ compact = false, locale, work }: WorkCardProps) {
               alt={coverAlt}
               className={styles.coverImage}
               fill
-              sizes="(max-width: 680px) calc(100vw - 40px), (max-width: 1100px) calc((100vw - 72px) / 2), (max-width: 1500px) calc((100vw - 120px) / 3), 380px"
+              sizes="(max-width: 680px) calc(100vw - 40px), (max-width: 1100px) calc((100vw - 72px) / 3), (max-width: 1500px) calc((100vw - 120px) / 3), 380px"
               src={assetPath(cover)}
             />
           ) : (
