@@ -5,6 +5,7 @@ import Link from "next/link";
 import styles from "./ContactsPage.module.css";
 import { assetPath, siteConfig } from "@/config/site";
 import { localizedHref } from "@/lib/localizedHref";
+import { localizedAlternates } from "@/lib/seo";
 import type { Locale } from "@/types/common.types";
 
 type IconName =
@@ -52,8 +53,8 @@ const contactBlockContent = {
       caption: "Подписывайтесь, чтобы быть в курсе наших обновлений",
       socials: [
         { href: "#", label: "FB" },
-        { href: "#", label: "IG" },
-        { href: "#", label: "YT" },
+        { href: siteConfig.contacts.instagramUrl, label: "IG" },
+        { href: siteConfig.contacts.youtubeUrl, label: "YT" },
         { href: siteConfig.contacts.telegramUrl || "#", label: "TG" },
       ],
     },
@@ -68,8 +69,8 @@ const contactBlockContent = {
       caption: "Падпісвайцеся, каб быць у курсе нашых абнаўленняў",
       socials: [
         { href: "#", label: "FB" },
-        { href: "#", label: "IG" },
-        { href: "#", label: "YT" },
+        { href: siteConfig.contacts.instagramUrl, label: "IG" },
+        { href: siteConfig.contacts.youtubeUrl, label: "YT" },
         { href: siteConfig.contacts.telegramUrl || "#", label: "TG" },
       ],
     },
@@ -84,8 +85,8 @@ const contactBlockContent = {
       caption: "Follow us to stay informed about our updates",
       socials: [
         { href: "#", label: "FB" },
-        { href: "#", label: "IG" },
-        { href: "#", label: "YT" },
+        { href: siteConfig.contacts.instagramUrl, label: "IG" },
+        { href: siteConfig.contacts.youtubeUrl, label: "YT" },
         { href: siteConfig.contacts.telegramUrl || "#", label: "TG" },
       ],
     },
@@ -461,6 +462,7 @@ export function getContactsPageMetadata(locale: Locale): Metadata {
   return {
     title: copy.metadataTitle,
     description: copy.metadataDescription,
+    alternates: localizedAlternates(locale, "contacts"),
     openGraph: {
       title: copy.metadataTitle,
       description: copy.metadataDescription,

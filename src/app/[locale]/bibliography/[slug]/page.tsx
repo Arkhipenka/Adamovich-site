@@ -10,6 +10,7 @@ import {
   getWorkBySlug,
 } from "@/lib/works";
 import { resolveLocalePage } from "@/lib/page";
+import { localizedAlternates } from "@/lib/seo";
 
 type WorkPageProps = {
   params: Promise<{
@@ -17,6 +18,8 @@ type WorkPageProps = {
     slug: string;
   }>;
 };
+
+export const dynamicParams = false;
 
 export function generateStaticParams() {
   const publishedWorks = getPublishedWorks();
@@ -46,6 +49,10 @@ export async function generateMetadata({
   return {
     title,
     description,
+    alternates: localizedAlternates(
+      resolved.locale,
+      `bibliography/${work.slug}`,
+    ),
     openGraph: {
       title,
       description,

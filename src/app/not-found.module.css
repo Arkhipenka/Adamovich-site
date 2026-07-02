@@ -1,0 +1,108 @@
+.page {
+  --not-found-bg: var(--color-paper, #f2eadb);
+  --not-found-surface: var(--color-paper-surface, #f8efdf);
+  --not-found-text: var(--color-paper-text, #1c1712);
+  --not-found-muted: var(--color-paper-muted, #5d5043);
+  --not-found-border: var(--color-paper-border, rgba(76, 53, 30, 0.18));
+  --not-found-accent: var(--color-paper-accent, #9a6826);
+
+  display: grid;
+  min-height: 100vh;
+  place-items: center;
+  padding: clamp(32px, 6vw, 80px) var(--page-gutter, 48px);
+  background:
+    radial-gradient(circle at 72% 24%, rgba(154, 104, 38, 0.12), transparent 28rem),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.18), rgba(80, 54, 28, 0.04)),
+    var(--not-found-bg);
+  color: var(--not-found-text);
+}
+
+.panel {
+  width: min(100%, 760px);
+  padding: clamp(32px, 5vw, 64px);
+  border: 1px solid var(--not-found-border);
+  background: rgba(248, 239, 223, 0.72);
+  box-shadow: 0 24px 72px rgba(83, 58, 35, 0.14);
+}
+
+.code {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--not-found-accent);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.code::after {
+  width: 54px;
+  height: 1px;
+  background: currentcolor;
+  content: "";
+}
+
+.title {
+  max-width: 620px;
+  margin: 18px 0 18px;
+  font-family: var(--font-serif);
+  font-size: clamp(2.6rem, 8vw, 5.8rem);
+  font-weight: 600;
+  line-height: 0.98;
+}
+
+.text {
+  max-width: 560px;
+  margin: 0;
+  color: var(--not-found-muted);
+  font-size: clamp(1rem, 1.5vw, 1.18rem);
+  line-height: 1.7;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 34px;
+}
+
+.link {
+  display: inline-flex;
+  min-height: 48px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--not-found-accent);
+  padding: 0 22px;
+  color: var(--not-found-accent);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition:
+    background-color 180ms ease,
+    color 180ms ease,
+    border-color 180ms ease;
+}
+
+.link:hover,
+.link:focus-visible {
+  border-color: var(--color-paper-accent-strong, #7c4f19);
+  background: var(--not-found-accent);
+  color: var(--not-found-surface);
+}
+
+@media (max-width: 640px) {
+  .page {
+    padding-inline: 20px;
+  }
+
+  .panel {
+    padding: 28px 22px;
+  }
+
+  .link {
+    width: 100%;
+  }
+}

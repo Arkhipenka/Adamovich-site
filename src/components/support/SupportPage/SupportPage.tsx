@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import styles from "./SupportPage.module.css";
-import { assetPath } from "@/config/site";
+import { assetPath, siteConfig } from "@/config/site";
 import type { Dictionary } from "@/i18n/dictionaries";
 import { localizedHref } from "@/lib/localizedHref";
 import type { Locale } from "@/types/common.types";
@@ -41,8 +41,8 @@ const supportHeroImage = assetPath("/assets/images/hero/support-hero-paper-backg
 
 const paymentLinks = {
   bank: "#",
-  kofi: "#",
-  patreon: "#",
+  kofi: siteConfig.supportUrl || "https://ko-fi.com/alesadamovich",
+  patreon: siteConfig.patreonUrl || "https://www.patreon.com/Adamovich",
   paypal: "#",
 };
 // TODO: add real payment links.

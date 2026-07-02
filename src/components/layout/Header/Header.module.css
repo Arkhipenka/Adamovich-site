@@ -12,9 +12,11 @@
   width: 100%;
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
+  transform: translateY(0);
   transition:
     background-color 220ms ease,
-    border-color 220ms ease;
+    border-color 220ms ease,
+    transform 240ms ease;
 }
 
 .inner {
@@ -31,6 +33,11 @@
 .headerScrolled {
   border-bottom-color: rgba(194, 163, 107, 0.24);
   background: rgba(8, 8, 8, 0.92);
+}
+
+.headerNearFooter {
+  pointer-events: none;
+  transform: translateY(-100%);
 }
 
 .headerOnHero:not(.headerScrolled) {
@@ -350,6 +357,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .header,
   .menuToggle,
   .menuToggle span {
     transition-duration: 0.01ms;

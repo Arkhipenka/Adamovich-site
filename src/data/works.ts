@@ -1,10 +1,15 @@
+import { asiyaWork } from "./works/asiya";
 import { blockadeBookWork } from "./works/blockade-book";
 import { chernobylMaterialsWork } from "./works/chernobyl-materials";
 import { comeAndSeeWork } from "./works/come-and-see";
 import { iAmFromFireVillageWork } from "./works/i-am-from-fire-village";
 import { khatynStoryWork } from "./works/khatyn-story";
-import { partisanStoriesWork } from "./works/partisan-stories";
+import { lastPastoralWork } from "./works/last-pastoral";
+import { lastVacationWork } from "./works/last-vacation";
+import { nyamkoWork } from "./works/nyamko";
 import { punishmentersWork } from "./works/punishmenters";
+import { sonsGoToBattleWork } from "./works/sons-go-to-battle";
+import { veneraWork } from "./works/venera";
 import { vixiWork } from "./works/vixi";
 import { warUnderRooftopsWork } from "./works/war-under-rooftops";
 
@@ -68,9 +73,13 @@ export type WorkMaterial = {
 
 export type WorkReview = {
   id: string;
+  body?: Partial<Record<Locale, readonly string[]>>;
   quote?: MaybeLocalizedText;
   title?: MaybeLocalizedText;
   author?: string;
+  authorRole?: MaybeLocalizedText;
+  image?: string;
+  imageAlt?: MaybeLocalizedText;
   source?: string;
   year?: string;
   href?: string;
@@ -88,7 +97,7 @@ export type WorkLink = {
 };
 
 export type WorkAnnotation = {
-  short: MaybeLocalizedText;
+  short?: MaybeLocalizedText;
   full?: MaybeLocalizedText[];
 };
 
@@ -220,10 +229,10 @@ export type Work = {
   title: LocalizedText;
   originalTitle?: string;
   subtitle?: LocalizedText;
-  authors: string[];
-  coAuthors?: string[];
-  editors?: string[];
-  translators?: string[];
+  authors: MaybeLocalizedText[];
+  coAuthors?: MaybeLocalizedText[];
+  editors?: MaybeLocalizedText[];
+  translators?: MaybeLocalizedText[];
   role?: LocalizedText;
   genre?: MaybeLocalizedText;
   descriptionShort: LocalizedText;
@@ -281,7 +290,12 @@ export const works: Work[] = [
   punishmentersWork,
   comeAndSeeWork,
   warUnderRooftopsWork,
-  partisanStoriesWork,
+  sonsGoToBattleWork,
+  asiyaWork,
+  lastVacationWork,
+  lastPastoralWork,
+  veneraWork,
+  nyamkoWork,
   vixiWork,
   chernobylMaterialsWork,
 ];

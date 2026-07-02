@@ -115,6 +115,7 @@ export function Header({ locale, dictionary }: HeaderProps) {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isNearFooter, setIsNearFooter] = useState(false);
   const menuOpenRef = useRef(menuOpen);
   const currentSegment = useMemo(
     () => getCurrentSegment(pathname, locale),
@@ -150,6 +151,29 @@ export function Header({ locale, dictionary }: HeaderProps) {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  useEffect(() => {
+    const footer = document.querySelector("[data-site-footer]");
+
+    if (!footer) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsNearFooter(entry.isIntersecting);
+      },
+      {
+        root: null,
+        rootMargin: "0px 0px 180px 0px",
+        threshold: 0,
+      },
+    );
+
+    observer.observe(footer);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [pathname]);
 
   useEffect(() => {
     if (!menuOpen) {
@@ -231,6 +255,7 @@ export function Header({ locale, dictionary }: HeaderProps) {
         isHeroHeader ? styles.headerOnHero : "",
         isPaperHeader ? styles.headerOnPaper : "",
         isScrolled ? styles.headerScrolled : "",
+        isNearFooter && !menuOpen ? styles.headerNearFooter : "",
       ].join(" ")}
     >
       <div className={styles.inner}>

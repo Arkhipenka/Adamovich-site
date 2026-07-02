@@ -4,6 +4,8 @@ import { useEffect, useMemo, useState } from "react";
 
 import styles from "./WorkDetail.module.css";
 
+import { assetPath } from "@/config/site";
+
 export type WorkDetailSectionId =
   | "annotation"
   | "history"
@@ -20,10 +22,15 @@ type WorkDetailQuote = {
 };
 
 type WorkDetailEntry = {
+  author?: string;
+  authorRole?: string;
   description?: string;
   href?: string;
   id: string;
+  image?: string;
+  imageAlt?: string;
   meta?: string;
+  paragraphs?: readonly string[];
   title?: string;
 };
 
@@ -137,11 +144,47 @@ export function WorkDetailSections({
         {hasEntries ? (
           <div className={styles.entryList}>
             {activeSection.entries?.map((entry) => {
+              const initials =
+                entry.author
+                  ?.split(/\s+/)
+                  .filter(Boolean)
+                  .slice(0, 2)
+                  .map((part) => part[0])
+                  .join("")
+                  .toUpperCase() ?? "";
               const content = (
                 <>
-                  {entry.title ? <strong>{entry.title}</strong> : null}
-                  {entry.description ? <p>{entry.description}</p> : null}
-                  {entry.meta ? <span>{entry.meta}</span> : null}
+                  {entry.author || entry.image ? (
+                    <span className={styles.entryAuthorMedia}>
+                      {entry.image ? (
+                        <img
+                          alt={entry.imageAlt ?? entry.author ?? ""}
+                          src={assetPath(entry.image)}
+                        />
+                      ) : (
+                        <span aria-hidden="true">{initials}</span>
+                      )}
+                    </span>
+                  ) : null}
+                  <span className={styles.entryBody}>
+                    {entry.title ? <strong>{entry.title}</strong> : null}
+                    {entry.author || entry.authorRole ? (
+                      <span className={styles.entryAuthor}>
+                        {entry.author}
+                        {entry.author && entry.authorRole ? " · " : ""}
+                        {entry.authorRole}
+                      </span>
+                    ) : null}
+                    {entry.description ? <p>{entry.description}</p> : null}
+                    {entry.paragraphs?.length ? (
+                      <span className={styles.entryTextFlow}>
+                        {entry.paragraphs.map((paragraph) => (
+                          <p key={paragraph}>{paragraph}</p>
+                        ))}
+                      </span>
+                    ) : null}
+                    {entry.meta ? <span>{entry.meta}</span> : null}
+                  </span>
                 </>
               );
 

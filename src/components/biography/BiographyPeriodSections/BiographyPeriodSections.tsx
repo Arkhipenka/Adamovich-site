@@ -1,10 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import Link from "next/link";
+import { useEffect, useState, type ReactElement } from "react";
 
 import { assetPath } from "@/config/site";
+import { works, type Work } from "@/data/works";
 import type { BiographyPeriod } from "@/data/biography";
+import { localizedHref } from "@/lib/localizedHref";
 import type { Locale } from "@/types/common.types";
 
 import styles from "./BiographyPeriodSections.module.css";
@@ -25,6 +28,11 @@ type PeriodCopy = {
 };
 
 type SelectedImage = {
+  images: ModalImage[];
+  index: number;
+};
+
+type ModalImage = {
   src: string;
   alt: string;
   caption?: string;
@@ -86,6 +94,181 @@ function getSectionId(periodId: string) {
   return `bio-period-${periodId}`;
 }
 
+const manualWorkAliases: Record<string, string[]> = {
+  "asiya": ["Вікторыя", "Виктория", "Victoria", "Асія", "Асия", "Asiya"],
+  "blockade-book": [
+    "Блакадная кніга",
+    "Блакаднай кнігі",
+    "Блокадная книга",
+    "Блокадной книги",
+    "The Blockade Book",
+  ],
+  "come-and-see": [
+    "Ідзі і глядзі",
+    "Иди и смотри",
+    "Come and See",
+    "Забіце Гітлера!",
+    "Убейте Гитлера!",
+    "Kill Hitler!",
+  ],
+  "i-am-from-fire-village": [
+    "Я з вогненнай вёскі",
+    "Я з вогненнай вёскі...",
+    "Я з вогненнай вёскі…",
+    "Я из огненной деревни",
+    "I Am from the Fiery Village",
+  ],
+  "khatyn-story": [
+    "Хатынская аповесць",
+    "Хатынскую аповесць",
+    "Хатынскай аповесці",
+    "Хатынская повесть",
+    "Хатынскую повесть",
+    "Khatyn Story",
+  ],
+  "last-pastoral": [
+    "Апошняя пастараль",
+    "Последняя пастораль",
+    "The Last Pastoral",
+  ],
+  "last-vacation": [
+    "Апошні адпачынак",
+    "Последний отдых",
+    "The Last Vacation",
+  ],
+  "nyamko": ["Нямко", "Nemko"],
+  "punishmenters": ["Карнікі", "Каратели", "The Punishmenters"],
+  "sons-go-to-battle": [
+    "Сыны ідуць у бой",
+    "Сыновья уходят в бой",
+    "Sons Go to Battle",
+  ],
+  "venera": [
+    "Венера, або Як я быў прыгоннікам",
+    "Венера, или Как я был крепостным",
+    "Venera",
+  ],
+  "vixi": ["Vixi", "Пражыта", "Прожито"],
+  "war-under-rooftops": [
+    "Вайна пад стрэхамі",
+    "Война под крышами",
+    "War under the Rooftops",
+  ],
+};
+
+function getWorkAliases(work: Work) {
+  const aliases = new Set<string>();
+
+  Object.values(work.title).forEach((title) => aliases.add(title));
+  if (work.originalTitle) {
+    aliases.add(work.originalTitle);
+  }
+  manualWorkAliases[work.slug]?.forEach((alias) => aliases.add(alias));
+
+  return [...aliases].filter(Boolean);
+}
+
+const workMentionRules = works
+  .flatMap((work) =>
+    getWorkAliases(work).map((alias) => ({
+      alias,
+      slug: work.slug,
+    })),
+  )
+  .sort((a, b) => b.alias.length - a.alias.length);
+
+function escapeRegExp(value: string) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function renderLinkedBiographyText(text: string, locale: Locale) {
+  const parts: (string | ReactElement)[] = [];
+  let remainingText = text;
+  let key = 0;
+
+  while (remainingText) {
+    const match = workMentionRules
+      .map((rule) => {
+        const result = new RegExp(escapeRegExp(rule.alias), "iu").exec(
+          remainingText,
+        );
+
+        return result
+          ? {
+              index: result.index,
+              text: result[0],
+              rule,
+            }
+          : null;
+      })
+      .filter(
+        (
+          item,
+        ): item is {
+          index: number;
+          text: string;
+          rule: { alias: string; slug: string };
+        } => Boolean(item),
+      )
+      .sort((a, b) => a.index - b.index || b.text.length - a.text.length)[0];
+
+    if (!match) {
+      parts.push(remainingText);
+      break;
+    }
+
+    if (match.index > 0) {
+      parts.push(remainingText.slice(0, match.index));
+    }
+
+    parts.push(
+      <Link
+        className={styles.workTextLink}
+        href={localizedHref(locale, `/bibliography/${match.rule.slug}`)}
+        key={`${match.rule.slug}-${key}`}
+      >
+        {match.text}
+      </Link>,
+    );
+
+    remainingText = remainingText.slice(match.index + match.text.length);
+    key += 1;
+  }
+
+  return parts;
+}
+
+function getYouTubeEmbedUrl(src: string) {
+  try {
+    const url = new URL(src);
+    const isShortUrl = url.hostname.includes("youtu.be");
+    const videoId = isShortUrl
+      ? url.pathname.replace("/", "")
+      : url.searchParams.get("v");
+
+    if (!videoId) {
+      return null;
+    }
+
+    const timeParam = url.searchParams.get("t") ?? url.searchParams.get("start");
+    const start = timeParam
+      ? Number.parseInt(timeParam.replace(/\D/g, ""), 10)
+      : 0;
+    const params = new URLSearchParams({
+      rel: "0",
+      modestbranding: "1",
+    });
+
+    if (Number.isFinite(start) && start > 0) {
+      params.set("start", String(start));
+    }
+
+    return `https://www.youtube.com/embed/${videoId}?${params.toString()}`;
+  } catch {
+    return null;
+  }
+}
+
 export function BiographyPeriodSections({
   locale,
   periods,
@@ -94,6 +277,7 @@ export function BiographyPeriodSections({
   const modalCopy = imageModalCopy[locale] ?? imageModalCopy.be;
   const [expandedPeriods, setExpandedPeriods] = useState<string[]>([]);
   const [selectedImage, setSelectedImage] = useState<SelectedImage | null>(null);
+  const activeImage = selectedImage?.images[selectedImage.index] ?? null;
 
   useEffect(() => {
     if (!selectedImage) return;
@@ -103,6 +287,19 @@ export function BiographyPeriodSections({
     function handleKeyDown(event: KeyboardEvent) {
       if (event.key === "Escape") {
         setSelectedImage(null);
+      }
+
+      if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+        setSelectedImage((current) => {
+          if (!current || current.images.length < 2) return current;
+
+          const step = event.key === "ArrowRight" ? 1 : -1;
+          const nextIndex =
+            (current.index + step + current.images.length) %
+            current.images.length;
+
+          return { ...current, index: nextIndex };
+        });
       }
     }
 
@@ -123,6 +320,47 @@ export function BiographyPeriodSections({
     );
   }
 
+  function getPeriodImages(period: BiographyPeriod): ModalImage[] {
+    if (!period.image) return [];
+
+    return [
+      {
+        src: period.image,
+        alt: period.imageAlt ?? copy.imageFallback,
+        caption: period.imageCaption,
+      },
+      ...(period.media ?? [])
+        .filter((item) => item.type === "image")
+        .map((item) => ({
+          src: item.src,
+          alt: item.alt ?? copy.imageFallback,
+          caption: item.caption ?? item.title,
+        })),
+    ];
+  }
+
+  function openPeriodImage(period: BiographyPeriod, index = 0) {
+    const images = getPeriodImages(period);
+    if (!images.length) return;
+
+    setSelectedImage({
+      images,
+      index: Math.min(index, images.length - 1),
+    });
+  }
+
+  function showModalImage(step: number) {
+    setSelectedImage((current) => {
+      if (!current || current.images.length < 2) return current;
+
+      const nextIndex =
+        (current.index + step + current.images.length) %
+        current.images.length;
+
+      return { ...current, index: nextIndex };
+    });
+  }
+
   return (
     <div className={styles.periodSections}>
       {periods.map((period, index) => {
@@ -130,7 +368,13 @@ export function BiographyPeriodSections({
         const events = period.events?.slice(0, 2) ?? [];
         const lead = period.shortDescription || period.sectionLead;
         const isExpanded = expandedPeriods.includes(period.id);
-        const isPlaceholder = index > 1;
+        const isPlaceholder = index > 6;
+        const imageMediaItems =
+          period.media?.filter((item) => item.type === "image") ?? [];
+        const visibleDetailMedia = imageMediaItems.slice(0, 1);
+        const videoMediaItems =
+          period.media?.filter((item) => item.type === "video") ?? [];
+        const mainImage = period.image;
 
         return (
           <section
@@ -142,8 +386,9 @@ export function BiographyPeriodSections({
             aria-labelledby={isPlaceholder ? undefined : `${sectionId}-title`}
             className={[
               styles.periodSection,
-              period.id === "childhood" ? styles.periodSectionFeatured : "",
+              !isPlaceholder ? styles.periodSectionFeatured : "",
               isPlaceholder ? styles.periodSectionPlaceholder : "",
+              !isPlaceholder && !mainImage ? styles.periodSectionNoMedia : "",
             ]
               .filter(Boolean)
               .join(" ")}
@@ -157,7 +402,9 @@ export function BiographyPeriodSections({
                   <>
                     <h2 id={`${sectionId}-title`}>{period.sectionTitle}</h2>
                     <span className={styles.accentLine} aria-hidden="true" />
-                    <p className={styles.periodLead}>{lead}</p>
+                    <p className={styles.periodLead}>
+                      {renderLinkedBiographyText(lead, locale)}
+                    </p>
                     {period.tags?.length ? (
                       <ul className={styles.tagList} aria-label={copy.themes}>
                         {period.tags.map((tag) => (
@@ -190,7 +437,7 @@ export function BiographyPeriodSections({
                 <div className={styles.periodPlaceholderPanel}>
                   <p>{copy.placeholderText}</p>
                 </div>
-              ) : period.image ? (
+              ) : mainImage ? (
                 <figure
                   className={[
                     styles.periodMedia,
@@ -202,13 +449,7 @@ export function BiographyPeriodSections({
                   <button
                     aria-label={modalCopy.open}
                     className={styles.periodImageButton}
-                    onClick={() =>
-                      setSelectedImage({
-                        src: period.image!,
-                        alt: period.imageAlt ?? copy.imageFallback,
-                        caption: period.imageCaption,
-                      })
-                    }
+                    onClick={() => openPeriodImage(period)}
                     type="button"
                   >
                     <span className={styles.periodImageFrame}>
@@ -218,7 +459,7 @@ export function BiographyPeriodSections({
                         fill
                         loading="lazy"
                         sizes="(max-width: 760px) calc(100vw - 32px), (max-width: 1100px) 48vw, 560px"
-                        src={assetPath(period.image)}
+                        src={assetPath(mainImage)}
                       />
                     </span>
                   </button>
@@ -247,9 +488,11 @@ export function BiographyPeriodSections({
                       </span>
                     ) : null}
                     {period.aside.title ? (
-                      <h3>{period.aside.title}</h3>
+                      <h3>
+                        {renderLinkedBiographyText(period.aside.title, locale)}
+                      </h3>
                     ) : null}
-                    <p>{period.aside.text}</p>
+                    <p>{renderLinkedBiographyText(period.aside.text, locale)}</p>
                     {period.aside.meta ? (
                       <span className={styles.asideMeta}>
                         {period.aside.meta}
@@ -275,8 +518,15 @@ export function BiographyPeriodSections({
                           <p className={styles.eventYear}>
                             {event.date ?? event.year}
                           </p>
-                          <h3>{event.title}</h3>
-                          <p>{event.description}</p>
+                          <h3>
+                            {renderLinkedBiographyText(event.title, locale)}
+                          </h3>
+                          <p>
+                            {renderLinkedBiographyText(
+                              event.description,
+                              locale,
+                            )}
+                          </p>
                         </article>
                       ))}
                     </div>
@@ -298,7 +548,9 @@ export function BiographyPeriodSections({
                 <div className={styles.periodDetailsInner}>
                   <div className={styles.detailText}>
                     {period.sectionText.map((paragraph) => (
-                      <p key={paragraph}>{paragraph}</p>
+                      <p key={paragraph}>
+                        {renderLinkedBiographyText(paragraph, locale)}
+                      </p>
                     ))}
                   </div>
 
@@ -307,33 +559,38 @@ export function BiographyPeriodSections({
                       {period.anchors.map((anchor) => (
                         <article className={styles.detailTheme} key={anchor.id}>
                           <span>{copy.themes}</span>
-                          <h3>{anchor.title}</h3>
-                          <p>{anchor.text}</p>
+                          <h3>
+                            {renderLinkedBiographyText(anchor.title, locale)}
+                          </h3>
+                          <p>{renderLinkedBiographyText(anchor.text, locale)}</p>
                         </article>
                       ))}
                     </div>
                   ) : null}
 
-                  {period.media?.some((item) => item.type === "image") ? (
+                  {visibleDetailMedia.length ? (
                     <div
                       className={[
                         styles.detailMediaGrid,
-                        period.media.some(
-                          (item) => item.id === "mother-and-brother",
-                        )
-                          ? styles.detailMediaGridAside
-                          : "",
+                        styles.detailMediaGridAside,
                       ]
                         .filter(Boolean)
                         .join(" ")}
                     >
-                      {period.media
-                        .filter((item) => item.type === "image")
-                        .map((item) => (
+                      {visibleDetailMedia.map((item) => {
+                        const modalIndex = Math.max(
+                          0,
+                          getPeriodImages(period).findIndex(
+                            (image) => image.src === item.src,
+                          ),
+                        );
+
+                        return (
                           <figure
                             className={[
                               styles.detailMedia,
-                              item.id === "mother-and-brother"
+                              item.id === "mother-and-brother" ||
+                              item.id === "award-sheet-1943"
                                 ? styles.detailMediaPortrait
                                 : "",
                             ]
@@ -341,14 +598,44 @@ export function BiographyPeriodSections({
                               .join(" ")}
                             key={item.id}
                           >
-                            <div className={styles.detailMediaFrame}>
-                              <Image
-                                alt={item.alt ?? copy.imageFallback}
-                                className={styles.detailMediaImage}
-                                fill
+                            <button
+                              aria-label={modalCopy.open}
+                              className={styles.detailMediaButton}
+                              onClick={() => openPeriodImage(period, modalIndex)}
+                              type="button"
+                            >
+                              <span className={styles.detailMediaFrame}>
+                                <Image
+                                  alt={item.alt ?? copy.imageFallback}
+                                  className={styles.detailMediaImage}
+                                  fill
+                                  loading="lazy"
+                                  sizes="(max-width: 760px) calc(100vw - 64px), (max-width: 1100px) 70vw, 720px"
+                                  src={assetPath(item.src)}
+                                />
+                              </span>
+                            </button>
+                            {item.caption || item.title ? (
+                              <figcaption>
+                                {item.caption ?? item.title}
+                              </figcaption>
+                            ) : null}
+                          </figure>
+                        );
+                      })}
+                      {videoMediaItems.map((item) => {
+                        const embedUrl = getYouTubeEmbedUrl(item.src);
+
+                        return embedUrl ? (
+                          <figure className={styles.detailVideo} key={item.id}>
+                            <div className={styles.detailVideoFrame}>
+                              <iframe
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowFullScreen
                                 loading="lazy"
-                                sizes="(max-width: 760px) calc(100vw - 64px), (max-width: 1100px) 70vw, 720px"
-                                src={assetPath(item.src)}
+                                referrerPolicy="strict-origin-when-cross-origin"
+                                src={embedUrl}
+                                title={item.title ?? "YouTube video"}
                               />
                             </div>
                             {item.caption || item.title ? (
@@ -357,9 +644,36 @@ export function BiographyPeriodSections({
                               </figcaption>
                             ) : null}
                           </figure>
-                        ))}
+                        ) : (
+                          <a
+                            className={styles.detailVideoLink}
+                            href={item.src}
+                            key={item.id}
+                            rel="noreferrer"
+                            target="_blank"
+                          >
+                            <span className={styles.detailVideoLabel}>
+                              {item.title}
+                            </span>
+                            {item.caption ? <span>{item.caption}</span> : null}
+                          </a>
+                        );
+                      })}
                     </div>
-                  ) : null}
+                  ) : (
+                    <div
+                      className={[
+                        styles.detailMediaGrid,
+                        styles.detailMediaGridAside,
+                      ]
+                        .filter(Boolean)
+                        .join(" ")}
+                    >
+                      <div className={styles.detailMediaPlaceholder}>
+                        <span>{copy.noImage}</span>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
               ) : null}
@@ -386,9 +700,9 @@ export function BiographyPeriodSections({
         );
       })}
 
-      {selectedImage ? (
+      {selectedImage && activeImage ? (
         <div
-          aria-label={selectedImage.alt}
+          aria-label={activeImage.alt}
           aria-modal="true"
           className={styles.imageModal}
           onClick={() => setSelectedImage(null)}
@@ -409,16 +723,37 @@ export function BiographyPeriodSections({
             </button>
             <div className={styles.imageModalFrame}>
               <Image
-                alt={selectedImage.alt}
+                alt={activeImage.alt}
                 className={styles.imageModalImage}
                 fill
                 sizes="100vw"
-                src={assetPath(selectedImage.src)}
+                src={assetPath(activeImage.src)}
               />
+              {selectedImage.images.length > 1 ? (
+                <div
+                  aria-label="Image navigation"
+                  className={styles.imageModalControls}
+                >
+                  <button
+                    aria-label="Previous image"
+                    onClick={() => showModalImage(-1)}
+                    type="button"
+                  >
+                    <span aria-hidden="true">&lsaquo;</span>
+                  </button>
+                  <button
+                    aria-label="Next image"
+                    onClick={() => showModalImage(1)}
+                    type="button"
+                  >
+                    <span aria-hidden="true">&rsaquo;</span>
+                  </button>
+                </div>
+              ) : null}
             </div>
-            {selectedImage.caption ? (
+            {activeImage.caption ? (
               <p className={styles.imageModalCaption}>
-                {selectedImage.caption}
+                {activeImage.caption}
               </p>
             ) : null}
           </div>

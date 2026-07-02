@@ -8,6 +8,10 @@ import styles from "./WorksCatalog.module.css";
 import { WorksGrid } from "./WorksGrid";
 import { assetPath, type Locale } from "@/config/site";
 import type { Work } from "@/data/works";
+import {
+  formatWorkAuthors,
+  getWorkAuthorSearchText,
+} from "@/lib/formatWorkAuthors";
 import { localizedHref } from "@/lib/localizedHref";
 import {
   getWorkCover,
@@ -217,10 +221,7 @@ function matchesSearch(work: Work, query: string, locale: Locale) {
     work.shortDescription ? getLocalizedField(work.shortDescription, locale) : "",
     getLocalizedField(work.descriptionShort, locale),
     getLocalizedField(work.descriptionFull, locale),
-    ...work.authors,
-    ...(work.coAuthors ?? []),
-    ...(work.editors ?? []),
-    ...(work.translators ?? []),
+    getWorkAuthorSearchText(work),
     ...(work.languages ?? []),
     ...(work.originalLanguages ?? []),
     ...(work.translatedLanguages ?? []),
@@ -264,10 +265,6 @@ function getWorkTypeLabel(work: Work, locale: Locale) {
   const filter = getWorkFilter(work);
 
   return labels[locale].filters.find(([value]) => value === filter)?.[1] ?? work.type;
-}
-
-function getAuthors(work: Work) {
-  return [...work.authors, ...(work.coAuthors ?? [])].filter(Boolean).join(", ");
 }
 
 export function WorksCatalog({ locale, works }: WorksCatalogProps) {
@@ -551,7 +548,7 @@ export function WorksCatalog({ locale, works }: WorksCatalogProps) {
                 const description = work.shortDescription
                   ? getLocalizedField(work.shortDescription, locale)
                   : getLocalizedField(work.descriptionShort, locale);
-                const authors = getAuthors(work);
+                const authors = formatWorkAuthors(work, locale);
                 const typeLabel = getWorkTypeLabel(work, locale);
                 const cover = getWorkCover(work);
                 const year = getWorkYear(work);

@@ -4,6 +4,7 @@ import Image from "next/image";
 import { WorksCatalog } from "@/components/WorksCatalog";
 import { assetPath } from "@/config/site";
 import type { Work } from "@/data/works";
+import { localizedAlternates } from "@/lib/seo";
 import type { Locale } from "@/types/common.types";
 
 import styles from "./BibliographyPage.module.css";
@@ -21,9 +22,9 @@ const bibliographyPageContent = {
   },
   en: {
     eyebrow: "Bibliography",
-    title: "Legacy of Adamovich",
+    title: "Adamovich’s Legacy",
     description:
-      "Books, films, screenplays, essays, interviews and archival materials connected with the life and work of Ales Adamovich.",
+      "Books, films, screenplays, essays, interviews, and archival materials connected with the life and work of Ales Adamovich.",
   },
   ru: {
     eyebrow: "Библиография",
@@ -51,6 +52,7 @@ export function getBibliographyPageMetadata(locale: Locale): Metadata {
   return {
     title: copy.title,
     description: copy.description,
+    alternates: localizedAlternates(locale, "bibliography"),
     openGraph: {
       title: copy.title,
       description: copy.description,

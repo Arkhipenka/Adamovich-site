@@ -14,6 +14,7 @@ export const dictionary: Dictionary = {
     initiative: "Initiative",
     contacts: "Contacts",
     support: "Support",
+    privacy: "Privacy",
   },
   common: {
     platform: "Cultural digital platform",
@@ -67,6 +68,12 @@ export const dictionary: Dictionary = {
       title: "Support memory. Build the future with us",
       description:
         "Financial, informational, volunteer, and institutional support options without aggressive fundraising.",
+    },
+    privacy: {
+      eyebrow: "Privacy",
+      title: "Privacy and Cookies",
+      description:
+        "Rules for analytics, cookies, and use of site materials.",
     },
   },
 };

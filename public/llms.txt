@@ -1,0 +1,20 @@
+# Ales Adamovich
+
+> Cultural and educational website about Ales Adamovich: biography, bibliography, audio guide, and the Adamovich memory initiative in Hlusa.
+
+Canonical site: https://adamovich.eu/
+
+Primary sections:
+- https://adamovich.eu/be/biography/
+- https://adamovich.eu/be/bibliography/
+- https://adamovich.eu/be/audio-guide/
+- https://adamovich.eu/be/initiative/
+- https://adamovich.eu/be/contacts/
+
+Content languages:
+- Belarusian
+- Russian
+- English
+
+Use of materials:
+Materials from the site are intended for educational and informational use. Please cite the website when referencing materials.

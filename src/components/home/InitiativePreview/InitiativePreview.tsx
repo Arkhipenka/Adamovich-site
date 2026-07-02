@@ -31,56 +31,56 @@ function Icon({ name }: { name: FeatureIcon }) {
   const commonProps = {
     "aria-hidden": true,
     fill: "none",
-    height: 22,
+    height: 28,
     stroke: "currentColor",
     strokeLinecap: "round" as const,
     strokeLinejoin: "round" as const,
-    strokeWidth: 1.7,
+    strokeWidth: 1.55,
     viewBox: "0 0 24 24",
-    width: 22,
+    width: 28,
   };
 
-    switch (name) {
+  switch (name) {
     case "archive":
       return (
         <svg {...commonProps}>
-          <path d="M4 7h16" />
-          <path d="M6 7v13h12V7" />
-          <path d="M8 4h8l2 3H6l2-3Z" />
-          <path d="M9 11h6" />
-          <path d="M9 15h4" />
+          <path d="M4 7.5h6l1.6 2H20v9.5H4z" />
+          <path d="M4 7.5v-2h5l1.6 2" />
+          <path d="M7.5 13h8.5" />
+          <path d="M7.5 16h5.5" />
         </svg>
       );
     case "audio":
       return (
         <svg {...commonProps}>
-          <path d="M5 12v.01" />
-          <path d="M9 9v6" />
-          <path d="M13 6v12" />
-          <path d="M17 9v6" />
-          <path d="M21 12v.01" />
-          <path d="M3 17a9 9 0 0 0 18 0" />
+          <path d="M5 14v-2a7 7 0 0 1 14 0v2" />
+          <path d="M5 14.5c0-1.1.9-2 2-2h1v5H7c-1.1 0-2-.9-2-2z" />
+          <path d="M19 14.5c0-1.1-.9-2-2-2h-1v5h1c1.1 0 2-.9 2-2z" />
+          <path d="M10.5 11.5 14.5 14l-4 2.5z" />
         </svg>
       );
     case "memorial":
       return (
         <svg {...commonProps}>
-          <path d="M12 4v12" />
-          <path d="M8 16h8" />
-          <path d="M6 20h12" />
-          <path d="M9 8h6" />
-          <path d="M10 4h4" />
+          <path d="M9 7.3a3 3 0 0 1 6 0c0 1.6-1 2.8-3 2.8s-3-1.2-3-2.8Z" />
+          <path d="M7.7 14.3c.7-2 2.1-3 4.3-3s3.6 1 4.3 3" />
+          <path d="M8 14.3h8" />
+          <path d="M7 17h10" />
+          <path d="M5.5 20h13" />
+          <path d="M8.5 17v3" />
+          <path d="M15.5 17v3" />
         </svg>
       );
     case "stop":
       return (
         <svg {...commonProps}>
-          <path d="M5 20V8a3 3 0 0 1 3-3h8a3 3 0 0 1 3 3v12" />
-          <path d="M3 20h18" />
-          <path d="M7 10h10" />
-          <path d="M8 14h8" />
-          <path d="M8 5V3" />
-          <path d="M16 5V3" />
+          <path d="M4 20h16" />
+          <path d="M6 20V10.5" />
+          <path d="M18 20V10.5" />
+          <path d="M3.5 10.5h17L17.5 5h-11z" />
+          <path d="M7.5 14h9" />
+          <path d="M8.5 17h7" />
+          <path d="M12 5V3" />
         </svg>
       );
   }

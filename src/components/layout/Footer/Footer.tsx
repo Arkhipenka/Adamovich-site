@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { CookieSettingsButton } from "@/components/CookieConsent/CookieSettingsButton";
 import styles from "./Footer.module.css";
 import {
   assetPath,
@@ -50,6 +51,7 @@ const footerContentByLocale: Record<
     rights: string;
     privacy: string;
     terms: string;
+    cookieSettings: string;
     navigation: FooterNavItem[];
   }
 > = {
@@ -61,8 +63,9 @@ const footerContentByLocale: Record<
     followTitle: "Сацыяльныя сеткі",
     supportedTitle: "Пры падтрымцы",
     rights: "Усе правы абаронены",
-    privacy: "Палітыка прыватнасці",
-    terms: "Умовы выкарыстання",
+    privacy: "Прыватнасць і cookies",
+    terms: "Выкарыстанне матэрыялаў",
+    cookieSettings: "Налады cookies",
     navigation: [
       { label: "Біяграфія", segment: "biography" },
       { label: "Бібліяграфія", segment: "bibliography" },
@@ -80,8 +83,9 @@ const footerContentByLocale: Record<
     followTitle: "Follow us",
     supportedTitle: "Supported by",
     rights: "All rights reserved",
-    privacy: "Privacy Policy",
-    terms: "Terms of Use",
+    privacy: "Privacy and cookies",
+    terms: "Use of materials",
+    cookieSettings: "Cookie settings",
     navigation: [
       { label: "Biography", segment: "biography" },
       { label: "Bibliography", segment: "bibliography" },
@@ -99,8 +103,9 @@ const footerContentByLocale: Record<
     followTitle: "Социальные сети",
     supportedTitle: "При поддержке",
     rights: "Все права защищены",
-    privacy: "Политика конфиденциальности",
-    terms: "Условия использования",
+    privacy: "Приватность и cookies",
+    terms: "Использование материалов",
+    cookieSettings: "Настройки cookies",
     navigation: [
       { label: "Биография", segment: "biography" },
       { label: "Библиография", segment: "bibliography" },
@@ -113,10 +118,10 @@ const footerContentByLocale: Record<
 };
 
 const socialLinks = [
-  { label: "Telegram", icon: "telegram", href: "#" },
+  { label: "Telegram", icon: "telegram", href: siteConfig.contacts.telegramUrl },
   { label: "Facebook", icon: "facebook", href: "#" },
-  { label: "Instagram", icon: "instagram", href: "#" },
-  { label: "YouTube", icon: "youtube", href: "#" },
+  { label: "Instagram", icon: "instagram", href: siteConfig.contacts.instagramUrl },
+  { label: "YouTube", icon: "youtube", href: siteConfig.contacts.youtubeUrl },
 ];
 
 type SocialIconName = (typeof socialLinks)[number]["icon"];
@@ -167,9 +172,10 @@ function SocialIcon({ name }: { name: SocialIconName }) {
 
 export function Footer({ locale = defaultLocale }: FooterProps) {
   const content = footerContentByLocale[locale];
+  const privacyHref = `${localizedPath(locale, "privacy")}/`;
 
   return (
-    <footer className={styles.footer}>
+    <footer className={styles.footer} data-site-footer>
       <div className={styles.inner}>
         <div className={styles.brandBlock}>
           <Link
@@ -233,6 +239,8 @@ export function Footer({ locale = defaultLocale }: FooterProps) {
                   aria-label={item.label}
                   className={styles.socialLink}
                   href={item.href}
+                  rel={item.href === "#" ? undefined : "noopener noreferrer"}
+                  target={item.href === "#" ? undefined : "_blank"}
                 >
                   <SocialIcon name={item.icon} />
                 </a>
@@ -267,12 +275,16 @@ export function Footer({ locale = defaultLocale }: FooterProps) {
       <div className={styles.bottom}>
         <p>{content.rights}</p>
         <div className={styles.legalLinks}>
-          <a className={styles.legalLink} href="#">
+          <Link className={styles.legalLink} href={privacyHref}>
             {content.privacy}
-          </a>
-          <a className={styles.legalLink} href="#">
+          </Link>
+          <Link
+            className={styles.legalLink}
+            href={`${privacyHref}#materials`}
+          >
             {content.terms}
-          </a>
+          </Link>
+          <CookieSettingsButton locale={locale} />
         </div>
       </div>
     </footer>

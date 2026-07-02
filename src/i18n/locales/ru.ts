@@ -14,6 +14,7 @@ export const dictionary: Dictionary = {
     initiative: "Об инициативе",
     contacts: "Контакты",
     support: "Поддержать",
+    privacy: "Приватность",
   },
   common: {
     platform: "Культурная цифровая платформа",
@@ -67,6 +68,12 @@ export const dictionary: Dictionary = {
       title: "Поддержите память. Создавайте будущее вместе с нами",
       description:
         "Способы финансовой, информационной, волонтерской и институциональной поддержки без агрессивного fundraising.",
+    },
+    privacy: {
+      eyebrow: "Приватность",
+      title: "Приватность и cookies",
+      description:
+        "Правила использования аналитики, cookies и материалов сайта.",
     },
   },
 };

@@ -1,0 +1,24 @@
+RewriteEngine On
+
+# Canonical domain, protocol and language root.
+RewriteCond %{HTTPS} !=on [OR]
+RewriteCond %{HTTP_HOST} ^www\.adamovich\.eu$ [NC]
+RewriteRule ^$ https://adamovich.eu/be/ [R=301,L,NE]
+
+RewriteCond %{HTTPS} !=on [OR]
+RewriteCond %{HTTP_HOST} ^www\.adamovich\.eu$ [NC]
+RewriteRule ^(.+)$ https://adamovich.eu/$1 [R=301,L,NE]
+
+RewriteRule ^$ /be/ [R=301,L]
+RewriteRule ^public_html/(.*)$ /$1 [R=301,L,NE]
+
+DirectoryIndex index.html
+ErrorDocument 404 /404.html
+
+<IfModule mod_headers.c>
+  <FilesMatch "\.(html|txt|xml)$">
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+  </FilesMatch>
+</IfModule>

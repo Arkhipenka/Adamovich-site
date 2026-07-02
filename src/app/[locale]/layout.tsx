@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import { CookieConsent } from "@/components/CookieConsent/CookieConsent";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { Footer } from "@/components/layout/Footer/Footer";
 import { Header } from "@/components/layout/Header/Header";
@@ -14,6 +15,8 @@ type RootLayoutProps = {
     locale: string;
   }>;
 };
+
+export const dynamicParams = false;
 
 export async function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -64,11 +67,13 @@ export default async function RootLayout({ children, params }: RootLayoutProps) 
             <Header locale={activeLocale} dictionary={dictionary} />
             <div className={styles.contentField}>{children}</div>
             <Footer locale={activeLocale} />
+            <CookieConsent locale={activeLocale} />
             <GoogleAnalytics />
           </>
         ) : (
           <>
             {children}
+            <CookieConsent locale={activeLocale} />
             <GoogleAnalytics />
           </>
         )}

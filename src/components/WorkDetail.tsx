@@ -12,6 +12,7 @@ import styles from "./WorkDetail.module.css";
 
 import { assetPath, type Locale } from "@/config/site";
 import type { MaybeLocalizedText, Work } from "@/data/works";
+import { formatWorkAuthors } from "@/lib/formatWorkAuthors";
 import { getLocalizedText } from "@/lib/getLocalizedText";
 import { localizedHref } from "@/lib/localizedHref";
 import { formatLanguages, getWorkCover, getWorkYear } from "@/lib/works";
@@ -26,7 +27,7 @@ const labels = {
   be: {
     authors: "Аўтары",
     back: "Да бібліяграфіі",
-    noCover: "Вокладка будзе дададзена",
+    noCover: "No cover available",
     originalTitle: "Арыгінальная назва",
     pageLabel: "Базавая старонка",
     primaryCover: "Асноўная вокладка",
@@ -38,7 +39,7 @@ const labels = {
   en: {
     authors: "Authors",
     back: "Back to bibliography",
-    noCover: "Cover will be added",
+    noCover: "No cover available",
     originalTitle: "Original title",
     pageLabel: "Basic page",
     primaryCover: "Main cover",
@@ -50,7 +51,7 @@ const labels = {
   ru: {
     authors: "Авторы",
     back: "К библиографии",
-    noCover: "Обложка будет добавлена",
+    noCover: "No cover available",
     originalTitle: "Оригинальное название",
     pageLabel: "Базовая страница",
     primaryCover: "Основная обложка",
@@ -257,10 +258,6 @@ function getTypeLabel(type: string, locale: Locale) {
   return workTypeLabels[type]?.[locale] ?? type;
 }
 
-function getAuthors(work: Work) {
-  return [...work.authors, ...(work.coAuthors ?? [])].filter(Boolean).join(", ");
-}
-
 function getMaybeText(value: MaybeLocalizedText | undefined, locale: Locale) {
   if (!value) return "";
   return typeof value === "string" ? value : getLocalizedText(value, locale);
@@ -390,7 +387,7 @@ export function WorkDetail({ locale, relatedWorks = [], work }: WorkDetailProps)
   );
   const cover = getWorkCover(work);
   const year = getWorkYear(work);
-  const authors = getAuthors(work);
+  const authors = formatWorkAuthors(work, locale);
   const typeLabel = getTypeLabel(work.type, locale);
   const editionCoverItems = getEditionCoverItems(work, locale);
   const detailT = detailLabels[locale];
@@ -484,12 +481,19 @@ export function WorkDetail({ locale, relatedWorks = [], work }: WorkDetailProps)
     },
     {
       entries: reviewItems.map((review) => ({
-        description: getMaybeText(review.quote, locale),
+        author: review.author,
+        authorRole: getMaybeText(review.authorRole, locale),
+        description: review.body?.[locale]?.length
+          ? undefined
+          : getMaybeText(review.quote, locale),
         href: review.href,
         id: review.id,
-        meta: [review.author, review.source, review.year]
+        image: review.image,
+        imageAlt: getMaybeText(review.imageAlt, locale),
+        meta: [review.source, review.year]
           .filter(Boolean)
           .join(" / "),
+        paragraphs: review.body?.[locale] ?? review.body?.be,
         title: getMaybeText(review.title, locale),
       })),
       id: "reviews",
@@ -533,9 +537,9 @@ export function WorkDetail({ locale, relatedWorks = [], work }: WorkDetailProps)
                 <img className={styles.cover} src={assetPath(cover)} alt={title} />
               ) : (
                 <div className={styles.coverPlaceholder}>
-                  <span>{typeLabel}</span>
-                  <strong>{title}</strong>
-                  {year ? <small>{year}</small> : null}
+                  <span className={styles.coverPlaceholderMark} aria-hidden="true">
+                    <span className={styles.coverPlaceholderIcon}>?</span>
+                  </span>
                   <em>{t.noCover}</em>
                 </div>
               )}

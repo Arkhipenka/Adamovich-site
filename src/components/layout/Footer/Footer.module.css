@@ -206,28 +206,57 @@
 
 @media (max-width: 640px) {
   .footer {
-    padding-block: 40px 24px;
+    padding-block: 36px 24px;
   }
 
   .inner {
     grid-template-columns: 1fr;
-    gap: 32px;
+    gap: 28px;
+  }
+
+  .brandBlock {
+    width: 100%;
+    padding-bottom: 4px;
+  }
+
+  .brand {
+    width: 100%;
+  }
+
+  .logoComposition {
+    width: 100%;
+    gap: 14px;
   }
 
   .logoPortrait {
-    height: 52px;
+    height: clamp(58px, 18vw, 78px);
   }
 
   .logoDivider {
-    height: 44px;
+    height: clamp(48px, 15vw, 66px);
   }
 
   .logoText {
-    font-size: 1.35rem;
+    font-size: clamp(1.45rem, 8vw, 2rem);
   }
 
   .brandText {
     max-width: none;
+  }
+
+  .column {
+    gap: 0;
+  }
+
+  .links {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px 18px;
+  }
+
+  .footerLink {
+    display: inline-flex;
+    min-height: 28px;
+    align-items: center;
   }
 
   .bottom {

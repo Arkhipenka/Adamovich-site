@@ -21,6 +21,7 @@ export const routeSegments = [
   "initiative",
   "contacts",
   "support",
+  "privacy",
 ] as const;
 
 export type RouteSegment = (typeof routeSegments)[number];
@@ -29,8 +30,16 @@ const contactEmail =
   process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "adamovich1926@gmail.com";
 const contactPhone = process.env.NEXT_PUBLIC_CONTACT_PHONE ?? "+48 733-25-90-97";
 const contactPhoneHref = process.env.NEXT_PUBLIC_CONTACT_PHONE_HREF ?? "+48733259097";
-const contactTelegram = process.env.NEXT_PUBLIC_CONTACT_TELEGRAM ?? "@adamovich_bot";
-const telegramBotUrl = process.env.NEXT_PUBLIC_TELEGRAM_BOT_URL ?? "";
+const contactTelegram =
+  process.env.NEXT_PUBLIC_CONTACT_TELEGRAM ?? "t.me/+bXNYZ8mj_mlkNjAy";
+const telegramBotUrl =
+  process.env.NEXT_PUBLIC_TELEGRAM_BOT_URL ?? "https://t.me/+bXNYZ8mj_mlkNjAy";
+const instagramUrl =
+  process.env.NEXT_PUBLIC_INSTAGRAM_URL ??
+  "https://www.instagram.com/adamovich.ales";
+const youtubeUrl =
+  process.env.NEXT_PUBLIC_YOUTUBE_URL ??
+  "https://www.youtube.com/@AdamovichAles";
 
 export const siteConfig = {
   name: "Ales Adamovich",
@@ -43,12 +52,15 @@ export const siteConfig = {
   telegramBotUrl,
   audioAppUrl: process.env.NEXT_PUBLIC_AUDIO_APP_URL ?? "",
   supportUrl: process.env.NEXT_PUBLIC_SUPPORT_URL ?? "",
+  patreonUrl: process.env.NEXT_PUBLIC_PATREON_URL ?? "",
   contacts: {
     email: contactEmail,
     phone: contactPhone,
     phoneHref: contactPhoneHref,
     telegram: contactTelegram,
     telegramUrl: telegramBotUrl,
+    instagramUrl,
+    youtubeUrl,
     location: {
       be: "Адрас будзе дададзена пазней",
       en: "Address will be added later",

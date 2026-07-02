@@ -4,6 +4,7 @@ import Link from "next/link";
 import styles from "./WorkCard.module.css";
 import { assetPath, type Locale } from "@/config/site";
 import type { Work, WorkType } from "@/data/works";
+import { formatWorkAuthors } from "@/lib/formatWorkAuthors";
 import { getLocalizedText } from "@/lib/getLocalizedText";
 import { getWorkCover, getWorkYear } from "@/lib/works";
 import { localizedHref } from "@/lib/localizedHref";
@@ -68,10 +69,6 @@ const typeLabels = {
   },
 } satisfies Record<Locale, Record<WorkType, string>>;
 
-function getAuthors(work: Work) {
-  return [...work.authors, ...(work.coAuthors ?? [])].filter(Boolean).join(", ");
-}
-
 export function WorkCard({ compact = false, locale, work }: WorkCardProps) {
   const title = getLocalizedText(work.title, locale);
   const description = getLocalizedText(
@@ -82,7 +79,7 @@ export function WorkCard({ compact = false, locale, work }: WorkCardProps) {
   const year = getWorkYear(work);
   const cover = getWorkCover(work);
   const coverAlt = work.coverAlt ? getLocalizedText(work.coverAlt, locale) : title;
-  const authors = getAuthors(work);
+  const authors = formatWorkAuthors(work, locale);
 
   return (
     <article className={`${styles.card} ${compact ? styles.compact : ""}`}>
@@ -101,8 +98,10 @@ export function WorkCard({ compact = false, locale, work }: WorkCardProps) {
             />
           ) : (
             <span className={styles.placeholder}>
-              <span className={styles.placeholderType}>{typeLabel}</span>
-              <span className={styles.placeholderTitle}>{title}</span>
+              <span className={styles.placeholderMark} aria-hidden="true">
+                <span className={styles.placeholderIcon}>?</span>
+              </span>
+              <span className={styles.placeholderLabel}>No cover available</span>
             </span>
           )}
 

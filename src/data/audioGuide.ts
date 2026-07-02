@@ -402,11 +402,11 @@ export const audioGuideContent: AudioGuidePageContent = {
           en: "A street that keeps the writer’s name within the everyday space of the village.",
         },
         image: {
-          src: "/assets/images/audioguide/route-point-glusha.jpg",
+          src: "/assets/images/audioguide/adamovich-street.jpg",
           alt: {
-            be: "Вуліца ў Глушы",
-            ru: "Улица в Глуше",
-            en: "A street in Glusha",
+            be: "Вуліца Алеся Адамовіча ў Глушы",
+            ru: "Улица Алеся Адамовича в Глуше",
+            en: "Ales Adamovich Street in Glusha",
           },
         },
       },
@@ -424,11 +424,11 @@ export const audioGuideContent: AudioGuidePageContent = {
           en: "A place connected with family history and Ales Adamovich’s return to his small homeland.",
         },
         image: {
-          src: "/assets/images/hero/glusha-pharmacy-1985.webp",
+          src: "/assets/images/audioguide/adamovich-house.jpg",
           alt: {
-            be: "Гістарычны будынак у Глушы",
-            ru: "Историческое здание в Глуше",
-            en: "A historic building in Glusha",
+            be: "Дом Адамовічаў у Глушы",
+            ru: "Дом Адамовичей в Глуше",
+            en: "The Adamovich family house in Glusha",
           },
         },
       },
@@ -512,11 +512,11 @@ export const audioGuideContent: AudioGuidePageContent = {
           en: "A place of memory for family, teachers, friends and neighbours.",
         },
         image: {
-          src: "/assets/images/initiative/memorial-illustration.webp",
+          src: "/assets/images/audioguide/adamovich-grave.jpg",
           alt: {
-            be: "Мемарыяльны вобраз маршруту",
-            ru: "Мемориальный образ маршрута",
-            en: "Memorial image of the route",
+            be: "Магіла Алеся Адамовіча ў Глушы",
+            ru: "Могила Алеся Адамовича в Глуше",
+            en: "The grave of Ales Adamovich in Glusha",
           },
         },
       },

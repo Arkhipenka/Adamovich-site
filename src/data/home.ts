@@ -33,8 +33,8 @@ export const homePageContent: HomePageContent = {
         },
       },
       imageCredit: {
-        be: "Архіўны вобраз пісьменніка і дакументальных матэрыялаў",
-        ru: "Архивный образ писателя и документальных материалов",
+        be: "Адамовіч за трыбунай",
+        ru: "Адамович за трибуной",
         en: "Archival image of the writer and documentary materials",
       },
       primaryLink: {
@@ -143,8 +143,8 @@ export const homePageContent: HomePageContent = {
         },
       },
       imageCredit: {
-        be: "Рукапісы і архіўныя матэрыялы",
-        ru: "Рукописи и архивные материалы",
+        be: "Вокладкі кніг",
+        ru: "Обложки книг",
         en: "Manuscripts and archival materials",
       },
       primaryLink: {
@@ -185,9 +185,9 @@ export const homePageContent: HomePageContent = {
         en: "Prypynak Adamovich",
       },
       subtitle: {
-        be: "Кнігі, дакументальная проза, публіцыстыка, фільмы звязанныя з Алесем Адамовічам.",
-        ru: "Книги, документальная проза, публицистика, фильмы, связанные с Алесям Адамовичем.",
-        en: "Books, documentary prose, journalism, films related to Ales Adamovich.",
+        be: "Культурная ініцыятыва пра памяць Алеся Адамовіча, Глушу і праекты, якія працягваюць гэтую гісторыю.",
+        ru: "Культурная инициатива о памяти Алеся Адамовича, Глуше и проектах, которые продолжают эту историю.",
+        en: "A cultural initiative about Ales Adamovich's memory, Glusha, and the projects that continue this story.",
       },
       image: {
         src: "/assets/images/hero/hero-initiative-collage.webp",
@@ -338,8 +338,8 @@ export const homePageContent: HomePageContent = {
           en: "How the audio guide was created",
         },
         text: {
-          be: "Праца з архівамі, месцамі памяці і сведчаннямі.",
-          ru: "Работа с архивами, местами памяти и свидетельствами.",
+          be: "Праца з біаграфіяй, месцамі і запіс.",
+          ru: "Работа с биографией, местами и запись.",
           en: "Work with archives, places of memory and testimonies.",
         },
         image: {

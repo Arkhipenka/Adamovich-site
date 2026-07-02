@@ -1,0 +1,157 @@
+.banner {
+  position: fixed;
+  right: clamp(16px, 4vw, 48px);
+  bottom: clamp(16px, 4vw, 40px);
+  z-index: 90;
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr) auto;
+  gap: 18px;
+  width: min(720px, calc(100vw - 32px));
+  padding: 22px 24px;
+  color: #211c16;
+  background:
+    linear-gradient(180deg, rgba(255, 252, 244, 0.96), rgba(241, 232, 214, 0.96)),
+    #f4ead8;
+  border: 1px solid rgba(164, 119, 58, 0.34);
+  box-shadow: 0 22px 70px rgba(19, 16, 12, 0.22);
+  backdrop-filter: blur(12px);
+}
+
+.mark {
+  width: 2px;
+  height: 58px;
+  margin-top: 7px;
+  background: #a66d20;
+  transform: rotate(42deg);
+  transform-origin: center;
+}
+
+.copy {
+  display: grid;
+  gap: 7px;
+}
+
+.eyebrow {
+  margin: 0;
+  color: #9a6721;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.title {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: clamp(1.28rem, 1.1rem + 0.5vw, 1.7rem);
+  font-weight: 700;
+  line-height: 1.08;
+}
+
+.text {
+  max-width: 52ch;
+  margin: 0;
+  color: rgba(33, 28, 22, 0.78);
+  font-size: 0.96rem;
+  line-height: 1.55;
+}
+
+.detailsLink {
+  width: fit-content;
+  color: #8b5b1b;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: color 180ms ease;
+}
+
+.detailsLink:hover {
+  color: #211c16;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.button {
+  min-height: 44px;
+  padding: 0 18px;
+  border: 1px solid rgba(154, 103, 33, 0.48);
+  border-radius: 0;
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition:
+    background-color 180ms ease,
+    color 180ms ease,
+    border-color 180ms ease;
+}
+
+.primary {
+  color: #fff8eb;
+  background: #9a6721;
+}
+
+.primary:hover {
+  background: #805316;
+}
+
+.secondary {
+  color: #7b5421;
+  background: transparent;
+}
+
+.secondary:hover {
+  color: #211c16;
+  border-color: rgba(33, 28, 22, 0.46);
+  background: rgba(255, 255, 255, 0.34);
+}
+
+@media (max-width: 760px) {
+  .banner {
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    grid-template-columns: 18px minmax(0, 1fr);
+    gap: 14px;
+    width: auto;
+    padding: 18px;
+  }
+
+  .mark {
+    height: 48px;
+  }
+
+  .actions {
+    grid-column: 1 / -1;
+    justify-content: stretch;
+  }
+
+  .button {
+    flex: 1;
+    padding: 0 12px;
+  }
+}
+
+@media (max-width: 420px) {
+  .actions {
+    flex-direction: column;
+  }
+
+  .button {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .detailsLink,
+  .button {
+    transition-duration: 0.01ms;
+  }
+}

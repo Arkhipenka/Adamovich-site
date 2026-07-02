@@ -1,6 +1,7 @@
 .periodSections {
   background: var(--color-paper-bg, #f3eadc);
   color: var(--color-paper-text, #1a1512);
+  padding-bottom: clamp(96px, 10vw, 160px);
 }
 
 .periodSection {
@@ -33,6 +34,19 @@
     rgba(246, 238, 224, 0.84),
     rgba(241, 231, 216, 0.92)
   );
+}
+
+.periodSectionNoMedia .periodInner {
+  grid-template-columns: minmax(280px, 0.82fr) minmax(360px, 1.18fr);
+  max-width: var(--container, 1180px);
+}
+
+.periodSectionNoMedia .periodMediaPlaceholder {
+  display: none;
+}
+
+.periodSectionNoMedia .periodSide {
+  align-self: stretch;
 }
 
 .periodInner {
@@ -91,6 +105,25 @@
   color: rgba(28, 23, 18, 0.74);
   font-size: clamp(0.92rem, 1vw, 1rem);
   line-height: 1.68;
+}
+
+.workTextLink {
+  color: var(--color-paper-accent, #9a6826);
+  font-weight: 700;
+  text-decoration-line: underline;
+  text-decoration-color: rgba(154, 104, 38, 0.36);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+  transition:
+    color 160ms ease,
+    text-decoration-color 160ms ease;
+}
+
+.workTextLink:hover,
+.workTextLink:focus-visible {
+  color: var(--color-paper-accent-strong, #7c4f18);
+  text-decoration-color: currentColor;
+  outline: none;
 }
 
 .periodLink {
@@ -215,7 +248,12 @@
 
 .periodImage {
   object-fit: cover;
+  object-position: center;
   filter: grayscale(1) sepia(0.08);
+}
+
+.periodMediaPortrait .periodImage {
+  object-position: center 32%;
 }
 
 .periodCaption {
@@ -376,6 +414,43 @@
   object-fit: contain;
 }
 
+.imageModalControls {
+  position: absolute;
+  inset: 50% 14px auto;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+
+.imageModalControls button {
+  display: grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  line-height: 1;
+  pointer-events: auto;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.65);
+  transition:
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.imageModalControls button:hover,
+.imageModalControls button:focus-visible {
+  color: var(--color-paper-accent, #c29f63);
+  outline: none;
+  transform: scale(1.08);
+}
+
 .imageModalClose {
   position: absolute;
   top: 12px;
@@ -386,20 +461,24 @@
   height: 44px;
   place-items: center;
   padding: 0;
-  border: 1px solid rgba(255, 255, 255, 0.42);
-  background: rgba(15, 13, 11, 0.72);
+  border: 0;
+  background: transparent;
   color: #fff;
   cursor: pointer;
   font-size: 2rem;
   font-weight: 300;
   line-height: 1;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.65);
+  transition:
+    color 180ms ease,
+    transform 180ms ease;
 }
 
 .imageModalClose:hover,
 .imageModalClose:focus-visible {
-  border-color: var(--color-paper-accent, #c29f63);
   color: var(--color-paper-accent, #c29f63);
   outline: none;
+  transform: scale(1.08);
 }
 
 .imageModalCaption {
@@ -559,6 +638,8 @@
 .detailMediaGrid {
   grid-column: 1 / -1;
   display: grid;
+  align-content: start;
+  align-items: start;
   gap: 18px;
   padding-top: clamp(4px, 1vw, 12px);
 }
@@ -571,22 +652,124 @@
 }
 
 .detailMedia {
+  align-self: start;
   width: min(100%, 720px);
   margin: 0;
+  overflow: hidden;
+  border: 1px solid rgba(76, 53, 30, 0.16);
+  background: rgba(255, 248, 236, 0.5);
+  box-shadow: 0 14px 34px rgba(54, 39, 18, 0.07);
+}
+
+.detailMediaPlaceholder {
+  display: grid;
+  width: min(100%, 720px);
+  min-height: clamp(220px, 24vw, 340px);
+  place-items: center;
+  border: 1px solid rgba(76, 53, 30, 0.16);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.34), transparent 52%),
+    rgba(255, 248, 236, 0.5);
+  box-shadow: 0 14px 34px rgba(54, 39, 18, 0.07);
+  color: rgba(28, 23, 18, 0.5);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .detailMediaPortrait {
   width: min(100%, 430px);
 }
 
-.detailMediaFrame {
+.detailVideo {
+  width: min(100%, 720px);
+  margin: 0;
+}
+
+.detailVideoFrame {
   position: relative;
   overflow: hidden;
   width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 1px solid rgba(154, 104, 38, 0.18);
+  background: rgba(26, 21, 18, 0.08);
+  box-shadow: 0 18px 42px rgba(50, 38, 23, 0.12);
+}
+
+.detailVideoFrame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.detailVideo figcaption {
+  margin: 0;
+  padding: 12px 4px 14px;
+  color: rgba(49, 39, 28, 0.62);
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.detailVideoLink {
+  display: grid;
+  width: min(100%, 720px);
+  gap: 6px;
+  padding: 15px 18px;
+  border: 1px solid rgba(154, 104, 38, 0.24);
+  background: rgba(255, 248, 236, 0.46);
+  color: var(--color-paper-text, #1a1512);
+  text-decoration: none;
+  transition:
+    border-color 180ms ease,
+    background-color 180ms ease,
+    color 180ms ease;
+}
+
+.detailVideoLink:hover,
+.detailVideoLink:focus-visible {
+  border-color: rgba(154, 104, 38, 0.52);
+  background: rgba(255, 248, 236, 0.78);
+  color: var(--color-paper-accent, #9a6826);
+  outline: none;
+}
+
+.detailVideoLabel {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.detailVideoLink span:last-child {
+  color: rgba(28, 23, 18, 0.68);
+  font-size: 0.86rem;
+  line-height: 1.45;
+}
+
+.detailMediaButton {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: zoom-in;
+}
+
+.detailMediaButton:focus-visible {
+  outline: 2px solid var(--color-paper-accent, #9a6826);
+  outline-offset: 4px;
+}
+
+.detailMediaFrame {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  width: 100%;
   aspect-ratio: 604 / 432;
-  border: 1px solid rgba(76, 53, 30, 0.2);
-  background: rgba(245, 237, 221, 0.78);
-  box-shadow: 0 14px 34px rgba(57, 42, 25, 0.12);
+  background: rgba(225, 218, 201, 0.54);
 }
 
 .detailMediaPortrait .detailMediaFrame {
@@ -594,14 +777,20 @@
 }
 
 .detailMediaImage {
-  object-fit: contain;
+  object-fit: cover;
+  transition: transform 220ms ease;
+}
+
+.detailMediaButton:hover .detailMediaImage {
+  transform: scale(1.018);
 }
 
 .detailMedia figcaption {
-  margin-top: 10px;
+  margin: 0;
+  padding: 12px 4px 14px;
   color: rgba(49, 39, 28, 0.62);
-  font-size: 0.78rem;
-  line-height: 1.5;
+  font-size: 0.82rem;
+  line-height: 1.45;
 }
 
 @media (max-width: 1100px) {
@@ -644,6 +833,15 @@
     grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
   }
 
+  .periodSectionNoMedia .periodInner {
+    grid-template-columns: 1fr;
+    max-width: min(100% - var(--page-gutter) * 2, var(--container));
+  }
+
+  .periodSectionNoMedia .periodSide {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+
   .periodSectionPlaceholder .periodInner {
     grid-template-columns: 1fr;
   }
@@ -670,6 +868,10 @@
 
   .periodImageFrame {
     height: 240px;
+  }
+
+  .periodMediaPortrait .periodImage {
+    object-position: center 28%;
   }
 
   .imageModal {
@@ -727,6 +929,10 @@
   .periodSectionFeatured .periodAside,
   .periodSectionFeatured .eventGroup {
     padding: 20px;
+  }
+
+  .periodSectionNoMedia .periodSide {
+    grid-template-columns: 1fr;
   }
 }
 
