@@ -622,7 +622,7 @@ export const biographyPeriodsBe: BiographyPeriod[] = [
 export const biographyPeriodsRu: BiographyPeriod[] = [
   {
     id: "childhood",
-    year: "1927–1940",
+    year: "1926–1940",
     title: "Детство и Глуша",
     shortDescription:
       "Начало жизни, семья и место, которое стало настоящей малой родиной писателя.",
@@ -1114,7 +1114,7 @@ export const biographyPeriodsRu: BiographyPeriod[] = [
 export const biographyPeriodsEn: BiographyPeriod[] = [
   {
     id: "childhood",
-    year: "1927–1940",
+    year: "1926–1940",
     title: "Childhood and Hlusha",
     shortDescription:
       "Family, early years, and the place that became Adamovich’s true home ground.",
