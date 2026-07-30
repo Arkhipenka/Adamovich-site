@@ -19,7 +19,7 @@ export const dictionary: Dictionary = {
   common: {
     platform: "Cultural digital platform",
     supportProject: "Support project",
-    currentStage: "This section is prepared as a scaffold for the next design and content stage.",
+    currentStage: "This section is gradually being enriched with materials and archival evidence.",
     primaryNavigation: "Primary navigation",
     mobileNavigation: "Mobile navigation",
     languageSwitcher: "Language switcher",
@@ -31,49 +31,49 @@ export const dictionary: Dictionary = {
       eyebrow: "Home",
       title: "Ales Adamovich",
       description:
-        "Writer, witness, and moral voice. The future homepage will connect biography, audio guide, bibliography, and the initiative.",
+        "Ales Adamovich: biography, works, the Hlusha audio guide, and an initiative preserving the writer's memory and moral legacy.",
     },
     biography: {
       eyebrow: "Biography",
       title: "Life, work, and public conscience",
       description:
-        "This page will become a chronological story with archival materials, quotes, and visual documentary accents.",
+        "Biography of Ales Adamovich: childhood in Hlusha, war, literature, cinema, anti-nuclear activism, and the writer's legacy.",
     },
     bibliography: {
       eyebrow: "Bibliography",
       title: "Books, texts, and documentary prose",
       description:
-        "A section for key works, categories, book cards, and future expansion into a research archive.",
+        "Ales Adamovich bibliography: books, screenplays, films, essays, interviews, and archival materials about his legacy.",
     },
     "audio-guide": {
       eyebrow: "Audio Guide",
       title: "Listen to the places connected with Adamovich",
       description:
-        "A presentation page for the audio guide, Telegram bot, mobile app, routes, voices, and stories.",
+        "Audio guide through Hlusha: places connected with Ales Adamovich, local stories, literary fragments, and the writer's memory.",
     },
     initiative: {
       eyebrow: "Initiative",
       title: "Preserving memory and developing culture",
       description:
-        "A page about goals, mission, team, partners, completed projects, and plans for Adamovich's centenary.",
+        "The Prypynak Adamovicha initiative: team, partners, and projects preserving the writer's memory in Hlusha and Belarus.",
     },
     contacts: {
       eyebrow: "Contacts",
       title: "Contact the initiative",
       description:
-        "Contact details, social platforms, a feedback form, and collaboration options.",
+        "Contacts for the Prypynak Adamovicha initiative: email, phone, social platforms, collaboration, materials, and project requests.",
     },
     support: {
       eyebrow: "Support Project",
       title: "Support memory. Build the future with us",
       description:
-        "Financial, informational, volunteer, and institutional support options without aggressive fundraising.",
+        "Support the Prypynak Adamovicha initiative: archive work, website development, translations, research, and the centenary programme.",
     },
     privacy: {
       eyebrow: "Privacy",
       title: "Privacy and Cookies",
       description:
-        "Rules for analytics, cookies, and use of site materials.",
+        "Adamovich.eu privacy policy: cookies, analytics, use of site materials, photo consent, and contacts for privacy or materials requests.",
     },
   },
 };

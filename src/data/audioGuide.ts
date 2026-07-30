@@ -53,7 +53,7 @@ export type AudioGuidePartner = {
   id: string;
   name: RequiredLocalizedText;
   text: RequiredLocalizedText;
-  logo: string;
+  logo: string | RequiredLocalizedText;
   href?: string;
 };
 
@@ -89,6 +89,7 @@ export type AudioGuidePageContent = {
   };
   listen: {
     title: RequiredLocalizedText;
+    unavailableLabel: RequiredLocalizedText;
     options: AudioGuideListenOption[];
   };
   partners: {
@@ -147,9 +148,9 @@ export const audioGuideContent: AudioGuidePageContent = {
       },
     ],
     status: {
-      be: "Даступна ў Telegram-боце · мабільны дадатак рыхтуецца",
-      ru: "Доступно в Telegram-боте · мобильное приложение готовится",
-      en: "Available in the Telegram bot · mobile app in preparation",
+      be: "Telegram-бот і мабільны дадатак будуць дададзены пазней",
+      ru: "Telegram-бот и мобильное приложение будут добавлены позже",
+      en: "Telegram bot and mobile app will be added later",
     },
   },
   intro: {
@@ -528,6 +529,11 @@ export const audioGuideContent: AudioGuidePageContent = {
       ru: "Где слушать",
       en: "Where to listen",
     },
+    unavailableLabel: {
+      be: "Будзе дададзена пазней",
+      ru: "Будет добавлено позже",
+      en: "Will be added later",
+    },
     options: [
       {
         id: "telegram",
@@ -635,7 +641,11 @@ export const audioGuideContent: AudioGuidePageContent = {
           ru: "Техническая поддержка Android APK-версии аудиогида.",
           en: "Technical support for the Android APK version of the audio guide.",
         },
-        logo: "",
+        logo: {
+          be: "/assets/partners/mecenat-logo.png",
+          ru: "/assets/partners/mecenat-logo.png",
+          en: "/assets/partners/mecenat-logo-en.png",
+        },
       },
     ],
   },

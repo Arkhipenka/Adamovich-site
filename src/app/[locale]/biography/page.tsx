@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 
+import { JsonLd } from "@/components/JsonLd";
 import { BiographyPage } from "@/components/biography/BiographyPage";
 import { resolveLocalePage, type LocalePageProps } from "@/lib/page";
 import { localizedAlternates } from "@/lib/seo";
+import { createPersonJsonLd } from "@/lib/structuredData";
 
 export async function generateMetadata({
   params,
@@ -28,5 +30,10 @@ export async function generateMetadata({
 export default async function BiographyRoute({ params }: LocalePageProps) {
   const { locale, dictionary } = await resolveLocalePage(params);
 
-  return <BiographyPage locale={locale} dictionary={dictionary} />;
+  return (
+    <>
+      <JsonLd data={createPersonJsonLd(locale)} />
+      <BiographyPage locale={locale} dictionary={dictionary} />
+    </>
+  );
 }

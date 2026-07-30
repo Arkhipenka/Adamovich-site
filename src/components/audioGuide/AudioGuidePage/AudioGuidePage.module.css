@@ -255,7 +255,6 @@
 .heroImage {
   object-fit: cover;
   object-position: 68% center;
-  filter: grayscale(1) contrast(1.05) brightness(0.82);
 }
 
 .intro {
@@ -749,6 +748,19 @@
   border-color: rgba(255, 248, 236, 0.44);
 }
 
+.listenPending {
+  display: inline-flex;
+  align-items: center;
+  min-height: 42px;
+  margin-top: 20px;
+  color: rgba(255, 248, 236, 0.74);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
 .partners {
   border-bottom: 0;
   padding: clamp(84px, 9vw, 132px) 0 clamp(140px, 15vw, 220px);
@@ -811,9 +823,9 @@
 .partnerLogoRow {
   display: flex;
   flex-direction: row;
-  justify-content:space-around;
   align-items: center;
   flex-wrap: wrap;
+  justify-content: space-around;
   width: 100%;
   gap: clamp(64px, 11vw, 178px);
   margin-top: clamp(32px, 4vw, 54px);
@@ -827,7 +839,7 @@
 }
 
 .partnerLogoItemEu {
-  display:  flex;
+  display: flex;
   align-items: center;
   width: 440px;
 }
@@ -864,6 +876,9 @@
 .technicalLogoRow {
   display: flex;
   justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: clamp(24px, 4vw, 56px);
   margin-top: clamp(24px, 3vw, 38px);
 }
 
@@ -871,22 +886,20 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: clamp(18px, 2vw, 28px);
-  min-height: 92px;
+  min-height: 84px;
+  width: min(100%, 291px);
   color: #11100e;
 }
 
-.kvitLogo {
-  display: inline-grid;
-  place-items: center;
+.technicalLogoImage {
+  display: block;
+  width: min(100%, 291px);
+  height: auto;
+  max-height: 123px;
+  object-fit: contain;
 }
 
-.kvitIcon {
-  width: clamp(62px, 5vw, 82px);
-  height: clamp(62px, 5vw, 82px);
-}
-
-.kvitName {
+.technicalLogoName {
   color: #11100e;
   font-size: clamp(1.25rem, 1.6vw, 1.65rem);
   font-weight: 800;
@@ -1067,11 +1080,10 @@
   }
 
   .technicalLogoItem {
-    gap: 16px;
-    min-height: 74px;
+    min-height: 67px;
   }
 
-  .kvitName {
+  .technicalLogoName {
     font-size: clamp(1.25rem, 1.6vw, 1.65rem);
   }
 }

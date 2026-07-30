@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import { locales, type Locale } from "@/config/site";
+import { defaultLocale, locales, type Locale } from "@/config/site";
 
 export function localePath(locale: Locale, segment = "") {
   const normalizedSegment = segment.replace(/^\/+|\/+$/g, "");
@@ -11,13 +11,18 @@ export function localePath(locale: Locale, segment = "") {
 }
 
 export function localizedAlternates(locale: Locale, segment = "") {
-  return {
-    canonical: localePath(locale, segment),
-    languages: Object.fromEntries(
+  const languages = {
+    ...Object.fromEntries(
       locales.map((alternateLocale) => [
         alternateLocale,
         localePath(alternateLocale, segment),
       ]),
     ),
+    "x-default": localePath(defaultLocale, segment),
+  };
+
+  return {
+    canonical: localePath(locale, segment),
+    languages,
   } satisfies Metadata["alternates"];
 }

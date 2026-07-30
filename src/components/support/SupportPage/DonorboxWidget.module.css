@@ -1,0 +1,32 @@
+.donorbox {
+  margin-top: clamp(30px, 5vw, 48px);
+  width: 425px;
+  max-width: 100%;
+  overflow: hidden;
+  border: 1px solid rgba(154, 104, 38, 0.24);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.42), transparent 58%),
+    rgba(255, 255, 255, 0.2);
+  box-shadow: 0 22px 56px rgba(53, 42, 31, 0.08);
+}
+
+.embed {
+  width: 425px;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.embed :global(dbox-widget),
+.embed :global(iframe) {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+}
+
+@media (max-width: 640px) {
+  .donorbox {
+    margin-top: 28px;
+    margin-inline: calc(var(--page-gutter) * -0.35);
+    width: auto;
+  }
+}

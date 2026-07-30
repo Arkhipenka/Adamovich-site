@@ -75,18 +75,6 @@ const headerLogoByLocale: Record<Locale, string> = {
   ru: assetPath("/assets/brand/adamovich-logo-portrait.png"),
 };
 
-const headerLogoAltByLocale: Record<Locale, string> = {
-  be: "Алесь Адамовіч",
-  en: "Ales Adamovich",
-  ru: "Алесь Адамович",
-};
-
-const compactLogoTextByLocale: Record<Locale, string> = {
-  be: "Алесь Адамовіч",
-  en: "Ales Adamovich",
-  ru: "Алесь Адамович",
-};
-
 const headerBrandLabelByLocale: Record<Locale, string> = {
   be: "Алесь Адамовіч",
   en: "Ales Adamovich",

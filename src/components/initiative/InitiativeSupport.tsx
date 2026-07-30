@@ -20,8 +20,9 @@ import {
   type InitiativeTeamMember,
   type SupportEntryType,
 } from "@/data/initiativeSupport";
+import { cx } from "@/lib/cx";
 import { getLocalizedText } from "@/lib/getLocalizedText";
-import type { Locale, RequiredLocalizedText } from "@/types/common.types";
+import type { Locale } from "@/types/common.types";
 
 import styles from "./InitiativeSupport.module.css";
 
@@ -34,10 +35,6 @@ const teamSectionLabels = {
   ru: "Основная команда",
   en: "Core team",
 } satisfies Record<Locale, string>;
-
-function localize(text: RequiredLocalizedText | undefined, locale: Locale) {
-  return text ? getLocalizedText(text, locale) : "";
-}
 
 function sortByOrder<T extends { order?: number }>(items: T[]) {
   return [...items].sort((a, b) => (a.order ?? 999) - (b.order ?? 999));
@@ -119,7 +116,7 @@ function SupportLogo({
   locale: Locale;
 }) {
   const [failed, setFailed] = useState(false);
-  const name = localize(entry.name, locale);
+  const name = getLocalizedText(entry.name, locale);
 
   if (entry.logo && entry.showLogo && !failed) {
     const image = (
@@ -164,12 +161,12 @@ function ImageOrFallback({
   className: string;
 }) {
   const [failed, setFailed] = useState(false);
-  const name = localize(entry.name, locale);
+  const name = getLocalizedText(entry.name, locale);
 
   if (entry.image && !failed) {
     return (
       <Image
-        alt={localize(entry.imageAlt, locale) || name}
+        alt={getLocalizedText(entry.imageAlt, locale) || name}
         className={className}
         fill
         loading="lazy"
@@ -195,14 +192,14 @@ function TeamCard({
   member: InitiativeTeamMember;
 }) {
   const [failed, setFailed] = useState(false);
-  const name = localize(member.name, locale);
+  const name = getLocalizedText(member.name, locale);
 
   return (
     <article className={styles.teamCard} tabIndex={0}>
       <div className={styles.teamPhoto}>
         {member.image && !failed ? (
           <Image
-            alt={localize(member.imageAlt, locale) || name}
+            alt={getLocalizedText(member.imageAlt, locale) || name}
             className={styles.teamImage}
             fill
             loading="lazy"
@@ -217,10 +214,10 @@ function TeamCard({
       <div className={styles.teamBody}>
         <div className={styles.teamDefaultInfo}>
           <h4>{name}</h4>
-          <p className={styles.role}>{localize(member.role, locale)}</p>
+          <p className={styles.role}>{getLocalizedText(member.role, locale)}</p>
         </div>
         <div className={styles.teamRevealInfo}>
-          <p>{localize(member.contribution, locale)}</p>
+          <p>{getLocalizedText(member.contribution, locale)}</p>
         </div>
       </div>
     </article>
@@ -235,14 +232,14 @@ function PublicThanksItem({
   locale: Locale;
 }) {
   const [failed, setFailed] = useState(false);
-  const name = localize(entry.name, locale);
+  const name = getLocalizedText(entry.name, locale);
 
   return (
     <article className={styles.publicThanksItem}>
       <div className={styles.avatar}>
         {entry.image && !failed ? (
           <Image
-            alt={localize(entry.imageAlt, locale) || name}
+            alt={getLocalizedText(entry.imageAlt, locale) || name}
             className={styles.avatarImage}
             fill
             loading="lazy"
@@ -256,7 +253,7 @@ function PublicThanksItem({
       </div>
       <div>
         <h4>{name}</h4>
-        <p>{localize(entry.contribution, locale)}</p>
+        <p>{getLocalizedText(entry.contribution, locale)}</p>
       </div>
     </article>
   );
@@ -297,18 +294,18 @@ function AwardVisual({
   locale: Locale;
 }) {
   const [failed, setFailed] = useState(false);
-  const title = localize(award.title, locale);
+  const title = getLocalizedText(award.title, locale);
 
   if (award.image && !failed) {
     return (
       <span
-        className={[
+        className={cx(
           styles.awardVisual,
-          compact ? styles.awardVisualCompact : "",
-        ].join(" ")}
+          compact && styles.awardVisualCompact,
+        )}
       >
         <Image
-          alt={localize(award.imageAlt, locale) || title}
+          alt={getLocalizedText(award.imageAlt, locale) || title}
           className={styles.awardImage}
           fill
           loading="lazy"
@@ -323,10 +320,10 @@ function AwardVisual({
   if (award.logo && !failed) {
     return (
       <span
-        className={[
+        className={cx(
           styles.awardVisual,
-          compact ? styles.awardVisualCompact : "",
-        ].join(" ")}
+          compact && styles.awardVisualCompact,
+        )}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
@@ -342,10 +339,10 @@ function AwardVisual({
 
   return (
     <span
-      className={[
+      className={cx(
         styles.awardIcon,
-        compact ? styles.awardIconCompact : "",
-      ].join(" ")}
+        compact && styles.awardIconCompact,
+      )}
       aria-hidden="true"
     >
       <AwardIcon type={award.type} />
@@ -360,10 +357,10 @@ function AwardCard({
   award: InitiativeAward;
   locale: Locale;
 }) {
-  const title = localize(award.title, locale);
-  const subtitle = localize(award.subtitle, locale);
-  const description = localize(award.description, locale);
-  const location = localize(award.location, locale);
+  const title = getLocalizedText(award.title, locale);
+  const subtitle = getLocalizedText(award.subtitle, locale);
+  const description = getLocalizedText(award.description, locale);
+  const location = getLocalizedText(award.location, locale);
   const card = (
     <>
       <div className={styles.awardTop}>
@@ -385,10 +382,10 @@ function AwardCard({
   if (award.href) {
     return (
       <a
-        className={[
+        className={cx(
           styles.awardCard,
-          award.featured ? styles.awardCardFeatured : "",
-        ].join(" ")}
+          award.featured && styles.awardCardFeatured,
+        )}
         href={award.href}
         rel="noopener noreferrer"
         target="_blank"
@@ -400,10 +397,10 @@ function AwardCard({
 
   return (
     <article
-      className={[
+      className={cx(
         styles.awardCard,
-        award.featured ? styles.awardCardFeatured : "",
-      ].join(" ")}
+        award.featured && styles.awardCardFeatured,
+      )}
     >
       {card}
     </article>
@@ -417,8 +414,8 @@ function CompactAwardCard({
   award: InitiativeAward;
   locale: Locale;
 }) {
-  const title = localize(award.title, locale);
-  const subtitle = localize(award.subtitle, locale);
+  const title = getLocalizedText(award.title, locale);
+  const subtitle = getLocalizedText(award.subtitle, locale);
 
   return (
     <article className={styles.compactAwardCard}>
@@ -514,12 +511,12 @@ export function InitiativeSupport({ locale }: InitiativeSupportProps) {
               >
                 <div className={styles.featuredSlide}>
                   <div className={styles.featuredContent}>
-                    <h3>{localize(activeContribution.name, locale)}</h3>
+                    <h3>{getLocalizedText(activeContribution.name, locale)}</h3>
                     <p className={styles.role}>
-                      {localize(activeContribution.role, locale)}
+                      {getLocalizedText(activeContribution.role, locale)}
                     </p>
                     <span className={styles.goldRule} aria-hidden="true" />
-                    <p>{localize(activeContribution.contribution, locale)}</p>
+                    <p>{getLocalizedText(activeContribution.contribution, locale)}</p>
                   </div>
                   <div className={styles.featuredImageFrame}>
                     <ImageOrFallback
@@ -547,12 +544,10 @@ export function InitiativeSupport({ locale }: InitiativeSupportProps) {
                   <div className={styles.sliderDots} aria-hidden="true">
                     {individualContributions.map((entry, index) => (
                       <span
-                        className={[
+                        className={cx(
                           styles.sliderDot,
-                          index === activeContributionIndex
-                            ? styles.sliderDotActive
-                            : "",
-                        ].join(" ")}
+                          index === activeContributionIndex && styles.sliderDotActive,
+                        )}
                         key={entry.id}
                       />
                     ))}
@@ -640,7 +635,7 @@ export function InitiativeSupport({ locale }: InitiativeSupportProps) {
             <span className={styles.smallRule} aria-hidden="true" />
             {mediaSupport ? (
               <p className={styles.mediaText}>
-                {localize(mediaSupport.contribution, locale)}
+                {getLocalizedText(mediaSupport.contribution, locale)}
               </p>
             ) : null}
             <ul>
@@ -680,14 +675,14 @@ export function InitiativeSupport({ locale }: InitiativeSupportProps) {
                 {currentFunders.map((entry) => (
                   <div className={styles.partnerLogoCard} key={entry.id}>
                     <SupportLogo entry={entry} locale={locale} />
-                    <span>{localize(entry.name, locale)}</span>
+                    <span>{getLocalizedText(entry.name, locale)}</span>
                   </div>
                 ))}
               </div>
               {fiscalPartner ? (
                 <p className={styles.groupNote}>
                   <strong>{labels.fiscalTitle}:</strong>{" "}
-                  {localize(fiscalPartner.contribution, locale)}
+                  {getLocalizedText(fiscalPartner.contribution, locale)}
                 </p>
               ) : null}
             </article>
@@ -696,7 +691,7 @@ export function InitiativeSupport({ locale }: InitiativeSupportProps) {
               <h3>{labels.informationPartnersTitle}</h3>
               <span className={styles.smallRule} aria-hidden="true" />
               {mediaSupport ? (
-                <p>{localize(mediaSupport.contribution, locale)}</p>
+                <p>{getLocalizedText(mediaSupport.contribution, locale)}</p>
               ) : null}
               <ul>
                 {labels.media.map((item) => (
@@ -712,7 +707,7 @@ export function InitiativeSupport({ locale }: InitiativeSupportProps) {
                 {culturalEntries.map((entry) => (
                   <div className={styles.compactEntry} key={entry.id}>
                     <SupportLogo entry={entry} locale={locale} />
-                    <span>{localize(entry.name, locale)}</span>
+                    <span>{getLocalizedText(entry.name, locale)}</span>
                   </div>
                 ))}
               </div>
@@ -725,7 +720,7 @@ export function InitiativeSupport({ locale }: InitiativeSupportProps) {
                 {platformEntries.map((entry) => (
                   <div className={styles.compactEntry} key={entry.id}>
                     <SupportLogo entry={entry} locale={locale} />
-                    <span>{localize(entry.name, locale)}</span>
+                    <span>{getLocalizedText(entry.name, locale)}</span>
                   </div>
                 ))}
               </div>

@@ -1,10 +1,12 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 
 import styles from "./WorkCoverSwitcher.module.css";
 
 import { assetPath } from "@/config/site";
+import { cx } from "@/lib/cx";
 
 export type WorkCoverSwitcherItem = {
   id: string;
@@ -26,10 +28,14 @@ export function WorkCoverSwitcher({ items }: WorkCoverSwitcherProps) {
   return (
     <div className={styles.switcher}>
       <figure className={styles.mainCover}>
-        <img
+        <Image
           alt={activeItem.title}
           className={styles.mainImage}
+          height={1300}
+          priority
+          sizes="(max-width: 1180px) 100vw, 360px"
           src={assetPath(activeItem.image)}
+          width={900}
         />
         <div className={styles.coverRail} role="tablist">
           {items.map((item, index) => {
@@ -39,22 +45,23 @@ export function WorkCoverSwitcher({ items }: WorkCoverSwitcherProps) {
               <button
                 aria-label={item.title}
                 aria-selected={isActive}
-                className={[
+                className={cx(
                   styles.coverCard,
-                  isActive ? styles.coverCardActive : "",
-                ]
-                  .filter(Boolean)
-                  .join(" ")}
+                  isActive && styles.coverCardActive,
+                )}
                 key={item.id}
                 onClick={() => setActiveIndex(index)}
                 role="tab"
                 type="button"
               >
-                <img
+                <Image
                   alt=""
                   className={styles.coverImage}
+                  height={180}
                   loading="lazy"
+                  sizes="96px"
                   src={assetPath(item.image)}
+                  width={120}
                 />
               </button>
             );

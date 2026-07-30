@@ -40,7 +40,6 @@
 .heroImage {
   object-fit: cover;
   object-position: right center;
-  filter: saturate(0.82) contrast(0.95) opacity(0.42);
 }
 
 .heroOverlay {
@@ -306,6 +305,17 @@
   grid-template-columns: repeat(5, minmax(0, 1fr));
 }
 
+.methodsLayout {
+  display: grid;
+  grid-template-columns: 425px minmax(0, 1fr);
+  gap: clamp(24px, 4vw, 46px);
+  align-items: start;
+}
+
+.methodsLayout .methodsGrid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
 .infoCard,
 .methodCard,
 .opennessItem {
@@ -562,6 +572,15 @@
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
+  .methodsLayout {
+    grid-template-columns: 425px minmax(0, 1fr);
+    gap: 28px;
+  }
+
+.methodsLayout .methodsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .bridgeInner,
   .partnershipInner,
   .opennessInner {
@@ -605,6 +624,14 @@
   .partnerList,
   .opennessItems {
     grid-template-columns: 1fr;
+  }
+
+  .methodsLayout {
+    grid-template-columns: 1fr;
+  }
+
+  .methodsLayout .methodsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .statItem,
@@ -655,5 +682,9 @@
   .infoCard,
   .methodCard {
     min-height: auto;
+  }
+
+  .methodsLayout .methodsGrid {
+    grid-template-columns: 1fr;
   }
 }

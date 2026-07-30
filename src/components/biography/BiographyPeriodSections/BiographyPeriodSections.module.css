@@ -249,7 +249,6 @@
 .periodImage {
   object-fit: cover;
   object-position: center;
-  filter: grayscale(1) sepia(0.08);
 }
 
 .periodMediaPortrait .periodImage {
@@ -328,6 +327,7 @@
   color: var(--color-paper-text, #1a1512);
   font-size: clamp(0.88rem, 0.96vw, 0.96rem);
   line-height: 1.58;
+  white-space: pre-line;
 }
 
 .asideMeta {

@@ -2,12 +2,12 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { type FocusEvent, useEffect, useMemo, useState } from "react";
+import { type FocusEvent, useMemo, useState } from "react";
 
 import styles from "./WorksCatalog.module.css";
 import { WorksGrid } from "./WorksGrid";
 import { assetPath, type Locale } from "@/config/site";
-import type { Work } from "@/data/works";
+import type { Work, WorkType } from "@/data/works";
 import {
   formatWorkAuthors,
   getWorkAuthorSearchText,
@@ -19,6 +19,7 @@ import {
   sortWorks,
   type WorkSortType,
 } from "@/lib/works";
+import { cx } from "@/lib/cx";
 
 type WorkFilter =
   | "all"
@@ -36,6 +37,24 @@ type DropdownId = "filter" | "sort";
 type WorksCatalogProps = {
   locale: Locale;
   works: Work[];
+};
+
+const ITEMS_PER_PAGE = 24;
+
+const workTypeFilterMap: Partial<Record<WorkType, WorkFilter>> = {
+  article: "publicism",
+  archive: "archive",
+  book: "book",
+  documentary_prose: "book",
+  "documentary-prose": "book",
+  essay: "publicism",
+  film: "film",
+  interview: "interview",
+  novel: "book",
+  novella: "book",
+  research: "research",
+  script: "script",
+  story: "book",
 };
 
 const labels = {
@@ -173,17 +192,8 @@ const viewLabels = {
 
 function matchesFilter(work: Work, filter: WorkFilter) {
   if (filter === "all") return true;
-  if (filter === "book") {
-    return (
-      work.type === "book" ||
-      work.type === "story" ||
-      work.type === "novella" ||
-      work.type === "documentary_prose"
-    );
-  }
-  if (filter === "publicism") return work.type === "article" || work.type === "essay";
 
-  return work.type === filter;
+  return getWorkFilter(work) === filter;
 }
 
 function getLocalizedField(
@@ -234,31 +244,8 @@ function matchesSearch(work: Work, query: string, locale: Locale) {
   return normalizeSearchValue(searchableText).includes(query);
 }
 
-function getItemsPerPage() {
-  if (typeof window === "undefined") return 6;
-  if (window.matchMedia("(max-width: 680px)").matches) return 2;
-  if (window.matchMedia("(min-width: 1360px)").matches) return 8;
-
-  return 6;
-}
-
 function getWorkFilter(work: Work): WorkFilter {
-  if (
-    work.type === "book" ||
-    work.type === "story" ||
-    work.type === "novella" ||
-    work.type === "documentary_prose"
-  ) {
-    return "book";
-  }
-  if (work.type === "article" || work.type === "essay") return "publicism";
-  if (work.type === "film") return "film";
-  if (work.type === "script") return "script";
-  if (work.type === "interview") return "interview";
-  if (work.type === "archive") return "archive";
-  if (work.type === "research") return "research";
-
-  return "all";
+  return workTypeFilterMap[work.type] ?? "all";
 }
 
 function getWorkTypeLabel(work: Work, locale: Locale) {
@@ -270,7 +257,6 @@ function getWorkTypeLabel(work: Work, locale: Locale) {
 export function WorksCatalog({ locale, works }: WorksCatalogProps) {
   const [filter, setFilter] = useState<WorkFilter>("all");
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(6);
   const [openDropdown, setOpenDropdown] = useState<DropdownId | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [sortType, setSortType] = useState<WorkSortType>("priority");
@@ -291,22 +277,24 @@ export function WorksCatalog({ locale, works }: WorksCatalogProps) {
     }
   };
 
-  useEffect(() => {
-    const updateItemsPerPage = () => {
-      setItemsPerPage(getItemsPerPage());
-    };
+  const resetCurrentPage = () => setCurrentPage(1);
 
-    updateItemsPerPage();
-    window.addEventListener("resize", updateItemsPerPage);
+  const handleSearchChange = (value: string) => {
+    setSearchQuery(value);
+    resetCurrentPage();
+  };
 
-    return () => {
-      window.removeEventListener("resize", updateItemsPerPage);
-    };
-  }, []);
+  const handleSortChange = (value: WorkSortType) => {
+    setSortType(value);
+    resetCurrentPage();
+    setOpenDropdown(null);
+  };
 
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [filter, itemsPerPage, normalizedSearchQuery, sortType]);
+  const handleFilterChange = (value: WorkFilter) => {
+    setFilter(value);
+    resetCurrentPage();
+    setOpenDropdown(null);
+  };
 
   const visibleWorks = useMemo(() => {
     return sortWorks(
@@ -318,13 +306,13 @@ export function WorksCatalog({ locale, works }: WorksCatalogProps) {
     );
   }, [filter, locale, normalizedSearchQuery, sortType, works]);
 
-  const totalPages = Math.max(1, Math.ceil(visibleWorks.length / itemsPerPage));
+  const totalPages = Math.max(1, Math.ceil(visibleWorks.length / ITEMS_PER_PAGE));
   const activePage = Math.min(currentPage, totalPages);
   const paginatedWorks = useMemo(() => {
-    const startIndex = (activePage - 1) * itemsPerPage;
+    const startIndex = (activePage - 1) * ITEMS_PER_PAGE;
 
-    return visibleWorks.slice(startIndex, startIndex + itemsPerPage);
-  }, [activePage, itemsPerPage, visibleWorks]);
+    return visibleWorks.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+  }, [activePage, visibleWorks]);
 
   return (
     <div className={styles.catalog}>
@@ -345,7 +333,7 @@ export function WorksCatalog({ locale, works }: WorksCatalogProps) {
             </span>
             <input
               className={styles.searchInput}
-              onChange={(event) => setSearchQuery(event.target.value)}
+              onChange={(event) => handleSearchChange(event.target.value)}
               placeholder={content.searchPlaceholder}
               type="search"
               value={searchQuery}
@@ -354,7 +342,7 @@ export function WorksCatalog({ locale, works }: WorksCatalogProps) {
               <button
                 aria-label={content.clearSearch}
                 className={styles.clearSearch}
-                onClick={() => setSearchQuery("")}
+                onClick={() => handleSearchChange("")}
                 type="button"
               >
                 ×
@@ -395,18 +383,21 @@ export function WorksCatalog({ locale, works }: WorksCatalogProps) {
             </button>
 
             <div
-              className={`${styles.dropdownMenu} ${openDropdown === "sort" ? styles.dropdownMenuOpen : ""}`}
+              className={cx(
+                styles.dropdownMenu,
+                openDropdown === "sort" && styles.dropdownMenuOpen,
+              )}
               role="listbox"
             >
               {content.sortOptions.map(([value, label]) => (
                 <button
                   aria-selected={sortType === value}
-                  className={`${styles.dropdownOption} ${sortType === value ? styles.dropdownOptionActive : ""}`}
+                  className={cx(
+                    styles.dropdownOption,
+                    sortType === value && styles.dropdownOptionActive,
+                  )}
                   key={value}
-                  onClick={() => {
-                    setSortType(value);
-                    setOpenDropdown(null);
-                  }}
+                  onClick={() => handleSortChange(value)}
                   role="option"
                   type="button"
                 >
@@ -452,18 +443,21 @@ export function WorksCatalog({ locale, works }: WorksCatalogProps) {
             </button>
 
             <div
-              className={`${styles.dropdownMenu} ${openDropdown === "filter" ? styles.dropdownMenuOpen : ""}`}
+              className={cx(
+                styles.dropdownMenu,
+                openDropdown === "filter" && styles.dropdownMenuOpen,
+              )}
               role="listbox"
             >
               {content.filters.map(([value, label]) => (
                 <button
                   aria-selected={filter === value}
-                  className={`${styles.dropdownOption} ${filter === value ? styles.dropdownOptionActive : ""}`}
+                  className={cx(
+                    styles.dropdownOption,
+                    filter === value && styles.dropdownOptionActive,
+                  )}
                   key={value}
-                  onClick={() => {
-                    setFilter(value);
-                    setOpenDropdown(null);
-                  }}
+                  onClick={() => handleFilterChange(value)}
                   role="option"
                   type="button"
                 >
@@ -492,9 +486,12 @@ export function WorksCatalog({ locale, works }: WorksCatalogProps) {
           {content.filters.map(([value, label]) => (
             <button
               aria-pressed={filter === value}
-              className={`${styles.filterButton} ${filter === value ? styles.filterButtonActive : ""}`}
+              className={cx(
+                styles.filterButton,
+                filter === value && styles.filterButtonActive,
+              )}
               key={value}
-              onClick={() => setFilter(value)}
+              onClick={() => handleFilterChange(value)}
               type="button"
             >
               {label}
@@ -506,7 +503,10 @@ export function WorksCatalog({ locale, works }: WorksCatalogProps) {
           <button
             aria-label={viewContent.grid}
             aria-pressed={viewMode === "grid"}
-            className={`${styles.viewButton} ${viewMode === "grid" ? styles.viewButtonActive : ""}`}
+            className={cx(
+              styles.viewButton,
+              viewMode === "grid" && styles.viewButtonActive,
+            )}
             onClick={() => setViewMode("grid")}
             type="button"
           >
@@ -522,7 +522,10 @@ export function WorksCatalog({ locale, works }: WorksCatalogProps) {
           <button
             aria-label={viewContent.list}
             aria-pressed={viewMode === "list"}
-            className={`${styles.viewButton} ${viewMode === "list" ? styles.viewButtonActive : ""}`}
+            className={cx(
+              styles.viewButton,
+              viewMode === "list" && styles.viewButtonActive,
+            )}
             onClick={() => setViewMode("list")}
             type="button"
           >
@@ -617,7 +620,10 @@ export function WorksCatalog({ locale, works }: WorksCatalogProps) {
                   return (
                     <button
                       aria-current={activePage === pageNumber ? "page" : undefined}
-                      className={`${styles.pageButton} ${activePage === pageNumber ? styles.pageButtonActive : ""}`}
+                      className={cx(
+                        styles.pageButton,
+                        activePage === pageNumber && styles.pageButtonActive,
+                      )}
                       key={pageNumber}
                       onClick={() => setCurrentPage(pageNumber)}
                       type="button"

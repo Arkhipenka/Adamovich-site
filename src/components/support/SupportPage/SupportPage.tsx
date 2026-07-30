@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { DonorboxWidget } from "./DonorboxWidget";
 import styles from "./SupportPage.module.css";
 import { assetPath, siteConfig } from "@/config/site";
 import type { Dictionary } from "@/i18n/dictionaries";
@@ -20,7 +21,6 @@ type IconName =
   | "monitor"
   | "news"
   | "partners"
-  | "paypal"
   | "patreon"
   | "people"
   | "shield";
@@ -40,10 +40,8 @@ const supportHeroImage = assetPath("/assets/images/hero/support-hero-paper-backg
 // TODO: replace hero image with final archive photo.
 
 const paymentLinks = {
-  bank: "#",
-  kofi: siteConfig.supportUrl || "https://ko-fi.com/alesadamovich",
-  patreon: siteConfig.patreonUrl || "https://www.patreon.com/Adamovich",
-  paypal: "#",
+  kofi: siteConfig.supportUrl,
+  patreon: siteConfig.patreonUrl,
 };
 // TODO: add real payment links.
 
@@ -97,13 +95,6 @@ const supportContent = {
     ] satisfies Card[],
     methodsTitle: "Как можно помочь",
     methods: [
-      {
-        icon: "paypal",
-        title: "PayPal",
-        text: "Разовая финансовая поддержка через PayPal.",
-        cta: "Поддержать",
-        href: paymentLinks.paypal,
-      },
       {
         icon: "patreon",
         title: "Patreon",
@@ -229,13 +220,6 @@ const supportContent = {
     methodsTitle: "Як можна дапамагчы",
     methods: [
       {
-        icon: "paypal",
-        title: "PayPal",
-        text: "Разавая фінансавая падтрымка праз PayPal.",
-        cta: "Падтрымаць",
-        href: paymentLinks.paypal,
-      },
-      {
         icon: "patreon",
         title: "Patreon",
         text: "Рэгулярная штомесячная падтрымка праекта.",
@@ -359,13 +343,6 @@ const supportContent = {
     ] satisfies Card[],
     methodsTitle: "How you can help",
     methods: [
-      {
-        icon: "paypal",
-        title: "PayPal",
-        text: "One-time financial support via PayPal.",
-        cta: "Support",
-        href: paymentLinks.paypal,
-      },
       {
         icon: "patreon",
         title: "Patreon",
@@ -564,13 +541,6 @@ function Icon({ name }: { name: IconName }) {
           <path d="M5 27c1.5-4 4-6 7-6M29 27c-1.5-4-4-6-7-6M14 22h6" />
         </svg>
       );
-    case "paypal":
-      return (
-        <svg {...commonProps}>
-          <path d="M11 27 14 7h8c4 0 6 2 5 6-1 5-4 7-10 7h-3" />
-          <path d="M9 27h6l2-13" />
-        </svg>
-      );
     case "patreon":
       return (
         <svg {...commonProps}>
@@ -605,6 +575,7 @@ export function SupportPage({ dictionary, locale }: SupportPageProps) {
   void dictionary;
 
   const copy = supportContent[locale];
+  const visibleMethods = copy.methods.filter((item) => item.href);
 
   return (
     <main className={styles.page}>
@@ -695,20 +666,23 @@ export function SupportPage({ dictionary, locale }: SupportPageProps) {
           <h2 className={styles.sectionTitle} id="support-methods-title">
             {copy.methodsTitle}
           </h2>
-          <div className={styles.methodsGrid}>
-            {copy.methods.map((item) => (
-              <article className={styles.methodCard} key={item.title}>
-                <span className={styles.methodIcon}>
-                  <Icon name={item.icon} />
-                </span>
-                <h3>{item.title}</h3>
-                <p>{item.text}</p>
-                <Link className={styles.linkArrow} href={item.href}>
-                  {item.cta}
-                  <span aria-hidden="true">→</span>
-                </Link>
-              </article>
-            ))}
+          <div className={styles.methodsLayout}>
+            <DonorboxWidget campaign={siteConfig.donorboxCampaign} />
+            <div className={styles.methodsGrid}>
+              {visibleMethods.map((item) => (
+                <article className={styles.methodCard} key={item.title}>
+                  <span className={styles.methodIcon}>
+                    <Icon name={item.icon} />
+                  </span>
+                  <h3>{item.title}</h3>
+                  <p>{item.text}</p>
+                  <Link className={styles.linkArrow} href={item.href}>
+                    {item.cta}
+                    <span aria-hidden="true">→</span>
+                  </Link>
+                </article>
+              ))}
+            </div>
           </div>
         </div>
       </section>

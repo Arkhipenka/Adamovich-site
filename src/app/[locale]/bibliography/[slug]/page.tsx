@@ -6,7 +6,6 @@ import { locales } from "@/config/site";
 import { getLocalizedText } from "@/lib/getLocalizedText";
 import {
   getPublishedWorks,
-  getRelatedWorks,
   getWorkBySlug,
 } from "@/lib/works";
 import { resolveLocalePage } from "@/lib/page";
@@ -74,7 +73,6 @@ export default async function WorkPage({ params }: WorkPageProps) {
   return (
     <WorkDetail
       locale={resolved.locale}
-      relatedWorks={getRelatedWorks(work)}
       work={work}
     />
   );

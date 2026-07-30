@@ -1,6 +1,13 @@
 import type { MetadataRoute } from "next";
 
-import { locales, routeSegments, siteConfig, type Locale } from "@/config/site";
+import {
+  defaultLocale,
+  locales,
+  routeSegments,
+  siteConfig,
+  type Locale,
+} from "@/config/site";
+import { localePath } from "@/lib/seo";
 import { getPublishedWorks } from "@/lib/works";
 
 export const dynamic = "force-static";
@@ -11,20 +18,23 @@ function absoluteUrl(path: string) {
   return new URL(path, siteConfig.url).toString();
 }
 
-function localizedUrl(locale: Locale, segment = "") {
-  return absoluteUrl(segment ? `/${locale}/${segment}/` : `/${locale}/`);
+function localizedAbsoluteUrl(locale: Locale, segment = "") {
+  return absoluteUrl(localePath(locale, segment));
 }
 
 function languageAlternates(segment = "") {
-  return Object.fromEntries(
-    locales.map((locale) => [locale, localizedUrl(locale, segment)]),
-  );
+  return {
+    ...Object.fromEntries(
+      locales.map((locale) => [locale, localizedAbsoluteUrl(locale, segment)]),
+    ),
+    "x-default": localizedAbsoluteUrl(defaultLocale, segment),
+  };
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages = routeSegments.flatMap((segment) =>
     locales.map((locale) => ({
-      url: localizedUrl(locale, segment),
+      url: localizedAbsoluteUrl(locale, segment),
       lastModified,
       changeFrequency: segment ? "monthly" : "weekly",
       priority: segment ? 0.75 : 1,
@@ -39,7 +49,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       const segment = `bibliography/${work.slug}`;
 
       return {
-        url: localizedUrl(locale, segment),
+        url: localizedAbsoluteUrl(locale, segment),
         lastModified,
         changeFrequency: "monthly",
         priority: 0.64,

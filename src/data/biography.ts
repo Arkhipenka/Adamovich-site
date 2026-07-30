@@ -26,6 +26,19 @@ export type BiographyEvent = {
 
 export type BiographyThemeId = string;
 
+export type BiographyThemeArticleBlock =
+  | {
+      type: "paragraph" | "pullquote";
+      text: string;
+      meta?: string;
+    }
+  | {
+      type: "image";
+      src: string;
+      alt: string;
+      caption?: string;
+    };
+
 export type BiographyMediaItem = {
   id: string;
   type: "image" | "video" | "audio" | "document";
@@ -73,6 +86,11 @@ export type BiographyTheme = {
   targetId: string;
   tag?: string;
   periodId?: string;
+  articleTitle?: string;
+  lead?: string;
+  text?: string[];
+  aside?: BiographyAside;
+  article?: BiographyThemeArticleBlock[];
 };
 
 type BiographyTimelineCopy = {
@@ -239,9 +257,8 @@ export const biographyPeriodsBe: BiographyPeriod[] = [
       },
     ],
     aside: {
-      label: "Факт",
-      title: "Сведчанне замест легенды",
-      text: "У сваіх ваенных тэкстах Адамовіч пастаянна вяртаўся да галасоў сведкаў — людзей, якія бачылі катастрофу ўласнымі вачыма.",
+      text: "Но ничто на этой войне не запомнилось больше, резче, страшнее и прекраснее, чем лица наших матерей.",
+      meta: "Алесь Адамовіч, «Вайна пад стрэхамі»",
     },
   },
   {
@@ -302,9 +319,8 @@ export const biographyPeriodsBe: BiographyPeriod[] = [
       },
     ],
     aside: {
-      label: "З архіва",
-      title: "Пошук мовы",
-      text: "Пасляваенная літаратура патрабавала новай мовы — такой, якая здольная вытрымаць памяць пра катастрофу.",
+      text: "Калі мне што і ўдалося ў рамане «Вайна пад стрэхамі», то гэта таму, што перш гэтую кнігу маці напісала ўласным жыццём.",
+      meta: "Алесь Адамовіч пра раман «Вайна пад стрэхамі»",
     },
   },
   {
@@ -319,8 +335,8 @@ export const biographyPeriodsBe: BiographyPeriod[] = [
     sectionLead:
       "Гэты перыяд падрыхтаваў галоўны прынцып яго творчасці: слухаць чалавека і не падмяняць яго голас літаратурнай позай.",
     sectionText: [
-      "У 1960 годзе ў часопісе «Дружба народов» быў апублікаваны раман «Вайна пад стрэхамі». Пазней Адамовіч адзначыў: «Калі мне што і ўдалося ў рамане “Вайна пад стрэхамі”, то гэта таму, што перш гэтую кнігу маці напісала ўласным жыццём».",
-      "У 1961 годзе выйшла манаграфія «Беларускі раман», на аснове якой была абаронена доктарская дысертацыя. Абараняў яе ў 1962 годзе ў Кіеве, у Інстытуце літаратуры імя Т. Р. Шаўчэнкі: у Мінску ўплывовыя літаратары пагражалі не дапусціць абароны.",
+      "У 1960 годзе ў часопісе «Дружба народов» быў апублікаваны раман «Вайна пад стрэхамі».",
+      "У 1961 годзе выйшла манаграфія «Беларускі раман», на аснове якой была абаронена доктарская дысертацыя. Абараняў яе ў 1962 годзе ў Кіеве, у Інстытуце літаратуры імя Т. Г. Шаўчэнкі: у Мінску ўплывовыя літаратары пагражалі не дапусціць абароны.",
       "У 1963 годзе ў «Дружбе народов» была апублікаваная другая частка рамана-дылогіі «Сыны ідуць у бой». На аснове гэтых твораў пазней быў напісаны кінасцэнар двухсерыйнага фільма «Вайна пад стрэхамі» і «Сыны ідуць у бой» Віктара Турава.",
       "Са снежня 1962 да 1964 года Адамовіч вучыўся на Вышэйшых сцэнарных курсах у Маскве. Адначасова выкладаў беларускую літаратуру ў Маскоўскім дзяржаўным універсітэце.",
       "У 1966 годзе ён быў вымушаны сысці з МДУ за адмову падпісаць ліст, які асуджаў Андрэя Сіняўскага і Юлія Даніэля. Пасля вяртання ў Мінск больш за паўгода быў беспрацоўным, пакуль пры падтрымцы Андрэя Макаёнка не быў прыняты старшым навуковым супрацоўнікам у Інстытут літаратуры імя Янкі Купалы.",
@@ -350,9 +366,9 @@ export const biographyPeriodsBe: BiographyPeriod[] = [
       },
     ],
     aside: {
-      label: "Тэма",
-      title: "Голас сведкі",
-      text: "Адамовічу было важна, каб літаратура не заглушала чалавека, а дапамагала яму быць пачутым.",
+      label: "Факт",
+      title: "Абарона ў Кіеве",
+      text: "У 1962 годзе Адамовіч абараніў доктарскую дысертацыю па манаграфіі «Белорусский роман» у Кіеве, у Інстытуце літаратуры імя Т. Г. Шаўчэнкі: у Мінску абарону спрабавалі заблакаваць.",
     },
   },
   {
@@ -464,6 +480,14 @@ export const biographyPeriodsBe: BiographyPeriod[] = [
         caption: "Алесь Адамовіч у ААН. Нью-Ёрк, 1982 год.",
       },
       {
+        id: "march-of-peace-1982",
+        type: "image",
+        src: "/assets/images/biography/adamovich-march-of-peace-1982.webp",
+        alt: "Алесь Адамовіч падчас Маршу міра-82 па дарозе ў Хатынь",
+        caption:
+          "Па дарозе ў Хатынь. Марш міра-82. Алесь Адамовіч. Фота Я. Коктыша.",
+      },
+      {
         id: "come-and-see-adamovich-set",
         type: "image",
         src: "/assets/images/biography/adamovich-come-and-see-adamovich-set.webp",
@@ -559,10 +583,19 @@ export const biographyPeriodsBe: BiographyPeriod[] = [
       "Грамадзянскія паніхіды прайшлі ў Доме кіно ў Маскве і ў Доме літаратараў у Мінску. Пахаваны ў Глушы 30 студзеня 1994 года побач з братам, недалёка ад магіл бацькоў і бабулі.",
     ],
     tags: ["Чарнобыль", "перабудова", "галоснасць"],
-    image: "/assets/images/biography/adamovich-kurapaty-march.webp",
-    imageAlt: "Алесь Адамовіч падчас Маршу Міру",
-    imageCaption: "Алесь Адамовіч падчас Маршу Міру.",
+    image: "/assets/images/biography/adamovich-japan-earth-parade-1990.webp",
+    imageAlt: "Алесь Адамовіч падчас антыядзернай акцыі ў Японіі",
+    imageCaption:
+      "Алесь Адамовіч у Японіі падчас акцыі «No Nukes One Earth». 1990 год.",
     media: [
+      {
+        id: "japan-no-nukes-1980s",
+        type: "image",
+        src: "/assets/images/biography/adamovich-japan-no-nukes-1980s.webp",
+        alt: "Алесь Адамовіч выступае на антыядзернай сустрэчы ў Японіі",
+        caption:
+          "Алесь Адамовіч выступае на антыядзернай сустрэчы ў Японіі. Архіўны матэрыял.",
+      },
       {
         id: "bykau-adamovich-deputies-1989",
         type: "image",
@@ -612,9 +645,8 @@ export const biographyPeriodsBe: BiographyPeriod[] = [
       },
     ],
     aside: {
-      label: "Важны факт",
-      title: "Чарнобыль і праўда",
-      text: "Пасля катастрофы Адамовіч настойваў на адкрытай размове пра яе рэальныя наступствы для Беларусі і свету.",
+      text: "Вінаватых у Чарнобылі трэба судзіць. Таму што, калі мы не спынім гэтую безадказнасць, гэтую кругавую паруку і вялікую хлусню на ўсіх узроўнях, мы не ўратуемся… ад непазбежных новых катастроф.",
+      meta: "Алесь Адамовіч, пра Чарнобыль",
     },
   },
 ];
@@ -731,9 +763,8 @@ export const biographyPeriodsRu: BiographyPeriod[] = [
       },
     ],
     aside: {
-      label: "Факт",
-      title: "Свидетельство вместо легенды",
-      text: "В своих военных текстах Адамович постоянно возвращался к голосам свидетелей — людей, которые видели катастрофу собственными глазами.",
+      text: "Но ничто на этой войне не запомнилось больше, резче, страшнее и прекраснее, чем лица наших матерей.",
+      meta: "Алесь Адамович, «Война под крышами»",
     },
   },
   {
@@ -794,9 +825,8 @@ export const biographyPeriodsRu: BiographyPeriod[] = [
       },
     ],
     aside: {
-      label: "Из архива",
-      title: "Поиск языка",
-      text: "Послевоенная литература требовала нового языка — такого, который способен выдержать память о катастрофе.",
+      text: "Если мне что и удалось в романе «Война под крышами», то это потому, что прежде эту книгу мать написала собственной жизнью.",
+      meta: "Алесь Адамович о романе «Война под крышами»",
     },
   },
   {
@@ -811,8 +841,8 @@ export const biographyPeriodsRu: BiographyPeriod[] = [
     sectionLead:
       "Этот период подготовил главный принцип его творчества: слушать человека и не подменять его голос литературной позой.",
     sectionText: [
-      "В 1960 году в журнале «Дружба народов» был опубликован роман «Война под крышами». Позже Адамович отмечал: «Если мне что и удалось в романе “Война под крышами”, то потому, что сначала эту книгу мать написала собственной жизнью».",
-      "В 1961 году вышла монография «Белорусский роман», на основе которой была защищена докторская диссертация. Защищал её в 1962 году в Киеве, в Институте литературы имени Т. Р. Шевченко: в Минске влиятельные литераторы угрожали не допустить защиты.",
+      "В 1960 году в журнале «Дружба народов» был опубликован роман «Война под крышами».",
+      "В 1961 году вышла монография «Белорусский роман», на основе которой была защищена докторская диссертация. Защищал её в 1962 году в Киеве, в Институте литературы имени Т. Г. Шевченко: в Минске влиятельные литераторы угрожали не допустить защиты.",
       "В 1963 году в «Дружбе народов» была опубликована вторая часть романа-дилогии «Сыновья уходят в бой». На основе этих произведений позже был написан киносценарий двухсерийного фильма «Война под крышами» и «Сыновья уходят в бой» Виктора Турова.",
       "С декабря 1962 до 1964 года Адамович учился на Высших сценарных курсах в Москве. Одновременно преподавал белорусскую литературу в Московском государственном университете.",
       "В 1966 году он был вынужден уйти из МГУ за отказ подписать письмо, осуждавшее Андрея Синявского и Юлия Даниэля. После возвращения в Минск более полугода был безработным, пока при поддержке Андрея Макаёнка не был принят старшим научным сотрудником в Институт литературы имени Янки Купалы.",
@@ -842,9 +872,9 @@ export const biographyPeriodsRu: BiographyPeriod[] = [
       },
     ],
     aside: {
-      label: "Тема",
-      title: "Голос свидетеля",
-      text: "Адамовичу было важно, чтобы литература не заглушала человека, а помогала ему быть услышанным.",
+      label: "Факт",
+      title: "Защита в Киеве",
+      text: "В 1962 году Адамович защитил докторскую диссертацию по монографии «Белорусский роман» в Киеве, в Институте литературы имени Т. Г. Шевченко: в Минске защиту пытались заблокировать.",
     },
   },
   {
@@ -956,6 +986,14 @@ export const biographyPeriodsRu: BiographyPeriod[] = [
         caption: "Алесь Адамович в ООН. Нью-Йорк, 1982 год.",
       },
       {
+        id: "march-of-peace-1982",
+        type: "image",
+        src: "/assets/images/biography/adamovich-march-of-peace-1982.webp",
+        alt: "Алесь Адамович во время Марша мира-82 по дороге в Хатынь",
+        caption:
+          "По дороге в Хатынь. Марш мира-82. Алесь Адамович. Фото Я. Коктыша.",
+      },
+      {
         id: "come-and-see-adamovich-set",
         type: "image",
         src: "/assets/images/biography/adamovich-come-and-see-adamovich-set.webp",
@@ -1051,10 +1089,19 @@ export const biographyPeriodsRu: BiographyPeriod[] = [
       "Гражданские панихиды прошли в Доме кино в Москве и в Доме литераторов в Минске. Похоронен в Глуше 30 января 1994 года рядом с братом, недалеко от могил родителей и бабушки.",
     ],
     tags: ["Чернобыль", "перестройка", "гласность"],
-    image: "/assets/images/biography/adamovich-kurapaty-march.webp",
-    imageAlt: "Алесь Адамович во время Марша Мира",
-    imageCaption: "Алесь Адамович во время Марша Мира.",
+    image: "/assets/images/biography/adamovich-japan-earth-parade-1990.webp",
+    imageAlt: "Алесь Адамович во время антиядерной акции в Японии",
+    imageCaption:
+      "Алесь Адамович в Японии во время акции «No Nukes One Earth». 1990 год.",
     media: [
+      {
+        id: "japan-no-nukes-1980s",
+        type: "image",
+        src: "/assets/images/biography/adamovich-japan-no-nukes-1980s.webp",
+        alt: "Алесь Адамович выступает на антиядерной встрече в Японии",
+        caption:
+          "Алесь Адамович выступает на антиядерной встрече в Японии. Архивный материал.",
+      },
       {
         id: "bykau-adamovich-deputies-1989",
         type: "image",
@@ -1104,9 +1151,8 @@ export const biographyPeriodsRu: BiographyPeriod[] = [
       },
     ],
     aside: {
-      label: "Важный факт",
-      title: "Чернобыль и правда",
-      text: "После катастрофы Адамович настаивал на открытом разговоре о её реальных последствиях для Беларуси и мира.",
+      text: "Виновников Чернобыля надо судить. Потому что, если мы не прекратим эту безответственность, эту круговую поруку и большую ложь на всех уровнях, мы не спасёмся… от неизбежных новых катастроф.",
+      meta: "Алесь Адамович, о Чернобыле",
     },
   },
 ];
@@ -1224,9 +1270,8 @@ export const biographyPeriodsEn: BiographyPeriod[] = [
       },
     ],
     aside: {
-      label: "Fact",
-      title: "Witness Instead of Legend",
-      text: "In his war texts, Adamovich constantly returned to the voices of witnesses.",
+      text: "Но ничто на этой войне не запомнилось больше, резче, страшнее и прекраснее, чем лица наших матерей.",
+      meta: "Ales Adamovich, War Under the Roofs",
     },
   },
   {
@@ -1287,9 +1332,8 @@ export const biographyPeriodsEn: BiographyPeriod[] = [
       },
     ],
     aside: {
-      label: "Archive",
-      title: "A Search for Language",
-      text: "Postwar literature needed a language capable of carrying the memory of catastrophe.",
+      text: "If anything succeeded in the novel War Under the Roofs, it was because my mother had first written that book with her own life.",
+      meta: "Ales Adamovich on the novel War Under the Roofs",
     },
   },
   {
@@ -1304,8 +1348,8 @@ export const biographyPeriodsEn: BiographyPeriod[] = [
     sectionLead:
       "This period prepared a central principle of his work: to listen to a human voice without replacing it with literary posture.",
     sectionText: [
-      "In 1960, the journal Druzhba narodov published the novel War Under the Roofs. Adamovich later noted that whatever succeeded in the novel did so because his mother had first written that book with her own life.",
-      "In 1961, his monograph The Belarusian Novel was published; it became the basis of his doctoral dissertation. He defended it in 1962 in Kyiv, at the T. R. Shevchenko Institute of Literature, after influential writers in Minsk threatened to block the defense.",
+      "In 1960, the journal Druzhba narodov published the novel War Under the Roofs.",
+      "In 1961, his monograph The Belarusian Novel was published; it became the basis of his doctoral dissertation. He defended it in 1962 in Kyiv, at the T. G. Shevchenko Institute of Literature, after influential writers in Minsk threatened to block the defense.",
       "In 1963, Druzhba narodov published the second part of the dilogy, Sons Go to Battle. These works later became the basis for Viktor Turov’s two-part film War Under the Roofs and Sons Go to Battle.",
       "From December 1962 to 1964, Adamovich studied at the Higher Courses for Scriptwriters in Moscow. At the same time, he taught Belarusian literature at Moscow State University.",
       "In 1966, he was forced to leave Moscow State University after refusing to sign a letter condemning Andrei Sinyavsky and Yuli Daniel. After returning to Minsk, he spent more than half a year unemployed before, with Andrei Makayonak’s support, joining the Yanka Kupala Institute of Literature as a senior researcher.",
@@ -1335,9 +1379,9 @@ export const biographyPeriodsEn: BiographyPeriod[] = [
       },
     ],
     aside: {
-      label: "Theme",
-      title: "The Witness’s Voice",
-      text: "Adamovich wanted literature to help people be heard.",
+      label: "Fact",
+      title: "Defense in Kyiv",
+      text: "In 1962, Adamovich defended his doctoral dissertation based on the monograph The Belarusian Novel in Kyiv, at the T. G. Shevchenko Institute of Literature: in Minsk, the defense had been threatened with obstruction.",
     },
   },
   {
@@ -1449,6 +1493,14 @@ export const biographyPeriodsEn: BiographyPeriod[] = [
         caption: "Ales Adamovich at the UN. New York, 1982.",
       },
       {
+        id: "march-of-peace-1982",
+        type: "image",
+        src: "/assets/images/biography/adamovich-march-of-peace-1982.webp",
+        alt: "Ales Adamovich during the March of Peace-82 on the way to Khatyn",
+        caption:
+          "On the way to Khatyn. March of Peace-82. Ales Adamovich. Photo by Y. Koktysh.",
+      },
+      {
         id: "come-and-see-adamovich-set",
         type: "image",
         src: "/assets/images/biography/adamovich-come-and-see-adamovich-set.webp",
@@ -1544,10 +1596,19 @@ export const biographyPeriodsEn: BiographyPeriod[] = [
       "Civil memorial services were held at the House of Cinema in Moscow and at the House of Writers in Minsk. He was buried in Hlusha on January 30, 1994, beside his brother and not far from the graves of his parents and grandmother.",
     ],
     tags: ["Chernobyl", "perestroika", "glasnost"],
-    image: "/assets/images/biography/adamovich-kurapaty-march.webp",
-    imageAlt: "Ales Adamovich during the March of Peace",
-    imageCaption: "Ales Adamovich during the March of Peace.",
+    image: "/assets/images/biography/adamovich-japan-earth-parade-1990.webp",
+    imageAlt: "Ales Adamovich during an anti-nuclear action in Japan",
+    imageCaption:
+      "Ales Adamovich in Japan during the No Nukes One Earth action. 1990.",
     media: [
+      {
+        id: "japan-no-nukes-1980s",
+        type: "image",
+        src: "/assets/images/biography/adamovich-japan-no-nukes-1980s.webp",
+        alt: "Ales Adamovich speaking at an anti-nuclear meeting in Japan",
+        caption:
+          "Ales Adamovich speaking at an anti-nuclear meeting in Japan. Archival material.",
+      },
       {
         id: "bykau-adamovich-deputies-1989",
         type: "image",
@@ -1597,10 +1658,351 @@ export const biographyPeriodsEn: BiographyPeriod[] = [
       },
     ],
     aside: {
-      label: "Key Fact",
-      title: "Chernobyl and Truth",
-      text: "After the disaster, Adamovich insisted on an open conversation about its real consequences for Belarus and the world.",
+      text: "The culprits of Chernobyl must be put on trial. Because if we do not stop this irresponsibility, this mutual cover-up and the great lie at every level, we will not save ourselves… from inevitable new catastrophes.",
+      meta: "Ales Adamovich, on Chernobyl",
     },
+  },
+];
+
+const antiNuclearArticleRu: BiographyThemeArticleBlock[] = [
+  {
+    type: "paragraph",
+    text: "На фоне новой гонки вооружений, ядерного шантажа, военных конфликтов у границ атомных станций и риторики «ударов возмездия» слова «Третья мировая» больше не кажутся фантастикой. Похоже, человечество не выучило антиядерные уроки истории. В этом контексте Экодом вспоминает одного из самых активных антиядерных голосов конца ХХ века, про которого незаслуженно мало знают, — беларусского писателя, публициста и общественного деятеля Алеся Адамовича.",
+  },
+  {
+    type: "paragraph",
+    text: "— В 2025 году исполнилось 80 лет со дня атомных бомбардировок Хиросимы и Нагасаки. В 2026 году — 40 лет с момента аварии на Чернобыльской АЭС. И в этом контексте невозможно не вспомнить Адамовича, который сделал своей миссией борьбу за то, чтобы у человечества было будущее, — рассказывает Андрей Архипенко, создатель инициативы «Прыпынак Адамовіча».",
+  },
+  {
+    type: "paragraph",
+    text: "Алесь Адамович родился в 1927 году в семье врачей, его дедушка по маминой линии был раскулачен и умер в ссылке. Пройдя Вторую мировую войну подростком в посёлке, а затем среди партизан, он стал писать военную прозу, получил звание доктора филологических наук, а в 1966 году был отстранён от преподавания в МГУ за отказ подписать письмо с осуждением антисоветских писателей.",
+  },
+  {
+    type: "paragraph",
+    text: "В советские 1980-е годы он приобрёл известность и как активный общественный деятель антиядерного движения. Задолго до Чернобыльской катастрофы писателя взволновала угроза ядерного апокалипсиса. «На планете нет двери с надписью “Запасный выход”. Некуда бежать будет в случаях ядерного пожара», — написал Адамович в 1981 году, метко предупредив: при ядерной войне человечеству не будет куда бежать спасаться.",
+  },
+  {
+    type: "pullquote",
+    text: "На планете нет двери с надписью «Запасный выход». Некуда бежать будет в случаях ядерного пожара.",
+    meta: "Алесь Адамович, 1981",
+  },
+  {
+    type: "paragraph",
+    text: "Алесь Адамович много ездил по миру, участвовал в международных антивоенных конференциях и Маршах мира, выступал с докладами и давал интервью на тему предотвращения ядерной катастрофы. В 1982 году Адамович вошёл в состав делегации БССР на сессии Генеральной Ассамблеи ООН в Нью-Йорке, где на мировой трибуне прозвучал его голос за ядерное разоружение. Писатель не боялся публично выступать против гонки вооружений даже в разгар холодной войны.",
+  },
+  {
+    type: "image",
+    src: "/assets/images/biography/adamovich-march-of-peace-1982.webp",
+    alt: "Алесь Адамович во время Марша мира-82 по дороге в Хатынь",
+    caption:
+      "По дороге в Хатынь. Марш мира-82. Алесь Адамович. Фото Я. Коктыша.",
+  },
+  {
+    type: "paragraph",
+    text: "26 апреля 1986 года взрыв на Чернобыльской АЭС навсегда изменил жизнь Адамовича и всего мира. В ночь катастрофы он летел на лечение на Кавказ, но, узнав о случившемся, сразу начал собирать информацию, добиваясь гласности.",
+  },
+  {
+    type: "paragraph",
+    text: "В Минске он встретился с учёными-физиками, президентом АН БССР Н. Борисевичем и директором Института ядерной энергетики АН БССР В. Нестеренко, пытаясь понять, что произошло. То, что он от них узнал, повергло Адамовича в шок, заставив одним из первых открыто говорить о масштабах трагедии. Уже 1 июня 1986 года он передал письмо М. С. Горбачёву, чтобы донести до руководства СССР и всего мира истинные масштабы чернобыльского бедствия для Беларуси. В ответ партийные советские чиновники организовали в печати его травлю, заклеймив Адамовича «пацифистом» и «паникёром».",
+  },
+  {
+    type: "paragraph",
+    text: "30 сентября 1989 года в Минске прошёл Чернобыльский шлях — первая массовая акция подобного рода. Во время митинга на площади Ленина Адамович выступал: «Чернобыль связан не только с большой ложью, но и с прямыми преступлениями — должностными преступлениями. И, конечно, мы все придём к экологическому Нюрнбергу. Это неизбежно».",
+  },
+  {
+    type: "pullquote",
+    text: "Чернобыль связан не только с большой ложью, но и с прямыми преступлениями. И, конечно, мы все придём к экологическому Нюрнбергу.",
+    meta: "Алесь Адамович, 1989",
+  },
+  {
+    type: "paragraph",
+    text: "— Адамович ставил трагедию Чернобыля в один ряд с самыми большими бедствиями беларусской истории — с расстрелами в Куропатах и сожжённой фашистами Хатынью, — поясняет Андрей. — «Виновников Чернобыля надо судить. Потому что, если мы не прекратим эту безответственность, эту круговую поруку и большую ложь на всех уровнях, мы не спасёмся… от неизбежных новых катастроф», — писал он, призывая покончить с системой замалчивания.",
+  },
+  {
+    type: "pullquote",
+    text: "Виновников Чернобыля надо судить. Потому что, если мы не прекратим эту безответственность, эту круговую поруку и большую ложь на всех уровнях, мы не спасёмся… от неизбежных новых катастроф.",
+    meta: "Алесь Адамович, о Чернобыле",
+  },
+  {
+    type: "paragraph",
+    text: "Эту позицию разделяли многие, и в 1989 году в Минске по инициативе Алеся Адамовича, Василя Быкова, Зянона Позняка и других состоялся «Общественный Чернобыльский трибунал» — символический суд, фиксирующий правду о произошедшем.",
+  },
+  {
+    type: "paragraph",
+    text: "Одновременно писатель осмыслял Чернобыль и в литературном жанре. В 1986 году он завершил повесть-антиутопию «Последняя пастораль», которую начал писать ещё в 1982 году; повесть была опубликована в журнале «Новый мир». В 1987 году он закончил сценарий документально-художественного фильма «…Имя этой звезды — Чернобыль».",
+  },
+  {
+    type: "paragraph",
+    text: "— Немногие знают, но кинокомпания Columbia Pictures одобрила сценарий, а режиссёром согласился стать Стэнли Крамер, создатель фильма о ядерной угрозе «На берегу», — делится Андрей. — К сожалению, по личным причинам Крамер не смог приступить к съёмкам, и фильм так и остался на бумаге. Спустя десятилетия сценарий лёг в основу одноимённой книги, вобравшей статьи Адамовича о чернобыльской катастрофе, его дневниковые записи и письма тех лет.",
+  },
+  {
+    type: "paragraph",
+    text: "Деятельность Алеся Адамовича не ограничивалась СССР: он установил тесные связи с антиядерным, антивоенным движением за рубежом. В конце 1980-х годов писатель побывал во многих странах Европы, в США, где сотрудничал с организацией «Beyond War / Без войн», и в Японии с лекциями о Чернобыле и угрозе ядерной войны.",
+  },
+  {
+    type: "paragraph",
+    text: "Особое место заняла Япония — единственная страна, пережившая атомную бомбардировку. В 1990–1991 годах Адамовича пригласили прочесть лекцию в университете в Нагасаки и участвовать в антиядерном марше в Токио. Писатель говорил о Чернобыле как о «новой Хиросиме», рассказывал о масштабах трагедии и сблизил Беларусь и Японию в глазах японцев.",
+  },
+  {
+    type: "image",
+    src: "/assets/images/biography/adamovich-japan-no-nukes-1980s.webp",
+    alt: "Алесь Адамович выступает на антиядерной встрече в Японии",
+    caption:
+      "Алесь Адамович выступает на антиядерной встрече в Японии. Архивный материал.",
+  },
+  {
+    type: "paragraph",
+    text: "Во время второго визита он вместе с актрисой Комаки Курихара собрал миллион японских йен — 7000 у. е. по курсу 1990 года, около 17 000 долларов на сегодняшние деньги — на лечение беларусских детей гематологического центра 1-й клинической больницы в Минске, пострадавших от аварии на ЧАЭС.",
+  },
+  {
+    type: "paragraph",
+    text: "Весной 1989 года в Беларуси по инициативе Адамовича начал создаваться благотворительный фонд «Детям Чернобыля», который возглавили его единомышленники Геннадий и Ирина Грушевые.",
+  },
+  {
+    type: "pullquote",
+    text: "Призывом Адамовича и Грушевых стал лозунг «Поможем себе сами!». Он нашёл отклик у многих в то время и остаётся актуальным сегодня.",
+    meta: "Экодом",
+  },
+  {
+    type: "paragraph",
+    text: "Алесь Адамович умер 26 января 1994 года в Москве в возрасте всего 67 лет. Он до конца жизни отстаивал идеалы гуманизма и правды, а его вклад в антиядерное движение неоценим. «Ушёл Адамович — и в мире не стало человека, который бы так же, как он, боролся за наше будущее», — сказал о нём академик Евгений Велихов.",
+  },
+  {
+    type: "pullquote",
+    text: "Ушёл Адамович — и в мире не стало человека, который бы так же, как он, боролся за наше будущее.",
+    meta: "Евгений Велихов",
+  },
+  {
+    type: "paragraph",
+    text: "В 2027 году будет официально отмечаться 100-летие писателя. Инициатива «Прыпынак Адамовіча» записывает воспоминания тех, кто был знаком с его антиядерной деятельностью, чтобы создать фильм. Актуальность этой работы растёт вместе с угрозой новой гонки вооружений. Поддержать её можно на странице поддержки инициативы.",
+  },
+];
+
+const antiNuclearArticleBe: BiographyThemeArticleBlock[] = [
+  {
+    type: "paragraph",
+    text: "На фоне новай гонкі ўзбраенняў, ядзернага шантажу, ваенных канфліктаў каля межаў атамных станцый і рыторыкі «ўдараў адплаты» словы «Трэцяя сусветная» ўжо не здаюцца фантастыкай. Падаецца, чалавецтва не вывучыла антыядзерныя ўрокі гісторыі. У гэтым кантэксце Экадом узгадвае адзін з самых актыўных антыядзерных галасоў канца ХХ стагоддзя, пра якога незаслужана мала ведаюць, — беларускага пісьменніка, публіцыста і грамадскага дзеяча Алеся Адамовіча.",
+  },
+  {
+    type: "paragraph",
+    text: "— У 2025 годзе споўнілася 80 гадоў з дня атамных бамбаванняў Хірасімы і Нагасакі. У 2026 годзе — 40 гадоў з моманту аварыі на Чарнобыльскай АЭС. І ў гэтым кантэксце немагчыма не ўзгадаць Адамовіча, які зрабіў сваёй місіяй барацьбу за тое, каб у чалавецтва была будучыня, — расказвае Андрэй Архіпенка, стваральнік ініцыятывы «Прыпынак Адамовіча».",
+  },
+  {
+    type: "paragraph",
+    text: "Алесь Адамовіч нарадзіўся ў 1927 годзе ў сям’і лекараў, ягоны дзед па матчынай лініі быў раскулачаны і памёр у ссылцы. Прайшоўшы Другую сусветную вайну падлеткам у пасёлку, а потым сярод партызан, ён стаў пісаць ваенную прозу, атрымаў званне доктара філалагічных навук, а ў 1966 годзе быў адхілены ад выкладання ў МДУ за адмову падпісаць ліст з асуджэннем антысавецкіх пісьменнікаў.",
+  },
+  {
+    type: "paragraph",
+    text: "У савецкія 1980-я гады ён стаў вядомы і як актыўны грамадскі дзеяч антыядзернага руху. Задоўга да Чарнобыльскай катастрофы пісьменніка ўсхвалявала пагроза ядзернага апакаліпсісу. «На планеце няма дзвярэй з надпісам “Запасны выхад”. Некуды будзе бегчы ў выпадку ядзернага пажару», — напісаў Адамовіч у 1981 годзе, дакладна папярэдзіўшы: пры ядзернай вайне чалавецтву не будзе куды ўцякаць.",
+  },
+  {
+    type: "pullquote",
+    text: "На планеце няма дзвярэй з надпісам «Запасны выхад». Некуды будзе бегчы ў выпадку ядзернага пажару.",
+    meta: "Алесь Адамовіч, 1981",
+  },
+  {
+    type: "paragraph",
+    text: "Алесь Адамовіч шмат ездзіў па свеце, удзельнічаў у міжнародных антываенных канферэнцыях і Маршах міру, выступаў з дакладамі і даваў інтэрв’ю на тэму прадухілення ядзернай катастрофы. У 1982 годзе Адамовіч увайшоў у склад дэлегацыі БССР на сесіі Генеральнай Асамблеі ААН у Нью-Ёрку, дзе з сусветнай трыбуны прагучаў ягоны голас за ядзернае раззбраенне. Пісьменнік не баяўся публічна выступаць супраць гонкі ўзбраенняў нават у разгар халоднай вайны.",
+  },
+  {
+    type: "image",
+    src: "/assets/images/biography/adamovich-march-of-peace-1982.webp",
+    alt: "Алесь Адамовіч падчас Маршу міра-82 па дарозе ў Хатынь",
+    caption:
+      "Па дарозе ў Хатынь. Марш міра-82. Алесь Адамовіч. Фота Я. Коктыша.",
+  },
+  {
+    type: "paragraph",
+    text: "26 красавіка 1986 года выбух на Чарнобыльскай АЭС назаўжды змяніў жыццё Адамовіча і ўсяго свету. У ноч катастрофы ён ляцеў на лячэнне на Каўказ, але, даведаўшыся пра тое, што здарылася, адразу пачаў збіраць інфармацыю і дамагацца галоснасці.",
+  },
+  {
+    type: "paragraph",
+    text: "У Мінску ён сустрэўся з вучонымі-фізікамі, прэзідэнтам АН БССР Н. Барысевічам і дырэктарам Інстытута ядзернай энергетыкі АН БССР В. Несцярэнкам, спрабуючы зразумець, што адбылося. Тое, што ён ад іх даведаўся, шакавала Адамовіча і прымусіла яго адным з першых адкрыта гаварыць пра маштабы трагедыі. Ужо 1 чэрвеня 1986 года ён перадаў ліст М. С. Гарбачову, каб данесці да кіраўніцтва СССР і ўсяго свету сапраўдныя маштабы чарнобыльскай бяды для Беларусі. У адказ савецкія партыйныя чыноўнікі арганізавалі ў друку ягонае цкаванне, назваўшы Адамовіча «пацыфістам» і «панікёрам».",
+  },
+  {
+    type: "paragraph",
+    text: "30 верасня 1989 года ў Мінску прайшоў Чарнобыльскі шлях — першая масавая акцыя такога кшталту. Падчас мітынгу на плошчы Леніна Адамовіч выступаў: «Чарнобыль звязаны не толькі з вялікай хлуснёй, але і з прамымі злачынствамі — службовымі злачынствамі. І, вядома, мы ўсе прыйдзем да экалагічнага Нюрнберга. Гэта непазбежна».",
+  },
+  {
+    type: "pullquote",
+    text: "Чарнобыль звязаны не толькі з вялікай хлуснёй, але і з прамымі злачынствамі. І, вядома, мы ўсе прыйдзем да экалагічнага Нюрнберга.",
+    meta: "Алесь Адамовіч, 1989",
+  },
+  {
+    type: "paragraph",
+    text: "— Адамовіч ставіў трагедыю Чарнобыля ў адзін шэраг з самымі вялікімі бедствамі беларускай гісторыі — з расстрэламі ў Курапатах і спаленай фашыстамі Хатынню, — тлумачыць Андрэй. — «Вінаватых у Чарнобылі трэба судзіць. Таму што, калі мы не спынім гэтую безадказнасць, гэтую кругавую паруку і вялікую хлусню на ўсіх узроўнях, мы не ўратуемся… ад непазбежных новых катастроф», — пісаў ён, заклікаючы пакончыць з сістэмай замоўчвання.",
+  },
+  {
+    type: "pullquote",
+    text: "Вінаватых у Чарнобылі трэба судзіць. Таму што, калі мы не спынім гэтую безадказнасць, гэтую кругавую паруку і вялікую хлусню на ўсіх узроўнях, мы не ўратуемся… ад непазбежных новых катастроф.",
+    meta: "Алесь Адамовіч, пра Чарнобыль",
+  },
+  {
+    type: "paragraph",
+    text: "Гэтую пазіцыю падзялялі многія, і ў 1989 годзе ў Мінску па ініцыятыве Алеся Адамовіча, Васіля Быкава, Зянона Пазняка і іншых адбыўся «Грамадскі Чарнобыльскі трыбунал» — сімвалічны суд, які фіксаваў праўду пра тое, што здарылася.",
+  },
+  {
+    type: "paragraph",
+    text: "Адначасова пісьменнік асэнсоўваў Чарнобыль і ў літаратурным жанры. У 1986 годзе ён скончыў аповесць-антыўтопію «Апошняя пастараль», якую пачаў пісаць яшчэ ў 1982 годзе; аповесць была апублікаваная ў часопісе «Новый мир». У 1987 годзе ён закончыў сцэнар дакументальна-мастацкага фільма «…Імя гэтай зоркі — Чарнобыль».",
+  },
+  {
+    type: "paragraph",
+    text: "— Нямногія ведаюць, але кінакампанія Columbia Pictures ухваліла сцэнар, а рэжысёрам пагадзіўся стаць Стэнлі Крамер, стваральнік фільма пра ядзерную пагрозу «На беразе», — дзеліцца Андрэй. — На жаль, па асабістых прычынах Крамер не змог пачаць здымкі, і фільм так і застаўся на паперы. Праз дзесяцігоддзі сцэнар лёг у аснову аднайменнай кнігі, якая ўключыла артыкулы Адамовіча пра чарнобыльскую катастрофу, яго дзённікавыя запісы і лісты тых гадоў.",
+  },
+  {
+    type: "paragraph",
+    text: "Дзейнасць Алеся Адамовіча не абмяжоўвалася СССР: ён наладзіў цесныя сувязі з антыядзерным і антываенным рухам за мяжой. У канцы 1980-х гадоў пісьменнік пабываў у многіх краінах Еўропы, у ЗША, дзе супрацоўнічаў з арганізацыяй «Beyond War / Без войн», і ў Японіі з лекцыямі пра Чарнобыль і пагрозу ядзернай вайны.",
+  },
+  {
+    type: "paragraph",
+    text: "Асаблівае месца заняла Японія — адзіная краіна, якая перажыла атамнае бамбаванне. У 1990–1991 гадах Адамовіча запрасілі прачытаць лекцыю ва ўніверсітэце ў Нагасакі і ўдзельнічаць у антыядзерным маршы ў Токіа. Пісьменнік гаварыў пра Чарнобыль як пра «новую Хірасіму», расказваў пра маштабы трагедыі і зблізіў Беларусь і Японію ў вачах японцаў.",
+  },
+  {
+    type: "image",
+    src: "/assets/images/biography/adamovich-japan-no-nukes-1980s.webp",
+    alt: "Алесь Адамовіч выступае на антыядзернай сустрэчы ў Японіі",
+    caption:
+      "Алесь Адамовіч выступае на антыядзернай сустрэчы ў Японіі. Архіўны матэрыял.",
+  },
+  {
+    type: "paragraph",
+    text: "Падчас другога візіту ён разам з актрысай Комакі Курыхара сабраў мільён японскіх ен — 7000 у. а. па курсе 1990 года, каля 17 000 долараў на сённяшнія грошы — на лячэнне беларускіх дзяцей гематалагічнага цэнтра 1-й клінічнай бальніцы ў Мінску, якія пацярпелі ад аварыі на ЧАЭС.",
+  },
+  {
+    type: "paragraph",
+    text: "Вясной 1989 года ў Беларусі па ініцыятыве Адамовіча пачаў стварацца дабрачынны фонд «Дзецям Чарнобыля», які ўзначалілі яго аднадумцы Генадзь і Ірына Грушавыя.",
+  },
+  {
+    type: "pullquote",
+    text: "Заклікам Адамовіча і Грушавых стаў лозунг «Дапаможам сабе самі!». Ён знайшоў водгук у многіх у той час і застаецца актуальным сёння.",
+    meta: "Экадом",
+  },
+  {
+    type: "paragraph",
+    text: "Алесь Адамовіч памёр 26 студзеня 1994 года ў Маскве ва ўзросце ўсяго 67 гадоў. Ён да канца жыцця адстойваў ідэалы гуманізму і праўды, а ягоны ўнёсак у антыядзерны рух неацэнны. «Пайшоў Адамовіч — і ў свеце не стала чалавека, які б гэтак жа, як ён, змагаўся за нашу будучыню», — сказаў пра яго акадэмік Яўген Веліхаў.",
+  },
+  {
+    type: "pullquote",
+    text: "Пайшоў Адамовіч — і ў свеце не стала чалавека, які б гэтак жа, як ён, змагаўся за нашу будучыню.",
+    meta: "Яўген Веліхаў",
+  },
+  {
+    type: "paragraph",
+    text: "У 2027 годзе будзе афіцыйна адзначацца 100-годдзе пісьменніка. Ініцыятыва «Прыпынак Адамовіча» запісвае ўспаміны тых, хто быў знаёмы з яго антыядзернай дзейнасцю, каб стварыць фільм. Актуальнасць гэтай працы расце разам з пагрозай новай гонкі ўзбраенняў. Падтрымаць яе можна на старонцы падтрымкі ініцыятывы.",
+  },
+];
+
+const antiNuclearArticleEn: BiographyThemeArticleBlock[] = [
+  {
+    type: "paragraph",
+    text: "Against the backdrop of a renewed arms race, nuclear blackmail, military conflicts near nuclear power plants, and rhetoric about “retaliatory strikes,” the words “Third World War” no longer sound like fantasy. It seems humanity has not learned the anti-nuclear lessons of history. In this context, Ecodom recalls one of the most active anti-nuclear voices of the late twentieth century, a figure still undeservedly little known: Belarusian writer, publicist, and civic figure Ales Adamovich.",
+  },
+  {
+    type: "paragraph",
+    text: "“In 2025, eighty years passed since the atomic bombings of Hiroshima and Nagasaki. In 2026, forty years will have passed since the accident at the Chernobyl nuclear power plant. In this context, it is impossible not to remember Adamovich, who made it his mission to fight so that humanity would have a future,” says Andrei Arkhipenko, founder of the Prypynak Adamovicha initiative.",
+  },
+  {
+    type: "paragraph",
+    text: "Ales Adamovich was born in 1927 into a family of doctors; his maternal grandfather was dispossessed and died in exile. Having gone through the Second World War as a teenager in a settlement and then among the partisans, he began writing war prose, earned the degree of Doctor of Philology, and in 1966 was removed from teaching at Moscow State University after refusing to sign a letter condemning anti-Soviet writers.",
+  },
+  {
+    type: "paragraph",
+    text: "In the Soviet 1980s, he also became known as an active public figure in the anti-nuclear movement. Long before the Chernobyl disaster, the writer was deeply troubled by the threat of nuclear apocalypse. “There is no door on the planet marked ‘Emergency Exit.’ There will be nowhere to run in the event of a nuclear fire,” Adamovich wrote in 1981, sharply warning that in a nuclear war humanity would have nowhere to flee.",
+  },
+  {
+    type: "pullquote",
+    text: "There is no door on the planet marked “Emergency Exit.” There will be nowhere to run in the event of a nuclear fire.",
+    meta: "Ales Adamovich, 1981",
+  },
+  {
+    type: "paragraph",
+    text: "Ales Adamovich traveled widely, took part in international antiwar conferences and peace marches, gave reports, and spoke in interviews about preventing nuclear catastrophe. In 1982, Adamovich joined the BSSR delegation to the session of the UN General Assembly in New York, where his voice for nuclear disarmament sounded from a global platform. The writer was not afraid to speak publicly against the arms race even at the height of the Cold War.",
+  },
+  {
+    type: "image",
+    src: "/assets/images/biography/adamovich-march-of-peace-1982.webp",
+    alt: "Ales Adamovich during the March of Peace-82 on the way to Khatyn",
+    caption:
+      "On the way to Khatyn. March of Peace-82. Ales Adamovich. Photo by Y. Koktysh.",
+  },
+  {
+    type: "paragraph",
+    text: "On April 26, 1986, the explosion at the Chernobyl nuclear power plant changed Adamovich’s life and the life of the whole world forever. On the night of the disaster he was flying to the Caucasus for treatment, but after learning what had happened he immediately began gathering information and demanding openness.",
+  },
+  {
+    type: "paragraph",
+    text: "In Minsk, he met with physicists, the president of the Academy of Sciences of the BSSR N. Borisevich, and the director of the Institute of Nuclear Energy of the Academy of Sciences of the BSSR V. Nesterenko, trying to understand what had happened. What he learned shocked him and made him one of the first to speak openly about the scale of the tragedy. As early as June 1, 1986, he sent a letter to Mikhail Gorbachev to convey to the Soviet leadership and to the world the true scale of the Chernobyl disaster for Belarus. In response, Soviet party officials organized a press campaign against him, branding Adamovich a “pacifist” and a “panic-monger.”",
+  },
+  {
+    type: "paragraph",
+    text: "On September 30, 1989, the Chernobyl Way took place in Minsk, the first mass action of its kind. During the rally on Lenin Square, Adamovich said: “Chernobyl is connected not only with a great lie, but also with direct crimes, official crimes. And of course we will all come to an ecological Nuremberg. It is inevitable.”",
+  },
+  {
+    type: "pullquote",
+    text: "Chernobyl is connected not only with a great lie, but also with direct crimes. And of course we will all come to an ecological Nuremberg.",
+    meta: "Ales Adamovich, 1989",
+  },
+  {
+    type: "paragraph",
+    text: "“Adamovich placed the Chernobyl tragedy alongside the greatest disasters in Belarusian history: the executions in Kurapaty and Khatyn, burned by the Nazis,” Andrei explains. “The culprits of Chernobyl must be put on trial. Because if we do not stop this irresponsibility, this mutual cover-up and the great lie at every level, we will not save ourselves… from inevitable new catastrophes,” Adamovich wrote, calling for an end to the system of silence.",
+  },
+  {
+    type: "pullquote",
+    text: "The culprits of Chernobyl must be put on trial. Because if we do not stop this irresponsibility, this mutual cover-up and the great lie at every level, we will not save ourselves… from inevitable new catastrophes.",
+    meta: "Ales Adamovich, on Chernobyl",
+  },
+  {
+    type: "paragraph",
+    text: "Many shared this position, and in 1989, in Minsk, at the initiative of Ales Adamovich, Vasil Bykau, Zianon Pazniak, and others, the Public Chernobyl Tribunal took place: a symbolic court that recorded the truth about what had happened.",
+  },
+  {
+    type: "paragraph",
+    text: "At the same time, the writer reflected on Chernobyl in literature. In 1986, he completed the anti-utopian novella The Last Pastoral, which he had begun writing back in 1982; it was published in the journal Novy Mir. In 1987, he finished the screenplay for the documentary-fiction film …The Name of This Star Is Chernobyl.",
+  },
+  {
+    type: "paragraph",
+    text: "“Few people know this, but Columbia Pictures approved the screenplay, and Stanley Kramer, creator of the film about nuclear threat On the Beach, agreed to direct it,” Andrei says. “Unfortunately, for personal reasons Kramer could not begin filming, and the film remained on paper. Decades later, the screenplay became the basis for a book of the same name, which included Adamovich’s articles about the Chernobyl disaster, his diary entries, and letters from those years.”",
+  },
+  {
+    type: "paragraph",
+    text: "Ales Adamovich’s activity was not limited to the USSR: he established close ties with anti-nuclear and antiwar movements abroad. In the late 1980s, the writer visited many European countries, the United States, where he worked with the organization Beyond War, and Japan, where he lectured about Chernobyl and the threat of nuclear war.",
+  },
+  {
+    type: "paragraph",
+    text: "Japan held a special place: it was the only country to have experienced atomic bombing. In 1990–1991, Adamovich was invited to lecture at a university in Nagasaki and take part in an anti-nuclear march in Tokyo. He spoke of Chernobyl as a “new Hiroshima,” described the scale of the tragedy, and brought Belarus and Japan closer in the eyes of Japanese audiences.",
+  },
+  {
+    type: "image",
+    src: "/assets/images/biography/adamovich-japan-no-nukes-1980s.webp",
+    alt: "Ales Adamovich speaking at an anti-nuclear meeting in Japan",
+    caption:
+      "Ales Adamovich speaking at an anti-nuclear meeting in Japan. Archival material.",
+  },
+  {
+    type: "paragraph",
+    text: "During his second visit, together with actress Komaki Kurihara, he raised one million Japanese yen, equal to 7,000 conventional units at the 1990 exchange rate, or about 17,000 dollars in today’s money, for the treatment of Belarusian children from the hematology center of Minsk’s First Clinical Hospital who had suffered from the Chernobyl accident.",
+  },
+  {
+    type: "paragraph",
+    text: "In the spring of 1989, at Adamovich’s initiative, the Children of Chernobyl charitable foundation began to be created in Belarus. It was led by his like-minded colleagues Henadz and Iryna Hrushevy.",
+  },
+  {
+    type: "pullquote",
+    text: "Adamovich and the Hrushevys’ call was the slogan “Let us help ourselves!” It resonated with many people then and remains relevant today.",
+    meta: "Ecodom",
+  },
+  {
+    type: "paragraph",
+    text: "Ales Adamovich died on January 26, 1994, in Moscow at the age of only 67. To the end of his life he defended the ideals of humanism and truth, and his contribution to the anti-nuclear movement is invaluable. “Adamovich is gone, and the world no longer has a person who fought for our future the way he did,” said academician Evgeny Velikhov.",
+  },
+  {
+    type: "pullquote",
+    text: "Adamovich is gone, and the world no longer has a person who fought for our future the way he did.",
+    meta: "Evgeny Velikhov",
+  },
+  {
+    type: "paragraph",
+    text: "In 2027, the writer’s centenary will be officially marked. The Prypynak Adamovicha initiative is recording memories of those who knew his anti-nuclear work in order to create a film. The relevance of this work is growing along with the threat of a new arms race. It can be supported on the initiative’s support page.",
   },
 ];
 
@@ -1633,13 +2035,16 @@ export const biographyThemesBe: BiographyTheme[] = [
     periodId: "eighties",
   },
   {
-    id: "chernobyl",
-    title: "Чарнобыль",
+    id: "anti-nuclear",
+    title: "Антыядзерны голас",
     description:
-      "Праўда пра катастрофу, адказнасць перад людзьмі і супраціў замоўчванню.",
+      "Ад пагрозы ядзернай вайны да Чарнобыля: выступы, маршы міру і патрабаванне праўды.",
     targetId: "section-legacy",
-    tag: "праўда",
+    tag: "будучыня",
     periodId: "legacy",
+    articleTitle: "«Ад не забі чалавека да не забі чалавецтва»",
+    lead: "Алесь Адамовіч і ягоная роля ў антыядзерным руху.",
+    article: antiNuclearArticleBe,
   },
   {
     id: "repressions",
@@ -1690,13 +2095,16 @@ export const biographyThemesRu: BiographyTheme[] = [
     periodId: "eighties",
   },
   {
-    id: "chernobyl",
-    title: "Чернобыль",
+    id: "anti-nuclear",
+    title: "Антиядерный голос",
     description:
-      "Правда о катастрофе, ответственность перед людьми и сопротивление замалчиванию.",
+      "От угрозы ядерной войны до Чернобыля: выступления, марши мира и требование правды.",
     targetId: "section-legacy",
-    tag: "правда",
+    tag: "будущее",
     periodId: "legacy",
+    articleTitle: "«От не убий человека до не убий человечество»",
+    lead: "Алесь Адамович и его роль в антиядерном движении.",
+    article: antiNuclearArticleRu,
   },
   {
     id: "repressions",
@@ -1747,13 +2155,16 @@ export const biographyThemesEn: BiographyTheme[] = [
     periodId: "eighties",
   },
   {
-    id: "chernobyl",
-    title: "Chernobyl",
+    id: "anti-nuclear",
+    title: "Anti-Nuclear Voice",
     description:
-      "Truth about the catastrophe, responsibility to people, and resistance to silence.",
+      "From the threat of nuclear war to Chernobyl: speeches, peace marches, and a demand for truth.",
     targetId: "section-legacy",
-    tag: "truth",
+    tag: "future",
     periodId: "legacy",
+    articleTitle: "“From Do Not Kill a Human Being to Do Not Kill Humanity”",
+    lead: "Ales Adamovich and his role in the anti-nuclear movement.",
+    article: antiNuclearArticleEn,
   },
   {
     id: "repressions",

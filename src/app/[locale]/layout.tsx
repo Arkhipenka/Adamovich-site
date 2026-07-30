@@ -4,6 +4,7 @@ import { CookieConsent } from "@/components/CookieConsent/CookieConsent";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { Footer } from "@/components/layout/Footer/Footer";
 import { Header } from "@/components/layout/Header/Header";
+import { MediaContextMenuGuard } from "@/components/MediaContextMenuGuard";
 import { defaultLocale, isLocale, locales, siteConfig } from "@/config/site";
 import { getDictionary } from "@/i18n/dictionaries";
 import "../globals.css";
@@ -67,12 +68,14 @@ export default async function RootLayout({ children, params }: RootLayoutProps) 
             <Header locale={activeLocale} dictionary={dictionary} />
             <div className={styles.contentField}>{children}</div>
             <Footer locale={activeLocale} />
+            <MediaContextMenuGuard />
             <CookieConsent locale={activeLocale} />
             <GoogleAnalytics />
           </>
         ) : (
           <>
             {children}
+            <MediaContextMenuGuard />
             <CookieConsent locale={activeLocale} />
             <GoogleAnalytics />
           </>

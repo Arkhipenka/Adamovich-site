@@ -4,9 +4,9 @@ import { assetPath } from "@/config/site";
 import {
   initiativeTimeline,
   initiativeTimelineCopy,
-  type InitiativeTimelineText,
   type InitiativeTimelineItem,
 } from "@/data/initiativeTimeline";
+import { cx } from "@/lib/cx";
 import { getLocalizedText } from "@/lib/getLocalizedText";
 import type { Locale } from "@/types/common.types";
 
@@ -16,11 +16,6 @@ type InitiativeTimelineProps = {
   items?: InitiativeTimelineItem[];
   locale: Locale;
 };
-
-function localizeTimelineText(text: InitiativeTimelineText | undefined, locale: Locale) {
-  if (!text) return "";
-  return typeof text === "string" ? text : getLocalizedText(text, locale);
-}
 
 function chunkItems(items: InitiativeTimelineItem[], size: number) {
   const rows: InitiativeTimelineItem[][] = [];
@@ -41,17 +36,17 @@ function TimelineCard({
   locale: Locale;
   moreLabel: string;
 }) {
-  const title = localizeTimelineText(item.title, locale);
-  const date = localizeTimelineText(item.date, locale);
-  const description = localizeTimelineText(item.description, locale);
-  const imageAlt = localizeTimelineText(item.imageAlt, locale) || title;
+  const title = getLocalizedText(item.title, locale);
+  const date = getLocalizedText(item.date, locale);
+  const description = getLocalizedText(item.description, locale);
+  const imageAlt = getLocalizedText(item.imageAlt, locale) || title;
 
   return (
     <article
-      className={[
+      className={cx(
         styles.timelineCard,
-        item.featured ? styles.timelineCardFeatured : "",
-      ].join(" ")}
+        item.featured && styles.timelineCardFeatured,
+      )}
     >
       <span className={styles.timelineDot} aria-hidden="true" />
       <div className={styles.dateGroup}>
@@ -100,7 +95,7 @@ function TimelineRows({
   const rows = chunkItems(items, rowSize);
 
   return (
-    <div className={`${styles.timelineRows} ${className}`}>
+    <div className={cx(styles.timelineRows, className)}>
       {rows.map((row, rowIndex) => (
         <div className={styles.timelineRow} key={`timeline-row-${rowIndex}`}>
           {row.map((item) => (

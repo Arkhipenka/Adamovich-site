@@ -187,6 +187,18 @@
   font-size: 0.82rem;
 }
 
+.legalCopy {
+  display: grid;
+  gap: 6px;
+  max-width: 640px;
+}
+
+.mediaConsent {
+  max-width: 620px;
+  line-height: 1.55;
+  opacity: 0.82;
+}
+
 .legalLinks {
   display: flex;
   gap: 28px;

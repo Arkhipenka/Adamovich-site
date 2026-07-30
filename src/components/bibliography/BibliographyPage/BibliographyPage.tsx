@@ -18,19 +18,19 @@ const bibliographyPageContent = {
     eyebrow: "Бібліяграфія",
     title: "Спадчына Адамовіча",
     description:
-      "Кнігі, фільмы, сцэнары, публіцыстыка, інтэрв’ю і архіўныя матэрыялы, звязаныя з жыццём і працай Алеся Адамовіча.",
+      "Кнігі, фільмы, сцэнары, публіцыстыка, інтэрв’ю і архіўныя матэрыялы, звязаныя з жыццём, працай і спадчынай Алеся Адамовіча.",
   },
   en: {
     eyebrow: "Bibliography",
     title: "Adamovich’s Legacy",
     description:
-      "Books, films, screenplays, essays, interviews, and archival materials connected with the life and work of Ales Adamovich.",
+      "Books, films, screenplays, essays, interviews, and archival materials connected with the life, work, and legacy of writer Ales Adamovich.",
   },
   ru: {
     eyebrow: "Библиография",
     title: "Наследие Адамовича",
     description:
-      "Книги, фильмы, сценарии, публицистика, интервью и архивные материалы, связанные с жизнью и работой Алеся Адамовича.",
+      "Книги, фильмы, сценарии, публицистика, интервью и архивные материалы, связанные с жизнью, работой и наследием Алеся Адамовича.",
   },
 } satisfies Record<
   Locale,

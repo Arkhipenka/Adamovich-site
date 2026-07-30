@@ -1,4 +1,4 @@
-export type Locale = "be" | "ru" | "en";
+export type { Locale } from "@/config/site";
 
 export type LocalizedText = {
   be?: string;

@@ -49,6 +49,7 @@ const footerContentByLocale: Record<
     followTitle: string;
     supportedTitle: string;
     rights: string;
+    mediaConsent: string;
     privacy: string;
     terms: string;
     cookieSettings: string;
@@ -63,6 +64,7 @@ const footerContentByLocale: Record<
     followTitle: "Сацыяльныя сеткі",
     supportedTitle: "Пры падтрымцы",
     rights: "Усе правы абаронены",
+    mediaConsent: "Фотаздымкі і архіўныя матэрыялы выкарыстоўваюцца толькі са згоды ініцыятывы і праваўладальнікаў.",
     privacy: "Прыватнасць і cookies",
     terms: "Выкарыстанне матэрыялаў",
     cookieSettings: "Налады cookies",
@@ -83,6 +85,7 @@ const footerContentByLocale: Record<
     followTitle: "Follow us",
     supportedTitle: "Supported by",
     rights: "All rights reserved",
+    mediaConsent: "Photographs and archival materials are used only with the consent of the initiative and rights holders.",
     privacy: "Privacy and cookies",
     terms: "Use of materials",
     cookieSettings: "Cookie settings",
@@ -103,6 +106,7 @@ const footerContentByLocale: Record<
     followTitle: "Социальные сети",
     supportedTitle: "При поддержке",
     rights: "Все права защищены",
+    mediaConsent: "Фотографии и архивные материалы используются только с согласия инициативы и правообладателей.",
     privacy: "Приватность и cookies",
     terms: "Использование материалов",
     cookieSettings: "Настройки cookies",
@@ -119,10 +123,9 @@ const footerContentByLocale: Record<
 
 const socialLinks = [
   { label: "Telegram", icon: "telegram", href: siteConfig.contacts.telegramUrl },
-  { label: "Facebook", icon: "facebook", href: "#" },
   { label: "Instagram", icon: "instagram", href: siteConfig.contacts.instagramUrl },
   { label: "YouTube", icon: "youtube", href: siteConfig.contacts.youtubeUrl },
-];
+].filter((item) => item.href);
 
 type SocialIconName = (typeof socialLinks)[number]["icon"];
 
@@ -144,12 +147,6 @@ function SocialIcon({ name }: { name: SocialIconName }) {
       return (
         <svg {...commonProps}>
           <path d="M21 3 3 10.2l7.2 2.4L17 7.4l-5.1 6.4.2 6.2 3.5-4 4.4 3L21 3Z" />
-        </svg>
-      );
-    case "facebook":
-      return (
-        <svg {...commonProps}>
-          <path d="M14 8h2V4h-2.4A4.6 4.6 0 0 0 9 8.6V11H6v4h3v5h4v-5h3l.5-4H13V8.8c0-.5.4-.8 1-.8Z" />
         </svg>
       );
     case "instagram":
@@ -273,7 +270,10 @@ export function Footer({ locale = defaultLocale }: FooterProps) {
       </div>
 
       <div className={styles.bottom}>
-        <p>{content.rights}</p>
+        <div className={styles.legalCopy}>
+          <p>{content.rights}</p>
+          <p className={styles.mediaConsent}>{content.mediaConsent}</p>
+        </div>
         <div className={styles.legalLinks}>
           <Link className={styles.legalLink} href={privacyHref}>
             {content.privacy}

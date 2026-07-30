@@ -295,13 +295,13 @@ export const homePageContent: HomePageContent = {
       ru: "Telegram",
       en: "Telegram",
     },
-    telegramHref: "#",
+    telegramHref: "",
     appLabel: {
       be: "Спампаваць",
       ru: "Скачать",
       en: "Download",
     },
-    appHref: "#",
+    appHref: "",
     detailsLabel: {
       be: "Даведацца больш",
       ru: "Подробнее",

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 import {
   WorkCoverSwitcher,
@@ -11,7 +12,7 @@ import {
 import styles from "./WorkDetail.module.css";
 
 import { assetPath, type Locale } from "@/config/site";
-import type { MaybeLocalizedText, Work } from "@/data/works";
+import type { Work } from "@/data/works";
 import { formatWorkAuthors } from "@/lib/formatWorkAuthors";
 import { getLocalizedText } from "@/lib/getLocalizedText";
 import { localizedHref } from "@/lib/localizedHref";
@@ -19,7 +20,6 @@ import { formatLanguages, getWorkCover, getWorkYear } from "@/lib/works";
 
 type WorkDetailProps = {
   locale: Locale;
-  relatedWorks?: Work[];
   work: Work;
 };
 
@@ -59,21 +59,6 @@ const labels = {
     editionsLead: "Здесь собраны известные обложки и переводы этого произведения.",
     type: "Тип",
     year: "Год",
-  },
-} satisfies Record<Locale, Record<string, string>>;
-
-const recommendationLabels = {
-  be: {
-    recommendations: "Рэкамендацыі",
-    readNext: "Што пачытаць",
-  },
-  en: {
-    recommendations: "Recommendations",
-    readNext: "What to read",
-  },
-  ru: {
-    recommendations: "Рекомендации",
-    readNext: "Что почитать",
   },
 } satisfies Record<Locale, Record<string, string>>;
 
@@ -230,6 +215,33 @@ const sectionEmptyLabels = {
   ru: "Раздел подготовлен для наполнения.",
 } satisfies Record<Locale, string>;
 
+const materialEmptyLabels = {
+  be: "Матэрыялы пакуль не дададзены.",
+  en: "Materials have not been added yet.",
+  ru: "Материалы пока не добавлены.",
+} satisfies Record<Locale, string>;
+
+const materialImageModalLabels = {
+  be: {
+    close: "Закрыць матэрыял",
+    next: "Наступны матэрыял",
+    open: "Адкрыць матэрыял",
+    previous: "Папярэдні матэрыял",
+  },
+  en: {
+    close: "Close material",
+    next: "Next material",
+    open: "Open material",
+    previous: "Previous material",
+  },
+  ru: {
+    close: "Закрыть материал",
+    next: "Следующий материал",
+    open: "Открыть материал",
+    previous: "Предыдущий материал",
+  },
+} satisfies Record<Locale, Record<string, string>>;
+
 const workTypeLabels: Record<string, Record<Locale, string>> = {
   archive: { be: "Архіў", en: "Archive", ru: "Архив" },
   article: { be: "Артыкул", en: "Article", ru: "Статья" },
@@ -256,11 +268,6 @@ const workTypeLabels: Record<string, Record<Locale, string>> = {
 
 function getTypeLabel(type: string, locale: Locale) {
   return workTypeLabels[type]?.[locale] ?? type;
-}
-
-function getMaybeText(value: MaybeLocalizedText | undefined, locale: Locale) {
-  if (!value) return "";
-  return typeof value === "string" ? value : getLocalizedText(value, locale);
 }
 
 function getUniqueValues<T extends string>(values: T[]) {
@@ -301,11 +308,9 @@ function getEditionCoverItems(work: Work, locale: Locale) {
 
     if (!image || usedImages.has(image)) return;
 
-    const title = edition.title
-      ? typeof edition.title === "string"
-        ? edition.title
-        : getLocalizedText(edition.title, locale)
-      : [edition.publisher, edition.year].filter(Boolean).join(", ");
+    const title =
+      getLocalizedText(edition.title, locale) ||
+      [edition.publisher, edition.year].filter(Boolean).join(", ");
     const meta = [
       edition.year,
       formatLanguages([edition.language], locale),
@@ -355,10 +360,23 @@ function getSourceItems(work: Work, locale: Locale) {
     href,
     title: linkLabels[key] ?? key,
   }));
+  const trailerItems = work.trailer?.href
+    ? [
+        {
+          href: work.trailer.href,
+          title: [
+            getLocalizedText(work.trailer.title, locale),
+            work.trailer.source,
+          ]
+            .filter(Boolean)
+            .join(" / "),
+        },
+      ]
+    : [];
   const pageLinkItems =
     work.pageLinks?.map((link) => ({
       href: link.href,
-      title: getMaybeText(link.label, locale),
+      title: getLocalizedText(link.label, locale),
     })) ?? [];
   const researchItems =
     work.research?.map((item) => ({
@@ -372,14 +390,17 @@ function getSourceItems(work: Work, locale: Locale) {
       title: link.label,
     }));
 
-  return [...linkItems, ...pageLinkItems, ...researchItems, ...availabilityItems].filter(
-    (item) => item.title || item.href,
-  );
+  return [
+    ...linkItems,
+    ...trailerItems,
+    ...pageLinkItems,
+    ...researchItems,
+    ...availabilityItems,
+  ].filter((item) => item.title || item.href);
 }
 
-export function WorkDetail({ locale, relatedWorks = [], work }: WorkDetailProps) {
+export function WorkDetail({ locale, work }: WorkDetailProps) {
   const t = labels[locale];
-  const recommendationT = recommendationLabels[locale];
   const title = getLocalizedText(work.title, locale);
   const description = getLocalizedText(
     work.descriptionFull ?? work.descriptionShort,
@@ -405,37 +426,45 @@ export function WorkDetail({ locale, relatedWorks = [], work }: WorkDetailProps)
   ]);
   const originalLanguages = formatDetailLanguages(originalLanguageCodes, locale);
   const translatedLanguages = formatDetailLanguages(translatedLanguageCodes, locale);
-  const genre = work.genre
-    ? typeof work.genre === "string"
-      ? work.genre
-      : getLocalizedText(work.genre, locale)
-    : "";
+  const genre = getLocalizedText(work.genre, locale);
   const themes = formatThemes(work.themes, locale);
-  const recommendedWorks = relatedWorks.slice(0, 3);
   const sectionT = sectionLabels[locale];
+  const trailer = work.trailer
+    ? {
+        description: getLocalizedText(work.trailer.description, locale),
+        embedUrl: work.trailer.embedUrl,
+        href: work.trailer.href,
+        source: work.trailer.source,
+        title: getLocalizedText(work.trailer.title, locale),
+      }
+    : null;
   const annotationTexts = (
     work.annotation?.full?.length
-      ? work.annotation.full.map((text) => getMaybeText(text, locale))
-      : [getMaybeText(work.annotation?.short, locale) || description]
+      ? work.annotation.full.map((text) => getLocalizedText(text, locale))
+      : [getLocalizedText(work.annotation?.short, locale) || description]
   ).filter(Boolean);
   const historyTexts = work.creationHistory?.text
-    ?.map((text) => getMaybeText(text, locale))
+    ?.map((text) => getLocalizedText(text, locale))
     .filter(Boolean) ?? [];
   const quoteItems = work.quotes ?? [];
   const reviewItems = work.reviews ?? [];
   const materialItems = [
     ...(work.materials ?? []).map((material) => ({
-      description: getMaybeText(material.description, locale),
+      description: getLocalizedText(material.description, locale),
       href: material.href,
       id: material.id,
-      title: getMaybeText(material.title, locale),
+      image: material.image,
+      imageAlt: getLocalizedText(material.title, locale),
+      meta: [material.source, material.year].filter(Boolean).join(" / "),
+      title: getLocalizedText(material.title, locale),
     })),
     ...(work.relatedMaterials ?? []).map((material) => ({
-      description: material.description
-        ? getLocalizedText(material.description, locale)
-        : "",
+      description: getLocalizedText(material.description, locale),
       href: material.href ?? material.link,
       id: material.id ?? getLocalizedText(material.title, locale),
+      image: undefined,
+      imageAlt: undefined,
+      meta: "",
       title: getLocalizedText(material.title, locale),
     })),
   ].filter((item) => item.title || item.description);
@@ -473,8 +502,8 @@ export function WorkDetail({ locale, relatedWorks = [], work }: WorkDetailProps)
       quotes: quoteItems
         .map((quote) => ({
           id: quote.id,
-          sourceNote: getMaybeText(quote.sourceNote, locale),
-          text: getMaybeText(quote.text, locale),
+          sourceNote: getLocalizedText(quote.sourceNote, locale),
+          text: getLocalizedText(quote.text, locale),
         }))
         .filter((quote) => quote.text),
       title: sectionT.quotes,
@@ -482,28 +511,32 @@ export function WorkDetail({ locale, relatedWorks = [], work }: WorkDetailProps)
     {
       entries: reviewItems.map((review) => ({
         author: review.author,
-        authorRole: getMaybeText(review.authorRole, locale),
+        authorRole: getLocalizedText(review.authorRole, locale),
         description: review.body?.[locale]?.length
           ? undefined
-          : getMaybeText(review.quote, locale),
+          : getLocalizedText(review.quote, locale),
         href: review.href,
         id: review.id,
         image: review.image,
-        imageAlt: getMaybeText(review.imageAlt, locale),
+        imageAlt: getLocalizedText(review.imageAlt, locale),
         meta: [review.source, review.year]
           .filter(Boolean)
           .join(" / "),
         paragraphs: review.body?.[locale] ?? review.body?.be,
-        title: getMaybeText(review.title, locale),
+        title: getLocalizedText(review.title, locale),
       })),
       id: "reviews",
       title: sectionT.reviews,
     },
     {
+      emptyLabel: materialEmptyLabels[locale],
       entries: materialItems.map((material) => ({
         description: material.description,
         href: material.href,
         id: material.id,
+        image: material.image,
+        imageAlt: material.imageAlt,
+        meta: material.meta,
         title: material.title,
       })),
       id: "materials",
@@ -534,7 +567,15 @@ export function WorkDetail({ locale, relatedWorks = [], work }: WorkDetailProps)
               {editionCoverItems.length > 1 ? (
                 <WorkCoverSwitcher items={editionCoverItems} />
               ) : cover ? (
-                <img className={styles.cover} src={assetPath(cover)} alt={title} />
+                <Image
+                  alt={title}
+                  className={styles.cover}
+                  height={1300}
+                  priority
+                  sizes="(max-width: 1180px) 100vw, 360px"
+                  src={assetPath(cover)}
+                  width={900}
+                />
               ) : (
                 <div className={styles.coverPlaceholder}>
                   <span className={styles.coverPlaceholderMark} aria-hidden="true">
@@ -609,11 +650,46 @@ export function WorkDetail({ locale, relatedWorks = [], work }: WorkDetailProps)
               </dl>
 
             </div>
+
+            {trailer ? (
+              <section
+                aria-labelledby="work-trailer-title"
+                className={styles.trailerBlock}
+              >
+                <h2 className={styles.trailerTitle} id="work-trailer-title">
+                  {trailer.title}
+                </h2>
+                <div className={styles.videoFrame}>
+                  <iframe
+                    allow="autoplay; fullscreen; picture-in-picture"
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="strict-origin-when-cross-origin"
+                    src={trailer.embedUrl}
+                    title={trailer.title}
+                  />
+                </div>
+
+                {trailer.description || trailer.href || trailer.source ? (
+                  <div className={styles.videoMeta}>
+                    {trailer.description ? <p>{trailer.description}</p> : null}
+                    {trailer.href ? (
+                      <a href={trailer.href}>
+                        {trailer.source ?? trailer.title}
+                      </a>
+                    ) : trailer.source ? (
+                      <span>{trailer.source}</span>
+                    ) : null}
+                  </div>
+                ) : null}
+              </section>
+            ) : null}
           </div>
 
           <WorkDetailSections
             ariaLabel={title}
             emptyLabel={sectionEmptyLabels[locale]}
+            imageModalLabels={materialImageModalLabels[locale]}
             sections={detailSections}
           />
         </section>

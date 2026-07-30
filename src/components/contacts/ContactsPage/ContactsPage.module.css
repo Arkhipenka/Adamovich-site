@@ -437,12 +437,10 @@
   aspect-ratio: 1.42 / 1;
   margin-top: clamp(30px, 5vw, 72px);
   overflow: hidden;
-  opacity: 0.82;
 }
 
 .messageImage img {
   object-fit: cover;
-  filter: grayscale(0.85) brightness(0.82) sepia(0.12);
 }
 
 .mapPanel {
@@ -711,12 +709,10 @@
   height: 150px;
   overflow: hidden;
   transform: rotate(-3deg);
-  opacity: 0.78;
 }
 
 .newsletterImage img {
   object-fit: cover;
-  filter: grayscale(0.85) brightness(0.9) sepia(0.12);
 }
 
 .visuallyHidden {

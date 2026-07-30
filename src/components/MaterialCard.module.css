@@ -60,17 +60,13 @@
 
 .image {
   object-fit: cover;
-  filter: grayscale(1) contrast(1.05) brightness(0.78);
   transform: scale(1.01);
-  transition:
-    filter 360ms ease,
-    transform 520ms ease;
+  transition: transform 520ms ease;
 }
 
 .card:hover .image,
 .card:focus-visible .image,
 .card:focus-within .image {
-  filter: grayscale(1) contrast(1.08) brightness(0.56);
   transform: scale(1.045);
 }
 
@@ -299,7 +295,6 @@
   }
 
   .cardOpen .image {
-    filter: grayscale(1) contrast(1.08) brightness(0.56);
     transform: scale(1.035);
   }
 }

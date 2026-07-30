@@ -108,6 +108,40 @@ export const blockadeBookWork: Work = {
       coverImage: "/assets/images/works/editions/blockade-book-italian.webp",
     },
   ],
+  materials: [
+    {
+      id: "granin-adamovich-leningrad",
+      type: "photo",
+      title: {
+        ru: "Даниил Гранин и Алесь Адамович в Ленинграде",
+        be: "Данііл Гранін і Алесь Адамовіч у Ленінградзе",
+        en: "Daniil Granin and Ales Adamovich in Leningrad",
+      },
+      description: {
+        ru: "Фотография, связанная с работой над «Блокадной книгой».",
+        be: "Фотаздымак, звязаны з працай над «Блакаднай кнігай».",
+        en: "A photograph connected with the work on The Blockade Book.",
+      },
+      image: "/assets/images/works/materials/blockade-book-granin-adamovich-leningrad.webp",
+      year: "1980-я",
+    },
+    {
+      id: "adamovich-granin-1984",
+      type: "photo",
+      title: {
+        ru: "Алесь Адамович и Даниил Гранин. 1984 г.",
+        be: "Алесь Адамовіч і Данііл Гранін. 1984 г.",
+        en: "Ales Adamovich and Daniil Granin, 1984",
+      },
+      description: {
+        ru: "Снимок соавторов документальной книги о блокаде Ленинграда.",
+        be: "Здымак суаўтараў дакументальнай кнігі пра блакаду Ленінграда.",
+        en: "A photograph of the co-authors of the documentary book about the Siege of Leningrad.",
+      },
+      image: "/assets/images/works/materials/blockade-book-adamovich-granin-1984.webp",
+      year: "1984",
+    },
+  ],
   relatedWorks: ["i-am-from-fire-village"],
   tags: ["documentary prose", "siege", "testimony"],
   themes: ["war", "memory", "testimony"],

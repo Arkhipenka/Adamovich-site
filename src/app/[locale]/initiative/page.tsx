@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 
+import { JsonLd } from "@/components/JsonLd";
 import { InitiativePage } from "@/components/initiative/InitiativePage";
 import { resolveLocalePage, type LocalePageProps } from "@/lib/page";
 import { localizedAlternates } from "@/lib/seo";
+import { createOrganizationJsonLd } from "@/lib/structuredData";
 
 export async function generateMetadata({
   params,
@@ -28,5 +30,10 @@ export async function generateMetadata({
 export default async function InitiativeRoute({ params }: LocalePageProps) {
   const { locale, dictionary } = await resolveLocalePage(params);
 
-  return <InitiativePage locale={locale} dictionary={dictionary} />;
+  return (
+    <>
+      <JsonLd data={createOrganizationJsonLd(locale)} />
+      <InitiativePage locale={locale} dictionary={dictionary} />
+    </>
+  );
 }

@@ -30,10 +30,11 @@ const contactEmail =
   process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "adamovich1926@gmail.com";
 const contactPhone = process.env.NEXT_PUBLIC_CONTACT_PHONE ?? "+48 733-25-90-97";
 const contactPhoneHref = process.env.NEXT_PUBLIC_CONTACT_PHONE_HREF ?? "+48733259097";
-const contactTelegram =
-  process.env.NEXT_PUBLIC_CONTACT_TELEGRAM ?? "t.me/+bXNYZ8mj_mlkNjAy";
-const telegramBotUrl =
-  process.env.NEXT_PUBLIC_TELEGRAM_BOT_URL ?? "https://t.me/+bXNYZ8mj_mlkNjAy";
+const contactTelegram = process.env.NEXT_PUBLIC_CONTACT_TELEGRAM ?? "";
+const contactTelegramUrl =
+  process.env.NEXT_PUBLIC_CONTACT_TELEGRAM_URL ??
+  (contactTelegram ? `https://${contactTelegram.replace(/^https?:\/\//, "")}` : "");
+const telegramBotUrl = process.env.NEXT_PUBLIC_TELEGRAM_BOT_URL ?? "";
 const instagramUrl =
   process.env.NEXT_PUBLIC_INSTAGRAM_URL ??
   "https://www.instagram.com/adamovich.ales";
@@ -51,14 +52,18 @@ export const siteConfig = {
   contactTelegram,
   telegramBotUrl,
   audioAppUrl: process.env.NEXT_PUBLIC_AUDIO_APP_URL ?? "",
-  supportUrl: process.env.NEXT_PUBLIC_SUPPORT_URL ?? "",
-  patreonUrl: process.env.NEXT_PUBLIC_PATREON_URL ?? "",
+  supportUrl:
+    process.env.NEXT_PUBLIC_SUPPORT_URL ?? "https://ko-fi.com/alesadamovich",
+  patreonUrl:
+    process.env.NEXT_PUBLIC_PATREON_URL ?? "https://www.patreon.com/Adamovich",
+  donorboxCampaign:
+    process.env.NEXT_PUBLIC_DONORBOX_CAMPAIGN ?? "ales-adamovich",
   contacts: {
     email: contactEmail,
     phone: contactPhone,
     phoneHref: contactPhoneHref,
     telegram: contactTelegram,
-    telegramUrl: telegramBotUrl,
+    telegramUrl: contactTelegramUrl,
     instagramUrl,
     youtubeUrl,
     location: {

@@ -13,6 +13,8 @@ import { veneraWork } from "./works/venera";
 import { vixiWork } from "./works/vixi";
 import { warUnderRooftopsWork } from "./works/war-under-rooftops";
 
+import type { Locale } from "@/config/site";
+
 export type WorkType =
   | "book"
   | "story"
@@ -30,7 +32,7 @@ export type WorkType =
 
 export type WorkStatus = "published" | "draft" | "in-progress";
 
-export type Locale = "ru" | "be" | "en";
+export type { Locale };
 
 export type LocalizedText = {
   ru: string;
@@ -154,6 +156,14 @@ export type WorkMediaCredits = {
   durationMinutes?: number;
 };
 
+export type WorkTrailer = {
+  title: MaybeLocalizedText;
+  description?: MaybeLocalizedText;
+  embedUrl: string;
+  href?: string;
+  source?: string;
+};
+
 export type WorkRating = {
   platform: string;
   value?: string;
@@ -252,6 +262,7 @@ export type Work = {
   editions?: WorkEdition[];
   translations?: WorkTranslation[];
   mediaCredits?: WorkMediaCredits;
+  trailer?: WorkTrailer;
   availability?: {
     libraries?: ExternalLink[];
     archives?: ExternalLink[];

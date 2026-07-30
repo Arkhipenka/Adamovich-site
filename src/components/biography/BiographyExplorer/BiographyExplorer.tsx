@@ -1,8 +1,10 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 import { BiographyPeriodSections } from "@/components/biography/BiographyPeriodSections";
+import { assetPath } from "@/config/site";
 import type { BiographyPeriod, BiographyTheme } from "@/data/biography";
 import type { Locale } from "@/types/common.types";
 
@@ -90,6 +92,7 @@ export function BiographyExplorer({
   const [mode, setMode] = useState<BiographyMode>("chronology");
   const [activePeriodId, setActivePeriodId] = useState(periods[0]?.id ?? "");
   const [activeThemeId, setActiveThemeId] = useState(themes[0]?.id ?? "");
+  const [isNearFooter, setIsNearFooter] = useState(false);
   const navRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -145,6 +148,31 @@ export function BiographyExplorer({
     };
   }, [mode, periods]);
 
+  useEffect(() => {
+    const footer = document.querySelector("[data-site-footer]");
+
+    if (!footer) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsNearFooter(entry.isIntersecting);
+      },
+      {
+        root: null,
+        rootMargin: "0px 0px 180px 0px",
+        threshold: 0,
+      },
+    );
+
+    observer.observe(footer);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
   if (!periods.length) {
     return null;
   }
@@ -162,11 +190,24 @@ export function BiographyExplorer({
   }
 
   const activeTheme = themes.find((theme) => theme.id === activeThemeId);
+  const hasThemeContent = Boolean(
+    activeTheme?.articleTitle ||
+      activeTheme?.lead ||
+      activeTheme?.article?.length ||
+      activeTheme?.text?.length ||
+      activeTheme?.aside,
+  );
+  const hasThemeArticle = Boolean(activeTheme?.article?.length);
 
   return (
     <section className={styles.explorer} aria-label={copy.ariaLabel}>
       <nav
-        className={styles.stickyNav}
+        className={[
+          styles.stickyNav,
+          isNearFooter ? styles.stickyNavNearFooter : "",
+        ]
+          .filter(Boolean)
+          .join(" ")}
         aria-label={copy.ariaLabel}
         ref={navRef}
       >
@@ -227,17 +268,73 @@ export function BiographyExplorer({
           <BiographyPeriodSections locale={locale} periods={periods} />
         ) : (
           <section
-            aria-labelledby="biography-theme-placeholder-title"
+            aria-labelledby="biography-theme-title"
             className={styles.thematicPlaceholder}
           >
             <div className={styles.placeholderInner}>
               <p className={styles.eyebrow}>{copy.thematicEyebrow}</p>
-              <h2 id="biography-theme-placeholder-title">{copy.thematicTitle}</h2>
-              <p>{copy.thematicLead}</p>
-              {activeTheme ? (
+              <h2 id="biography-theme-title">
+                {activeTheme?.articleTitle ?? activeTheme?.title ?? copy.thematicTitle}
+              </h2>
+              {activeTheme?.articleTitle && activeTheme.title ? (
                 <span className={styles.placeholderMeta}>{activeTheme.title}</span>
               ) : null}
-              <small>{copy.thematicNote}</small>
+              <p className={styles.themeLead}>
+                {activeTheme?.lead ?? activeTheme?.description ?? copy.thematicLead}
+              </p>
+              {activeTheme?.article?.length ? (
+                <div className={styles.themeArticle}>
+                  {activeTheme.article.map((block, index) =>
+                    block.type === "image" ? (
+                      <figure className={styles.themeFigure} key={`${block.type}-${index}`}>
+                        <span className={styles.themeImageFrame}>
+                          <Image
+                            alt={block.alt}
+                            className={styles.themeImage}
+                            fill
+                            loading="lazy"
+                            sizes="(max-width: 760px) calc(100vw - 64px), 820px"
+                            src={assetPath(block.src)}
+                          />
+                        </span>
+                        {block.caption ? (
+                          <figcaption>{block.caption}</figcaption>
+                        ) : null}
+                      </figure>
+                    ) : block.type === "pullquote" ? (
+                      <blockquote className={styles.themePullQuote} key={`${block.type}-${index}`}>
+                        <span aria-hidden="true">“</span>
+                        <p>{block.text}</p>
+                        {block.meta ? <cite>{block.meta}</cite> : null}
+                      </blockquote>
+                    ) : (
+                      <p className={styles.themeParagraph} key={`${block.type}-${index}`}>
+                        {block.text}
+                      </p>
+                    ),
+                  )}
+                </div>
+              ) : null}
+              {!hasThemeArticle && activeTheme?.text?.length ? (
+                <div className={styles.themeText}>
+                  {activeTheme.text.map((paragraph) => (
+                    <p key={paragraph}>{paragraph}</p>
+                  ))}
+                </div>
+              ) : null}
+              {!hasThemeArticle && activeTheme?.aside ? (
+                <blockquote className={styles.themeQuote}>
+                  <span aria-hidden="true">“</span>
+                  <p>{activeTheme.aside.text}</p>
+                  {activeTheme.aside.meta ? (
+                    <cite>{activeTheme.aside.meta}</cite>
+                  ) : null}
+                </blockquote>
+              ) : null}
+              {!hasThemeContent && activeTheme ? (
+                <span className={styles.placeholderMeta}>{activeTheme.title}</span>
+              ) : null}
+              {!hasThemeContent ? <small>{copy.thematicNote}</small> : null}
             </div>
           </section>
         )}

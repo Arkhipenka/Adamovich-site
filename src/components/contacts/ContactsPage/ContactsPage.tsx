@@ -21,7 +21,7 @@ type IconName =
   | "send"
   | "users";
 
-type SocialIconName = "FB" | "IG" | "YT" | "TG";
+type SocialIconName = "IG" | "YT" | "TG";
 
 type ContactCard = {
   icon: IconName;
@@ -36,7 +36,6 @@ type ContactCard = {
 };
 
 const socialAriaLabels: Record<SocialIconName, string> = {
-  FB: "Facebook",
   IG: "Instagram",
   YT: "YouTube",
   TG: "Telegram",
@@ -52,10 +51,9 @@ const contactBlockContent = {
       title: "Социальные сети",
       caption: "Подписывайтесь, чтобы быть в курсе наших обновлений",
       socials: [
-        { href: "#", label: "FB" },
         { href: siteConfig.contacts.instagramUrl, label: "IG" },
         { href: siteConfig.contacts.youtubeUrl, label: "YT" },
-        { href: siteConfig.contacts.telegramUrl || "#", label: "TG" },
+        { href: siteConfig.contacts.telegramUrl, label: "TG" },
       ],
     },
   },
@@ -68,10 +66,9 @@ const contactBlockContent = {
       title: "Сацыяльныя сеткі",
       caption: "Падпісвайцеся, каб быць у курсе нашых абнаўленняў",
       socials: [
-        { href: "#", label: "FB" },
         { href: siteConfig.contacts.instagramUrl, label: "IG" },
         { href: siteConfig.contacts.youtubeUrl, label: "YT" },
-        { href: siteConfig.contacts.telegramUrl || "#", label: "TG" },
+        { href: siteConfig.contacts.telegramUrl, label: "TG" },
       ],
     },
   },
@@ -84,10 +81,9 @@ const contactBlockContent = {
       title: "Social media",
       caption: "Follow us to stay informed about our updates",
       socials: [
-        { href: "#", label: "FB" },
         { href: siteConfig.contacts.instagramUrl, label: "IG" },
         { href: siteConfig.contacts.youtubeUrl, label: "YT" },
-        { href: siteConfig.contacts.telegramUrl || "#", label: "TG" },
+        { href: siteConfig.contacts.telegramUrl, label: "TG" },
       ],
     },
   },
@@ -104,7 +100,7 @@ const contactContent = {
   ru: {
     metadataTitle: "Контакты",
     metadataDescription:
-      "Контакты культурной цифровой платформы об Алесе Адамовиче: сотрудничество, материалы, вопросы и предложения.",
+      "Контакты инициативы «Прыпынак Адамовіча»: email, телефон, соцсети, сотрудничество, материалы и проектные предложения.",
     back: "На главную",
     heroTitle: "Контакты",
     heroText:
@@ -158,7 +154,7 @@ const contactContent = {
         title: "Telegram",
         value: siteConfig.contacts.telegram,
         caption: "Для быстрой связи, новостей о проекте и обратной связи.",
-        href: siteConfig.contacts.telegramUrl || "#",
+        href: siteConfig.contacts.telegramUrl,
       },
     ],
     mapEyebrow: "Где мы находимся",
@@ -207,7 +203,7 @@ const contactContent = {
   be: {
     metadataTitle: "Кантакты",
     metadataDescription:
-      "Кантакты культурнай лічбавай платформы пра Алеся Адамовіча: супрацоўніцтва, матэрыялы, пытанні і прапановы.",
+      "Кантакты ініцыятывы «Прыпынак Адамовіча»: email, тэлефон, сацсеткі, супрацоўніцтва, матэрыялы і праектныя прапановы.",
     back: "На галоўную",
     heroTitle: "Кантакты",
     heroText:
@@ -261,7 +257,7 @@ const contactContent = {
         title: "Telegram",
         value: siteConfig.contacts.telegram,
         caption: "Для хуткай сувязі, навін пра праект і зваротнай сувязі.",
-        href: siteConfig.contacts.telegramUrl || "#",
+        href: siteConfig.contacts.telegramUrl,
       },
     ],
     mapEyebrow: "Дзе мы знаходзімся",
@@ -310,7 +306,7 @@ const contactContent = {
   en: {
     metadataTitle: "Contacts",
     metadataDescription:
-      "Contacts of the Ales Adamovich cultural digital platform: cooperation, materials, questions and proposals.",
+      "Contacts for the Prypynak Adamovicha initiative: email, phone, social platforms, collaboration, materials, and project requests.",
     back: "Back to home",
     heroTitle: "Contacts",
     heroText:
@@ -364,7 +360,7 @@ const contactContent = {
         title: "Telegram",
         value: siteConfig.contacts.telegram,
         caption: "For quick contact, project news and feedback.",
-        href: siteConfig.contacts.telegramUrl || "#",
+        href: siteConfig.contacts.telegramUrl,
       },
     ],
     mapEyebrow: "Where we are",
@@ -587,12 +583,6 @@ function SocialIcon({ name }: { name: SocialIconName }) {
           <path d="M21 3 3 10.2l7.2 2.4L17 7.4l-5.1 6.4.2 6.2 3.5-4 4.4 3L21 3Z" />
         </svg>
       );
-    case "FB":
-      return (
-        <svg {...commonProps}>
-          <path d="M14 8h2V4h-2.4A4.6 4.6 0 0 0 9 8.6V11H6v4h3v5h4v-5h3l.5-4H13V8.8c0-.5.4-.8 1-.8Z" />
-        </svg>
-      );
     case "IG":
       return (
         <svg {...commonProps}>
@@ -638,11 +628,16 @@ type ContactsPageProps = {
 export function ContactsPage({ locale }: ContactsPageProps) {
   const copy = contactContent[locale];
   const contactBlock = contactBlockContent[locale];
-  const contactCards = [
-    copy.cards[0],
-    copy.cards[3],
-    contactBlock.socialCard,
-  ].filter(Boolean) as ContactCard[];
+  const socialCard: ContactCard = {
+    ...contactBlock.socialCard,
+    socials: contactBlock.socialCard.socials?.filter((social) => social.href),
+  };
+  const telegramCard = copy.cards[3] as ContactCard;
+  const contactCards: ContactCard[] = ([
+    copy.cards[0] as ContactCard,
+    telegramCard.href && telegramCard.value ? telegramCard : null,
+    socialCard.socials?.length ? socialCard : null,
+  ] as Array<ContactCard | null>).filter((card): card is ContactCard => card !== null);
 
   return (
     <main className={styles.page}>
@@ -697,7 +692,7 @@ export function ContactsPage({ locale }: ContactsPageProps) {
                           href={social.href}
                           key={social.label}
                           rel="noopener noreferrer"
-                          target={social.href === "#" ? undefined : "_blank"}
+                          target="_blank"
                         >
                           <SocialIcon name={social.label} />
                         </a>

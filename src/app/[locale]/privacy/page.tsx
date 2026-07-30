@@ -21,20 +21,20 @@ const contentByLocale: Record<Locale, PrivacyContent> = {
     eyebrow: "Прыватнасць",
     title: "Прыватнасць і cookies",
     description:
-      "Каротка тлумачым, якія даныя можа выкарыстоўваць сайт, навошта патрэбная аналітыка і як мы ставімся да матэрыялаў.",
+      "Палітыка прыватнасці adamovich.eu: cookies, аналітыка, выкарыстанне матэрыялаў сайта, згода на фота і кантакты для запытаў.",
     updated: "Абноўлена: 1 ліпеня 2026",
     sections: [
       {
         title: "Аналітыка",
         body: [
-          "Сайт можа выкарыстоўваць Google Analytics, каб разумець агульную наведвальнасць, папулярнасць старонак і тэхнічную якасць працы сайта.",
+          "Сайт можа выкарыстоўваць Google Analytics, каб разумець агульную наведвальнасць, карыснасць старонак і тэхнічную якасць працы сайта.",
           "Аналітыка ўключаецца толькі пасля вашай згоды ў банеры cookies. Калі вы не націскаеце «Прыняць» або выбіраеце адмову, Google Analytics не загружаецца.",
         ],
       },
       {
         title: "Cookies",
         body: [
-          "Мы захоўваем толькі ваш выбар адносна аналітыкі: прынята або адхілена. Гэта трэба, каб не пытацца пра адно і тое ж пры кожным наведванні.",
+          "Мы захоўваем толькі ваш выбар адносна аналітыкі: прынята або адхілена. Гэта трэба, каб сайт не пытаўся пра адно і тое ж пры кожным наведванні.",
           "Вы можаце змяніць рашэнне праз спасылку «Налады cookies» унізе сайта.",
         ],
       },
@@ -42,6 +42,7 @@ const contentByLocale: Record<Locale, PrivacyContent> = {
         title: "Матэрыялы сайта",
         body: [
           "Тэксты, фотаздымкі і архіўныя матэрыялы размяшчаюцца з павагай да памяці Алеся Адамовіча і правоў людзей, якія ўдзельнічаюць у праекце.",
+          "Фотаздымкі і матэрыялы, атрыманыя ад людзей або арганізацый, публікуюцца на сайце з іх згоды. Калі вы заўважылі недакладнасць або хочаце ўдакладніць умовы выкарыстання, напішыце камандзе.",
           "Калі вы выкарыстоўваеце матэрыялы сайта, калі ласка, спасылайцеся на adamovich.eu. Для публікацый, выстаў, медыяпраектаў і камерцыйнага выкарыстання лепш загадзя звязацца з камандай.",
         ],
       },
@@ -57,7 +58,7 @@ const contentByLocale: Record<Locale, PrivacyContent> = {
     eyebrow: "Privacy",
     title: "Privacy and Cookies",
     description:
-      "A short explanation of what data the site may use, why analytics are needed, and how materials from the site should be handled.",
+      "Adamovich.eu privacy policy: cookies, analytics, use of site materials, photo consent, and contacts for privacy or materials requests.",
     updated: "Updated: July 1, 2026",
     sections: [
       {
@@ -78,6 +79,7 @@ const contentByLocale: Record<Locale, PrivacyContent> = {
         title: "Site Materials",
         body: [
           "Texts, photographs, and archival materials are published with respect for Ales Adamovich's memory and for the rights of the people involved in the project.",
+          "Photographs and materials received from people or organizations are published on the site with their consent. If you notice an inaccuracy or want to clarify usage terms, contact the team.",
           "If you use materials from the site, please credit adamovich.eu. For publications, exhibitions, media projects, or commercial use, contact the team in advance.",
         ],
       },
@@ -93,7 +95,7 @@ const contentByLocale: Record<Locale, PrivacyContent> = {
     eyebrow: "Приватность",
     title: "Приватность и cookies",
     description:
-      "Коротко объясняем, какие данные может использовать сайт, зачем нужна аналитика и как обращаться с материалами.",
+      "Политика приватности adamovich.eu: cookies, аналитика, использование материалов сайта, согласие на фото и контакты для запросов.",
     updated: "Обновлено: 1 июля 2026",
     sections: [
       {
@@ -114,6 +116,7 @@ const contentByLocale: Record<Locale, PrivacyContent> = {
         title: "Материалы сайта",
         body: [
           "Тексты, фотографии и архивные материалы размещаются с уважением к памяти Алеся Адамовича и правам людей, участвующих в проекте.",
+          "Фотографии и материалы, полученные от людей или организаций, публикуются на сайте с их согласия. Если вы заметили неточность или хотите уточнить условия использования, напишите команде.",
           "Если вы используете материалы сайта, пожалуйста, указывайте ссылку на adamovich.eu. Для публикаций, выставок, медиапроектов и коммерческого использования лучше заранее связаться с командой.",
         ],
       },

@@ -121,15 +121,11 @@
 .cover {
   object-fit: contain;
   object-position: center;
-  filter: grayscale(1) contrast(1.04) brightness(0.82);
   transform: scale(1);
-  transition:
-    filter 220ms ease,
-    transform 500ms ease;
+  transition: transform 500ms ease;
 }
 
 .workCard:hover .cover {
-  filter: grayscale(1) contrast(1.04) brightness(0.96);
   transform: scale(1.04);
 }
 

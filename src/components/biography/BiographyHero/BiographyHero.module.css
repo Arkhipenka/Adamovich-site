@@ -25,8 +25,7 @@
 .heroImage {
   object-fit: cover;
   object-position: center right;
-  filter: grayscale(1) contrast(0.96) sepia(0.08);
-  opacity: 0.74;
+  opacity: 1;
 }
 
 .hero::before,
@@ -122,7 +121,7 @@
 
   .heroImage {
     object-position: 58% center;
-    opacity: 0.62;
+    opacity: 1;
   }
 
   .hero::before {
@@ -157,7 +156,7 @@
 
   .heroImage {
     object-position: 62% center;
-    opacity: 0.48;
+    opacity: 1;
   }
 
   .hero::before {

@@ -92,8 +92,8 @@ function Icon({ name }: { name: IconName }) {
 export function AudioGuidePreview({ locale = "ru" }: AudioGuidePreviewProps) {
   const content = homePageContent.audioGuidePreview;
   const detailsHref = localizedHref(locale, content.detailsHref);
-  const telegramHref = siteConfig.telegramBotUrl || content.telegramHref;
-  const appHref = siteConfig.audioAppUrl || content.appHref;
+  const telegramHref = siteConfig.telegramBotUrl;
+  const appHref = siteConfig.audioAppUrl || detailsHref;
 
   return (
     <section className={styles.section} aria-labelledby="audio-guide-preview-title">
@@ -110,10 +110,12 @@ export function AudioGuidePreview({ locale = "ru" }: AudioGuidePreviewProps) {
           </p>
 
           <div className={styles.actions}>
-            <Link className={styles.buttonPrimary} href={telegramHref}>
-              <Icon name="send" />
-              {getLocalizedText(content.telegramLabel, locale)}
-            </Link>
+            {telegramHref ? (
+              <Link className={styles.buttonPrimary} href={telegramHref}>
+                <Icon name="send" />
+                {getLocalizedText(content.telegramLabel, locale)}
+              </Link>
+            ) : null}
             <Link className={styles.buttonSecondary} href={appHref}>
               <Icon name="googlePlay" />
               {getLocalizedText(content.appLabel, locale)}

@@ -22,6 +22,31 @@ type IconName =
   | "phone"
   | "send";
 
+type PartnerLogoSize = {
+  height: number;
+  sizes: string;
+  width: number;
+};
+
+const supportLogoSizes = {
+  default: {
+    height: 150,
+    sizes: "240px",
+    width: 240,
+  },
+  eu: {
+    height: 120,
+    sizes: "440px",
+    width: 440,
+  },
+} satisfies Record<"default" | "eu", PartnerLogoSize>;
+
+const technicalLogoSize = {
+  height: 120,
+  sizes: "291px",
+  width: 291,
+} satisfies PartnerLogoSize;
+
 function Icon({ name }: { name: IconName }) {
   const commonProps = {
     "aria-hidden": true,
@@ -93,40 +118,13 @@ function Icon({ name }: { name: IconName }) {
   }
 }
 
-function KvitLabLogo() {
-  return (
-    <span className={styles.kvitLogo} aria-hidden="true">
-      <svg
-        className={styles.kvitIcon}
-        fill="none"
-        viewBox="0 0 64 64"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M32 4 56 18v28L32 60 8 46V18L32 4Z"
-          stroke="currentColor"
-          strokeLinejoin="round"
-          strokeWidth="3.5"
-        />
-        <path
-          d="m27 23-8 9 8 9M37 23l8 9-8 9M35 20l-6 24"
-          stroke="currentColor"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="3.5"
-        />
-      </svg>
-    </span>
-  );
-}
-
 function resolveHref(href: string) {
   if (href === "telegram") {
-    return siteConfig.telegramBotUrl || "#listen";
+    return siteConfig.telegramBotUrl;
   }
 
   if (href === "app") {
-    return siteConfig.audioAppUrl || "#listen";
+    return siteConfig.audioAppUrl;
   }
 
   return href;
@@ -134,6 +132,41 @@ function resolveHref(href: string) {
 
 function isExternalHref(href: string) {
   return href.startsWith("http://") || href.startsWith("https://");
+}
+
+function getPartnerLogo(
+  logo: string | Record<Locale, string>,
+  locale: Locale,
+) {
+  return typeof logo === "string" ? logo : getLocalizedText(logo, locale);
+}
+
+function getSupportLogoSize(partnerId: string) {
+  return partnerId === "eu" ? supportLogoSizes.eu : supportLogoSizes.default;
+}
+
+function PartnerLogoImage({
+  alt,
+  className,
+  size,
+  src,
+}: {
+  alt: string;
+  className: string;
+  size: PartnerLogoSize;
+  src: string;
+}) {
+  return (
+    <Image
+      alt={alt}
+      className={className}
+      height={size.height}
+      loading="lazy"
+      sizes={size.sizes}
+      src={assetPath(src)}
+      width={size.width}
+    />
+  );
 }
 
 function getFeatureIcon(index: number): IconName {
@@ -181,6 +214,8 @@ export function AudioGuidePage({ locale }: AudioGuidePageProps) {
             <div className={styles.heroActions}>
               {content.hero.actions.map((action) => {
                 const href = resolveHref(action.href);
+                if (!href) return null;
+
                 return (
                   <a
                     className={
@@ -351,14 +386,20 @@ export function AudioGuidePage({ locale }: AudioGuidePageProps) {
                   <div className={styles.listenText}>
                     <h3>{getLocalizedText(option.title, locale)}</h3>
                     <p>{getLocalizedText(option.text, locale)}</p>
-                    <a
-                      className={styles.listenLink}
-                      href={href}
-                      rel={isExternalHref(href) ? "noopener noreferrer" : undefined}
-                      target={isExternalHref(href) ? "_blank" : undefined}
-                    >
-                      {getLocalizedText(option.label, locale)}
-                    </a>
+                    {href ? (
+                      <a
+                        className={styles.listenLink}
+                        href={href}
+                        rel={isExternalHref(href) ? "noopener noreferrer" : undefined}
+                        target={isExternalHref(href) ? "_blank" : undefined}
+                      >
+                        {getLocalizedText(option.label, locale)}
+                      </a>
+                    ) : (
+                      <span className={styles.listenPending}>
+                        {getLocalizedText(content.listen.unavailableLabel, locale)}
+                      </span>
+                    )}
                   </div>
                 </article>
               );
@@ -381,25 +422,28 @@ export function AudioGuidePage({ locale }: AudioGuidePageProps) {
               {getLocalizedText(content.partners.supportLabel, locale)}
             </p>
             <div className={styles.partnerLogoRow}>
-              {content.partners.items.map((partner) => (
-                <article
-                  className={[
-                    styles.partnerLogoItem,
-                    partner.id === "eu" ? styles.partnerLogoItemEu : "",
-                  ].join(" ")}
-                  key={partner.id}
-                >
-                  <Image
-                    alt={getLocalizedText(partner.name, locale)}
-                    className={styles.partnerLogoImage}
-                    height={partner.id === "eu" ? 120 : 150}
-                    loading="lazy"
-                    sizes={partner.id === "eu" ? "440px" : "240px"}
-                    src={assetPath(partner.logo)}
-                    width={partner.id === "eu" ? 440 : 240}
-                  />
-                </article>
-              ))}
+              {content.partners.items.map((partner) => {
+                const isEuPartner = partner.id === "eu";
+
+                return (
+                  <article
+                    className={[
+                      styles.partnerLogoItem,
+                      isEuPartner ? styles.partnerLogoItemEu : "",
+                    ]
+                      .filter(Boolean)
+                      .join(" ")}
+                    key={partner.id}
+                  >
+                    <PartnerLogoImage
+                      alt={getLocalizedText(partner.name, locale)}
+                      className={styles.partnerLogoImage}
+                      size={getSupportLogoSize(partner.id)}
+                      src={getPartnerLogo(partner.logo, locale)}
+                    />
+                  </article>
+                );
+              })}
             </div>
           </div>
 
@@ -410,13 +454,26 @@ export function AudioGuidePage({ locale }: AudioGuidePageProps) {
               {getLocalizedText(content.partners.technicalLabel, locale)}
             </p>
             <div className={styles.technicalLogoRow}>
-              {content.partners.technicalItems.map((partner) => (
-                <article className={styles.technicalLogoItem} key={partner.id}>
-                      <span className={styles.kvitName}>
+              {content.partners.technicalItems.map((partner) => {
+                const logo = getPartnerLogo(partner.logo, locale);
+
+                return (
+                  <article className={styles.technicalLogoItem} key={partner.id}>
+                    {logo ? (
+                      <PartnerLogoImage
+                        alt={getLocalizedText(partner.name, locale)}
+                        className={styles.technicalLogoImage}
+                        size={technicalLogoSize}
+                        src={logo}
+                      />
+                    ) : (
+                      <span className={styles.technicalLogoName}>
                         {getLocalizedText(partner.name, locale)}
                       </span>
-                </article>
-              ))}
+                    )}
+                  </article>
+                );
+              })}
             </div>
           </div>
         </div>
